@@ -1,13 +1,20 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useRef } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+
+interface Program {
+  title: string;
+  image: string;
+  players: string;
+  awards: string;
+}
 
 export default function ProgramsSection() {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
 
-  const programs = [
+  const programs: Program[] = [
     {
       title: "Goalkeeper Training",
       image:
@@ -45,136 +52,127 @@ export default function ProgramsSection() {
     },
   ];
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % programs.length);
-    }, 4000);
+  // Track scroll progress through this section
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
 
-    return () => clearInterval(interval);
-  }, [programs.length]);
+  // Transform scroll progress into animation values
+  // Title animations - fade out in first 20% of scroll
+  const titleScale = useTransform(scrollYProgress, [0, 0.2], [1, 0.5]);
+  const titleOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
 
-  const currentProgram = programs[currentIndex];
-  const nextProgram = programs[(currentIndex + 1) % programs.length];
+  // Cards horizontal movement
+  const cardWidth = 478; // 450px card + 28px gap
+  const totalWidth = cardWidth * programs.length;
+
+  // Start showing 2 cards (0px offset), then scroll all the way through
+  const cardsX = useTransform(
+    scrollYProgress,
+    [0, 0.2, 1], // Start immediately, ramp up after title fades
+    [0, 0, -totalWidth + 900] // Scroll through all cards
+  );
 
   return (
-    <section className="bg-[#171717] w-full min-h-screen flex items-center px-6 md:px-12 lg:px-16 py-12 md:py-16 overflow-hidden">
-      <div className="w-full flex flex-col lg:flex-row gap-8 lg:gap-12">
-        {/* Left Column - Title (40%) */}
-        <div className="lg:w-[40%] flex items-center">
-          <div className="space-y-2">
-            <h2 className="font-extrabold text-6xl md:text-8xl lg:text-[120px] leading-none uppercase [text-shadow:_-2px_-2px_0_#fff,_2px_-2px_0_#fff,_-2px_2px_0_#fff,_2px_2px_0_#fff] text-[#171717]">
-              WE
-            </h2>
-            <h2 className="font-extrabold text-6xl md:text-8xl lg:text-[120px] leading-none uppercase [text-shadow:_-2px_-2px_0_#fff,_2px_-2px_0_#fff,_-2px_2px_0_#fff,_2px_2px_0_#fff] text-[#171717]">
-              MAKE IT
-            </h2>
-            <div className="flex items-center gap-4 lg:gap-6">
-              <h2 className="font-extrabold text-6xl md:text-8xl lg:text-[120px] leading-none uppercase [text-shadow:_-2px_-2px_0_#fff,_2px_-2px_0_#fff,_-2px_2px_0_#fff,_2px_2px_0_#fff] text-[#171717]">
-                HAPPEN
-              </h2>
-              <svg
-                className="w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 text-white flex-shrink-0"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="3"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path d="M9 5l7 7-7 7" />
-              </svg>
-            </div>
+    // Wrapper with extra height for scroll distance - increased for smooth scrolling
+    <div style={{ height: `${400}vh` }}>
+      <section
+        ref={sectionRef}
+        className="bg-[#171717] w-full h-screen sticky top-0 overflow-hidden p-5"
+      >
+        {/* Inner container - Two column layout */}
+        <div className="relative w-full h-full flex items-center gap-8">
+          {/* LEFT COLUMN - Title (40%) */}
+          <motion.div
+            style={{
+              scale: titleScale,
+              opacity: titleOpacity,
+            }}
+            className="w-[40%] flex items-center z-10"
+          >
+            <TitleContent />
+          </motion.div>
+
+          {/* RIGHT COLUMN - Cards (60%) */}
+          <div className="w-[60%] relative h-full flex items-center overflow-hidden">
+            <motion.div
+              style={{ x: cardsX }}
+              className="flex gap-7 absolute left-0"
+            >
+              {programs.map((program, index) => (
+                <ProgramCard key={index} program={program} index={index} />
+              ))}
+            </motion.div>
           </div>
         </div>
+      </section>
+    </div>
+  );
+}
 
-        {/* Right Column - Cards (60%) */}
-        <div className="lg:w-[60%] flex items-end justify-end relative h-[500px] md:h-[600px]">
-          <div className="relative w-full h-full flex items-end justify-end">
-            <AnimatePresence mode="popLayout">
-              {/* Main Card */}
-              <motion.div
-                key={`main-${currentIndex}`}
-                initial={{ x: 300, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                exit={{ x: -300, opacity: 0 }}
-                transition={{ duration: 0.8, ease: "easeInOut" }}
-                className="absolute bottom-0 right-0 bg-white w-[90%] md:w-[450px] h-[480px] shadow-2xl z-20"
-              >
-                <div className="w-full h-full flex flex-col items-center justify-between p-6 md:p-8">
-                  {/* Image */}
-                  <div className="relative w-full h-[200px] md:h-[250px] flex-shrink-0">
-                    <Image
-                      src={currentProgram.image}
-                      alt={currentProgram.title}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
+// ==================== SUB-COMPONENTS ====================
 
-                  {/* Title */}
-                  <h3 className="text-[#171717] text-xl md:text-2xl lg:text-3xl font-bold uppercase text-center mt-6">
-                    {currentProgram.title}
-                  </h3>
+function TitleContent() {
+  return (
+    <div className="space-y-4">
+      <h2 className="font-extrabold text-6xl md:text-8xl lg:text-[120px] leading-none uppercase [text-shadow:_-2px_-2px_0_#fff,_2px_-2px_0_#fff,_-2px_2px_0_#fff,_2px_2px_0_#fff] text-[#171717]">
+        WE
+      </h2>
+      <h2 className="font-extrabold text-6xl md:text-8xl lg:text-[120px] leading-none uppercase [text-shadow:_-2px_-2px_0_#fff,_2px_-2px_0_#fff,_-2px_2px_0_#fff,_2px_2px_0_#fff] text-[#171717]">
+        MAKE IT
+      </h2>
+      <div className="flex items-center gap-4 lg:gap-6">
+        <h2 className="font-extrabold text-6xl md:text-8xl lg:text-[120px] leading-none uppercase [text-shadow:_-2px_-2px_0_#fff,_2px_-2px_0_#fff,_-2px_2px_0_#fff,_2px_2px_0_#fff] text-[#171717]">
+          HAPPEN
+        </h2>
+        {/* Custom Arrow SVG from public folder */}
+        <Image
+          src="/arrow.svg"
+          alt="Arrow"
+          width={80}
+          height={80}
+          className="w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 flex-shrink-0"
+        />
+      </div>
+    </div>
+  );
+}
 
-                  {/* Stats */}
-                  <div className="flex gap-8 md:gap-12 mt-4">
-                    <div className="text-center">
-                      <p className="text-[#171717] text-sm md:text-base font-normal">
-                        {currentProgram.players}
-                      </p>
-                    </div>
-                    <div className="text-center">
-                      <p className="text-[#171717] text-sm md:text-base font-normal">
-                        {currentProgram.awards}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
+function ProgramCard({ program, index }: { program: Program; index: number }) {
+  return (
+    <div className="bg-white w-[450px] h-[550px] shadow-2xl flex-shrink-0 rounded-lg overflow-hidden">
+      <div className="w-full h-full flex flex-col items-center justify-between p-8">
+        {/* Image */}
+        <div className="relative w-full h-[280px] flex-shrink-0 rounded-lg overflow-hidden">
+          <Image
+            src={program.image}
+            alt={program.title}
+            fill
+            className="object-cover"
+            sizes="450px"
+          />
+        </div>
 
-              {/* Next Card (Partial View) */}
-              <motion.div
-                key={`next-${currentIndex}`}
-                initial={{ x: 300, opacity: 0.5 }}
-                animate={{ x: 225, opacity: 0.7 }}
-                transition={{ duration: 0.8, ease: "easeInOut" }}
-                className="absolute bottom-0 right-0 bg-white w-[90%] md:w-[450px] h-[480px] shadow-xl z-10"
-              >
-                <div className="w-full h-full flex flex-col items-center justify-between p-6 md:p-8">
-                  {/* Image */}
-                  <div className="relative w-full h-[200px] md:h-[250px] flex-shrink-0">
-                    <Image
-                      src={nextProgram.image}
-                      alt={nextProgram.title}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
+        {/* Title */}
+        <h3 className="text-[#171717] text-2xl lg:text-3xl font-bold uppercase text-center mt-6">
+          {program.title}
+        </h3>
 
-                  {/* Title */}
-                  <h3 className="text-[#171717] text-xl md:text-2xl lg:text-3xl font-bold uppercase text-center mt-6">
-                    {nextProgram.title}
-                  </h3>
-
-                  {/* Stats */}
-                  <div className="flex gap-8 md:gap-12 mt-4">
-                    <div className="text-center">
-                      <p className="text-[#171717] text-sm md:text-base font-normal">
-                        {nextProgram.players}
-                      </p>
-                    </div>
-                    <div className="text-center">
-                      <p className="text-[#171717] text-sm md:text-base font-normal">
-                        {nextProgram.awards}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-          </div>
+        {/* Stats */}
+        <div className="flex gap-12 mt-4">
+          <StatBadge label={program.players} />
+          <StatBadge label={program.awards} />
         </div>
       </div>
-    </section>
+    </div>
+  );
+}
+
+function StatBadge({ label }: { label: string }) {
+  return (
+    <div className="text-center px-4 py-2 bg-gray-100 rounded-full">
+      <p className="text-[#171717] text-sm font-medium">{label}</p>
+    </div>
   );
 }
