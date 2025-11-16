@@ -67,15 +67,15 @@ export default function EventsSection() {
   const pastEvents = [
     {
       title: "MADRID",
-      image: "/events/madrid.jpg",
+      image: "/realmadrid.webp",
     },
     {
       title: "BARCELONA",
-      image: "/events/barcelona.jpg",
+      image: "/bareclona.jpg",
     },
     {
       title: "TOURNAMENTS",
-      image: "/events/tournaments.jpg",
+      image: "/tournament.jpg",
     },
   ];
 
@@ -83,12 +83,12 @@ export default function EventsSection() {
   const maxIndicatorTravel = 200 - indicatorHeight;
 
   return (
-    <section className="bg-[#171717] w-full px-6 md:px-12 lg:px-16">
-      <div className="flex flex-col md:flex-row h-auto md:h-[280px]">
-        {/* Left Column - Catalog (35%) */}
-        <div className="w-full md:w-[30%] flex">
+    <section className="bg-[#171717] w-full px-6 md:px-12 lg:px-16 h-[20vh]">
+      <div className="flex flex-col md:flex-row h-full">
+        {/* Left Column - Catalog (30%) */}
+        <div className="w-full md:w-[30%] flex h-full">
           {/* Progress Line Container */}
-          <div className="relative w-[1px] bg-white/20 my-8 h-[200px]">
+          <div className="relative w-[1.5px] bg-white my-8 h-[200px]">
             {/* Blue Moving Indicator */}
             <div
               className="absolute left-0 w-full bg-[#3050FD] transition-all duration-150 ease-out"
@@ -122,25 +122,22 @@ export default function EventsSection() {
                 }}
               >
                 {events.map((event, index) => (
-                  <div
-                    key={index}
-                    // className="pb-4 border-b border-white/10 last:border-b-0"
-                  >
-                    {/* Date and Time */}
-                    <p className="text-white text-xs md:text-sm uppercase mb-3">
+                  <div key={index}>
+                    {/* Date and Time - Underlined */}
+                    <p className="text-white text-xs md:text-sm uppercase mb-3 underline underline-offset-2">
                       {event.date} | {event.time}
                     </p>
 
                     {/* Teams */}
                     <div className="space-y-2">
                       <div className="flex items-center gap-3">
-                        <div className="w-3 h-3 rounded-full bg-white flex-shrink-0" />
+                        <div className="w-4 h-4 rounded-full bg-white flex-shrink-0" />
                         <p className="text-white text-sm md:text-base uppercase font-medium">
                           {event.team1}
                         </p>
                       </div>
                       <div className="flex items-center gap-3">
-                        <div className="w-3 h-3 rounded-full bg-white flex-shrink-0" />
+                        <div className="w-4 h-4 rounded-full bg-white flex-shrink-0" />
                         <p className="text-white text-sm md:text-base uppercase font-medium">
                           {event.team2}
                         </p>
@@ -156,7 +153,7 @@ export default function EventsSection() {
           </div>
         </div>
 
-        {/* Right Column (65%) - Past Events */}
+        {/* Right Column (70%) - Past Events */}
         <div className="w-full md:w-[70%] flex items-center justify-end py-8 md:py-0">
           <div className="flex flex-col md:flex-row gap-4 lg:gap-6">
             {pastEvents.map((event, index) => (
