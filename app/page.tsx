@@ -3,6 +3,7 @@ import EventsSection from "./components/Events";
 import TopStoriesSection from "./components/Stories";
 import ProgramsSection from "./components/Activities";
 import OtherActivitiesSection from "./components/OtherActivities";
+import StatisticsSection from "./components/Statistics";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
       <TopStoriesSection />
       <ProgramsSection />
       <OtherActivitiesSection />
+      <StatisticsSection />
     </main>
   );
 }
