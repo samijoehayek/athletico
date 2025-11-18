@@ -7,6 +7,7 @@ import StatisticsSection from "./components/Statistics";
 import MustSeeMomentsSection from "./components/MustSee";
 import PartnersSection from "./components/Partners";
 import MyTeamSection from "./components/MyTeam";
+import Footer from "./components/Footer";
 
 export default function Home() {
   return (
@@ -20,6 +21,7 @@ export default function Home() {
       <MustSeeMomentsSection />
       <PartnersSection />
       <MyTeamSection />
+      <Footer />
     </main>
   );
 }
