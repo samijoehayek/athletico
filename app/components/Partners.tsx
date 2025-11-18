@@ -55,7 +55,6 @@ export default function PartnersSection() {
           ))}
         </motion.div>
       </div>
-      <div className="mb-20"></div>
     </section>
   );
 }
