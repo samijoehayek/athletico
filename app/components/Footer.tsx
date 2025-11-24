@@ -35,9 +35,9 @@ export default function Footer() {
   const repeatedSlogan = slogan.repeat(10);
 
   return (
-    <footer className="w-full h-[120vh] bg-[#3050FD] flex flex-col font-outfit">
+    <footer className="w-full h-[150vh] bg-[#3050FD] flex flex-col font-outfit">
       {/* PART 1: Newsletter Section (20vh) */}
-      <div className="h-[30vh] px-50 flex flex-col justify-center">
+      <div className="h-[50vh] px-50 flex flex-col justify-center">
         {/* Newsletter Title */}
         <h2 className="text-white text-[50px] font-extrabold uppercase leading-tight mb-6">
           SUBSCRIBE TO OUR
@@ -70,7 +70,7 @@ export default function Footer() {
       {/* PART 2: Main Footer Content */}
       <div className="flex-grow flex flex-col">
         {/* Athletico Title and Branches */}
-        <div className="p-50">
+        <div className="px-50 py-30">
           {/* Title */}
           <h3 className="text-white text-[50px] font-bold uppercase mb-8">
             ATHLETICO

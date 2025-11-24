@@ -82,7 +82,7 @@ export default function TopStoriesSection() {
   const nextStoryData = stories[(currentIndex + 1) % stories.length];
 
   return (
-    <section className="bg-white w-full h-[70vh] overflow-hidden">
+    <section className="bg-white w-full h-[90vh] overflow-hidden">
       {/* Main Container */}
       <div className="h-full pl-40 pr-10 py-10 flex flex-col lg:flex-row gap-8">
         {/* LEFT COLUMN - Title and Player Info */}

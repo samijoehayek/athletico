@@ -83,7 +83,7 @@ export default function EventsSection() {
   const maxIndicatorTravel = 200 - indicatorHeight;
 
   return (
-    <section className="bg-[#171717] w-full px-6 md:px-12 lg:px-16 h-[20vh]">
+    <section className="bg-[#171717] w-full px-6 md:px-12 lg:px-16 h-[30vh]">
       <div className="flex flex-col md:flex-row h-full">
         {/* Left Column - Catalog (30%) */}
         <div className="w-full md:w-[30%] flex h-full">

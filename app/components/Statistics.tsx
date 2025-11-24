@@ -17,11 +17,11 @@ export default function StatisticsSection() {
   ];
 
   return (
-    <section className="w-full bg-white pt-10 pb-40 px-[200px]">
+    <section className="w-full bg-white pt-10 pb-40 ">
       {/* ATHLETICO Title with Image Background */}
       <div className="mb-20">
         <h1
-          className="text-[330px] font-black uppercase leading-none text-center pb-10"
+          className="text-[250px] font-black uppercase leading-none text-center pb-10"
           style={{
             backgroundImage: "url('/tennis.png')",
             backgroundSize: "cover",

@@ -76,7 +76,7 @@ export default function MustSeeMomentsSection() {
   };
 
   return (
-    <section className="w-full h-[90vh] bg-white flex items-center justify-center px-[200px] py-60">
+    <section className="w-full h-[90vh] bg-white flex items-center justify-center px-[200px] py-40">
       <div className="w-full h-full flex flex-col">
         {/* Header - Title and Navigation */}
         <div className="flex justify-between items-center">
