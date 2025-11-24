@@ -16,6 +16,8 @@ export default function Navbar() {
     { href: "/branches", label: "BRANCHES" },
     { href: "/services", label: "OUR SERVICES" },
     { href: "/careers", label: "CAREERS" },
+    { href: "/events", label: "EVENTS" },
+    { href: "/news", label: "NEWS" },
     { href: "/contact", label: "CONTACT US" },
   ];
 
