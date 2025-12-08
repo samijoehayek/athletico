@@ -21,70 +21,63 @@ export default function Footer() {
     { name: "Chadi Soccer Stadium, Mansourieh", phone: "+961 76 151 808" },
   ];
 
-  // WhatsApp number (replace with actual number)
   const whatsappNumber = "96170202030";
   const whatsappMessage = "Hello! I would like to get more information.";
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
     whatsappMessage
   )}`;
 
-  // Duplicate the slogan for infinite scroll
   const slogan = "90 MINUTES. INFINITE MEMORIES. ";
   const repeatedSlogan = slogan.repeat(10);
 
   return (
-    <footer className="w-full h-[150vh] bg-[#3050FD] flex flex-col font-outfit">
+    <footer className="w-full bg-[#3050FD] flex flex-col font-outfit">
       {/* PART 1: WhatsApp Section */}
-      <div className="h-[50vh] px-50 flex flex-col justify-center">
-        {/* WhatsApp Title */}
-        <h2 className="text-white text-[50px] font-extrabold leading-tight mb-4">
+      <div className="w-full px-4 sm:px-6 lg:px-16 xl:px-24 py-10 md:py-16 lg:py-20 flex flex-col justify-center">
+        <h2 className="text-white text-3xl sm:text-4xl md:text-[40px] lg:text-[50px] font-extrabold leading-tight mb-3">
           WhatsApp
         </h2>
 
-        {/* Subtitle */}
-        <p className="text-white/80 text-[18px] font-normal mb-8">
+        <p className="text-white/80 text-base sm:text-lg md:text-[18px] font-normal mb-6 max-w-xl">
           For faster responses, reach us on WhatsApp
         </p>
 
-        {/* WhatsApp Button */}
         <a
           href={whatsappUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-3 bg-[#25D366] hover:bg-[#20bd5a] text-white font-semibold px-8 py-4 text-lg transition-colors w-fit"
+          className="inline-flex items-center gap-3 bg-[#25D366] hover:bg-[#20bd5a] text-white font-semibold px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base md:text-lg transition-colors w-fit"
         >
           <WhatsAppIcon />
           Chat on WhatsApp
         </a>
       </div>
 
-      {/* White Divider Line */}
+      {/* Divider */}
       <div className="w-full border-t border-white/50" />
 
       {/* PART 2: Main Footer Content */}
-      <div className="flex-grow flex flex-col">
+      <div className="flex flex-col flex-grow">
         {/* Athletico Title and Branches */}
-        <div className="px-50 py-30">
-          {/* Title */}
-          <h3 className="text-white text-[50px] font-bold uppercase mb-8">
+        <div className="px-4 sm:px-6 lg:px-16 xl:px-24 py-10 md:py-14 lg:py-16">
+          <h3 className="text-white text-3xl sm:text-4xl md:text-[40px] lg:text-[50px] font-bold uppercase mb-6 md:mb-8">
             ATHLETICO
           </h3>
 
-          {/* Branches Title */}
-          <h4 className="text-white text-[20px] font-semibold uppercase mb-6">
+          <h4 className="text-white text-base sm:text-lg md:text-[20px] font-semibold uppercase mb-4 md:mb-6">
             Branches
           </h4>
 
-          {/* Branches Grid - 3 columns, 3 rows */}
-          <div className="grid grid-cols-3 gap-x-16 gap-y-8">
+          {/* Branches Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-10 md:gap-x-16 gap-y-6 md:gap-y-8">
             {branches.map((branch, index) => (
               <div key={index}>
-                <p className="text-white text-[18px] font-medium mb-2">
+                <p className="text-white text-base sm:text-[17px] md:text-[18px] font-medium mb-1.5">
                   {branch.name}
                 </p>
                 <a
                   href={`tel:${branch.phone.replace(/\s/g, "")}`}
-                  className="text-white text-[16px] flex items-center gap-2 hover:underline"
+                  className="text-white text-sm sm:text-[15px] md:text-[16px] flex items-center gap-2 hover:underline"
                 >
                   <PhoneIcon />
                   {branch.phone}
@@ -95,12 +88,10 @@ export default function Footer() {
         </div>
 
         {/* PART 3: Infinite Scrolling Slogan Banner */}
-        <div className="overflow-hidden bg-[#3050FD] py-8">
+        <div className="overflow-hidden bg-[#3050FD] py-4 sm:py-6 md:py-8">
           <motion.div
             className="flex whitespace-nowrap"
-            animate={{
-              x: [0, "-50%"],
-            }}
+            animate={{ x: [0, "-50%"] }}
             transition={{
               x: {
                 repeat: Infinity,
@@ -110,21 +101,19 @@ export default function Footer() {
               },
             }}
           >
-            <span className="text-white text-[190px] font-bold uppercase">
+            <span className="text-white font-bold uppercase text-4xl sm:text-5xl md:text-6xl lg:text-[140px] xl:text-[190px] leading-none">
               {repeatedSlogan}
             </span>
           </motion.div>
         </div>
 
         {/* PART 4: Copyright and Social Media */}
-        <div className="px-20 py-8 flex justify-between items-center">
-          {/* Copyright */}
-          <p className="text-white text-sm opacity-70">
+        <div className="px-4 sm:px-6 lg:px-16 xl:px-24 py-6 md:py-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+          <p className="text-white text-xs sm:text-sm opacity-70">
             © 2025 Developed by dot.jo, all rights reserved.
           </p>
 
-          {/* Social Media Links */}
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-4 sm:gap-6">
             <Link
               href="https://facebook.com"
               target="_blank"

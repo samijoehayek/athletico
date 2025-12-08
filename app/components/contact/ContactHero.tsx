@@ -78,7 +78,7 @@ export default function ContactHero() {
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20bd5a] text-white font-semibold px-6 py-3 rounded transition-colors"
+              className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20bd5a] text-white font-semibold px-6 py-3 transition-colors"
             >
               <WhatsAppIcon />
               Chat on WhatsApp
@@ -154,7 +154,7 @@ export default function ContactHero() {
               <div className="flex justify-end">
                 <button
                   type="submit"
-                  className="bg-[#3050FD] hover:bg-[#2040dd] text-white font-semibold px-8 py-3 rounded transition-colors flex items-center gap-2"
+                  className="bg-[#3050FD] hover:bg-[#2040dd] text-white font-semibold px-8 py-3 transition-colors flex items-center gap-2"
                 >
                   Leave us a Message
                   <svg

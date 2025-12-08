@@ -17,27 +17,24 @@ export default function JobCard({
 }: JobCardProps) {
   return (
     <motion.div
-      className="w-full bg-[#f5f5f5] px-12 py-10"
+      className="w-full bg-[#f5f5f5] px-4 sm:px-8 md:px-12 py-8 md:py-10"
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
-      <div className="flex justify-between items-start">
+      <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-6 md:gap-0">
         {/* Left Content */}
-        <div className="flex-1 pr-12">
-          {/* Title */}
-          <h3 className="text-[#171717] text-2xl md:text-3xl font-bold uppercase leading-tight mb-2 font-outfit">
+        <div className="flex-1 md:pr-12">
+          <h3 className="text-[#171717] font-bold uppercase leading-tight mb-2 font-outfit text-xl sm:text-2xl md:text-3xl">
             {title}
           </h3>
 
-          {/* Positions Count */}
-          <p className="text-[#171717]/60 text-sm font-medium uppercase tracking-wide mb-6">
+          <p className="text-[#171717]/60 text-xs sm:text-sm font-medium uppercase tracking-wide mb-4 md:mb-6">
             {positions} {positions === 1 ? "POSITION" : "POSITIONS"}
           </p>
 
-          {/* Description */}
-          <p className="text-[#171717]/80 text-base leading-relaxed max-w-4xl">
+          <p className="text-[#171717]/80 text-sm sm:text-base leading-relaxed max-w-4xl">
             {description}
           </p>
         </div>
@@ -45,7 +42,7 @@ export default function JobCard({
         {/* Apply Button */}
         <motion.button
           onClick={onApply}
-          className="flex-shrink-0 flex items-center gap-3 px-8 py-4 border-2 border-[#3050FD] text-[#3050FD] font-semibold uppercase tracking-wide transition-colors duration-300 hover:bg-[#3050FD] hover:text-white"
+          className="md:self-start flex items-center justify-center gap-3 px-6 sm:px-8 py-3 sm:py-4 border-2 border-[#3050FD] text-[#3050FD] font-semibold uppercase tracking-wide text-xs sm:text-sm md:text-base transition-colors duration-300 hover:bg-[#3050FD] hover:text-white"
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >

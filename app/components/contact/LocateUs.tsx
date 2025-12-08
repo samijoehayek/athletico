@@ -22,7 +22,7 @@ export default function LocateUs() {
   return (
     <section className="w-full bg-[#F3F3F3] py-10 md:py-14 lg:py-18 px-6 md:px-10 lg:px-16">
       <div className="max-w-7xl mx-auto">
-        {/* Section Header */}
+        {/* Header */}
         <div className="mb-8">
           <p className="text-[#171717]/60 text-sm font-semibold uppercase tracking-wide mb-1">
             8 BRANCHES
@@ -32,15 +32,15 @@ export default function LocateUs() {
           </h2>
         </div>
 
-        {/* Two Column Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
-          {/* Left Column - Branch List */}
-          <div className="lg:col-span-4">
-            <div className="bg-white p-6 shadow-sm h-full">
-              <div className="space-y-5">
+        {/* Two Columns */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
+          {/* LEFT COLUMN - Original Single Container */}
+          <div className="lg:col-span-4 h-full">
+            <div className="bg-white border border-[#E0E0E0] p-6 h-full flex flex-col">
+              <div className="flex flex-col divide-y divide-[#E0E0E0]">
                 {branches.map((branch, index) => (
-                  <div key={index}>
-                    <p className="text-[#171717] text-base font-semibold">
+                  <div key={index} className="py-4">
+                    <p className="text-[#171717] text-base font-semibold mb-1">
                       {branch.name}
                     </p>
                     <a
@@ -55,13 +55,12 @@ export default function LocateUs() {
             </div>
           </div>
 
-          {/* Right Column - Map */}
+          {/* RIGHT COLUMN - Map */}
           <div className="lg:col-span-8">
-            <div className="w-full aspect-video bg-gray-200 overflow-hidden">
+            <div className="w-full h-full bg-gray-200 overflow-hidden">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d106069.93019479885!2d35.4674!3d33.8886!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151f17215880a78f%3A0x729182bae99836b4!2sBeirut%2C%20Lebanon!5e0!3m2!1sen!2sus!4v1699999999999!5m2!1sen!2sus"
-                width="100%"
-                height="100%"
+                className="w-full h-full"
                 style={{ border: 0 }}
                 allowFullScreen
                 loading="lazy"
@@ -72,8 +71,8 @@ export default function LocateUs() {
           </div>
         </div>
 
-        {/* Footer Row - Info Items */}
-        <div className="mt-8 flex flex-wrap gap-6 md:gap-10">
+        {/* DETAILS ROW — Aligned Under Map */}
+        <div className="mt-10 flex flex-wrap gap-6 md:gap-10">
           {/* Club Hours */}
           <div className="flex items-center gap-2">
             <ClockIcon />
@@ -107,6 +106,7 @@ export default function LocateUs() {
   );
 }
 
+/* Icons */
 function ClockIcon() {
   return (
     <svg
@@ -116,8 +116,6 @@ function ClockIcon() {
       fill="none"
       stroke="#171717"
       strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
     >
       <circle cx="12" cy="12" r="10" />
       <polyline points="12 6 12 12 16 14" />
@@ -134,10 +132,8 @@ function EmailIcon() {
       fill="none"
       stroke="#171717"
       strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
     >
-      <rect width="20" height="16" x="2" y="4" rx="2" />
+      <rect width="20" height="16" x="2" y="4" />
       <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
     </svg>
   );

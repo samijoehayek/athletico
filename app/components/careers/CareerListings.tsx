@@ -37,16 +37,16 @@ export default function CareerListings() {
   ];
 
   const handleApply = (jobTitle: string) => {
-    // Handle apply action - could open modal, navigate to form, etc.
     console.log(`Applying for: ${jobTitle}`);
   };
 
   return (
-    <section className="w-full bg-white py-10">
-      <div className="px-[200px]">
+    <section className="w-full bg-white py-10 md:py-14">
+      {/* Mobile / tablet: normal container; Desktop: original px-[200px] */}
+      <div className="px-4 sm:px-6 md:px-10 lg:px-[200px]">
         {/* Section Title */}
-        <div className="mb-12">
-          <h2 className="text-[#171717] text-[50px] font-bold uppercase font-outfit">
+        <div className="mb-8 md:mb-12">
+          <h2 className="text-[#171717] font-bold uppercase font-outfit text-3xl sm:text-4xl md:text-[50px]">
             Open Positions
           </h2>
         </div>

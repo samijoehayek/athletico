@@ -16,10 +16,8 @@ export default function CareerMarquee() {
 
     if (!marquee || !textContainer) return;
 
-    // Get the width of the text content
     const textWidth = textContainer.scrollWidth / 2;
 
-    // Create infinite scroll animation
     gsap.to(textContainer, {
       x: -textWidth,
       duration: 30,
@@ -33,17 +31,19 @@ export default function CareerMarquee() {
   }, []);
 
   return (
-    <section ref={marqueeRef} className="w-full bg-white py-24 overflow-hidden">
+    <section
+      ref={marqueeRef}
+      className="w-full bg-white py-12 sm:py-16 md:py-24 overflow-hidden"
+    >
       <div
         ref={textRef}
         className="flex whitespace-nowrap"
         style={{ willChange: "transform" }}
       >
-        {/* Duplicate text for seamless loop */}
         {[...Array(4)].map((_, index) => (
           <span
             key={index}
-            className="text-[120px] font-extrabold uppercase font-outfit mx-8"
+            className="font-extrabold uppercase font-outfit mx-6 sm:mx-8 text-3xl sm:text-4xl md:text-5xl lg:text-[80px] xl:text-[120px]"
             style={{
               background: "linear-gradient(90deg, #3050FD 0%, #7B08FF 100%)",
               WebkitBackgroundClip: "text",
@@ -52,7 +52,7 @@ export default function CareerMarquee() {
             }}
           >
             {marqueeText}
-            <span className="mx-16 opacity-50">•</span>
+            <span className="mx-6 sm:mx-10 md:mx-16 opacity-50">•</span>
           </span>
         ))}
       </div>

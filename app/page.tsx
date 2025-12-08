@@ -15,16 +15,16 @@ export default function Home() {
       <Hero />
       <EventsSection />
       <TopStoriesSection />
-      {/* <div id="programs">
+      <div id="programs">
         <ProgramsSection />
-      </div> */}
+      </div>
 
-      {/* <OtherActivitiesSection /> */}
-      {/* <StatisticsSection /> */}
-      {/* <MustSeeMomentsSection /> */}
-      {/* <PartnersSection /> */}
-      {/* <MyTeamSection /> */}
-      {/* <Footer /> */}
+      <OtherActivitiesSection />
+      <StatisticsSection />
+      <MustSeeMomentsSection />
+      <PartnersSection />
+      <MyTeamSection />
+      <Footer />
     </main>
   );
 }

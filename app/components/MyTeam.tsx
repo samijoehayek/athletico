@@ -5,8 +5,8 @@ import Image from "next/image";
 export default function MyTeamSection() {
   return (
     <>
-      <div className="mb-40"></div>
-      <section className="w-full h-[70vh] relative overflow-hidden">
+      <div className="mb-16 md:mb-20" />
+      <section className="w-full relative overflow-hidden min-h-[50vh] sm:min-h-[60vh] lg:h-[70vh]">
         {/* Background Image - Edge to Edge */}
         <div className="absolute inset-0">
           <Image
@@ -18,21 +18,23 @@ export default function MyTeamSection() {
             priority
           />
           {/* Dark overlay for better text contrast */}
-          <div className="absolute inset-0 bg-black/30" />
+          <div className="absolute inset-0 bg-black/40" />
         </div>
 
-        {/* Text Content - Centered vertically, slightly left horizontally */}
-        <div className="relative z-10 h-full flex items-center pl-[200px]">
-          <div className="text-white">
-            {/* "MEET THE" text */}
-            <h3 className="text-[50px] font-extrabold uppercase leading-none mb-2 font-outfit">
-              MEET THE
-            </h3>
+        {/* Text Content */}
+        <div className="relative z-10 h-full flex items-center">
+          <div className="w-full max-w-[1440px] mx-auto px-10 sm:px-6 lg:px-12 xl:px-[200px]">
+            <div className="text-white font-outfit">
+              {/* "MEET THE" */}
+              <h3 className="uppercase font-extrabold leading-none mb-2 tracking-tight text-3xl sm:text-4xl md:text-5xl lg:text-[50px]">
+                MEET THE
+              </h3>
 
-            {/* "TEAM" text */}
-            <h2 className="text-[200px] font-extrabold uppercase leading-none font-outfit">
-              TEAM
-            </h2>
+              {/* "TEAM" */}
+              <h2 className="uppercase font-extrabold leading-none tracking-tight text-6xl sm:text-7xl md:text-8xl lg:text-[150px] xl:text-[200px]">
+                TEAM
+              </h2>
+            </div>
           </div>
         </div>
       </section>

@@ -17,6 +17,12 @@ export default function CareerHero() {
   const curvedTextRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    // Only run the scroll animation on tablet/desktop
+    const isDesktop = window.matchMedia("(min-width: 768px)").matches;
+    if (!isDesktop) return;
+
     const section = sectionRef.current;
     const circles = circlesRef.current;
     const image = imageRef.current;
@@ -24,34 +30,30 @@ export default function CareerHero() {
 
     if (!section || !circles || !image || !curvedText) return;
 
-    // Get all circle elements
     const circleElements = circles.querySelectorAll(".career-circle");
 
-    // Create the scroll-triggered animation
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: section,
         start: "top top",
-        end: "+=1100", // Reduced from 1500 - faster transition
-        scrub: 0.5, // Slightly faster scrub
+        end: "+=1100",
+        scrub: 0.5,
         pin: true,
         anticipatePin: 1,
       },
     });
 
-    // Animate circles scaling up (zoom effect)
     tl.to(
       circleElements,
       {
         scale: 8,
         opacity: 0,
         duration: 1,
-        stagger: 0.03, // Faster stagger
+        stagger: 0.03,
         ease: "power2.inOut",
       },
       0
     )
-      // Scale up the center image
       .to(
         image,
         {
@@ -62,7 +64,6 @@ export default function CareerHero() {
         },
         0
       )
-      // Fade out curved text
       .to(
         curvedText,
         {
@@ -74,7 +75,6 @@ export default function CareerHero() {
         0
       );
 
-    // Cleanup
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
@@ -83,15 +83,28 @@ export default function CareerHero() {
   return (
     <section
       ref={sectionRef}
-      className="w-full h-screen bg-white relative overflow-hidden"
+      className="w-full h-screen relative overflow-hidden bg-[#171717] md:bg-white"
     >
-      {/* Concentric Circles Container - moved up */}
+      {/* MOBILE: simple hero, no circles, no animation */}
+      <div className="flex h-full w-full items-center justify-center md:hidden">
+        <div className="relative w-[70vw] max-w-[320px] aspect-square overflow-hidden">
+          <Image
+            src="/career-hero.png"
+            alt="Young football players"
+            fill
+            className="object-cover"
+            sizes="70vw"
+            priority
+          />
+        </div>
+      </div>
+
+      {/* DESKTOP/TABLET: original animated circles hero */}
       <div
         ref={circlesRef}
-        className="absolute inset-0 flex items-center justify-center"
-        style={{}}
+        className="hidden md:flex absolute inset-0 items-center justify-center"
       >
-        {/* Outermost circle - sized to show curved edge at bottom */}
+        {/* Outermost circle */}
         <div
           className="career-circle absolute rounded-full bg-[#171717]"
           style={{
@@ -101,7 +114,7 @@ export default function CareerHero() {
           }}
         />
 
-        {/* Second circle - very transparent */}
+        {/* Second circle */}
         <div
           className="career-circle absolute rounded-full bg-white/[0.03]"
           style={{
@@ -110,7 +123,7 @@ export default function CareerHero() {
           }}
         />
 
-        {/* Innermost circle - almost transparent, glued to image */}
+        {/* Innermost circle */}
         <div
           className="career-circle absolute rounded-full bg-white/[0.03]"
           style={{
@@ -119,7 +132,7 @@ export default function CareerHero() {
           }}
         />
 
-        {/* Center Image Container */}
+        {/* Center Image */}
         <div
           ref={imageRef}
           className="absolute rounded-full overflow-hidden z-10"
@@ -139,10 +152,10 @@ export default function CareerHero() {
         </div>
       </div>
 
-      {/* Curved Text at Bottom - More pronounced upward curve */}
+      {/* Curved Text (desktop/tablet only) */}
       <div
         ref={curvedTextRef}
-        className="absolute bottom-10 left-0 right-0 flex justify-center pointer-events-none z-20"
+        className="hidden md:flex absolute bottom-10 left-0 right-0 justify-center pointer-events-none z-20"
       >
         <svg
           viewBox="0 0 1200 300"
@@ -150,7 +163,6 @@ export default function CareerHero() {
           preserveAspectRatio="xMidYMid meet"
         >
           <defs>
-            {/* More pronounced upward curve */}
             <path
               id="curvedPathUp"
               d="M 0,20 Q 600,280 1200,20"

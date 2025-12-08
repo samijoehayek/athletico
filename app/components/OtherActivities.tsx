@@ -15,24 +15,8 @@ export default function OtherActivitiesSection() {
 
   const activities: Activity[] = [
     {
-      name: "TENNIS",
-      image: "/tennis.png",
-    },
-    {
-      name: "BASKETBALL",
-      image: "/basketball.png",
-    },
-    {
-      name: "PADDEL",
-      image: "/padel.png",
-    },
-    {
-      name: "GYM",
-      image: "/gym.png",
-    },
-    {
-      name: "FOOTBALL",
-      image: "/football.png",
+      name: "Padel",
+      image: "/padel-long.png",
     },
   ];
 
@@ -40,7 +24,7 @@ export default function OtherActivitiesSection() {
   const bottomActivities = activities.slice(1);
 
   return (
-    <section className="w-full min-h-screen relative overflow-hidden -mt-1">
+    <section className="w-full min-h-[70vh] lg:min-h-screen relative overflow-hidden -mt-1">
       {/* Diagonal split background */}
       <div className="absolute inset-0">
         {/* Dark section (top) - #171717 */}
@@ -65,10 +49,10 @@ export default function OtherActivitiesSection() {
       </div>
 
       {/* Content container */}
-      <div className="relative z-10 w-full min-h-screen pb-[200px] px-[200px]">
-        {/* Title - Top Right */}
-        <div className="flex justify-start mb-8">
-          <h2 className="text-white text-[25px] font-bold leading-tight text-left">
+      <div className="relative z-10 w-full min-h-[70vh] lg:min-h-screen pb-20 md:pb-32 lg:pb-24 px-6 md:px-12 lg:px-[200px]">
+        {/* Title */}
+        <div className="flex justify-start mb-6 md:mb-8">
+          <h2 className="text-white text-lg md:text-xl lg:text-[25px] font-bold leading-tight text-left">
             OTHER
             <br />
             ACTIVITIES
@@ -77,23 +61,25 @@ export default function OtherActivitiesSection() {
 
         {/* Grid Container */}
         <div className="flex flex-col">
-          {/* Top Row - Single Large Activity (Tennis) */}
+          {/* Top Row - Single Large Activity (Padel) */}
           <ActivityCard
             activity={topActivity}
-            className="w-full h-[550px]"
+            className="w-full h-[300px] sm:h-[400px] md:h-[450px] lg:h-[550px]"
             isLarge
           />
 
-          {/* Bottom Row - 4 Equal Columns */}
-          <div className="grid grid-cols-4">
-            {bottomActivities.map((activity, index) => (
-              <ActivityCard
-                key={index}
-                activity={activity}
-                className="h-[550px]"
-              />
-            ))}
-          </div>
+          {/* Bottom Row - 4 Equal Columns (if there are more activities) */}
+          {bottomActivities.length > 0 && (
+            <div className="grid grid-cols-2 md:grid-cols-4">
+              {bottomActivities.map((activity, index) => (
+                <ActivityCard
+                  key={index}
+                  activity={activity}
+                  className="h-[200px] sm:h-[250px] md:h-[400px] lg:h-[550px]"
+                />
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </section>
@@ -125,7 +111,7 @@ function ActivityCard({
           alt={activity.name}
           fill
           className="object-cover"
-          sizes={isLarge ? "100vw" : "25vw"}
+          sizes={isLarge ? "100vw" : "(max-width: 768px) 50vw, 25vw"}
         />
       </motion.div>
 
@@ -134,7 +120,7 @@ function ActivityCard({
 
       {/* Activity Name */}
       <div className="absolute inset-0 flex items-center justify-center z-10">
-        <h3 className="text-white text-3xl md:text-4xl lg:text-5xl font-bold uppercase tracking-wide drop-shadow-lg">
+        <h3 className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold uppercase tracking-wide drop-shadow-lg">
           {activity.name}
         </h3>
       </div>
