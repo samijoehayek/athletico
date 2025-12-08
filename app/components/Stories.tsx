@@ -82,11 +82,11 @@ export default function TopStoriesSection() {
   const nextStoryData = stories[(currentIndex + 1) % stories.length];
 
   return (
-    <section className="bg-white w-full h-[90vh] overflow-hidden">
+    <section className="bg-white w-full min-h-screen lg:h-[90vh] overflow-hidden">
       {/* Main Container */}
-      <div className="h-full pl-40 pr-10 py-10 flex flex-col lg:flex-row gap-8">
+      <div className="h-full px-6 md:px-10 lg:pl-40 lg:pr-10 py-10 flex flex-col lg:flex-row gap-8">
         {/* LEFT COLUMN - Title and Player Info */}
-        <div className="lg:w-[40%] flex flex-col justify-center mb-40">
+        <div className="lg:w-[40%] flex flex-col justify-center lg:mb-40">
           {/* Title Section */}
           <TitleSection />
 
@@ -98,7 +98,7 @@ export default function TopStoriesSection() {
               initial="enter"
               animate="center"
               exit="exit"
-              className="mt-6 space-y-4"
+              className="mt-6 space-y-6"
             >
               <PlayerProfile story={currentStory} />
               <PlayerStats story={currentStory} />
@@ -107,33 +107,34 @@ export default function TopStoriesSection() {
         </div>
 
         {/* RIGHT COLUMN - Images (Stories) */}
-        <div className="lg:w-[60%] flex items-center justify-center relative">
-          {/* Main Image - Portrait (500x700px) */}
-          <div className="relative w-[500px] h-[700px] overflow-hidden rounded-lg shadow-2xl">
-            <AnimatePresence mode="wait" initial={false}>
-              <motion.div
-                key={currentIndex}
-                variants={mainImageVariants}
-                initial="enter"
-                animate="center"
-                exit="exit"
-                className="absolute inset-0"
-              >
-                <Image
-                  src={currentStory.mainImage}
-                  alt={currentStory.name}
-                  fill
-                  className="object-cover"
-                  sizes="500px"
-                  priority
-                />
-              </motion.div>
-            </AnimatePresence>
-          </div>
+        <div className="lg:w-[60%] flex items-center justify-center lg:justify-end">
+          {/* Images Container - Flex row, bottom aligned */}
+          <div className="flex flex-col sm:flex-row items-center sm:items-end gap-4 lg:gap-6">
+            {/* Main Image - Portrait 500x700 */}
+            <div className="relative w-[300px] h-[420px] sm:w-[400px] sm:h-[560px] lg:w-[500px] lg:h-[700px] overflow-hidden shadow-2xl flex-shrink-0">
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.div
+                  key={currentIndex}
+                  variants={mainImageVariants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  className="absolute inset-0"
+                >
+                  <Image
+                    src={currentStory.mainImage}
+                    alt={currentStory.name}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 640px) 300px, (max-width: 1024px) 400px, 500px"
+                    priority
+                  />
+                </motion.div>
+              </AnimatePresence>
+            </div>
 
-          {/* Next Up Preview - Positioned to the right with tiny gap */}
-          <div className="absolute right-0 top-100 flex flex-col justify-center">
-            <div className="flex flex-col gap-2">
+            {/* Next Up Section - Aligned to bottom */}
+            <div className="flex flex-col gap-2 self-end">
               <NextUpLabel />
               <NextUpImage
                 nextStoryData={nextStoryData}
@@ -154,9 +155,9 @@ export default function TopStoriesSection() {
 function TitleSection() {
   return (
     <div className="mb-4">
-      <h2 className="text-[#3050FD] font-extrabold text-6xl md:text-7xl lg:text-[100px] xl:text-[120px] leading-none uppercase">
+      <h2 className="text-[#3050FD] font-extrabold text-5xl sm:text-6xl md:text-7xl lg:text-[100px] xl:text-[120px] leading-none uppercase">
         TOP
-        <div className="mt-10" />
+        <div className="mt-4 lg:mt-10" />
         STORIES
       </h2>
     </div>
@@ -167,7 +168,7 @@ function TitleSection() {
 function PlayerProfile({ story }: { story: Story }) {
   return (
     <div className="flex items-center gap-4">
-      <div className="relative w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden flex-shrink-0 ring-2 ring-[#3050FD]/20">
+      <div className="relative w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-full overflow-hidden flex-shrink-0 ring-2 ring-[#3050FD]/20">
         <Image
           src={story.profileImage}
           alt={story.name}
@@ -177,13 +178,13 @@ function PlayerProfile({ story }: { story: Story }) {
         />
       </div>
       <div>
-        <p className="text-[#171717]/60 text-sm md:text-base font-medium uppercase tracking-wide">
+        <p className="text-[#171717]/60 text-xs sm:text-sm md:text-base font-medium uppercase tracking-wide">
           {story.nationality}
         </p>
-        <p className="text-[#171717] text-xl md:text-2xl font-bold uppercase leading-tight">
+        <p className="text-[#171717] text-lg sm:text-xl md:text-2xl font-bold uppercase leading-tight">
           {story.name}
         </p>
-        <p className="text-[#171717]/60 text-sm md:text-base font-medium uppercase">
+        <p className="text-[#171717]/60 text-xs sm:text-sm md:text-base font-medium uppercase">
           {story.age}
         </p>
       </div>
@@ -191,10 +192,10 @@ function PlayerProfile({ story }: { story: Story }) {
   );
 }
 
-// Player Stats Component
+// Player Stats Component - No background cards
 function PlayerStats({ story }: { story: Story }) {
   return (
-    <div className="grid grid-cols-3 gap-4 pt-2">
+    <div className="grid grid-cols-3 gap-4 lg:gap-6 pt-2">
       <StatCard label="TOP SPEED" value={story.topSpeed} />
       <StatCard label="SHOOTING POWER" value={story.shootingPower} />
       <StatCard label="SHOOTING ACCURACY" value={story.shootingAccuracy} />
@@ -213,7 +214,7 @@ function NextUpLabel() {
   );
 }
 
-// Next Up Image Component
+// Next Up Image Component - Square, bigger, no rounded corners
 function NextUpImage({
   nextStoryData,
   currentIndex,
@@ -225,10 +226,10 @@ function NextUpImage({
 }) {
   return (
     <motion.div
-      className="relative w-[350px] h-[350px] overflow-hidden rounded-lg shadow-xl cursor-pointer"
+      className="relative w-[200px] h-[200px] sm:w-[280px] sm:h-[280px] lg:w-[350px] lg:h-[350px] overflow-hidden shadow-xl cursor-pointer"
       onClick={onNext}
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
+      whileHover={{ scale: 1.03 }}
+      whileTap={{ scale: 0.97 }}
     >
       <AnimatePresence mode="wait">
         <motion.div
@@ -244,7 +245,7 @@ function NextUpImage({
             alt={nextStoryData.name}
             fill
             className="object-cover"
-            sizes="200px"
+            sizes="(max-width: 640px) 200px, (max-width: 1024px) 280px, 350px"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
         </motion.div>
@@ -253,14 +254,16 @@ function NextUpImage({
   );
 }
 
-// Stat Card Component
+// Stat Card Component - Clean, no background
 function StatCard({ label, value }: { label: string; value: string }) {
   return (
-    <div className="bg-gradient-to-br from-gray-50 to-white p-3 rounded-lg border border-gray-100">
+    <div className="py-2">
       <p className="text-[#171717]/50 text-[10px] md:text-xs font-semibold uppercase tracking-wide mb-1">
         {label}
       </p>
-      <p className="text-[#171717] text-base md:text-lg font-bold">{value}</p>
+      <p className="text-[#171717] text-sm sm:text-base md:text-lg font-bold">
+        {value}
+      </p>
     </div>
   );
 }

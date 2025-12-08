@@ -16,7 +16,9 @@ export default function ContactPage() {
       <ContactHero />
 
       {/* Locate Us Section */}
-      <LocateUs />
+      <div id="branches">
+        <LocateUs />
+      </div>
 
       {/* FAQ Section */}
       <ContactFAQ />
