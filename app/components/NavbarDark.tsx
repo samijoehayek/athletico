@@ -55,7 +55,7 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`text-white text-sm lg:text-base uppercase transition-all hover:text-[#3050FD] ${
+                className={`text-black text-sm lg:text-base uppercase transition-all hover:text-[#3050FD] ${
                   isActive(link.href) ? "font-bold" : "font-normal"
                 }`}
               >
@@ -80,7 +80,7 @@ export default function Navbar() {
             <Link
               key={link.href}
               href={link.href}
-              className={`text-white text-base uppercase transition-colors hover:text-[#3050FD] ${
+              className={`text-black text-base uppercase transition-colors hover:text-[#3050FD] ${
                 isActive(link.href) ? "font-bold" : "font-normal"
               }`}
               onClick={() => setIsOpen(false)}
