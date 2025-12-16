@@ -156,7 +156,7 @@ function TitleSection() {
   return (
     <div className="mb-4">
       <h2 className="text-[#3050FD] font-extrabold text-5xl sm:text-6xl md:text-7xl lg:text-[100px] xl:text-[120px] leading-none uppercase">
-        TOP
+        SUCCESS
         <div className="mt-4 lg:mt-10" />
         STORIES
       </h2>

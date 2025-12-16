@@ -26,13 +26,26 @@ export default function MyTeamSection() {
           <div className="w-full max-w-[1440px] mx-auto px-10 sm:px-6 lg:px-12 xl:px-[200px]">
             <div className="text-white font-outfit">
               {/* "MEET THE" */}
-              <h3 className="uppercase font-extrabold leading-none mb-2 tracking-tight text-3xl sm:text-4xl md:text-5xl lg:text-[50px]">
-                MEET THE
+              <h3
+                className="
+    uppercase font-extrabold leading-none mb-2 tracking-tight
+    text-3xl sm:text-4xl md:text-5xl lg:text-[50px]
+    translate-y-1 sm:translate-y-2
+    -translate-x-1
+  "
+              >
+                THE
               </h3>
 
               {/* "TEAM" */}
-              <h2 className="uppercase font-extrabold leading-none tracking-tight text-6xl sm:text-7xl md:text-8xl lg:text-[150px] xl:text-[200px]">
-                TEAM
+              <h2
+                className="uppercase font-extrabold leading-none tracking-tight
+    text-6xl sm:text-7xl md:text-8xl lg:text-[150px] xl:text-[200px]
+    translate-y-2 sm:translate-y-3
+    -translate-x-1 sm:-translate-x-2
+  "
+              >
+                CLUB
               </h2>
             </div>
           </div>

@@ -9,3 +9,14 @@
   --font-weight-extrabold: 800;
   --font-weight-black: 900;
 }
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

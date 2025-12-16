@@ -9,14 +9,36 @@ interface Activity {
 }
 
 export default function OtherActivitiesSection() {
+  const whatsappNumber = "96170202030";
+  const whatsappMessage = "Hello! I would like to get more information.";
+
+  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+    whatsappMessage
+  )}`;
   // Adjustable diagonal angle - increase this number to make the diagonal steeper
   // Lower values = more horizontal, Higher values = more vertical
   const diagonalAngle = 22; // Percentage - adjusts the slope of the diagonal
 
   const activities: Activity[] = [
     {
-      name: "Padel",
-      image: "/padel-long.png",
+      name: "TENNIS",
+      image: "/tennis.png",
+    },
+    {
+      name: "BASKETBALL",
+      image: "/basketball.png",
+    },
+    {
+      name: "PADDEL",
+      image: "/padel.png",
+    },
+    {
+      name: "GYM",
+      image: "/gym.png",
+    },
+    {
+      name: "FOOTBALL",
+      image: "/football.png",
     },
   ];
 
@@ -24,7 +46,7 @@ export default function OtherActivitiesSection() {
   const bottomActivities = activities.slice(1);
 
   return (
-    <section className="w-full min-h-[70vh] lg:min-h-screen relative overflow-hidden -mt-1">
+    <section className="w-full min-h-[70vh] lg:min-h-screen relative overflow-hidden -mt-1 py-30">
       {/* Diagonal split background */}
       <div className="absolute inset-0">
         {/* Dark section (top) - #171717 */}
@@ -51,12 +73,26 @@ export default function OtherActivitiesSection() {
       {/* Content container */}
       <div className="relative z-10 w-full min-h-[70vh] lg:min-h-screen pb-20 md:pb-32 lg:pb-24 px-6 md:px-12 lg:px-[200px]">
         {/* Title */}
-        <div className="flex justify-start mb-6 md:mb-8">
+        <div className="flex items-start justify-between mb-6 md:mb-8">
           <h2 className="text-white text-lg md:text-xl lg:text-[25px] font-bold leading-tight text-left">
-            OTHER
+            ATHLETICO
             <br />
-            ACTIVITIES
+            SPORTS CITY
           </h2>
+
+          <a
+            href={whatsappUrl}
+            className="
+    text-[#FFFFFF]
+    text-sm md:text-base lg:text-[16px]
+    leading-tight
+    underline underline-offset-4
+    hover:opacity-80 transition-opacity
+    mt-5 md:mt-6
+  "
+          >
+            Rent Your Space
+          </a>
         </div>
 
         {/* Grid Container */}
@@ -64,7 +100,7 @@ export default function OtherActivitiesSection() {
           {/* Top Row - Single Large Activity (Padel) */}
           <ActivityCard
             activity={topActivity}
-            className="w-full h-[300px] sm:h-[400px] md:h-[450px] lg:h-[550px]"
+            className="w-full h-[300px] sm:h-[300px] md:h-[350px] lg:h-[400px]"
             isLarge
           />
 
@@ -75,7 +111,7 @@ export default function OtherActivitiesSection() {
                 <ActivityCard
                   key={index}
                   activity={activity}
-                  className="h-[200px] sm:h-[250px] md:h-[400px] lg:h-[550px]"
+                  className="h-[200px] sm:h-[250px] md:h-[350px] lg:h-[400px]"
                 />
               ))}
             </div>
@@ -120,7 +156,7 @@ function ActivityCard({
 
       {/* Activity Name */}
       <div className="absolute inset-0 flex items-center justify-center z-10">
-        <h3 className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold uppercase tracking-wide drop-shadow-lg">
+        <h3 className="text-white text-xl sm:text-xl md:text-2xl lg:text-2xl font-bold uppercase tracking-wide drop-shadow-lg">
           {activity.name}
         </h3>
       </div>

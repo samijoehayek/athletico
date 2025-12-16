@@ -34,16 +34,6 @@ export default function Hero() {
               SPORTS CLUB
             </h2>
           </div>
-
-          {/* Opening Hours - Left Aligned */}
-          <div className="max-w-screen-2xl w-full">
-            <p className="text-[#3050FD] font-semibold text-base md:text-lg lg:text-xl uppercase tracking-wide">
-              CLUB OPENING HOURS
-            </p>
-            <p className="text-[#3050FD] font-normal text-lg md:text-xl lg:text-2xl mt-1">
-              8AM to 12AM
-            </p>
-          </div>
         </div>
       </div>
     </section>

@@ -5,15 +5,16 @@ import { motion, useInView } from "framer-motion";
 
 interface Stat {
   value: number;
-  label: string;
+  label: string; // main (big)
+  subLabel?: string; // second line (smaller)
   suffix?: string;
 }
 
 export default function StatisticsSection() {
   const stats: Stat[] = [
-    { value: 12, label: "Branches", suffix: "" },
-    { value: 2300, label: "Players", suffix: "+" },
-    { value: 80, label: "Coaches", suffix: "+" },
+    { value: 12, label: "Branches", subLabel: "Across Lebanon" },
+    { value: 2300, label: "Players", subLabel: "Passionate", suffix: "+" },
+    { value: 80, label: "Coaches", subLabel: "FIFA Certified", suffix: "+" },
   ];
 
   return (
@@ -40,7 +41,7 @@ export default function StatisticsSection() {
         <h1
           className="hidden md:block font-black uppercase leading-none text-center"
           style={{
-            fontSize: "clamp(150px, 18vw, 300px)",
+            fontSize: "clamp(150px, 18vw, 290px)",
             backgroundImage: "url('/tennis.png')",
             backgroundSize: "cover",
             backgroundPosition: "center",
@@ -114,8 +115,17 @@ function AnimatedStat({ stat }: { stat: Stat }) {
         {stat.suffix}
       </div>
       {/* Label */}
-      <div className="text-[60px] lg:text-[80px] font-normal text-[#171717] leading-tight">
-        {stat.label}
+      {/* Label */}
+      <div className="leading-tight">
+        <div className="text-[60px] lg:text-[80px] font-normal text-[#171717]">
+          {stat.label}
+        </div>
+
+        {stat.subLabel && (
+          <div className="mt-1 text-base lg:text-xl font-medium tracking-wide uppercase text-[#171717]/60">
+            {stat.subLabel}
+          </div>
+        )}
       </div>
     </motion.div>
   );
@@ -162,8 +172,17 @@ function AnimatedStatMobile({ stat }: { stat: Stat }) {
         {stat.suffix}
       </div>
       {/* Label */}
-      <div className="text-sm sm:text-base font-normal text-[#171717]/70">
-        {stat.label}
+      {/* Label */}
+      <div className="leading-tight">
+        <div className="text-sm sm:text-base font-semibold text-[#171717]/80">
+          {stat.label}
+        </div>
+
+        {stat.subLabel && (
+          <div className="text-[11px] sm:text-xs font-medium uppercase tracking-wide text-[#171717]/50">
+            {stat.subLabel}
+          </div>
+        )}
       </div>
     </motion.div>
   );

@@ -27,13 +27,13 @@ export default function Footer() {
     whatsappMessage
   )}`;
 
-  const slogan = "90 MINUTES. INFINITE MEMORIES. ";
+  const slogan = "LIVE YOUR PASSION ";
   const repeatedSlogan = slogan.repeat(10);
 
   return (
     <footer className="w-full bg-[#3050FD] flex flex-col font-outfit">
       {/* PART 1: WhatsApp Section */}
-      <div className="w-full px-4 sm:px-6 lg:px-16 xl:px-24 py-10 md:py-16 lg:py-20 flex flex-col justify-center">
+      {/* <div className="w-full px-4 sm:px-6 lg:px-16 xl:px-24 py-10 md:py-16 lg:py-20 flex flex-col justify-center">
         <h2 className="text-white text-3xl sm:text-4xl md:text-[40px] lg:text-[50px] font-extrabold leading-tight mb-3">
           WhatsApp
         </h2>
@@ -51,10 +51,10 @@ export default function Footer() {
           <WhatsAppIcon />
           Chat on WhatsApp
         </a>
-      </div>
+      </div> */}
 
       {/* Divider */}
-      <div className="w-full border-t border-white/50" />
+      {/* <div className="w-full border-t border-white/50" /> */}
 
       {/* PART 2: Main Footer Content */}
       <div className="flex flex-col flex-grow">
@@ -64,12 +64,22 @@ export default function Footer() {
             ATHLETICO
           </h3>
 
-          <h4 className="text-white text-base sm:text-lg md:text-[20px] font-semibold uppercase mb-4 md:mb-6">
-            Branches
-          </h4>
+          <div className="flex flex-wrap items-center gap-6 md:gap-10 mb-4 md:mb-6">
+            <h4 className="text-white text-base sm:text-lg md:text-[20px] uppercase">
+              Branches
+            </h4>
+
+            <h4 className="text-white text-base sm:text-lg md:text-[20px] uppercase">
+              Career
+            </h4>
+
+            <h4 className="text-white text-base sm:text-lg md:text-[20px] uppercase">
+              Join us
+            </h4>
+          </div>
 
           {/* Branches Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-10 md:gap-x-16 gap-y-6 md:gap-y-8">
+          {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-10 md:gap-x-16 gap-y-6 md:gap-y-8">
             {branches.map((branch, index) => (
               <div key={index}>
                 <p className="text-white text-base sm:text-[17px] md:text-[18px] font-medium mb-1.5">
@@ -84,14 +94,14 @@ export default function Footer() {
                 </a>
               </div>
             ))}
-          </div>
+          </div> */}
         </div>
 
         {/* PART 3: Infinite Scrolling Slogan Banner */}
         <div className="overflow-hidden bg-[#3050FD] py-4 sm:py-6 md:py-8">
           <motion.div
             className="flex whitespace-nowrap"
-            animate={{ x: [0, "-50%"] }}
+            animate={{ x: [0, "-400%"] }}
             transition={{
               x: {
                 repeat: Infinity,
@@ -108,12 +118,19 @@ export default function Footer() {
         </div>
 
         {/* PART 4: Copyright and Social Media */}
-        <div className="px-4 sm:px-6 lg:px-16 xl:px-24 py-6 md:py-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div className="px-4 sm:px-6 lg:px-16 xl:px-24 py-6 md:py-8 relative flex flex-col md:flex-row md:items-center gap-4">
+          {/* Copyright – stays in the same position */}
           <p className="text-white text-xs sm:text-sm opacity-70">
             © 2025 Developed by dot.jo, all rights reserved.
           </p>
 
-          <div className="flex items-center gap-4 sm:gap-6">
+          {/* Social Media – centered */}
+          <div
+            className="
+      flex items-center gap-4 sm:gap-6
+      md:absolute md:left-1/2 md:-translate-x-1/2
+    "
+          >
             <Link
               href="https://facebook.com"
               target="_blank"
@@ -122,6 +139,7 @@ export default function Footer() {
             >
               <FacebookIcon />
             </Link>
+
             <Link
               href="https://instagram.com"
               target="_blank"
@@ -130,6 +148,7 @@ export default function Footer() {
             >
               <InstagramIcon />
             </Link>
+
             <Link
               href="https://twitter.com"
               target="_blank"
@@ -138,6 +157,7 @@ export default function Footer() {
             >
               <TwitterIcon />
             </Link>
+
             <Link
               href="https://linkedin.com"
               target="_blank"

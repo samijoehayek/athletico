@@ -32,44 +32,43 @@ export default function ContactHero() {
   };
 
   return (
-    <section className="w-full bg-white pt-12 md:pt-18 lg:pt-24 pb-12 md:pb-16 lg:pb-24 px-6 md:px-10 lg:px-16">
-      <div className="max-w-7xl mx-auto">
-        {/* Row 1: Full Width Title Block */}
-        <div className="mb-12 md:mb-16">
-          {/* Small Label */}
-          <p
-            className="text-[#171717] text-sm font-semibold uppercase tracking-widest mb-2"
-            style={{ letterSpacing: "0.12em" }}
-          >
-            GET STARTED
-          </p>
+    <div className="max-w-7xl mx-auto">
+      {/* Row 1: Full Width Title Block */}
+      <div className="mb-12 md:mb-16">
+        {/* Small Label */}
+        <p
+          className="text-[#171717] text-sm font-semibold uppercase tracking-widest mb-2"
+          style={{ letterSpacing: "0.12em" }}
+        >
+          GET STARTED
+        </p>
 
-          {/* Main Title */}
-          <h1
-            className="text-[#3050FD] font-extrabold leading-tight mb-3"
-            style={{
-              fontSize: "clamp(36px, 5vw, 64px)",
-              lineHeight: 1.1,
-            }}
-          >
-            Get in touch with us.
-          </h1>
+        {/* Main Title */}
+        <h1
+          className="text-[#3050FD] font-extrabold leading-tight mb-3"
+          style={{
+            fontSize: "clamp(36px, 5vw, 64px)",
+            lineHeight: 1.1,
+          }}
+        >
+          Get in touch with us.
+        </h1>
 
-          {/* Subtitle - no underline, not bold */}
-          <p
-            className="text-[#171717] font-normal"
-            style={{
-              fontSize: "clamp(20px, 3vw, 28px)",
-            }}
-          >
-            We're here to assist you
-          </p>
-        </div>
+        {/* Subtitle - no underline, not bold */}
+        <p
+          className="text-[#171717] font-normal"
+          style={{
+            fontSize: "clamp(20px, 3vw, 28px)",
+          }}
+        >
+          We're here to assist you
+        </p>
+      </div>
 
-        {/* Row 2: WhatsApp + Form (Two Columns) */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          {/* Left Column - WhatsApp */}
-          <div className="lg:col-span-4">
+      {/* Row 2: WhatsApp + Form (Two Columns) */}
+      {/* <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start"> */}
+      {/* Left Column - WhatsApp */}
+      {/* <div className="lg:col-span-4">
             <h3 className="text-[#171717] text-2xl font-bold mb-2">WhatsApp</h3>
             <p className="text-[#171717] text-base mb-4">
               For faster responses, reach us on WhatsApp
@@ -83,14 +82,12 @@ export default function ContactHero() {
               <WhatsAppIcon />
               Chat on WhatsApp
             </a>
-          </div>
+          </div> */}
 
-          {/* Right Column - Contact Form */}
-          <div className="lg:col-span-8">
+      {/* Right Column - Contact Form */}
+      {/* <div className="lg:col-span-8">
             <form onSubmit={handleSubmit}>
-              {/* Row 1: Name, Email, Phone */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                {/* Name */}
                 <div>
                   <label className="block text-[#171717] text-sm mb-2">
                     Your Name
@@ -105,7 +102,6 @@ export default function ContactHero() {
                   />
                 </div>
 
-                {/* Email */}
                 <div>
                   <label className="block text-[#171717] text-sm mb-2">
                     Email Address
@@ -120,7 +116,6 @@ export default function ContactHero() {
                   />
                 </div>
 
-                {/* Phone */}
                 <div>
                   <label className="block text-[#171717] text-sm mb-2">
                     Phone Number (optional)
@@ -135,7 +130,6 @@ export default function ContactHero() {
                 </div>
               </div>
 
-              {/* Row 2: Message */}
               <div className="mb-8">
                 <label className="block text-[#171717] text-sm mb-2">
                   Message
@@ -150,7 +144,6 @@ export default function ContactHero() {
                 />
               </div>
 
-              {/* Submit Button */}
               <div className="flex justify-end">
                 <button
                   type="submit"
@@ -173,10 +166,9 @@ export default function ContactHero() {
                 </button>
               </div>
             </form>
-          </div>
-        </div>
-      </div>
-    </section>
+          </div> */}
+      {/* </div> */}
+    </div>
   );
 }
 

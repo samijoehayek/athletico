@@ -134,7 +134,7 @@ export default function ProgramsSection() {
         {/* Title - Single row */}
         <div className="flex items-center gap-3 mb-10">
           <h2 className="font-extrabold text-3xl sm:text-4xl leading-none uppercase [text-shadow:_-1px_-1px_0_#fff,_1px_-1px_0_#fff,_-1px_1px_0_#fff,_1px_1px_0_#fff] text-[#171717]">
-            LIVE YOUR PASSION
+            INSIDE ATHLETICO
           </h2>
           <Image
             src="/arrow.svg"
@@ -239,14 +239,11 @@ export default function ProgramsSection() {
       >
         <div className="space-y-4">
           <h2 className="font-extrabold text-8xl lg:text-[120px] leading-none uppercase [text-shadow:_-2px_-2px_0_#fff,_2px_-2px_0_#fff,_-2px_2px_0_#fff,_2px_2px_0_#fff] text-[#171717] text-left">
-            LIVE
-          </h2>
-          <h2 className="font-extrabold text-8xl lg:text-[120px] leading-none uppercase [text-shadow:_-2px_-2px_0_#fff,_2px_-2px_0_#fff,_-2px_2px_0_#fff,_2px_2px_0_#fff] text-[#171717] text-left">
-            YOUR
+            INSIDE
           </h2>
           <div className="flex items-center gap-4 lg:gap-6">
             <h2 className="font-extrabold text-8xl lg:text-[120px] leading-none uppercase [text-shadow:_-2px_-2px_0_#fff,_2px_-2px_0_#fff,_-2px_2px_0_#fff,_2px_2px_0_#fff] text-[#171717] text-left">
-              PASSION
+              ATHLETICO
             </h2>
             <Image
               src="/arrow.svg"

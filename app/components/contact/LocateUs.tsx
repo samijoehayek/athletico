@@ -20,7 +20,7 @@ export default function LocateUs() {
   ];
 
   return (
-    <section className="w-full bg-[#F3F3F3] py-10 md:py-14 lg:py-18 px-6 md:px-10 lg:px-16">
+    <section className="w-full py-10 md:py-14 lg:py-18 px-6 md:px-10 lg:px-16">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">

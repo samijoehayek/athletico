@@ -21,7 +21,7 @@ export default function Home() {
 
       <OtherActivitiesSection />
       <StatisticsSection />
-      <MustSeeMomentsSection />
+      {/* <MustSeeMomentsSection /> */}
       <PartnersSection />
       <MyTeamSection />
       <Footer />

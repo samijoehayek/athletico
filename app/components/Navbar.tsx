@@ -31,13 +31,14 @@ export default function Navbar({ mode = "light" }: NavbarProps) {
   const navLinks = [
     { href: "/", label: "HOME" },
     // { href: "/athletico", label: "ATHELETICO" },
-    { href: "/team", label: "TEAM" },
-    { href: "/contact#branches", label: "BRANCHES" },
-    { href: "/#programs", label: "OUR SERVICES" },
+    { href: "/team", label: "THE CLUB" },
+    { href: "/#programs", label: "INSIDE ATHLETICO" },
+    // { href: "/contact#branches", label: "BRANCHES" },
+    // { href: "/#programs", label: "OUR SERVICES" },
     { href: "/careers", label: "CAREERS" },
     // { href: "/events", label: "EVENTS" },
     { href: "/news", label: "NEWS" },
-    { href: "/contact", label: "CONTACT US" },
+    { href: "/contact", label: "JOIN US" },
   ];
 
   const handleLinkClick = (href: string) => {
