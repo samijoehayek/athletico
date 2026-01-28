@@ -29,15 +29,12 @@ export default function Navbar({ mode = "light" }: NavbarProps) {
   };
 
   const navLinks = [
-    { href: "/", label: "HOME" },
-    // { href: "/athletico", label: "ATHELETICO" },
+    { href: "/inside-athletico", label: "INSIDE ATHLETICO" },
     { href: "/team", label: "THE CLUB" },
-    { href: "/#programs", label: "INSIDE ATHLETICO" },
-    // { href: "/contact#branches", label: "BRANCHES" },
-    // { href: "/#programs", label: "OUR SERVICES" },
-    { href: "/careers", label: "CAREERS" },
-    // { href: "/events", label: "EVENTS" },
-    { href: "/news", label: "NEWS" },
+    // { href: "/camps", label: "CAMPS & TRIPS" },
+    { href: "/olympique-lyonnais", label: "OL" },
+    { href: "/achievement", label: "ACHIEVEMENT" },
+    { href: "/alumni", label: "ALUMNI" },
     { href: "/contact", label: "JOIN US" },
   ];
 

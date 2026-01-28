@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion, AnimatePresence } from "framer-motion";
@@ -14,8 +15,7 @@ if (typeof window !== "undefined") {
 interface Program {
   title: string;
   image: string;
-  players: string;
-  awards: string;
+  href: string;
 }
 
 export default function ProgramsSection() {
@@ -27,39 +27,14 @@ export default function ProgramsSection() {
 
   const programs: Program[] = [
     {
-      title: "Goalkeeper Training",
-      image:
-        "https://images.unsplash.com/photo-1589487391730-58f20eb2c308?w=400&h=300&fit=crop",
-      players: "200+ Players",
-      awards: "6 awards",
+      title: "Values",
+      image: "/values.png",
+      href: "/inside-athletico#values",
     },
     {
-      title: "Elite Player Program",
-      image:
-        "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=400&h=300&fit=crop",
-      players: "200+ Players",
-      awards: "8 awards",
-    },
-    {
-      title: "Youth Development",
-      image:
-        "https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=400&h=300&fit=crop",
-      players: "150+ Players",
-      awards: "5 awards",
-    },
-    {
-      title: "Advanced Tactics",
-      image:
-        "https://images.unsplash.com/photo-1606925797300-0b35e9d1794e?w=400&h=300&fit=crop",
-      players: "100+ Players",
-      awards: "4 awards",
-    },
-    {
-      title: "Fitness Training",
-      image:
-        "https://images.unsplash.com/photo-1614632537197-38a17061c2bd?w=400&h=300&fit=crop",
-      players: "250+ Players",
-      awards: "7 awards",
+      title: "Mission",
+      image: "/values.png",
+      href: "/inside-athletico#mission",
     },
   ];
 
@@ -85,13 +60,17 @@ export default function ProgramsSection() {
     if (!section || !title || !cardsContainer) return;
 
     const cardWidth = 658;
-    const totalScrollWidth = cardWidth * programs.length;
+    const gap = 28; // gap-7 = 28px
+    const totalCardsWidth =
+      cardWidth * programs.length + gap * (programs.length - 1);
+    // Calculate how much to scroll: we start with 1 card visible, end with last card visible
+    const scrollDistance = totalCardsWidth - cardWidth;
 
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: section,
         start: "top top",
-        end: `+=${totalScrollWidth + 1500}`,
+        end: `+=${scrollDistance + 800}`,
         scrub: 1,
         pin: true,
         anticipatePin: 1,
@@ -107,11 +86,11 @@ export default function ProgramsSection() {
     }).to(
       cardsContainer,
       {
-        x: -totalScrollWidth,
+        x: -scrollDistance,
         duration: 2,
         ease: "none",
       },
-      "-=0.40"
+      "-=0.40",
     );
 
     return () => {
@@ -256,10 +235,15 @@ export default function ProgramsSection() {
         </div>
       </div>
 
-      {/* Cards Container - Will slide horizontally */}
+      {/* Cards Container - Positioned to show 1 card initially */}
       <div
         ref={cardsContainerRef}
-        className="flex gap-7 absolute left-[100vw] items-center"
+        className="flex gap-7 absolute items-center"
+        style={{
+          // Position so first card is visible on the right side
+          // calc(100vw - cardWidth - rightPadding)
+          left: "calc(100vw - 630px - 80px)",
+        }}
       >
         {programs.map((program, index) => (
           <DesktopCard key={index} program={program} />
@@ -271,104 +255,90 @@ export default function ProgramsSection() {
 
 // ==================== MOBILE CARD COMPONENT ====================
 function MobileCard({ program }: { program: Program }) {
-  const words = program.title.split(" ");
-  const midPoint = Math.ceil(words.length / 2);
-  const firstLine = words.slice(0, midPoint).join(" ");
-  const secondLine = words.slice(midPoint).join(" ");
-
   return (
-    <div className="bg-white w-full max-w-[320px] shadow-2xl">
-      <div className="w-full flex flex-col p-5">
-        {/* Image - Right aligned */}
-        <div className="flex justify-end mb-4">
-          <div className="relative w-[160px] h-[130px] flex-shrink-0 overflow-hidden">
-            <Image
-              src={program.image}
-              alt={program.title}
-              fill
-              className="object-cover"
-              sizes="160px"
-            />
-          </div>
-        </div>
+    <Link
+      href={program.href}
+      className="block relative w-full max-w-[320px] h-[400px] overflow-hidden group"
+    >
+      {/* Background Image */}
+      <Image
+        src={program.image}
+        alt={program.title}
+        fill
+        className="object-cover transition-transform duration-500 group-hover:scale-105"
+        sizes="320px"
+      />
 
-        {/* Title - Left aligned, two lines */}
-        <div className="mb-6">
-          <h3 className="text-[#171717] text-xl font-bold uppercase text-left leading-tight">
-            {secondLine ? (
-              <>
-                {firstLine}
-                <br />
-                {secondLine}
-              </>
-            ) : (
-              program.title
-            )}
-          </h3>
-        </div>
+      {/* Overlay for better text readability */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
-        {/* Stats */}
-        <div className="flex justify-between items-center w-full pt-4 border-t border-gray-100">
-          <p className="text-[#171717]/60 text-sm font-normal">
-            {program.players}
-          </p>
-          <p className="text-[#171717]/60 text-sm font-normal">
-            {program.awards}
-          </p>
-        </div>
+      {/* Arrow Button - Top Right */}
+      <div className="absolute top-4 right-4 w-12 h-12 bg-white flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#171717"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M5 12h14M12 5l7 7-7 7" />
+        </svg>
       </div>
-    </div>
+
+      {/* Title - Bottom Left */}
+      <div className="absolute bottom-6 left-6">
+        <h3 className="text-white font-extrabold text-4xl uppercase">
+          {program.title}
+        </h3>
+      </div>
+    </Link>
   );
 }
 
 // ==================== DESKTOP CARD COMPONENT ====================
 function DesktopCard({ program }: { program: Program }) {
-  const words = program.title.split(" ");
-  const midPoint = Math.ceil(words.length / 2);
-  const firstLine = words.slice(0, midPoint).join(" ");
-  const secondLine = words.slice(midPoint).join(" ");
-
   return (
-    <div className="bg-white w-[600px] h-[650px] lg:w-[630px] lg:h-[680px] shadow-2xl flex-shrink-0">
-      <div className="w-full h-full flex flex-col p-10 lg:p-12">
-        {/* Image - Right aligned */}
-        <div className="flex justify-end mb-6">
-          <div className="relative w-[320px] h-[260px] lg:w-[340px] lg:h-[280px] flex-shrink-0 overflow-hidden">
-            <Image
-              src={program.image}
-              alt={program.title}
-              fill
-              className="object-cover"
-              sizes="(max-width: 1024px) 320px, 340px"
-            />
-          </div>
-        </div>
+    <Link
+      href={program.href}
+      className="block relative w-[600px] h-[650px] lg:w-[630px] lg:h-[680px] overflow-hidden flex-shrink-0 group"
+    >
+      {/* Background Image */}
+      <Image
+        src={program.image}
+        alt={program.title}
+        fill
+        className="object-cover transition-transform duration-500 group-hover:scale-105"
+        sizes="(max-width: 1024px) 600px, 630px"
+      />
 
-        {/* Title - Left aligned, two lines */}
-        <div className="flex-grow flex flex-col justify-center">
-          <h3 className="text-[#171717] text-3xl lg:text-4xl font-bold uppercase text-left leading-tight">
-            {secondLine ? (
-              <>
-                {firstLine}
-                <br />
-                {secondLine}
-              </>
-            ) : (
-              program.title
-            )}
-          </h3>
-        </div>
+      {/* Subtle overlay for depth */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
 
-        {/* Stats */}
-        <div className="flex justify-between items-center w-full mt-auto pt-6">
-          <p className="text-[#171717]/70 text-base font-normal">
-            {program.players}
-          </p>
-          <p className="text-[#171717]/70 text-base font-normal">
-            {program.awards}
-          </p>
-        </div>
+      {/* Arrow Button - Top Right */}
+      <div className="absolute top-8 right-8 w-16 h-16 bg-white flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:bg-gray-100">
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#171717"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M5 12h14M12 5l7 7-7 7" />
+        </svg>
       </div>
-    </div>
+
+      {/* Title - Bottom Left */}
+      <div className="absolute bottom-10 left-10">
+        <h3 className="text-white font-extrabold text-[80px] uppercase leading-none">
+          {program.title}
+        </h3>
+      </div>
+    </Link>
   );
 }

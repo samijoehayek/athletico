@@ -13,7 +13,7 @@ export default function OtherActivitiesSection() {
   const whatsappMessage = "Hello! I would like to get more information.";
 
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
-    whatsappMessage
+    whatsappMessage,
   )}`;
   // Adjustable diagonal angle - increase this number to make the diagonal steeper
   // Lower values = more horizontal, Higher values = more vertical
@@ -83,7 +83,7 @@ export default function OtherActivitiesSection() {
           <a
             href={whatsappUrl}
             className="
-    text-[#FFFFFF]
+    text-[#D9FF00]
     text-sm md:text-base lg:text-[16px]
     leading-tight
     underline underline-offset-4
@@ -102,6 +102,7 @@ export default function OtherActivitiesSection() {
             activity={topActivity}
             className="w-full h-[300px] sm:h-[300px] md:h-[350px] lg:h-[400px]"
             isLarge
+            whatsappUrl={whatsappUrl}
           />
 
           {/* Bottom Row - 4 Equal Columns (if there are more activities) */}
@@ -112,6 +113,7 @@ export default function OtherActivitiesSection() {
                   key={index}
                   activity={activity}
                   className="h-[200px] sm:h-[250px] md:h-[350px] lg:h-[400px]"
+                  whatsappUrl={whatsappUrl}
                 />
               ))}
             </div>
@@ -127,14 +129,19 @@ function ActivityCard({
   activity,
   className = "",
   isLarge = false,
+  whatsappUrl,
 }: {
   activity: Activity;
   className?: string;
   isLarge?: boolean;
+  whatsappUrl: string;
 }) {
   return (
-    <div
-      className={`relative overflow-hidden group cursor-pointer ${className}`}
+    <a
+      href={whatsappUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`relative overflow-hidden group cursor-pointer block ${className}`}
     >
       {/* Image with zoom effect on hover */}
       <motion.div
@@ -151,15 +158,25 @@ function ActivityCard({
         />
       </motion.div>
 
-      {/* Overlay - dark normally, bright on hover (light effect) */}
-      <div className="absolute inset-0 bg-black/40 group-hover:bg-white/20 transition-colors duration-500 z-[1]" />
+      {/* Default Overlay - dark */}
+      <div className="absolute inset-0 bg-black/40 group-hover:opacity-0 transition-opacity duration-500 z-[1]" />
 
-      {/* Activity Name */}
-      <div className="absolute inset-0 flex items-center justify-center z-10">
+      {/* Hover Overlay - blue */}
+      <div className="absolute inset-0 bg-[#3050FD]/70 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-[2]" />
+
+      {/* Default Activity Name */}
+      <div className="absolute inset-0 flex items-center justify-center z-10 group-hover:opacity-0 transition-opacity duration-300">
         <h3 className="text-white text-xl sm:text-xl md:text-2xl lg:text-2xl font-bold uppercase tracking-wide drop-shadow-lg">
           {activity.name}
         </h3>
       </div>
-    </div>
+
+      {/* Hover Text - Rent Your Space */}
+      <div className="absolute inset-0 flex items-center justify-center z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <h3 className="text-[#D9FF00] text-xl sm:text-xl md:text-2xl lg:text-2xl font-bold uppercase tracking-wide drop-shadow-lg">
+          RENT YOUR SPACE
+        </h3>
+      </div>
+    </a>
   );
 }
