@@ -15,29 +15,67 @@ export default function ContactFAQ() {
 
   const faqs: FAQItem[] = [
     {
-      question: "What age groups do you offer training for?",
+      question: "What age groups do you accept?",
       answer:
-        "We offer training programs for all age groups, starting from 4 years old up to adults. Our youth development program is structured by age: Mini (4-6), Junior (7-9), Youth (10-12), Teen (13-15), and Senior (16+).",
+        "We welcome boys and girls starting from age 4 and above, across all skill levels.",
     },
     {
-      question: "How do I register my child for a program?",
+      question: "How can I register my child?",
       answer:
-        "You can register your child by visiting any of our branches, calling our hotline, or filling out the contact form on this page. Our team will guide you through the registration process and help you choose the right program.",
+        "Registration is handled directly with our branch admins. Call or WhatsApp the branch closest to you:\n\n• Dbayeh: 78824357\n• Cornet Chahwan: 79100023\n• Jal el Dib: 76499049\n• Sami el Soloh: 79100025\n• Mansourieh: 79100026\n• Beit Mery: 76779027\n• Horsh Tabet: 79100024\n• Jnah: 70343483\n• Champville, Dik el Mehdi: 71402444\n• Antoura: 03337875\n• Zouk Mikhael: 03337875\n• HQ (Admin/Marketing): 70202030 / 76927288",
     },
     {
-      question: "What equipment does my child need?",
+      question: "What are the training days and times?",
       answer:
-        "For initial sessions, comfortable athletic wear and football boots are sufficient. As your child progresses, we'll provide a list of recommended gear. Shin guards are mandatory for all training sessions.",
+        "Training days and times vary by branch. Refer to our weekly schedule on Instagram (check carousel posts or story highlights for your branch).",
     },
     {
-      question: "Do you offer trial sessions?",
+      question: "Where are the training venues located?",
       answer:
-        "Yes! We offer a free trial session for new players to experience our training environment before committing to a program. Contact us to schedule your trial.",
+        "We currently operate in 12 branches across Lebanon: Dbayeh, Cornet Chahwan, Jal el Dib, Sami el Soloh, Mansourieh, Beit Mery, Horsh Tabet, Jnah, Champville (Dik el Mehdi), Antoura, and Zouk Mikhael.",
     },
     {
-      question: "What are your payment options?",
+      question: "How long does each session last?",
       answer:
-        "We offer flexible payment options including monthly, quarterly, and annual plans. We also accept cash, credit cards, and bank transfers. Contact us for more details on pricing.",
+        "Sessions last either 1.25 hours or 1.5 hours, depending on the branch and age group. Check your branch's schedule for exact timing.",
+    },
+    {
+      question: "Are there tryouts or can anyone join?",
+      answer:
+        "There are no tryouts required. We proudly welcome every child who wants to play football in a safe, encouraging, and professional environment. Our coaches will assess each child during sessions and place them in the team where they can grow best — as both a person and a player.",
+    },
+    {
+      question: "What are the fees per term or month?",
+      answer:
+        "Fees vary based on branch, age group, and number of sessions. Please contact your branch admin for updated pricing.",
+    },
+    {
+      question: "How can I make payments?",
+      answer:
+        "You can pay through the BOB Finance app (official partner) or with cash at your branch's admin desk.",
+    },
+    {
+      question: "When are payments due?",
+      answer: "Payments are due at the beginning of every month.",
+    },
+    {
+      question: "Do you offer sibling discounts?",
+      answer:
+        "Yes, sibling discounts are available! Just ask your branch admin for details and eligibility.",
+    },
+    {
+      question: "How are teams divided?",
+      answer:
+        "Teams are first divided by age group, then further split by level (beginner, intermediate, advanced) to ensure every child trains at the right pace and environment.",
+    },
+    {
+      question: "Where can I buy Athletico kits?",
+      answer:
+        "Kits are available through our branches. DM us to know availability.",
+    },
+    {
+      question: "Is wearing the Athletico kit mandatory?",
+      answer: "Yes, official kits are required for training and matches.",
     },
   ];
 
@@ -67,7 +105,7 @@ export default function ContactFAQ() {
                   {/* Question Header */}
                   <button
                     onClick={() => toggleFAQ(index)}
-                    className="w-full flex items-center justify-between px-5 py-4 text-left"
+                    className="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-gray-50 transition-colors"
                   >
                     <span className="text-[#171717] text-base font-semibold pr-4">
                       {faq.question}
@@ -80,7 +118,7 @@ export default function ContactFAQ() {
                   {/* Answer */}
                   {openIndex === index && (
                     <div className="px-5 pb-4">
-                      <p className="text-[#171717]/70 text-sm leading-relaxed">
+                      <p className="text-[#171717]/70 text-sm leading-relaxed whitespace-pre-line">
                         {faq.answer}
                       </p>
                     </div>
@@ -130,7 +168,7 @@ export default function ContactFAQ() {
           </div>
 
           {/* Right Column - Image */}
-          <div className="lg:col-span-3">
+          {/* <div className="lg:col-span-3">
             <div className="relative w-full h-full min-h-[300px] lg:min-h-0 rounded-lg overflow-hidden">
               <Image
                 src="/contact-faq.jpg"
@@ -140,7 +178,7 @@ export default function ContactFAQ() {
                 sizes="(max-width: 1024px) 100vw, 25vw"
               />
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </section>

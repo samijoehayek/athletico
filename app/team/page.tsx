@@ -19,7 +19,7 @@ export default function TeamPage() {
       <div className="px-6 md:px-10 lg:px-16 pb-32">
         {/* CEO Section */}
         <TeamSection
-          title="CEO"
+          title="FOUNDERS"
           members={[
             {
               name: "JOHN SMITH",
@@ -39,7 +39,7 @@ export default function TeamPage() {
 
         {/* Technical & Tactical Coaches Section */}
         <TeamSection
-          title="TECHNICAL & TACTICAL COACHES"
+          title="SHAREHOLDERS"
           members={[
             {
               name: "CARLOS RODRIGUEZ",

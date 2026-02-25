@@ -19,7 +19,7 @@ export default function OurClubSection() {
 
   const mottoLines = [
     { text: "OUR MOTTO", isBold: false, isSubtitle: false },
-    { text: "IS LIVE YOUR PASSION", isBold: true, isSubtitle: false },
+    { text: "LIVE YOUR PASSION", isBold: true, isSubtitle: false },
     {
       text: "BECAUSE PROGRESS COMES WHEN FOOTBALL STAYS",
       isBold: false,
@@ -80,7 +80,7 @@ export default function OurClubSection() {
 
             {/* Mission Text */}
             <p className="text-white/80 text-sm md:text-base lg:text-lg leading-relaxed mb-10 md:mb-12">
-              give young players in Lebanon the training standards and
+              Give young players in Lebanon the training standards and
               mentorship they deserve. Today, we continue to build a culture of
               discipline, respect, and teamwork—so every player improves on the
               pitch and grows as a person.
