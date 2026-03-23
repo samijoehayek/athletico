@@ -75,17 +75,6 @@ function HeroSection() {
               </h1>
             </div>
 
-            {/* Kid Image - Positioned relative to title */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[55%] z-20 w-[380px] h-[480px] sm:w-[480px] sm:h-[600px] md:w-[600px] md:h-[750px] lg:w-[750px] lg:h-[940px] xl:w-[1250px] xl:h-[1060px]">
-              <Image
-                src="/achievements.png"
-                alt="Young Athlete"
-                fill
-                className="object-contain"
-                sizes="(max-width: 640px) 380px, (max-width: 768px) 480px, (max-width: 1024px) 600px, (max-width: 1280px) 750px, 1250px"
-                priority
-              />
-            </div>
           </div>
         </div>
       </div>
@@ -105,21 +94,21 @@ function AchievementsCarouselSection() {
       title: "ATHLETICO MATEN 2013",
       ageCategory: "U12",
       season: "2024-2025",
-      tournament: "WA3IDIN",
+      tournament: "PROMISING",
       image: "/ourclub1.png",
     },
     {
       title: "ATHLETICO 2011",
       ageCategory: "U12",
       season: "22/23",
-      tournament: "WA3IDIN",
+      tournament: "PROMISING",
       image: "/ourclub1.png",
     },
     {
       title: "ATHLETICO 2012",
       ageCategory: "U11",
       season: "23/24",
-      tournament: "WA3IDIN",
+      tournament: "PROMISING",
       image: "/ourclub1.png",
     },
     {

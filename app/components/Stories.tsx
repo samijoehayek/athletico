@@ -4,13 +4,10 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence, type Variant } from "framer-motion";
 
-interface Story {
-  nationality: string;
+interface Graduate {
   name: string;
-  age: string;
-  topSpeed: string;
-  shootingPower: string;
-  shootingAccuracy: string;
+  position: string;
+  advice: string;
   mainImage: string;
   profileImage: string;
 }
@@ -18,59 +15,67 @@ interface Story {
 export default function TopStoriesSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const stories: Story[] = [
+  const graduates: Graduate[] = [
     {
-      nationality: "LEBANESE",
-      name: "LIAM DUARTE",
-      age: "AGE 15",
-      topSpeed: "35.4 KM/H",
-      shootingPower: "112 KM/H",
-      shootingAccuracy: "82%",
-      mainImage:
-        "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=800&h=1000&fit=crop",
-      profileImage:
-        "https://images.unsplash.com/photo-1566577134770-3d85bb3a9cc4?w=200&h=200&fit=crop",
+      name: "PHILIPPE PAOLI",
+      position: "STRIKER",
+      advice:
+        "Give it your all in every training & every game. Cherish every moment with your teammates — you will make friends for life.",
+      mainImage: "/athletico-graduates/philippe-paoli-main.jpg",
+      profileImage: "/athletico-graduates/philippe-paoli-profile.jpg",
     },
     {
-      nationality: "BRAZILIAN",
-      name: "CARLOS SILVA",
-      age: "AGE 17",
-      topSpeed: "38.2 KM/H",
-      shootingPower: "118 KM/H",
-      shootingAccuracy: "85%",
-      mainImage:
-        "https://images.unsplash.com/photo-1614632537197-38a17061c2bd?w=800&h=1000&fit=crop",
-      profileImage:
-        "https://images.unsplash.com/photo-1560272564-c83b66b1ad12?w=200&h=200&fit=crop",
+      name: "MARTIN BOU YOUNES",
+      position: "MIDFIELDER",
+      advice:
+        "Enjoy every single moment when you step on that field. This club isn't just about football — it's about family, friendship, and memories.",
+      mainImage: "/athletico-graduates/martin-bou-younes-main.jpg",
+      profileImage: "/athletico-graduates/martin-bou-younes-profile.jpg",
     },
     {
-      nationality: "SPANISH",
-      name: "DIEGO MARTINEZ",
-      age: "AGE 16",
-      topSpeed: "36.8 KM/H",
-      shootingPower: "115 KM/H",
-      shootingAccuracy: "88%",
-      mainImage:
-        "https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=800&h=1000&fit=crop",
-      profileImage:
-        "https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?w=200&h=200&fit=crop",
+      name: "ASSAF ANTOINE",
+      position: "MIDFIELDER",
+      advice:
+        "Keep working hard and believing in yourself.",
+      mainImage: "/athletico-graduates/assaf-antoine-main.jpg",
+      profileImage: "/athletico-graduates/assaf-antoine-profile.jpg",
     },
     {
-      nationality: "ARGENTINIAN",
-      name: "MATEO FERNANDEZ",
-      age: "AGE 18",
-      topSpeed: "37.5 KM/H",
-      shootingPower: "120 KM/H",
-      shootingAccuracy: "90%",
-      mainImage:
-        "https://images.unsplash.com/photo-1606925797300-0b35e9d1794e?w=800&h=1000&fit=crop",
-      profileImage:
-        "https://images.unsplash.com/photo-1564513148692-30f17e448f3d?w=200&h=200&fit=crop",
+      name: "KASSEM HAYEK",
+      position: "DEFENSIVE MIDFIELDER",
+      advice:
+        "Push yourself every single day, stay humble, and never settle — greatness comes from hard work and sacrifice.",
+      mainImage: "/athletico-graduates/kassem-hayek-main.jpg",
+      profileImage: "/athletico-graduates/kassem-hayek-profile.jpg",
+    },
+    {
+      name: "JACQUES MATTA",
+      position: "MIDFIELDER",
+      advice:
+        "Consistency is key. Work hard but always ask for advice. Don't forget that it's your passion.",
+      mainImage: "/athletico-graduates/jacques-matta-main.jpg",
+      profileImage: "/athletico-graduates/jacques-matta-profile.jpg",
+    },
+    {
+      name: "RALPH KHOURY",
+      position: "STRIKER / RIGHT WING",
+      advice:
+        "Enjoy the game and stay patient. Hard work and consistency will always pay off, even when it doesn't show right away.",
+      mainImage: "/athletico-graduates/ralph-khoury-main.jpg",
+      profileImage: "/athletico-graduates/ralph-khoury-profile.jpg",
+    },
+    {
+      name: "HADI JAD KHALIL",
+      position: "CAM / CM",
+      advice:
+        "Without discipline, you won't make it far.",
+      mainImage: "/athletico-graduates/hadi-jad-khalil-main.jpg",
+      profileImage: "/athletico-graduates/hadi-jad-khalil-profile.jpg",
     },
   ];
 
   const nextStory = () => {
-    setCurrentIndex((prev) => (prev + 1) % stories.length);
+    setCurrentIndex((prev) => (prev + 1) % graduates.length);
   };
 
   useEffect(() => {
@@ -78,8 +83,8 @@ export default function TopStoriesSection() {
     return () => clearInterval(interval);
   }, []);
 
-  const currentStory = stories[currentIndex];
-  const nextStoryData = stories[(currentIndex + 1) % stories.length];
+  const currentGraduate = graduates[currentIndex];
+  const nextGraduate = graduates[(currentIndex + 1) % graduates.length];
 
   return (
     <section className="bg-white w-full min-h-screen lg:h-[90vh] overflow-hidden">
@@ -100,13 +105,13 @@ export default function TopStoriesSection() {
               exit="exit"
               className="mt-6 space-y-6"
             >
-              <PlayerProfile story={currentStory} />
-              <PlayerStats story={currentStory} />
+              <PlayerProfile graduate={currentGraduate} />
+              <PlayerAdvice advice={currentGraduate.advice} />
             </motion.div>
           </AnimatePresence>
         </div>
 
-        {/* RIGHT COLUMN - Images (Stories) */}
+        {/* RIGHT COLUMN - Images */}
         <div className="lg:w-[60%] flex items-center justify-center lg:justify-end">
           {/* Images Container - Flex row, bottom aligned */}
           <div className="flex flex-col sm:flex-row items-center sm:items-end gap-4 lg:gap-6">
@@ -122,8 +127,8 @@ export default function TopStoriesSection() {
                   className="absolute inset-0"
                 >
                   <Image
-                    src={currentStory.mainImage}
-                    alt={currentStory.name}
+                    src={currentGraduate.mainImage}
+                    alt={currentGraduate.name}
                     fill
                     className="object-cover"
                     sizes="(max-width: 640px) 300px, (max-width: 1024px) 400px, 500px"
@@ -137,7 +142,7 @@ export default function TopStoriesSection() {
             <div className="flex flex-col gap-2 self-end">
               <NextUpLabel />
               <NextUpImage
-                nextStoryData={nextStoryData}
+                nextGraduate={nextGraduate}
                 currentIndex={currentIndex}
                 onNext={nextStory}
               />
@@ -155,50 +160,50 @@ export default function TopStoriesSection() {
 function TitleSection() {
   return (
     <div className="mb-4">
-      <h2 className="text-[#3050FD] font-extrabold text-5xl sm:text-6xl md:text-7xl lg:text-[100px] xl:text-[120px] leading-none uppercase">
-        SUCCESS
+      <h2 className="text-[#3050FD] font-extrabold text-4xl sm:text-5xl md:text-6xl lg:text-[72px] xl:text-[88px] leading-none uppercase">
+        ATHLETICO
         <div className="mt-4 lg:mt-10" />
-        STORIES
+        GRADUATES
       </h2>
     </div>
   );
 }
 
 // Player Profile Component (Profile pic + basic info)
-function PlayerProfile({ story }: { story: Story }) {
+function PlayerProfile({ graduate }: { graduate: Graduate }) {
   return (
     <div className="flex items-center gap-4">
       <div className="relative w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-full overflow-hidden flex-shrink-0 ring-2 ring-[#3050FD]/20">
         <Image
-          src={story.profileImage}
-          alt={story.name}
+          src={graduate.profileImage}
+          alt={graduate.name}
           fill
           className="object-cover"
           sizes="80px"
         />
       </div>
       <div>
-        <p className="text-[#171717]/60 text-xs sm:text-sm md:text-base font-medium uppercase tracking-wide">
-          {story.nationality}
-        </p>
         <p className="text-[#171717] text-lg sm:text-xl md:text-2xl font-bold uppercase leading-tight">
-          {story.name}
+          {graduate.name}
         </p>
-        <p className="text-[#171717]/60 text-xs sm:text-sm md:text-base font-medium uppercase">
-          {story.age}
+        <p className="text-[#171717]/60 text-xs sm:text-sm md:text-base font-medium uppercase tracking-wide">
+          {graduate.position}
         </p>
       </div>
     </div>
   );
 }
 
-// Player Stats Component - No background cards
-function PlayerStats({ story }: { story: Story }) {
+// Player Advice Component - Replaces stats
+function PlayerAdvice({ advice }: { advice: string }) {
   return (
-    <div className="grid grid-cols-3 gap-4 lg:gap-6 pt-2">
-      <StatCard label="TOP SPEED" value={story.topSpeed} />
-      <StatCard label="SHOOTING POWER" value={story.shootingPower} />
-      <StatCard label="SHOOTING ACCURACY" value={story.shootingAccuracy} />
+    <div className="pt-2 max-w-md">
+      <p className="text-[#171717]/50 text-[10px] md:text-xs font-semibold uppercase tracking-wide mb-2">
+        ADVICE TO YOUNG PLAYERS
+      </p>
+      <p className="text-[#171717]/70 text-sm md:text-base italic leading-relaxed">
+        &ldquo;{advice}&rdquo;
+      </p>
     </div>
   );
 }
@@ -216,11 +221,11 @@ function NextUpLabel() {
 
 // Next Up Image Component - Square, bigger, no rounded corners
 function NextUpImage({
-  nextStoryData,
+  nextGraduate,
   currentIndex,
   onNext,
 }: {
-  nextStoryData: Story;
+  nextGraduate: Graduate;
   currentIndex: number;
   onNext: () => void;
 }) {
@@ -241,8 +246,8 @@ function NextUpImage({
           className="absolute inset-0"
         >
           <Image
-            src={nextStoryData.mainImage}
-            alt={nextStoryData.name}
+            src={nextGraduate.mainImage}
+            alt={nextGraduate.name}
             fill
             className="object-cover"
             sizes="(max-width: 640px) 200px, (max-width: 1024px) 280px, 350px"
@@ -251,20 +256,6 @@ function NextUpImage({
         </motion.div>
       </AnimatePresence>
     </motion.div>
-  );
-}
-
-// Stat Card Component - Clean, no background
-function StatCard({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="py-2">
-      <p className="text-[#171717]/50 text-[10px] md:text-xs font-semibold uppercase tracking-wide mb-1">
-        {label}
-      </p>
-      <p className="text-[#171717] text-sm sm:text-base md:text-lg font-bold">
-        {value}
-      </p>
-    </div>
   );
 }
 

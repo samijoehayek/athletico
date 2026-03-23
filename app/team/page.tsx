@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import TeamHero from "@/app/components/team/TeamHero";
 import TeamSection from "@/app/components/team/TeamSection";
+import FoundersSection from "@/app/components/team/FoundersSection";
 import TeamExpertise from "../components/team/TeamExpertise";
 
 export default function TeamPage() {
@@ -17,25 +18,8 @@ export default function TeamPage() {
 
       {/* Team Sections */}
       <div className="px-6 md:px-10 lg:px-16 pb-32">
-        {/* CEO Section */}
-        <TeamSection
-          title="FOUNDERS"
-          members={[
-            {
-              name: "JOHN SMITH",
-              image: "/team/ceo1.jpg",
-              stat1: "15+ Years Experience",
-              stat2: "3 Championships",
-            },
-            {
-              name: "MARIA GARCIA",
-              image: "/team/ceo2.jpg",
-              stat1: "12+ Years Experience",
-              stat2: "5 Awards",
-            },
-          ]}
-          columns={2}
-        />
+        {/* Founders Section */}
+        <FoundersSection />
 
         {/* Technical & Tactical Coaches Section */}
         <TeamSection

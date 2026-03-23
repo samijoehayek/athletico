@@ -28,12 +28,12 @@ export default function ProgramsSection() {
   const programs: Program[] = [
     {
       title: "Values",
-      image: "/values.png",
+      image: "/homepage/values.jpg",
       href: "/inside-athletico#values",
     },
     {
       title: "Mission",
-      image: "/values.png",
+      image: "/homepage/values.jpg",
       href: "/inside-athletico#mission",
     },
   ];

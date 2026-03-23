@@ -6,7 +6,7 @@ export default function Hero() {
     <section className="relative h-[70vh] w-full overflow-hidden bg-[#171717]">
       {/* Background Image */}
       <Image
-        src="/homepage-bg.png"
+        src="/homepage/main.jpg"
         alt="Athletico Sports Club Background"
         fill
         sizes="100vw"
