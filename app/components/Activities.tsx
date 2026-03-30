@@ -33,7 +33,7 @@ export default function ProgramsSection() {
     },
     {
       title: "Mission",
-      image: "/homepage/values.jpg",
+      image: "/homepage/mission.jpg",
       href: "/inside-athletico#mission",
     },
   ];

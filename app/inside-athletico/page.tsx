@@ -124,8 +124,8 @@ function OurMissionVisionSection() {
               {/* Left Image - Portrait/Vertical (narrower) */}
               <div className="relative w-[42%] h-full overflow-hidden">
                 <Image
-                  src="/ourclub1.png"
-                  alt="Athletico Sports Club"
+                  src="/homepage/values.jpg"
+                  alt="Athletico Sports Club Vision"
                   fill
                   className="object-cover"
                   sizes="(max-width: 768px) 45vw, (max-width: 1024px) 30vw, 25vw"
@@ -135,7 +135,7 @@ function OurMissionVisionSection() {
               {/* Right Image - Landscape/Horizontal (wider) */}
               <div className="relative w-[58%] h-full overflow-hidden">
                 <Image
-                  src="/ourclub2.png"
+                  src="/homepage/mission.jpg"
                   alt="Athletico Sports Club Training"
                   fill
                   className="object-cover"

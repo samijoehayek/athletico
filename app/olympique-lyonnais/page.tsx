@@ -83,25 +83,28 @@ function PartnershipIntroSection() {
             </div>
           </div>
 
-          {/* Right Column - Logo with Circles */}
-          <div className="w-full lg:w-[45%] flex items-center justify-center">
-            <div className="relative">
-              {/* Outer Circle - 30% opacity */}
-              <div className="w-[330px] h-[330px] sm:w-[400px] sm:h-[400px] md:w-[450px] md:h-[450px] lg:w-[500px] lg:h-[500px] rounded-full bg-[#F3F3F3]/30 flex items-center justify-center">
-                {/* Inner Circle - 60% opacity */}
-                <div className="w-[220px] h-[220px] sm:w-[280px] sm:h-[280px] md:w-[320px] md:h-[320px] lg:w-[360px] lg:h-[360px] rounded-full bg-[#F3F3F3]/60 flex items-center justify-center">
-                  {/* Logo */}
-                  <div className="relative w-[140px] h-[140px] sm:w-[180px] sm:h-[180px] md:w-[200px] md:h-[200px] lg:w-[220px] lg:h-[220px]">
-                    <Image
-                      src="/ol.png"
-                      alt="Olympique Lyonnais Logo"
-                      fill
-                      className="object-contain"
-                      sizes="220px"
-                    />
-                  </div>
-                </div>
-              </div>
+          {/* Right Column - Image and Logo */}
+          <div className="w-full lg:w-[45%] flex flex-col items-center justify-center gap-6">
+            {/* Partnership Photo */}
+            <div className="relative w-full h-[300px] sm:h-[350px] md:h-[400px] lg:h-[420px] overflow-hidden rounded-lg">
+              <Image
+                src="/Olympique Lyonnais/ol.jpeg"
+                alt="Athletico players at Olympique Lyonnais"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 45vw"
+              />
+            </div>
+
+            {/* OL Logo */}
+            <div className="relative w-[80px] h-[80px] sm:w-[100px] sm:h-[100px]">
+              <Image
+                src="/ol.png"
+                alt="Olympique Lyonnais Logo"
+                fill
+                className="object-contain"
+                sizes="100px"
+              />
             </div>
           </div>
         </div>
@@ -181,7 +184,8 @@ function StackingCardsSection() {
                 "Athletico has been approved as an AFC Elite Youth Scheme One-Star Academy after meeting the program's criteria—an important milestone that reflects the academy's structure, coaching standards, safeguarding approach, and development planning.",
                 "In an exclusive interview on Athletico's website, OL Academy leadership shared insights into their philosophy and the value of international collaboration in youth development.",
               ]}
-              image="/ourclub2.png"
+              image="/Olympique Lyonnais/one-start-academy.png"
+              imageContain
               isDark
             />
           </div>
@@ -197,7 +201,7 @@ function StackingCardsSection() {
               paragraphs={[
                 "Athletico's long-term development work has also been highlighted by local media, including coverage noting national recognition and the academy's progress in building a professional youth structure.",
               ]}
-              image="/ourclub2.png"
+              image="/Olympique Lyonnais/recognition&credibility.jpeg"
               isDark={false}
             />
           </div>
@@ -233,7 +237,8 @@ function StackingCardsSection() {
                 "Athletico has been approved as an AFC Elite Youth Scheme One-Star Academy after meeting the program's criteria—an important milestone that reflects the academy's structure, coaching standards, safeguarding approach, and development planning.",
                 "In an exclusive interview on Athletico's website, OL Academy leadership shared insights into their philosophy and the value of international collaboration in youth development.",
               ]}
-              image="/ourclub2.png"
+              image="/Olympique Lyonnais/one-start-academy.png"
+              imageContain
               isDark
             />
           </div>
@@ -252,7 +257,7 @@ function StackingCardsSection() {
               paragraphs={[
                 "Athletico's long-term development work has also been highlighted by local media, including coverage noting national recognition and the academy's progress in building a professional youth structure.",
               ]}
-              image="/ourclub2.png"
+              image="/Olympique Lyonnais/recognition&credibility.jpeg"
               isDark={false}
             />
           </div>
@@ -271,6 +276,7 @@ function CardContent({
   headingLine2,
   paragraphs,
   image,
+  imageContain,
   isDark,
 }: {
   title: string;
@@ -280,6 +286,7 @@ function CardContent({
   headingLine2?: string;
   paragraphs: string[];
   image: string;
+  imageContain?: boolean;
   isDark: boolean;
 }) {
   const textColor = isDark ? "text-white" : "text-[#171717]";
@@ -310,7 +317,7 @@ function CardContent({
               src={image}
               alt={title}
               fill
-              className="object-cover"
+              className={imageContain ? "object-contain" : "object-cover"}
               sizes="(max-width: 1024px) 100vw, 45vw"
             />
           </div>

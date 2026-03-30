@@ -16,7 +16,7 @@ export default function Home() {
       <Hero />
       <EventsSection />
       <OurClubSection />
-      <TopStoriesSection />
+      {/* <TopStoriesSection /> */}
       <div id="programs">
         <ProgramsSection />
       </div>
