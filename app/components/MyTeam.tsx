@@ -10,8 +10,8 @@ export default function MyTeamSection() {
         {/* Background Image - Edge to Edge */}
         <div className="absolute inset-0">
           <Image
-            src="/myteam.png"
-            alt="Meet the team"
+            src="/homepage/footer-main.jpg"
+            alt="The Club"
             fill
             className="object-cover"
             sizes="100vw"

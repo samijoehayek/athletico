@@ -55,7 +55,7 @@ function AlumniSection() {
         "His advice to young Athletico players: Give everything in every training and every match. Be patient, take care of your body (eat, sleep, rest), and cherish every moment with your teammates—those friendships last for life.",
       ],
       instagram: "philippepaoli",
-      image: "/ourclub1.png",
+      image: "/alumni/philippe-paoli.jpeg",
       message:
         "PHILIPPE SALUTES THE CLUB'S PROGRESS OVER THE PAST 20 YEARS AND SHARES HOW PROUD HE IS TO BE PART OF THE ATHLETICO FAMILY—EXCITED FOR THE NEXT 20 YEARS.",
     },
@@ -68,7 +68,7 @@ function AlumniSection() {
         "His advice to today's Athletico players: Enjoy every moment on the field. Athletico is more than football—it's family, friendship, and memories. Give your all in training and matches, because even if life takes you abroad or elsewhere, nothing feels like playing for this family.",
       ],
       instagram: "martinbouyounes",
-      image: "/ourclub1.png",
+      image: "/alumni/martin-bou-younes.jpeg",
       message: "NUMBER 1 CLUB IN LEBANON.",
     },
     {
@@ -80,7 +80,7 @@ function AlumniSection() {
         "His advice to young Athletico players: Keep working hard and believe in yourself.",
       ],
       instagram: "antoine.assaf_",
-      image: "/ourclub1.png",
+      image: "/alumni/antoine-assaf.jpeg",
     },
     {
       name: "Kassem Hayek",
@@ -91,7 +91,7 @@ function AlumniSection() {
         "His advice to young Athletico players: Push yourself every day, stay humble, and never settle—greatness comes from hard work and sacrifice.",
       ],
       instagram: "kasemhayek",
-      image: "/ourclub1.png",
+      image: "/alumni/kassem-hayek.jpeg",
       message:
         "KASSEM SHARES THAT ATHLETICO SHAPED HIM DEEPLY THROUGH BOTH CHALLENGES AND VICTORIES, AND THAT HE'S PROUD TO CALL THE CLUB HIS HOME.",
     },
@@ -104,7 +104,7 @@ function AlumniSection() {
         "His advice to young Athletico players: Consistency is key. Work hard, ask for advice, and never forget that football is your passion.",
       ],
       instagram: "jacquesmatta",
-      image: "/ourclub1.png",
+      image: "/alumni/jacques-matta.jpg",
     },
     {
       name: "Ralph Khoury",
@@ -115,7 +115,7 @@ function AlumniSection() {
         "His advice to young Athletico players: Enjoy the game and stay patient. Hard work and consistency always pay off—even when you don't see results right away.",
       ],
       instagram: "ralphkhoury",
-      image: "/ourclub1.png",
+      image: "/alumni/ralph-khoury.jpeg",
     },
     {
       name: "Hadi Jad Khalil",
@@ -126,7 +126,16 @@ function AlumniSection() {
         "His advice to young Athletico players: Without discipline, you won't make it far.",
       ],
       instagram: "hadiii_0099",
-      image: "/ourclub1.png",
+      image: "/alumni/hadi-jad-khalil.jpg",
+    },
+    {
+      name: "Andrew Sawaya",
+      bio: [
+        "Andrew Sawaya is part of the Athletico alumni family.",
+        "Bio to be added soon.",
+      ],
+      instagram: "andrewsawaya",
+      image: "/alumni/andrew-sawaya.jpg",
     },
   ];
 

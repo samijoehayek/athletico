@@ -120,9 +120,18 @@ export default function Footer() {
         {/* PART 4: Copyright and Social Media */}
         <div className="px-4 sm:px-6 lg:px-16 xl:px-24 py-6 md:py-8 relative flex flex-col md:flex-row md:items-center gap-4">
           {/* Copyright – stays in the same position */}
-          <p className="text-white text-xs sm:text-sm opacity-70">
-            © 2025 Developed by dot.jo, all rights reserved.
-          </p>
+          <div className="flex items-center gap-3 text-white text-xs sm:text-sm">
+            <p className="opacity-70">
+              © 2025 Developed by dot.jo, all rights reserved.
+            </p>
+            <span className="opacity-40 hidden sm:inline">·</span>
+            <span className="hidden sm:inline-flex items-center gap-2 opacity-90">
+              <LebaneseFlag />
+              <span className="uppercase tracking-widest text-[10px] sm:text-[11px] opacity-80">
+                Proudly Lebanese
+              </span>
+            </span>
+          </div>
 
           {/* Social Media – centered */}
           <div
@@ -174,6 +183,31 @@ export default function Footer() {
 }
 
 // ==================== ICON COMPONENTS ====================
+function LebaneseFlag() {
+  // 3:2 stylized Lebanese flag with a simplified cedar silhouette.
+  return (
+    <svg
+      width="22"
+      height="14"
+      viewBox="0 0 30 20"
+      aria-label="Lebanese flag"
+      role="img"
+      className="rounded-[1px] shadow-[0_0_0_1px_rgba(255,255,255,0.15)]"
+    >
+      <rect x="0" y="0" width="30" height="5" fill="#ED1C24" />
+      <rect x="0" y="5" width="30" height="10" fill="#FFFFFF" />
+      <rect x="0" y="15" width="30" height="5" fill="#ED1C24" />
+      {/* Stylized cedar */}
+      <g fill="#00853F" transform="translate(15 10)">
+        <polygon points="0,-3.6 -3.2,1.2 3.2,1.2" />
+        <polygon points="0,-1.8 -2.4,2.4 2.4,2.4" />
+        <polygon points="0,0 -1.8,3 1.8,3" />
+        <rect x="-0.5" y="2.6" width="1" height="1.4" />
+      </g>
+    </svg>
+  );
+}
+
 function WhatsAppIcon() {
   return (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">

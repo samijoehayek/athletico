@@ -57,12 +57,12 @@ function OurValuesSection() {
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 xl:gap-24">
           {/* Left Column - Single Image */}
           <div className="w-full lg:w-[50%]">
-            <div className="relative w-full h-[300px] sm:h-[350px] md:h-[400px] lg:h-[450px] overflow-hidden">
+            <div className="relative w-full h-[300px] sm:h-[350px] md:h-[400px] lg:h-[450px] overflow-hidden bg-white">
               <Image
-                src="/ourclub2.png"
+                src="/homepage/values-poster.jpg"
                 alt="Athletico Sports Club Values"
                 fill
-                className="object-cover"
+                className="object-contain"
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
             </div>
