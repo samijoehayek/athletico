@@ -5,12 +5,13 @@ import { motion } from "framer-motion";
 
 export default function PartnersSection() {
   const logos = [
-    "/logo1.png",
-    "/logo2.png",
-    "/logo3.png",
-    "/logo4.png",
-    "/logo5.png",
-    "/logo6.png",
+    "/parterners/partner1.png",
+    "/parterners/partner2.png",
+    "/parterners/partner3.png",
+    "/parterners/partner4.png",
+    "/parterners/partner5.png",
+    "/parterners/partner6.png",
+    "/parterners/partner7.png",
   ];
 
   // Duplicate logos for seamless infinite scroll

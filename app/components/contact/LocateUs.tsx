@@ -17,28 +17,28 @@ export default function LocateUs() {
 
   const branches: Branch[] = [
     {
-      name: "Saint Joseph",
+      name: "Saint Joseph - Cornet Chahwan",
       phone: "+961 79 100 023",
       mapUrl: "https://maps.app.goo.gl/nY3A78bPXVdG6goR7",
       lat: 33.9166823,
       lng: 35.6336115,
     },
     {
-      name: "Freres",
+      name: "Freres - Sami El Soleh",
       phone: "+961 79 100 025",
       mapUrl: "https://maps.app.goo.gl/HNs3XKgWSRuZysHm9",
       lat: 33.8713467,
       lng: 35.5176699,
     },
     {
-      name: "Hooligans",
+      name: "Hooligans - Horsh Tabet",
       phone: "+961 79 100 024",
       mapUrl: "https://maps.app.goo.gl/TWckchEYKzvzYGGh8",
       lat: 33.875421,
       lng: 35.536366,
     },
     {
-      name: "Dbayeh",
+      name: "Athletico Sports City - Dbaye",
       phone: "+961 78 824 357",
       mapUrl: "https://maps.app.goo.gl/tRMG1gvVwQov67bu8",
       lat: 33.9460312,
@@ -52,7 +52,7 @@ export default function LocateUs() {
       lng: 35.5699343,
     },
     {
-      name: "Vclub",
+      name: "Vclub - Jal el Dib",
       phone: "+961 76 499 049",
       mapUrl: "https://maps.app.goo.gl/6VKeRjoc45HKcfya9",
       lat: 33.9105636,
@@ -73,21 +73,14 @@ export default function LocateUs() {
       lng: 35.5310628,
     },
     {
-      name: "E-club",
-      phone: "+961 03 337 875",
-      mapUrl: "https://maps.app.goo.gl/TtmgDtsTW8j2eYzWA",
-      lat: 33.9632225,
-      lng: 35.6238687,
-    },
-    {
-      name: "Champville",
+      name: "Champville - Dik el Mahdi",
       phone: "+961 71 402 444",
       mapUrl: "https://maps.app.goo.gl/rVJZNREX43geHS3VA",
       lat: 33.9334759,
       lng: 35.6198336,
     },
     {
-      name: "Beit Mery",
+      name: "Country Lodge - Beit Mery",
       phone: "+961 76 779 027",
       mapUrl: "https://maps.app.goo.gl/JiRUoKjUAHExPdS76",
       lat: 33.8552964,
@@ -109,7 +102,7 @@ export default function LocateUs() {
         {/* Header */}
         <div className="mb-8">
           <p className="text-[#171717]/60 text-sm font-semibold uppercase tracking-wide mb-1">
-            11 BRANCHES
+            10 BRANCHES
           </p>
           <h2 className="text-[#171717] text-3xl font-extrabold uppercase">
             LOCATE US

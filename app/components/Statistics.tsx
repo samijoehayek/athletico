@@ -12,7 +12,7 @@ interface Stat {
 
 export default function StatisticsSection() {
   const stats: Stat[] = [
-    { value: 12, label: "Branches", subLabel: "Across Lebanon" },
+    { value: 10, label: "Branches", subLabel: "Across Lebanon" },
     { value: 2300, label: "Players", subLabel: "Passionate", suffix: "+" },
     { value: 80, label: "Coaches", subLabel: "FIFA Certified", suffix: "+" },
   ];

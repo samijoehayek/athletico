@@ -3,7 +3,7 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import TeamHero from "@/app/components/team/TeamHero";
-import TeamSection from "@/app/components/team/TeamSection";
+// import TeamSection from "@/app/components/team/TeamSection";
 import FoundersSection from "@/app/components/team/FoundersSection";
 import TeamExpertise from "../components/team/TeamExpertise";
 
@@ -21,95 +21,39 @@ export default function TeamPage() {
         {/* Founders Section */}
         <FoundersSection />
 
-        {/* Technical & Tactical Coaches Section */}
+        {/* Sections below intentionally hidden — placeholder content with empty images
         <TeamSection
           title="SHAREHOLDERS"
           members={[
-            {
-              name: "CARLOS RODRIGUEZ",
-              image: "/team/coach1.jpg",
-              stat1: "200+ Players",
-              stat2: "6 Awards",
-            },
-            {
-              name: "AHMED HASSAN",
-              image: "/team/coach2.jpg",
-              stat1: "180+ Players",
-              stat2: "4 Awards",
-            },
-            {
-              name: "JAMES WILSON",
-              image: "/team/coach3.jpg",
-              stat1: "150+ Players",
-              stat2: "5 Awards",
-            },
-            {
-              name: "LUCAS FERNANDEZ",
-              image: "/team/coach4.jpg",
-              stat1: "220+ Players",
-              stat2: "8 Awards",
-            },
-            {
-              name: "OMAR KHALIL",
-              image: "/team/coach5.jpg",
-              stat1: "170+ Players",
-              stat2: "3 Awards",
-            },
-            {
-              name: "DAVID CHEN",
-              image: "/team/coach6.jpg",
-              stat1: "190+ Players",
-              stat2: "7 Awards",
-            },
+            { name: "CARLOS RODRIGUEZ", image: "/team/coach1.jpg", stat1: "200+ Players", stat2: "6 Awards" },
+            { name: "AHMED HASSAN", image: "/team/coach2.jpg", stat1: "180+ Players", stat2: "4 Awards" },
+            { name: "JAMES WILSON", image: "/team/coach3.jpg", stat1: "150+ Players", stat2: "5 Awards" },
+            { name: "LUCAS FERNANDEZ", image: "/team/coach4.jpg", stat1: "220+ Players", stat2: "8 Awards" },
+            { name: "OMAR KHALIL", image: "/team/coach5.jpg", stat1: "170+ Players", stat2: "3 Awards" },
+            { name: "DAVID CHEN", image: "/team/coach6.jpg", stat1: "190+ Players", stat2: "7 Awards" },
           ]}
           columns={3}
         />
 
-        {/* Goalkeeping Coaches Section */}
         <TeamSection
           title="GOALKEEPING COACHES"
           members={[
-            {
-              name: "PETER SCHMIDT",
-              image: "/team/gk1.jpg",
-              stat1: "100+ Goalkeepers",
-              stat2: "4 Awards",
-            },
-            {
-              name: "IVAN PETROV",
-              image: "/team/gk2.jpg",
-              stat1: "85+ Goalkeepers",
-              stat2: "3 Awards",
-            },
+            { name: "PETER SCHMIDT", image: "/team/gk1.jpg", stat1: "100+ Goalkeepers", stat2: "4 Awards" },
+            { name: "IVAN PETROV", image: "/team/gk2.jpg", stat1: "85+ Goalkeepers", stat2: "3 Awards" },
           ]}
           columns={2}
         />
 
-        {/* Fitness & Conditioning Section */}
         <TeamSection
           title="FITNESS & CONDITIONING"
           members={[
-            {
-              name: "MICHAEL BROWN",
-              image: "/team/fitness1.jpg",
-              stat1: "300+ Athletes",
-              stat2: "5 Certifications",
-            },
-            {
-              name: "SARAH JOHNSON",
-              image: "/team/fitness2.jpg",
-              stat1: "250+ Athletes",
-              stat2: "6 Certifications",
-            },
-            {
-              name: "ALEX TURNER",
-              image: "/team/fitness3.jpg",
-              stat1: "200+ Athletes",
-              stat2: "4 Certifications",
-            },
+            { name: "MICHAEL BROWN", image: "/team/fitness1.jpg", stat1: "300+ Athletes", stat2: "5 Certifications" },
+            { name: "SARAH JOHNSON", image: "/team/fitness2.jpg", stat1: "250+ Athletes", stat2: "6 Certifications" },
+            { name: "ALEX TURNER", image: "/team/fitness3.jpg", stat1: "200+ Athletes", stat2: "4 Certifications" },
           ]}
           columns={3}
         />
+        */}
       </div>
 
       <TeamExpertise />

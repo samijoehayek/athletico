@@ -95,56 +95,56 @@ function AchievementsCarouselSection() {
       ageCategory: "U12",
       season: "2024-2025",
       tournament: "PROMISING",
-      image: "/ourclub1.png",
+      image: "/logonew.png",
     },
     {
       title: "ATHLETICO 2011",
       ageCategory: "U12",
       season: "22/23",
       tournament: "PROMISING",
-      image: "/ourclub1.png",
+      image: "/logonew.png",
     },
     {
       title: "ATHLETICO 2012",
       ageCategory: "U11",
       season: "23/24",
       tournament: "PROMISING",
-      image: "/ourclub1.png",
+      image: "/logonew.png",
     },
     {
       title: "ATHLETICO 2010",
       ageCategory: "U13",
       season: "2023/2024",
       tournament: "LEBANESE LEAGUE U13",
-      image: "/ourclub1.png",
+      image: "/logonew.png",
     },
     {
       title: "MOUNT LEBANON CHAMPIONS",
       ageCategory: "U16",
       season: "2022/23",
       tournament: "ATHLETICO 2007",
-      image: "/ourclub1.png",
+      image: "/logonew.png",
     },
     {
       title: "LEBANESE LEAGUE CHAMPIONS",
       ageCategory: "U16",
       season: "2023/24",
       tournament: "ATHLETICO 2007",
-      image: "/ourclub1.png",
+      image: "/logonew.png",
     },
     {
       title: "MOUNT LEBANON CHAMPIONS",
       ageCategory: "U16",
       season: "2023/24",
       tournament: "ATHLETICO 2007",
-      image: "/ourclub1.png",
+      image: "/logonew.png",
     },
     {
       title: "ATHLETICO SENIOR TEAM",
       ageCategory: "SENIOR",
       season: "2023/2024",
       tournament: "LEBANESE LEAGUE DIV.5 CHAMPIONS • PROMOTION TO 3RD DIVISION",
-      image: "/ourclub1.png",
+      image: "/logonew.png",
     },
   ];
 
@@ -169,7 +169,7 @@ function AchievementsCarouselSection() {
 
     if (!section || !container || !carousel) return;
 
-    const cardWidth = 900; // Bigger cards
+    const cardWidth = 950; // Bigger cards (circular logo)
     const gap = 80; // More space between cards
     const totalWidth = (cardWidth + gap) * achievements.length;
     const scrollDistance = totalWidth - window.innerWidth + 100;
@@ -230,19 +230,21 @@ function AchievementsCarouselSection() {
 function AchievementCard({ achievement }: { achievement: Achievement }) {
   return (
     <div className="flex items-center gap-12 flex-shrink-0">
-      {/* Image with Title Overlay */}
-      <div className="relative w-[450px] h-[550px] lg:w-[500px] lg:h-[600px] flex-shrink-0">
-        {/* Image */}
-        <Image
-          src={achievement.image}
-          alt={achievement.title}
-          fill
-          className="object-cover"
-          sizes="500px"
-        />
+      {/* Logo (Circular) with Title Overlay */}
+      <div className="relative w-[500px] h-[500px] lg:w-[550px] lg:h-[550px] flex-shrink-0">
+        {/* Circular Logo Container */}
+        <div className="relative w-full h-full rounded-full overflow-hidden bg-white border-4 border-[#3050FD] flex items-center justify-center">
+          <Image
+            src={achievement.image}
+            alt={achievement.title}
+            fill
+            className="object-contain p-12"
+            sizes="500px"
+          />
+        </div>
 
-        {/* Title Box - More to the left, half over image, half outside */}
-        <div className="absolute bottom-12 -left-24 bg-[#171717] px-8 py-5 min-w-[280px]">
+        {/* Title Box - half over circle, half outside */}
+        <div className="absolute bottom-12 -left-24 bg-[#171717] px-8 py-5 min-w-[280px] z-10">
           <h3 className="text-white font-extrabold text-2xl lg:text-3xl uppercase leading-tight">
             {achievement.title}
           </h3>
@@ -288,20 +290,22 @@ function AchievementCard({ achievement }: { achievement: Achievement }) {
 // ==================== MOBILE ACHIEVEMENT CARD ====================
 function MobileAchievementCard({ achievement }: { achievement: Achievement }) {
   return (
-    <div className="flex flex-col">
-      {/* Image with Title Overlay */}
-      <div className="relative w-full h-[400px]">
-        {/* Image */}
-        <Image
-          src={achievement.image}
-          alt={achievement.title}
-          fill
-          className="object-cover"
-          sizes="100vw"
-        />
+    <div className="flex flex-col items-center">
+      {/* Circular Logo with Title Overlay */}
+      <div className="relative w-[320px] h-[320px] sm:w-[380px] sm:h-[380px]">
+        {/* Circular Logo Container */}
+        <div className="relative w-full h-full rounded-full overflow-hidden bg-white border-4 border-[#3050FD] flex items-center justify-center">
+          <Image
+            src={achievement.image}
+            alt={achievement.title}
+            fill
+            className="object-contain p-8"
+            sizes="380px"
+          />
+        </div>
 
         {/* Title Box */}
-        <div className="absolute bottom-6 -left-2 bg-[#171717] px-5 py-4">
+        <div className="absolute bottom-4 -left-2 bg-[#171717] px-5 py-4 z-10">
           <h3 className="text-white font-extrabold text-xl uppercase leading-tight">
             {achievement.title}
           </h3>
