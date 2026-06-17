@@ -52,20 +52,20 @@ function AlumniSection() {
         "Philippe Paoli joined Athletico in 2006, starting at the academy's early days when the main branch was Antranik, before moving to St. Joseph. He spent 5 years at Athletico, playing as a striker.",
         "After Athletico, Philippe continued his football journey with Racing Beirut, Olympique Lyonnais (OL), FC Köln, and Lommel United.",
         "His most memorable Athletico moments include the Gothia Cup opening ceremony in front of 50,000 spectators, beating major Lebanese clubs in Athletico's first official season in the Lebanese youth championship, and international trips such as Dana Cup, plus experiences in Jordan, Syria, and Olympique Lyonnais tryouts.",
-        "His advice to young Athletico players: Give everything in every training and every match. Be patient, take care of your body (eat, sleep, rest), and cherish every moment with your teammates—those friendships last for life.",
+        "His advice to young Athletico players: Give everything in every training and every match. Be patient, take care of your body (eat, sleep, rest), and cherish every moment with your teammates. Those friendships last for life.",
       ],
       instagram: "philippepaoli",
       image: "/alumni/philippe-paoli.jpeg",
       message:
-        "PHILIPPE SALUTES THE CLUB'S PROGRESS OVER THE PAST 20 YEARS AND SHARES HOW PROUD HE IS TO BE PART OF THE ATHLETICO FAMILY—EXCITED FOR THE NEXT 20 YEARS.",
+        "PHILIPPE SALUTES THE CLUB'S PROGRESS OVER THE PAST 20 YEARS AND SHARES HOW PROUD HE IS TO BE PART OF THE ATHLETICO FAMILY, EXCITED FOR THE NEXT 20 YEARS.",
     },
     {
       name: "Martin Bou Younes",
       bio: [
         "Martin Bou Younes joined Athletico in 2012 at the Dbayeh branch and spent 10 years with the club. He played as a midfielder.",
         "After Athletico, Martin played for Ahed Football Club and Sagesse Football Club.",
-        "For Martin, the most memorable moments are hard to narrow down—he highlights the trips with the team and the shared experiences with the boys as the biggest memories.",
-        "His advice to today's Athletico players: Enjoy every moment on the field. Athletico is more than football—it's family, friendship, and memories. Give your all in training and matches, because even if life takes you abroad or elsewhere, nothing feels like playing for this family.",
+        "For Martin, the most memorable moments are hard to narrow down, he highlights the trips with the team and the shared experiences with the boys as the biggest memories.",
+        "His advice to today's Athletico players: Enjoy every moment on the field. Athletico is more than football. It's family, friendship, and memories. Give your all in training and matches, because even if life takes you abroad or elsewhere, nothing feels like playing for this family.",
       ],
       instagram: "martinbouyounes",
       image: "/alumni/martin-bou-younes.jpeg",
@@ -88,7 +88,7 @@ function AlumniSection() {
         "Kassem Hayek joined Athletico in 2013 at the Dbayeh branch and spent 5 years with the club. He played as a defensive midfielder.",
         "After Athletico, he continued with Lyon-La Duchère and Al Safa FC.",
         "Kassem's standout memory is his time during the Lyon camp, which he describes as the most memorable part of his Athletico journey.",
-        "His advice to young Athletico players: Push yourself every day, stay humble, and never settle—greatness comes from hard work and sacrifice.",
+        "His advice to young Athletico players: Push yourself every day, stay humble, and never settle. Greatness comes from hard work and sacrifice.",
       ],
       instagram: "kasemhayek",
       image: "/alumni/kassem-hayek.jpeg",
@@ -112,7 +112,7 @@ function AlumniSection() {
         "Ralph Khoury joined Athletico in 2011 at the Dbayeh branch and spent 9 years with the club. He played as a striker / right wing.",
         "After Athletico, Ralph played with Eleven Football Pro, Ottawa South United, and Atlético Ottawa.",
         "One of Ralph's most memorable highlights was training with the Olympique Lyonnais academy, along with tournament experiences including Plomelin.",
-        "His advice to young Athletico players: Enjoy the game and stay patient. Hard work and consistency always pay off—even when you don't see results right away.",
+        "His advice to young Athletico players: Enjoy the game and stay patient. Hard work and consistency always pay off, even when you don't see results right away.",
       ],
       instagram: "ralphkhoury",
       image: "/alumni/ralph-khoury.jpeg",
@@ -278,7 +278,7 @@ function AlumniSection() {
               backgroundClip: "text",
             }}
           >
-            BEYOND THE ACADEMYS
+            BEYOND THE ACADEMY
           </h2>
         </div>
 

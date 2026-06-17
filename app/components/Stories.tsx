@@ -20,7 +20,7 @@ export default function TopStoriesSection() {
       name: "PHILIPPE PAOLI",
       position: "STRIKER",
       advice:
-        "Give it your all in every training & every game. Cherish every moment with your teammates — you will make friends for life.",
+        "Give it your all in every training & every game. Cherish every moment with your teammates, you will make friends for life.",
       mainImage: "/athletico-graduates/philippe-paoli-main.jpg",
       profileImage: "/athletico-graduates/philippe-paoli-profile.jpg",
     },
@@ -28,7 +28,7 @@ export default function TopStoriesSection() {
       name: "MARTIN BOU YOUNES",
       position: "MIDFIELDER",
       advice:
-        "Enjoy every single moment when you step on that field. This club isn't just about football — it's about family, friendship, and memories.",
+        "Enjoy every single moment when you step on that field. This club isn't just about football. It's about family, friendship, and memories.",
       mainImage: "/athletico-graduates/martin-bou-younes-main.jpg",
       profileImage: "/athletico-graduates/martin-bou-younes-profile.jpg",
     },
@@ -44,7 +44,7 @@ export default function TopStoriesSection() {
       name: "KASSEM HAYEK",
       position: "DEFENSIVE MIDFIELDER",
       advice:
-        "Push yourself every single day, stay humble, and never settle — greatness comes from hard work and sacrifice.",
+        "Push yourself every single day, stay humble, and never settle. Greatness comes from hard work and sacrifice.",
       mainImage: "/athletico-graduates/kassem-hayek-main.jpg",
       profileImage: "/athletico-graduates/kassem-hayek-profile.jpg",
     },

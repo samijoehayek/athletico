@@ -82,7 +82,7 @@ export default function OurClubSection() {
             <p className="text-white/80 text-sm md:text-base lg:text-lg leading-relaxed mb-10 md:mb-12">
               Give young players in Lebanon the training standards and
               mentorship they deserve. Today, we continue to build a culture of
-              discipline, respect, and teamwork—so every player improves on the
+              discipline, respect, and teamwork, so every player improves on the
               pitch and grows as a person.
             </p>
 

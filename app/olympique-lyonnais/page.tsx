@@ -63,7 +63,7 @@ function PartnershipIntroSection() {
             <div className="space-y-4 md:space-y-6 text-[#171717]/80 text-sm md:text-base lg:text-lg leading-relaxed">
               <p>
                 Athletico has been in active partnership with Olympique Lyonnais
-                since 2011—a collaboration built on long-term development, not
+                since 2011, a collaboration built on long-term development, not
                 one-off events. Over the years, OL staff have supported
                 Athletico through coach education, methodology sharing, and
                 ongoing exchange.
@@ -77,7 +77,7 @@ function PartnershipIntroSection() {
               <p>
                 Athletico players also benefit from international exposure
                 through training camps and immersion experiences connected to
-                OL—helping motivated players experience high-level standards and
+                OL, helping motivated players experience high-level standards and
                 new football cultures.
               </p>
             </div>
@@ -181,7 +181,7 @@ function StackingCardsSection() {
               label="ATHLETICO SPORTS CLUB"
               heading="ONE-STAR ACADEMY"
               paragraphs={[
-                "Athletico has been approved as an AFC Elite Youth Scheme One-Star Academy after meeting the program's criteria—an important milestone that reflects the academy's structure, coaching standards, safeguarding approach, and development planning.",
+                "Athletico has been approved as an AFC Elite Youth Scheme One-Star Academy after meeting the program's criteria, an important milestone that reflects the academy's structure, coaching standards, safeguarding approach, and development planning.",
                 "In an exclusive interview on Athletico's website, OL Academy leadership shared insights into their philosophy and the value of international collaboration in youth development.",
               ]}
               image="/Olympique Lyonnais/one-start-academy.png"
@@ -234,7 +234,7 @@ function StackingCardsSection() {
               label="ATHLETICO SPORTS CLUB"
               heading="ONE-STAR ACADEMY"
               paragraphs={[
-                "Athletico has been approved as an AFC Elite Youth Scheme One-Star Academy after meeting the program's criteria—an important milestone that reflects the academy's structure, coaching standards, safeguarding approach, and development planning.",
+                "Athletico has been approved as an AFC Elite Youth Scheme One-Star Academy after meeting the program's criteria, an important milestone that reflects the academy's structure, coaching standards, safeguarding approach, and development planning.",
                 "In an exclusive interview on Athletico's website, OL Academy leadership shared insights into their philosophy and the value of international collaboration in youth development.",
               ]}
               image="/Olympique Lyonnais/one-start-academy.png"

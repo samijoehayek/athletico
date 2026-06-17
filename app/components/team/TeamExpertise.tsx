@@ -11,10 +11,7 @@ export default function TeamExpertise() {
             fontSize: "clamp(50px, 8vw, 100px)",
           }}
         >
-          <span className="font-normal">Alongside our </span>
-          <span className="font-bold">core team,</span>
-          <br />
-          <span className="font-normal">we offer the expertise of a</span>
+          <span className="font-normal">We offer the expertise of a</span>
         </h2>
 
         {/* Subheading */}

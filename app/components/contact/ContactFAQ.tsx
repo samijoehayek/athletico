@@ -42,7 +42,7 @@ export default function ContactFAQ() {
     {
       question: "Are there tryouts or can anyone join?",
       answer:
-        "There are no tryouts required. We proudly welcome every child who wants to play football in a safe, encouraging, and professional environment. Our coaches will assess each child during sessions and place them in the team where they can grow best — as both a person and a player.",
+        "There are no tryouts required. We proudly welcome every child who wants to play football in a safe, encouraging, and professional environment. Our coaches will assess each child during sessions and place them in the team where they can grow best, as both a person and a player.",
     },
     {
       question: "What are the fees per term or month?",

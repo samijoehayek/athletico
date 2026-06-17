@@ -31,7 +31,7 @@ export default function FoundersSection() {
         <div className="relative w-full h-[400px] md:h-[520px] lg:h-[620px]">
           <Image
             src="/founders.jpeg"
-            alt="Athletico Founders — Nadim Ghattas, Robert Paoli, René Matta"
+            alt="Athletico Founders: Nadim Ghattas, Robert Paoli, René Matta"
             fill
             className="object-cover object-[center_35%]"
             sizes="100vw"
