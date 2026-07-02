@@ -399,6 +399,20 @@ function AlumniSection() {
 
 // ==================== ALUMNI CONTENT COMPONENT ====================
 function AlumniContent({ alumni }: { alumni: Alumni }) {
+  // Pull the "advice to young athletes" paragraph out of the bio so it can be
+  // highlighted separately as a quote callout.
+  const adviceIndex = alumni.bio.findIndex((p) => /advice to/i.test(p));
+  const bioParagraphs =
+    adviceIndex >= 0
+      ? alumni.bio.filter((_, i) => i !== adviceIndex)
+      : alumni.bio;
+  let advice: string | null =
+    adviceIndex >= 0 ? alumni.bio[adviceIndex] : null;
+  if (advice) {
+    const colon = advice.indexOf(":");
+    if (colon !== -1) advice = advice.slice(colon + 1).trim();
+  }
+
   return (
     <div className="flex flex-col lg:flex-row gap-4 lg:gap-6">
       {/* Left - Image + Instagram */}
@@ -438,10 +452,35 @@ function AlumniContent({ alumni }: { alumni: Alumni }) {
       <div className="w-full lg:w-[65%]">
         {/* Bio Paragraphs */}
         <div className="space-y-4 text-white/80 text-sm md:text-base leading-relaxed mb-8">
-          {alumni.bio.map((paragraph, index) => (
+          {bioParagraphs.map((paragraph, index) => (
             <p key={index}>{paragraph}</p>
           ))}
         </div>
+
+        {/* Advice to Young Athletes - Highlighted Quote */}
+        {advice && (
+          <div className="relative mb-8 border-l-4 border-[#3050FD] bg-white/[0.04] rounded-r-lg pl-6 pr-5 py-5 md:pl-8 md:pr-6 md:py-6">
+            {/* Quote mark */}
+            <span
+              aria-hidden="true"
+              className="absolute top-2 right-4 text-5xl md:text-6xl leading-none font-serif select-none"
+              style={{
+                background: "linear-gradient(90deg, #3050FD 0%, #A861F9 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
+            >
+              &rdquo;
+            </span>
+            <p className="text-[#3050FD] text-[11px] md:text-xs font-semibold uppercase tracking-widest mb-2">
+              Advice to Young Athletes
+            </p>
+            <p className="text-white font-semibold italic text-base md:text-lg lg:text-xl leading-relaxed pr-8">
+              {advice}
+            </p>
+          </div>
+        )}
 
         {/* Message to Athletico Family */}
         {alumni.message && (
