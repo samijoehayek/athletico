@@ -145,10 +145,10 @@ function ValueCard({ value, index }: { value: ClubValue; index: number }) {
 
       {/* Bottom — Title + Description */}
       <div className="relative z-10">
-        <h3 className="text-[#171717] font-extrabold uppercase leading-[0.95] tracking-tight text-2xl md:text-[28px] lg:text-[30px] transition-colors duration-500 group-hover:text-white">
+        <h3 className="flex items-end min-h-[46px] md:min-h-[54px] lg:min-h-[58px] text-[#171717] font-extrabold uppercase leading-[0.95] tracking-tight text-2xl md:text-[28px] lg:text-[30px] transition-colors duration-500 group-hover:text-white">
           {value.title}
         </h3>
-        <p className="mt-3 text-sm leading-relaxed text-[#171717]/55 transition-colors duration-500 group-hover:text-white/85">
+        <p className="mt-3 min-h-[44px] text-sm leading-relaxed text-[#171717]/55 transition-colors duration-500 group-hover:text-white/85">
           {value.description}
         </p>
       </div>
