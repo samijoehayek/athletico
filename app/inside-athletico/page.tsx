@@ -229,33 +229,6 @@ function OurMissionVisionSection() {
 }
 
 // ==================== OUR VISION SECTION ====================
-interface VisionPillar {
-  number: string;
-  title: string;
-  description: string;
-}
-
-const VISION_PILLARS: VisionPillar[] = [
-  {
-    number: "01",
-    title: "Regional Leadership",
-    description:
-      "Become the undisputed benchmark for youth football development across the Arab world, expanding our model of excellence beyond Lebanon.",
-  },
-  {
-    number: "02",
-    title: "Pathway To Pro",
-    description:
-      "Build clear, structured pathways for talented players to pursue professional careers in Lebanon, France, and beyond through our OL partnership.",
-  },
-  {
-    number: "03",
-    title: "Community Impact",
-    description:
-      "Use sport as a vehicle for positive social change, making football accessible, inclusive, and transformative for every community we serve.",
-  },
-];
-
 function OurVisionSection() {
   return (
     <section
@@ -288,53 +261,7 @@ function OurVisionSection() {
             </blockquote>
           </div>
         </div>
-
-        {/* ---- Pillars Grid ---- */}
-        <div className="grid grid-cols-1 md:grid-cols-3 border-t border-l border-[#171717]/10">
-          {VISION_PILLARS.map((pillar, index) => (
-            <PillarCard key={pillar.number} pillar={pillar} index={index} />
-          ))}
-        </div>
       </div>
     </section>
-  );
-}
-
-// ==================== VISION PILLAR CARD ====================
-function PillarCard({
-  pillar,
-  index,
-}: {
-  pillar: VisionPillar;
-  index: number;
-}) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.5, delay: index * 0.08, ease: "easeOut" }}
-      className="group relative overflow-hidden border-r border-b border-[#171717]/10 min-h-[240px] md:min-h-[300px] p-6 md:p-8 flex flex-col justify-between cursor-default"
-    >
-      {/* Blue fill that rises on hover */}
-      <div className="pointer-events-none absolute inset-0 bg-[#3050FD] origin-bottom scale-y-0 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-y-100" />
-
-      {/* Top — Number */}
-      <div className="relative z-10">
-        <span className="text-base md:text-lg font-bold tracking-tight text-[#3050FD] transition-colors duration-500 group-hover:text-white/70">
-          {pillar.number}
-        </span>
-      </div>
-
-      {/* Bottom — Title + Description */}
-      <div className="relative z-10">
-        <h3 className="text-[#171717] font-extrabold uppercase leading-[0.95] tracking-tight text-2xl md:text-[28px] lg:text-[30px] transition-colors duration-500 group-hover:text-white">
-          {pillar.title}
-        </h3>
-        <p className="mt-3 text-sm leading-relaxed text-[#171717]/55 transition-colors duration-500 group-hover:text-white/85">
-          {pillar.description}
-        </p>
-      </div>
-    </motion.div>
   );
 }
