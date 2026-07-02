@@ -18,16 +18,16 @@ export default function PartnersSection() {
   const duplicatedLogos = [...logos, ...logos];
 
   return (
-    <section className="w-full h-[40vh] bg-white flex flex-col items-center justify-center py-20">
+    <section className="w-full bg-white flex flex-col items-center justify-center py-12 md:py-16 lg:py-20 overflow-hidden">
       {/* Title */}
-      <h2 className="text-[50px] font-bold text-[#171717] uppercase mb-8 font-outfit">
+      <h2 className="text-3xl sm:text-4xl lg:text-[50px] font-bold text-[#171717] uppercase mb-8 md:mb-10 font-outfit text-center px-6">
         OUR PARTNERS
       </h2>
 
       {/* Infinite Scrolling Logo Container */}
       <div className="w-full overflow-hidden">
         <motion.div
-          className="flex gap-16 items-center"
+          className="flex gap-10 md:gap-14 lg:gap-16 items-center"
           animate={{
             x: [0, -50 + "%"],
           }}
@@ -43,14 +43,14 @@ export default function PartnersSection() {
           {duplicatedLogos.map((logo, index) => (
             <div
               key={index}
-              className="flex-shrink-0 relative w-[200px] h-[80px] grayscale hover:grayscale-0 transition-all duration-300"
+              className="flex-shrink-0 relative w-[130px] h-[60px] sm:w-[160px] sm:h-[70px] lg:w-[200px] lg:h-[80px]"
             >
               <Image
                 src={logo}
                 alt={`Partner logo ${(index % logos.length) + 1}`}
                 fill
                 className="object-contain"
-                sizes="200px"
+                sizes="(max-width: 640px) 130px, (max-width: 1024px) 160px, 200px"
               />
             </div>
           ))}
