@@ -207,11 +207,6 @@ function OurMissionVisionSection() {
               ATHLETICO SPORTS CLUB
             </p>
 
-            {/* Heading */}
-            <h3 className="text-white font-bold text-2xl sm:text-3xl md:text-4xl uppercase leading-tight mb-6 md:mb-8">
-              A CLUB WITH A MISSION
-            </h3>
-
             {/* Paragraph */}
             <p className="text-white/80 text-sm md:text-base lg:text-lg leading-relaxed">
               Athletico&apos;s mission is rooted in the belief that a football
