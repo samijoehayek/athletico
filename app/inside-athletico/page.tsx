@@ -100,36 +100,16 @@ function OurValuesSection() {
       className="bg-white w-full px-6 md:px-12 lg:px-16 pb-16 pt-8 md:pb-20 lg:pb-24"
     >
       <div className="max-w-screen-2xl mx-auto">
-        {/* ---- Intro Band: Title + Mission Paragraph ---- */}
-        <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 xl:gap-24 mb-14 md:mb-20 lg:mb-24">
-          {/* Left — Title */}
-          <div className="lg:w-[45%]">
-            <p className="text-[#3050FD] text-xs md:text-sm font-semibold uppercase tracking-[0.25em] mb-5 md:mb-7">
-              Athletico Sports Club
-            </p>
-            <h2 className="text-[#171717] font-extrabold text-5xl sm:text-6xl md:text-7xl lg:text-[80px] leading-[0.9] uppercase tracking-tight">
-              OUR
-              <br />
-              VALUES
-            </h2>
-          </div>
-
-          {/* Right — Mission Paragraph */}
-          <div className="lg:w-[55%] flex flex-col justify-end">
-            <h3 className="text-[#171717] font-bold text-2xl sm:text-3xl md:text-4xl uppercase leading-tight mb-5 md:mb-7">
-              A Club With A Mission
-            </h3>
-            <p className="text-[#171717]/70 text-sm md:text-base lg:text-lg leading-relaxed max-w-2xl">
-              The Athletico project started in 2006, with a group of parents
-              coming together to give the best to their kids. It is with this
-              vision that the club grew, to become today the leading academy in
-              the region, with branches across Lebanon, a historic partnership
-              with the prestigious Olympique Lyonnais, a French Technical
-              Director, and a continuous coaches&apos; training and development
-              program. These eight values are the foundation every Athletico
-              player is built on.
-            </p>
-          </div>
+        {/* ---- Intro Band: Title ---- */}
+        <div className="mb-14 md:mb-20 lg:mb-24">
+          <p className="text-[#3050FD] text-xs md:text-sm font-semibold uppercase tracking-[0.25em] mb-5 md:mb-7">
+            Athletico Sports Club
+          </p>
+          <h2 className="text-[#171717] font-extrabold text-5xl sm:text-6xl md:text-7xl lg:text-[80px] leading-[0.9] uppercase tracking-tight">
+            OUR
+            <br />
+            VALUES
+          </h2>
         </div>
 
         {/* ---- Values Grid ---- */}
