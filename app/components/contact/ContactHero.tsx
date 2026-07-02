@@ -32,8 +32,9 @@ export default function ContactHero() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto">
-      {/* Row 1: Full Width Title Block */}
+    <section className="w-full px-6 md:px-10 lg:px-16 pt-10 md:pt-14 lg:pt-16">
+      <div className="max-w-7xl mx-auto">
+        {/* Row 1: Full Width Title Block */}
       <div className="mb-12 md:mb-16">
         {/* Small Label */}
         <p
@@ -168,7 +169,8 @@ export default function ContactHero() {
             </form>
           </div> */}
       {/* </div> */}
-    </div>
+      </div>
+    </section>
   );
 }
 
