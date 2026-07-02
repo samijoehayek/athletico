@@ -171,8 +171,8 @@ function StackingCardsSection() {
           {/* Card 1 - Dark */}
           <div className="bg-[#171717] w-full p-6 md:p-10">
             <CardContent
-              title="AFC ELITE"
-              titleLine2="YOUTH SCHEME"
+              title="AFC ONE-STAR"
+              titleLine2="ACADEMY"
               label="ATHLETICO SPORTS CLUB"
               heading="ONE-STAR ACADEMY"
               paragraphs={[
@@ -224,8 +224,8 @@ function StackingCardsSection() {
             className="bg-[#171717] w-[95%] mx-auto p-10 lg:p-12 absolute inset-x-0 top-0 bottom-0 my-auto h-fit"
           >
             <CardContent
-              title="AFC ELITE"
-              titleLine2="YOUTH SCHEME"
+              title="AFC ONE-STAR"
+              titleLine2="ACADEMY"
               label="ATHLETICO SPORTS CLUB"
               heading="ONE-STAR ACADEMY"
               paragraphs={[
