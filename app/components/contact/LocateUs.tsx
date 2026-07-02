@@ -187,12 +187,6 @@ export default function LocateUs() {
           <div className="flex items-center gap-2">
             <ClockIcon />
             <p className="text-[#171717] text-sm">
-              Club opening hours <span className="font-bold">8AM to 12AM</span>
-            </p>
-          </div>
-          <div className="flex items-center gap-2">
-            <ClockIcon />
-            <p className="text-[#171717] text-sm">
               Administrative opening hours{" "}
               <span className="font-bold">4PM to 8PM</span>
             </p>
