@@ -29,7 +29,7 @@ export default function OtherActivitiesSection() {
       image: "/basketball.png",
     },
     {
-      name: "PADDEL",
+      name: "PADEL",
       image: "/padel.png",
     },
     {
