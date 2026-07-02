@@ -18,7 +18,7 @@ export default function StatisticsSection() {
   ];
 
   return (
-    <section className="w-full bg-white pb-20 md:pb-32 lg:pb-40 overflow-hidden">
+    <section className="w-full bg-white pb-12 md:pb-16 lg:pb-20 overflow-hidden">
       {/* ATHLETICO Title with Image Background */}
       <div className="mb-10 md:mb-16 lg:mb-20 w-full">
         {/* Mobile Title */}
