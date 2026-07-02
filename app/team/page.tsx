@@ -5,7 +5,6 @@ import Footer from "../components/Footer";
 import TeamHero from "@/app/components/team/TeamHero";
 // import TeamSection from "@/app/components/team/TeamSection";
 import FoundersSection from "@/app/components/team/FoundersSection";
-import TeamExpertise from "../components/team/TeamExpertise";
 
 export default function TeamPage() {
   return (
@@ -55,8 +54,6 @@ export default function TeamPage() {
         />
         */}
       </div>
-
-      <TeamExpertise />
 
       {/* Footer */}
       <Footer />
