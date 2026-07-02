@@ -62,7 +62,7 @@ export default function ContactHero() {
             fontSize: "clamp(20px, 3vw, 28px)",
           }}
         >
-          We're here to assist you
+          We&apos;re here to assist you
         </p>
       </div>
 
