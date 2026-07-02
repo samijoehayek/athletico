@@ -11,14 +11,14 @@ export default function InsideAthleticoPage() {
       {/* Hero Section */}
       <HeroSection />
 
-      {/* Our Values Section */}
-      <OurValuesSection />
+      {/* Our Vision Section */}
+      <OurVisionSection />
 
       {/* Our Mission Section */}
       <OurMissionVisionSection />
 
-      {/* Our Vision Section */}
-      <OurVisionSection />
+      {/* Our Values Section */}
+      <OurValuesSection />
 
       {/* Footer */}
       <Footer />
