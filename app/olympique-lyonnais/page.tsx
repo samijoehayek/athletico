@@ -54,11 +54,6 @@ function PartnershipIntroSection() {
               ATHLETICO SPORTS CLUB
             </p>
 
-            {/* Heading */}
-            <h3 className="text-[#171717] font-bold text-xl sm:text-2xl md:text-3xl uppercase leading-tight mb-6 md:mb-8">
-              A CLUB WITH A MISSION
-            </h3>
-
             {/* Paragraphs */}
             <div className="space-y-4 md:space-y-6 text-[#171717]/80 text-sm md:text-base lg:text-lg leading-relaxed">
               <p>
