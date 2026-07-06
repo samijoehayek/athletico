@@ -23,7 +23,7 @@ export default function StatisticsSection() {
       <div className="mb-10 md:mb-16 lg:mb-20 w-full">
         {/* Mobile Title */}
         <h1
-          className="block md:hidden text-[80px] sm:text-[100px] font-black uppercase leading-none text-center"
+          className="block md:hidden text-[64px] sm:text-[84px] font-black uppercase leading-none text-center"
           style={{
             backgroundImage: "url('/tennis.png')",
             backgroundSize: "cover",
@@ -41,7 +41,7 @@ export default function StatisticsSection() {
         <h1
           className="hidden md:block font-black uppercase leading-none text-center"
           style={{
-            fontSize: "clamp(150px, 18vw, 290px)",
+            fontSize: "clamp(108px, 14.5vw, 225px)",
             backgroundImage: "url('/tennis.png')",
             backgroundSize: "cover",
             backgroundPosition: "center",
@@ -110,14 +110,14 @@ function AnimatedStat({ stat }: { stat: Stat }) {
       className="text-center"
     >
       {/* Number */}
-      <div className="text-[60px] lg:text-[80px] font-bold text-[#0B3E80] leading-none">
+      <div className="text-[54px] lg:text-[72px] font-bold text-[#0B3E80] leading-none">
         {count}
         {stat.suffix}
       </div>
       {/* Label */}
       {/* Label */}
       <div className="leading-tight">
-        <div className="text-[60px] lg:text-[80px] font-normal text-[#0B3E80]">
+        <div className="text-[54px] lg:text-[72px] font-normal text-[#0B3E80]">
           {stat.label}
         </div>
 
