@@ -38,7 +38,7 @@ export default function ContactHero() {
       <div className="mb-12 md:mb-16">
         {/* Small Label */}
         <p
-          className="text-[#171717] text-sm font-semibold uppercase tracking-widest mb-2"
+          className="text-[#0B3E80] text-sm font-semibold uppercase tracking-widest mb-2"
           style={{ letterSpacing: "0.12em" }}
         >
           GET STARTED
@@ -46,7 +46,7 @@ export default function ContactHero() {
 
         {/* Main Title */}
         <h1
-          className="text-[#3050FD] font-extrabold leading-tight mb-3"
+          className="text-[#0B3E80] font-extrabold leading-tight mb-3"
           style={{
             fontSize: "clamp(36px, 5vw, 64px)",
             lineHeight: 1.1,
@@ -57,7 +57,7 @@ export default function ContactHero() {
 
         {/* Subtitle - no underline, not bold */}
         <p
-          className="text-[#171717] font-normal"
+          className="text-[#0B3E80] font-normal"
           style={{
             fontSize: "clamp(20px, 3vw, 28px)",
           }}
@@ -70,8 +70,8 @@ export default function ContactHero() {
       {/* <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start"> */}
       {/* Left Column - WhatsApp */}
       {/* <div className="lg:col-span-4">
-            <h3 className="text-[#171717] text-2xl font-bold mb-2">WhatsApp</h3>
-            <p className="text-[#171717] text-base mb-4">
+            <h3 className="text-[#0B3E80] text-2xl font-bold mb-2">WhatsApp</h3>
+            <p className="text-[#0B3E80] text-base mb-4">
               For faster responses, reach us on WhatsApp
             </p>
             <a
@@ -90,7 +90,7 @@ export default function ContactHero() {
             <form onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                 <div>
-                  <label className="block text-[#171717] text-sm mb-2">
+                  <label className="block text-[#0B3E80] text-sm mb-2">
                     Your Name
                   </label>
                   <input
@@ -99,12 +99,12 @@ export default function ContactHero() {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full bg-transparent border-b border-[#e0e0e0] focus:border-[#3050FD] outline-none py-2 text-base text-[#171717] transition-colors"
+                    className="w-full bg-transparent border-b border-[#e0e0e0] focus:border-[#0B3E80] outline-none py-2 text-base text-[#0B3E80] transition-colors"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-[#171717] text-sm mb-2">
+                  <label className="block text-[#0B3E80] text-sm mb-2">
                     Email Address
                   </label>
                   <input
@@ -113,12 +113,12 @@ export default function ContactHero() {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full bg-transparent border-b border-[#e0e0e0] focus:border-[#3050FD] outline-none py-2 text-base text-[#171717] transition-colors"
+                    className="w-full bg-transparent border-b border-[#e0e0e0] focus:border-[#0B3E80] outline-none py-2 text-base text-[#0B3E80] transition-colors"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-[#171717] text-sm mb-2">
+                  <label className="block text-[#0B3E80] text-sm mb-2">
                     Phone Number (optional)
                   </label>
                   <input
@@ -126,13 +126,13 @@ export default function ContactHero() {
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
-                    className="w-full bg-transparent border-b border-[#e0e0e0] focus:border-[#3050FD] outline-none py-2 text-base text-[#171717] transition-colors"
+                    className="w-full bg-transparent border-b border-[#e0e0e0] focus:border-[#0B3E80] outline-none py-2 text-base text-[#0B3E80] transition-colors"
                   />
                 </div>
               </div>
 
               <div className="mb-8">
-                <label className="block text-[#171717] text-sm mb-2">
+                <label className="block text-[#0B3E80] text-sm mb-2">
                   Message
                 </label>
                 <textarea
@@ -141,14 +141,14 @@ export default function ContactHero() {
                   onChange={handleChange}
                   required
                   rows={4}
-                  className="w-full bg-transparent border-b border-[#e0e0e0] focus:border-[#3050FD] outline-none py-2 text-base text-[#171717] transition-colors resize-none min-h-[120px]"
+                  className="w-full bg-transparent border-b border-[#e0e0e0] focus:border-[#0B3E80] outline-none py-2 text-base text-[#0B3E80] transition-colors resize-none min-h-[120px]"
                 />
               </div>
 
               <div className="flex justify-end">
                 <button
                   type="submit"
-                  className="bg-[#3050FD] hover:bg-[#2040dd] text-white font-semibold px-8 py-3 transition-colors flex items-center gap-2"
+                  className="bg-[#0B3E80] hover:bg-[#092f5f] text-white font-semibold px-8 py-3 transition-colors flex items-center gap-2"
                 >
                   Leave us a Message
                   <svg

@@ -26,15 +26,15 @@ export default function JobCard({
       <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-6 md:gap-0">
         {/* Left Content */}
         <div className="flex-1 md:pr-12">
-          <h3 className="text-[#171717] font-bold uppercase leading-tight mb-2 font-outfit text-xl sm:text-2xl md:text-3xl">
+          <h3 className="text-[#0B3E80] font-bold uppercase leading-tight mb-2 font-outfit text-xl sm:text-2xl md:text-3xl">
             {title}
           </h3>
 
-          <p className="text-[#171717]/60 text-xs sm:text-sm font-medium uppercase tracking-wide mb-4 md:mb-6">
+          <p className="text-[#0B3E80]/60 text-xs sm:text-sm font-medium uppercase tracking-wide mb-4 md:mb-6">
             {positions} {positions === 1 ? "POSITION" : "POSITIONS"}
           </p>
 
-          <p className="text-[#171717]/80 text-sm sm:text-base leading-relaxed max-w-4xl">
+          <p className="text-[#0B3E80]/80 text-sm sm:text-base leading-relaxed max-w-4xl">
             {description}
           </p>
         </div>
@@ -42,7 +42,7 @@ export default function JobCard({
         {/* Apply Button */}
         <motion.button
           onClick={onApply}
-          className="md:self-start flex items-center justify-center gap-3 px-6 sm:px-8 py-3 sm:py-4 border-2 border-[#3050FD] text-[#3050FD] font-semibold uppercase tracking-wide text-xs sm:text-sm md:text-base transition-colors duration-300 hover:bg-[#3050FD] hover:text-white"
+          className="md:self-start flex items-center justify-center gap-3 px-6 sm:px-8 py-3 sm:py-4 border-2 border-[#0B3E80] text-[#0B3E80] font-semibold uppercase tracking-wide text-xs sm:text-sm md:text-base transition-colors duration-300 hover:bg-[#0B3E80] hover:text-white"
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >

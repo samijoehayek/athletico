@@ -43,7 +43,7 @@ export default function FoundersSection() {
         <div className="grid grid-cols-3 divide-x divide-[#e5e5e5]">
           {founders.map((founder) => (
             <div key={founder.name} className="py-6 md:py-8 px-4 md:px-8">
-              <p className="text-[#171717] text-sm md:text-lg lg:text-xl font-bold uppercase tracking-wide text-center">
+              <p className="text-[#0B3E80] text-sm md:text-lg lg:text-xl font-bold uppercase tracking-wide text-center">
                 {founder.name}
               </p>
             </div>

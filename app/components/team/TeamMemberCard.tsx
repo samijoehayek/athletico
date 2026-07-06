@@ -27,16 +27,16 @@ export default function TeamMemberCard({ member }: { member: TeamMember }) {
         </div>
 
         {/* Name - Left aligned */}
-        <h3 className="text-[#171717] text-2xl lg:text-3xl font-bold uppercase text-left mb-auto">
+        <h3 className="text-[#0B3E80] text-2xl lg:text-3xl font-bold uppercase text-left mb-auto">
           {member.name}
         </h3>
 
         {/* Stats - Full width with space between */}
         <div className="flex justify-between items-center w-full mt-8">
-          <p className="text-[#171717]/70 text-sm md:text-base font-normal">
+          <p className="text-[#0B3E80]/70 text-sm md:text-base font-normal">
             {member.stat1}
           </p>
-          <p className="text-[#171717]/70 text-sm md:text-base font-normal">
+          <p className="text-[#0B3E80]/70 text-sm md:text-base font-normal">
             {member.stat2}
           </p>
         </div>

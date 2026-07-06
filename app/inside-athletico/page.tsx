@@ -29,13 +29,13 @@ export default function InsideAthleticoPage() {
 // ==================== HERO SECTION ====================
 function HeroSection() {
   return (
-    <section className="bg-white w-full min-h-[60vh] flex flex-col">
+    <section className="bg-[#F1EAEA] w-full min-h-[60vh] flex flex-col">
       {/* Navbar */}
       <Navbar mode="dark" />
 
       {/* Title - Centered */}
       <div className="flex-1 flex items-center justify-center px-6 md:px-12 lg:px-16">
-        <h1 className="text-[#171717] font-extrabold text-6xl sm:text-8xl md:text-[120px] lg:text-[150px] xl:text-[180px] leading-none uppercase tracking-tight text-center">
+        <h1 className="text-[#0B3E80] font-extrabold text-6xl sm:text-8xl md:text-[120px] lg:text-[150px] xl:text-[180px] leading-none uppercase tracking-tight text-center">
           INSIDE ATHLETICO
         </h1>
       </div>
@@ -97,15 +97,15 @@ function OurValuesSection() {
   return (
     <section
       id="values"
-      className="bg-white w-full px-6 md:px-12 lg:px-16 pb-16 pt-8 md:pb-20 lg:pb-24"
+      className="bg-[#F1EAEA] w-full px-6 md:px-12 lg:px-16 pb-16 pt-8 md:pb-20 lg:pb-24"
     >
       <div className="max-w-screen-2xl mx-auto">
         {/* ---- Intro Band: Title ---- */}
         <div className="mb-14 md:mb-20 lg:mb-24">
-          <p className="text-[#3050FD] text-xs md:text-sm font-semibold uppercase tracking-[0.25em] mb-5 md:mb-7">
+          <p className="text-[#0B3E80] text-xs md:text-sm font-semibold uppercase tracking-[0.25em] mb-5 md:mb-7">
             Athletico Sports Club
           </p>
-          <h2 className="text-[#171717] font-extrabold text-5xl sm:text-6xl md:text-7xl lg:text-[80px] leading-[0.9] uppercase tracking-tight">
+          <h2 className="text-[#0B3E80] font-extrabold text-5xl sm:text-6xl md:text-7xl lg:text-[80px] leading-[0.9] uppercase tracking-tight">
             OUR
             <br />
             VALUES
@@ -113,7 +113,7 @@ function OurValuesSection() {
         </div>
 
         {/* ---- Values Grid ---- */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 border-t border-l border-[#171717]/10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 border-t border-l border-[#0B3E80]/10">
           {CLUB_VALUES.map((value, index) => (
             <ValueCard key={value.number} value={value} index={index} />
           ))}
@@ -131,24 +131,24 @@ function ValueCard({ value, index }: { value: ClubValue; index: number }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.5, delay: (index % 4) * 0.08, ease: "easeOut" }}
-      className="group relative overflow-hidden border-r border-b border-[#171717]/10 min-h-[210px] md:min-h-[250px] lg:min-h-[270px] p-6 md:p-8 flex flex-col justify-between cursor-default"
+      className="group relative overflow-hidden border-r border-b border-[#0B3E80]/10 min-h-[210px] md:min-h-[250px] lg:min-h-[270px] p-6 md:p-8 flex flex-col justify-between cursor-default"
     >
       {/* Blue fill that rises on hover */}
-      <div className="pointer-events-none absolute inset-0 bg-[#3050FD] origin-bottom scale-y-0 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-y-100" />
+      <div className="pointer-events-none absolute inset-0 bg-[#0B3E80] origin-bottom scale-y-0 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-y-100" />
 
       {/* Top Row — Number */}
       <div className="relative z-10">
-        <span className="text-base md:text-lg font-bold tracking-tight text-[#3050FD] transition-colors duration-500 group-hover:text-white/70">
+        <span className="text-base md:text-lg font-bold tracking-tight text-[#0B3E80] transition-colors duration-500 group-hover:text-white/70">
           {value.number}
         </span>
       </div>
 
       {/* Bottom — Title + Description */}
       <div className="relative z-10">
-        <h3 className="flex items-end min-h-[46px] md:min-h-[54px] lg:min-h-[58px] text-[#171717] font-extrabold uppercase leading-[0.95] tracking-tight text-2xl md:text-[28px] lg:text-[30px] transition-colors duration-500 group-hover:text-white">
+        <h3 className="flex items-end min-h-[46px] md:min-h-[54px] lg:min-h-[58px] text-[#0B3E80] font-extrabold uppercase leading-[0.95] tracking-tight text-2xl md:text-[28px] lg:text-[30px] transition-colors duration-500 group-hover:text-white">
           {value.title}
         </h3>
-        <p className="mt-3 min-h-[44px] text-sm leading-relaxed text-[#171717]/55 transition-colors duration-500 group-hover:text-white/85">
+        <p className="mt-3 min-h-[44px] text-sm leading-relaxed text-[#0B3E80]/55 transition-colors duration-500 group-hover:text-white/85">
           {value.description}
         </p>
       </div>
@@ -161,7 +161,7 @@ function OurMissionVisionSection() {
   return (
     <section
       id="mission"
-      className="bg-[#171717] w-full px-6 md:px-12 lg:px-16 py-16 md:py-20 lg:py-24"
+      className="bg-[#0B3E80] w-full px-6 md:px-12 lg:px-16 py-16 md:py-20 lg:py-24"
     >
       <div className="max-w-screen-2xl mx-auto">
         {/* Section Title */}
@@ -233,17 +233,17 @@ function OurVisionSection() {
   return (
     <section
       id="vision"
-      className="bg-white w-full px-6 md:px-12 lg:px-16 py-16 md:py-20 lg:py-24"
+      className="bg-[#F1EAEA] w-full px-6 md:px-12 lg:px-16 py-16 md:py-20 lg:py-24"
     >
       <div className="max-w-screen-2xl mx-auto">
         {/* ---- Intro Band: Title + Vision Statement ---- */}
         <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 xl:gap-24 mb-14 md:mb-20 lg:mb-24">
           {/* Left — Title */}
           <div className="lg:w-[45%]">
-            <p className="text-[#3050FD] text-xs md:text-sm font-semibold uppercase tracking-[0.25em] mb-5 md:mb-7">
+            <p className="text-[#0B3E80] text-xs md:text-sm font-semibold uppercase tracking-[0.25em] mb-5 md:mb-7">
               Athletico Sports Club
             </p>
-            <h2 className="text-[#171717] font-extrabold text-5xl sm:text-6xl md:text-7xl lg:text-[80px] leading-[0.9] uppercase tracking-tight">
+            <h2 className="text-[#0B3E80] font-extrabold text-5xl sm:text-6xl md:text-7xl lg:text-[80px] leading-[0.9] uppercase tracking-tight">
               OUR
               <br />
               VISION
@@ -252,8 +252,8 @@ function OurVisionSection() {
 
           {/* Right — Vision Statement */}
           <div className="lg:w-[55%] flex flex-col justify-end">
-            <blockquote className="border-l-2 border-[#3050FD] pl-6 md:pl-8">
-              <p className="text-[#171717] font-medium italic text-xl sm:text-2xl md:text-3xl lg:text-[34px] leading-snug tracking-tight">
+            <blockquote className="border-l-2 border-[#0B3E80] pl-6 md:pl-8">
+              <p className="text-[#0B3E80] font-medium italic text-xl sm:text-2xl md:text-3xl lg:text-[34px] leading-snug tracking-tight">
                 &ldquo;To be the defining football academy of the Middle East,
                 a place where Lebanese talent is discovered, developed, and
                 celebrated on the world stage.&rdquo;

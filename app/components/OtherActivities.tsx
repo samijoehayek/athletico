@@ -49,9 +49,9 @@ export default function OtherActivitiesSection() {
     <section className="w-full min-h-[70vh] lg:min-h-screen relative overflow-hidden -mt-1 py-30">
       {/* Diagonal split background */}
       <div className="absolute inset-0">
-        {/* Dark section (top) - #171717 */}
+        {/* Dark section (top) - #0B3E80 */}
         <div
-          className="absolute inset-0 bg-[#171717]"
+          className="absolute inset-0 bg-[#0B3E80]"
           style={{
             clipPath: `polygon(0 0, 100% 0, 100% ${50 - diagonalAngle}%, 0 ${
               50 + diagonalAngle
@@ -61,7 +61,7 @@ export default function OtherActivitiesSection() {
 
         {/* White section (bottom) */}
         <div
-          className="absolute inset-0 bg-white"
+          className="absolute inset-0 bg-[#F1EAEA]"
           style={{
             clipPath: `polygon(0 ${50 + diagonalAngle}%, 100% ${
               50 - diagonalAngle
@@ -83,7 +83,7 @@ export default function OtherActivitiesSection() {
           <a
             href={whatsappUrl}
             className="
-    text-[#D9FF00]
+    text-[#FFE400]
     text-sm md:text-base lg:text-[16px]
     leading-tight
     underline underline-offset-4
@@ -162,7 +162,7 @@ function ActivityCard({
       <div className="absolute inset-0 bg-black/40 group-hover:opacity-0 transition-opacity duration-500 z-[1]" />
 
       {/* Hover Overlay - blue */}
-      <div className="absolute inset-0 bg-[#3050FD]/70 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-[2]" />
+      <div className="absolute inset-0 bg-[#0B3E80]/70 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-[2]" />
 
       {/* Default Activity Name */}
       <div className="absolute inset-0 flex items-center justify-center z-10 group-hover:opacity-0 transition-opacity duration-300">
@@ -173,7 +173,7 @@ function ActivityCard({
 
       {/* Hover Text - Rent Your Space */}
       <div className="absolute inset-0 flex items-center justify-center z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-        <h3 className="text-[#D9FF00] text-xl sm:text-xl md:text-2xl lg:text-2xl font-bold uppercase tracking-wide drop-shadow-lg">
+        <h3 className="text-[#FFE400] text-xl sm:text-xl md:text-2xl lg:text-2xl font-bold uppercase tracking-wide drop-shadow-lg">
           RENT YOUR SPACE
         </h3>
       </div>

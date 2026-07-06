@@ -15,9 +15,9 @@ export default function Navbar({ mode = "light" }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
 
-  const textColor = mode === "dark" ? "text-[#171717]" : "text-white";
-  const hoverColor = "hover:text-[#3050FD]";
-  const mobileMenuBg = mode === "dark" ? "bg-white/95" : "bg-black/95";
+  const textColor = mode === "dark" ? "text-[#0B3E80]" : "text-white";
+  const hoverColor = "hover:text-[#2B87C8]";
+  const mobileMenuBg = mode === "dark" ? "bg-white/95" : "bg-[#0B3E80]/95";
   const mobileOverlayBg = mode === "dark" ? "bg-white/50" : "bg-black/50";
 
   const isActive = (path: string) => {

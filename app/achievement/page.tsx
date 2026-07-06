@@ -54,7 +54,7 @@ function HeroSection() {
     <section className="relative w-full h-[60vh] overflow-hidden">
       {/* White Background (Top) */}
       <div
-        className="absolute inset-0 bg-white"
+        className="absolute inset-0 bg-[#F1EAEA]"
         style={{
           clipPath: `polygon(0 0, 100% 0, 100% ${100 - diagonalAngle}%, 0 100%)`,
         }}
@@ -62,7 +62,7 @@ function HeroSection() {
 
       {/* Dark Background (Bottom) */}
       <div
-        className="absolute inset-0 bg-[#171717]"
+        className="absolute inset-0 bg-[#0B3E80]"
         style={{
           clipPath: `polygon(0 100%, 100% ${100 - diagonalAngle}%, 100% 100%)`,
         }}
@@ -78,10 +78,10 @@ function HeroSection() {
           <div className="max-w-screen-2xl mx-auto relative h-full">
             {/* Title - Centered vertically */}
             <div className="relative z-10 h-full flex flex-col justify-center pb-20">
-              <p className="text-[#171717] font-bold text-lg sm:text-xl md:text-2xl uppercase tracking-wide mb-1">
+              <p className="text-[#0B3E80] font-bold text-lg sm:text-xl md:text-2xl uppercase tracking-wide mb-1">
                 ATHLETICO
               </p>
-              <h1 className="text-[#171717] font-extrabold text-5xl sm:text-7xl md:text-[100px] lg:text-[140px] xl:text-[180px] uppercase leading-none tracking-tight">
+              <h1 className="text-[#0B3E80] font-extrabold text-5xl sm:text-7xl md:text-[100px] lg:text-[140px] xl:text-[180px] uppercase leading-none tracking-tight">
                 ACHIEVEMENTS
               </h1>
             </div>
@@ -197,7 +197,7 @@ function AchievementsSliderSection() {
   };
 
   return (
-    <section className="bg-[#171717] w-full px-6 md:px-12 lg:px-16 py-14 md:py-20">
+    <section className="bg-[#0B3E80] w-full px-6 md:px-12 lg:px-16 py-14 md:py-20">
       <div className="max-w-screen-2xl mx-auto">
         {/* Year Navigation */}
         <div className="flex flex-wrap gap-2 md:gap-3 justify-center mb-10 md:mb-14">
@@ -207,7 +207,7 @@ function AchievementsSliderSection() {
               onClick={() => jumpToYear(y.label)}
               className={`px-4 py-2 text-xs md:text-sm font-bold uppercase tracking-wide border transition-all ${
                 y.label === active.year.label
-                  ? "bg-[#3050FD] border-[#3050FD] text-white"
+                  ? "bg-[#2B87C8] border-[#2B87C8] text-white"
                   : "border-white/20 text-white/60 hover:border-white/50 hover:text-white"
               }`}
             >
@@ -217,7 +217,7 @@ function AchievementsSliderSection() {
         </div>
 
         {/* Active Year */}
-        <p className="text-center text-[#3050FD] font-extrabold text-4xl md:text-5xl lg:text-6xl uppercase leading-none mb-8 md:mb-12">
+        <p className="text-center text-[#FFE400] font-extrabold text-4xl md:text-5xl lg:text-6xl uppercase leading-none mb-8 md:mb-12">
           {active.year.label}
         </p>
 
@@ -227,7 +227,7 @@ function AchievementsSliderSection() {
           <button
             onClick={goPrev}
             aria-label="Previous achievement"
-            className="hidden lg:flex absolute left-0 top-1/2 -translate-y-1/2 z-20 w-14 h-14 border border-white/30 hover:border-[#3050FD] hover:bg-[#3050FD] text-white items-center justify-center transition-all"
+            className="hidden lg:flex absolute left-0 top-1/2 -translate-y-1/2 z-20 w-14 h-14 border border-white/30 hover:border-[#2B87C8] hover:bg-[#2B87C8] text-white items-center justify-center transition-all"
           >
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <polyline points="15 18 9 12 15 6" />
@@ -236,7 +236,7 @@ function AchievementsSliderSection() {
           <button
             onClick={goNext}
             aria-label="Next achievement"
-            className="hidden lg:flex absolute right-0 top-1/2 -translate-y-1/2 z-20 w-14 h-14 border border-white/30 hover:border-[#3050FD] hover:bg-[#3050FD] text-white items-center justify-center transition-all"
+            className="hidden lg:flex absolute right-0 top-1/2 -translate-y-1/2 z-20 w-14 h-14 border border-white/30 hover:border-[#2B87C8] hover:bg-[#2B87C8] text-white items-center justify-center transition-all"
           >
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <polyline points="9 18 15 12 9 6" />
@@ -257,7 +257,7 @@ function AchievementsSliderSection() {
               >
                 {/* Logo + Title */}
                 <div className="flex flex-col items-center gap-6 flex-shrink-0">
-                  <div className="relative w-[240px] h-[240px] sm:w-[280px] sm:h-[280px] lg:w-[320px] lg:h-[320px] rounded-full overflow-hidden bg-white border-4 border-[#3050FD] flex items-center justify-center">
+                  <div className="relative w-[240px] h-[240px] sm:w-[280px] sm:h-[280px] lg:w-[320px] lg:h-[320px] rounded-full overflow-hidden bg-white border-4 border-[#0B3E80] flex items-center justify-center">
                     <Image
                       src={active.image}
                       alt={active.title}
@@ -288,7 +288,7 @@ function AchievementsSliderSection() {
           <button
             onClick={goPrev}
             aria-label="Previous achievement"
-            className="lg:hidden w-11 h-11 border border-white/30 text-white flex items-center justify-center transition-all active:bg-[#3050FD]"
+            className="lg:hidden w-11 h-11 border border-white/30 text-white flex items-center justify-center transition-all active:bg-[#2B87C8]"
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <polyline points="15 18 9 12 15 6" />
@@ -303,7 +303,7 @@ function AchievementsSliderSection() {
                 onClick={() => goTo(i)}
                 aria-label={`Go to achievement ${i + 1}`}
                 className={`h-1.5 transition-all ${
-                  i === index ? "w-8 bg-[#3050FD]" : "w-4 bg-white/30 hover:bg-white/60"
+                  i === index ? "w-8 bg-[#2B87C8]" : "w-4 bg-white/30 hover:bg-white/60"
                 }`}
               />
             ))}
@@ -313,7 +313,7 @@ function AchievementsSliderSection() {
           <button
             onClick={goNext}
             aria-label="Next achievement"
-            className="lg:hidden w-11 h-11 border border-white/30 text-white flex items-center justify-center transition-all active:bg-[#3050FD]"
+            className="lg:hidden w-11 h-11 border border-white/30 text-white flex items-center justify-center transition-all active:bg-[#2B87C8]"
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <polyline points="9 18 15 12 9 6" />

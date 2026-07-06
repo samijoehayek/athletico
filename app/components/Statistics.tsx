@@ -18,7 +18,7 @@ export default function StatisticsSection() {
   ];
 
   return (
-    <section className="w-full bg-white pb-12 md:pb-16 lg:pb-20 overflow-hidden">
+    <section className="w-full bg-[#F1EAEA] pb-12 md:pb-16 lg:pb-20 overflow-hidden">
       {/* ATHLETICO Title with Image Background */}
       <div className="mb-10 md:mb-16 lg:mb-20 w-full">
         {/* Mobile Title */}
@@ -110,19 +110,19 @@ function AnimatedStat({ stat }: { stat: Stat }) {
       className="text-center"
     >
       {/* Number */}
-      <div className="text-[60px] lg:text-[80px] font-bold text-[#171717] leading-none">
+      <div className="text-[60px] lg:text-[80px] font-bold text-[#0B3E80] leading-none">
         {count}
         {stat.suffix}
       </div>
       {/* Label */}
       {/* Label */}
       <div className="leading-tight">
-        <div className="text-[60px] lg:text-[80px] font-normal text-[#171717]">
+        <div className="text-[60px] lg:text-[80px] font-normal text-[#0B3E80]">
           {stat.label}
         </div>
 
         {stat.subLabel && (
-          <div className="mt-1 text-base lg:text-xl font-medium tracking-wide uppercase text-[#171717]/60">
+          <div className="mt-1 text-base lg:text-xl font-medium tracking-wide uppercase text-[#0B3E80]/60">
             {stat.subLabel}
           </div>
         )}
@@ -167,19 +167,19 @@ function AnimatedStatMobile({ stat }: { stat: Stat }) {
       className="text-center"
     >
       {/* Number */}
-      <div className="text-3xl sm:text-4xl font-bold text-[#171717] leading-none mb-1">
+      <div className="text-3xl sm:text-4xl font-bold text-[#0B3E80] leading-none mb-1">
         {count}
         {stat.suffix}
       </div>
       {/* Label */}
       {/* Label */}
       <div className="leading-tight">
-        <div className="text-sm sm:text-base font-semibold text-[#171717]/80">
+        <div className="text-sm sm:text-base font-semibold text-[#0B3E80]/80">
           {stat.label}
         </div>
 
         {stat.subLabel && (
-          <div className="text-[11px] sm:text-xs font-medium uppercase tracking-wide text-[#171717]/50">
+          <div className="text-[11px] sm:text-xs font-medium uppercase tracking-wide text-[#0B3E80]/50">
             {stat.subLabel}
           </div>
         )}

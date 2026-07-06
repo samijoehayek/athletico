@@ -83,7 +83,7 @@ export default function CareerHero() {
   return (
     <section
       ref={sectionRef}
-      className="w-full h-screen relative overflow-hidden bg-[#171717] md:bg-white"
+      className="w-full h-screen relative overflow-hidden bg-[#0B3E80] md:bg-[#F1EAEA]"
     >
       {/* MOBILE: simple hero, no circles, no animation */}
       <div className="flex h-full w-full items-center justify-center md:hidden">
@@ -106,7 +106,7 @@ export default function CareerHero() {
       >
         {/* Outermost circle */}
         <div
-          className="career-circle absolute rounded-full bg-[#171717]"
+          className="career-circle absolute rounded-full bg-[#0B3E80]"
           style={{
             width: "120vw",
             height: "120vw",

@@ -8,7 +8,7 @@ import FoundersSection from "@/app/components/team/FoundersSection";
 
 export default function TeamPage() {
   return (
-    <main className="bg-[#171717] min-h-screen">
+    <main className="bg-[#0B3E80] min-h-screen">
       {/* Navbar */}
       <Navbar />
 

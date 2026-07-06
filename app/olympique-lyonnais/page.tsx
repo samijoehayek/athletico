@@ -14,7 +14,7 @@ if (typeof window !== "undefined") {
 
 export default function OlympiqueLyonnaisPage() {
   return (
-    <main className="bg-white">
+    <main className="bg-[#F1EAEA]">
       {/* Navbar */}
       <Navbar mode="dark" />
 
@@ -33,14 +33,14 @@ export default function OlympiqueLyonnaisPage() {
 // ==================== PARTNERSHIP INTRO SECTION ====================
 function PartnershipIntroSection() {
   return (
-    <section className="bg-white w-full px-6 md:px-12 lg:px-16 py-24 md:pt-32 lg:pt-40">
+    <section className="bg-[#F1EAEA] w-full px-6 md:px-12 lg:px-16 py-24 md:pt-32 lg:pt-40">
       <div className="max-w-screen-2xl mx-auto">
         {/* Title */}
         <div className="mb-12 md:mb-16 lg:mb-20">
-          <h1 className="text-[#171717] font-light text-3xl sm:text-4xl md:text-5xl lg:text-6xl uppercase tracking-tight mb-2 md:mb-4">
+          <h1 className="text-[#0B3E80] font-light text-3xl sm:text-4xl md:text-5xl lg:text-6xl uppercase tracking-tight mb-2 md:mb-4">
             OUR PARTNERSHIP WITH
           </h1>
-          <h2 className="text-[#171717] font-extrabold text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[120px] uppercase leading-none tracking-tight">
+          <h2 className="text-[#0B3E80] font-extrabold text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[120px] uppercase leading-none tracking-tight">
             OLYMPIQUE LYONNAIS
           </h2>
         </div>
@@ -50,12 +50,12 @@ function PartnershipIntroSection() {
           {/* Left Column - Text */}
           <div className="w-full lg:w-[55%]">
             {/* Club Label */}
-            <p className="text-[#171717]/50 text-xs md:text-sm font-medium uppercase tracking-widest mb-3 md:mb-4">
+            <p className="text-[#0B3E80]/50 text-xs md:text-sm font-medium uppercase tracking-widest mb-3 md:mb-4">
               ATHLETICO SPORTS CLUB
             </p>
 
             {/* Paragraphs */}
-            <div className="space-y-4 md:space-y-6 text-[#171717]/80 text-sm md:text-base lg:text-lg leading-relaxed">
+            <div className="space-y-4 md:space-y-6 text-[#0B3E80]/80 text-sm md:text-base lg:text-lg leading-relaxed">
               <p>
                 Athletico has been in active partnership with Olympique Lyonnais
                 since 2011, a collaboration built on long-term development, not
@@ -169,7 +169,7 @@ function StackingCardsSection() {
       <section className="w-full px-4 md:px-8 pb-16">
         <div className="space-y-6">
           {/* Card 1 - Dark */}
-          <div className="bg-[#171717] w-full p-6 md:p-10">
+          <div className="bg-[#0B3E80] w-full p-6 md:p-10">
             <CardContent
               title="AFC ONE-STAR"
               titleLine2="ACADEMY"
@@ -186,7 +186,7 @@ function StackingCardsSection() {
           </div>
 
           {/* Card 2 - Light */}
-          <div className="bg-[#F3F3F3] w-full p-6 md:p-10">
+          <div className="bg-[#F1EAEA] w-full p-6 md:p-10">
             <CardContent
               title="RECOGNITION"
               titleLine2="AND CREDIBILITY"
@@ -221,7 +221,7 @@ function StackingCardsSection() {
           {/* Card 1 - Dark (Base card) */}
           <div
             ref={card1Ref}
-            className="bg-[#171717] w-[95%] mx-auto p-10 lg:p-12 absolute inset-x-0 top-0 bottom-0 my-auto h-fit"
+            className="bg-[#0B3E80] w-[95%] mx-auto p-10 lg:p-12 absolute inset-x-0 top-0 bottom-0 my-auto h-fit"
           >
             <CardContent
               title="AFC ONE-STAR"
@@ -241,7 +241,7 @@ function StackingCardsSection() {
           {/* Card 2 - Light (Slides over Card 1) */}
           <div
             ref={card2Ref}
-            className="bg-[#F3F3F3] w-[95%] mx-auto p-10 lg:p-12 absolute inset-x-0 top-0 bottom-0 my-auto h-fit"
+            className="bg-[#F1EAEA] w-[95%] mx-auto p-10 lg:p-12 absolute inset-x-0 top-0 bottom-0 my-auto h-fit"
           >
             <CardContent
               title="RECOGNITION"
@@ -284,9 +284,9 @@ function CardContent({
   imageContain?: boolean;
   isDark: boolean;
 }) {
-  const textColor = isDark ? "text-white" : "text-[#171717]";
-  const mutedTextColor = isDark ? "text-white/50" : "text-[#171717]/50";
-  const paragraphColor = isDark ? "text-white/80" : "text-[#171717]/80";
+  const textColor = isDark ? "text-white" : "text-[#0B3E80]";
+  const mutedTextColor = isDark ? "text-white/50" : "text-[#0B3E80]/50";
+  const paragraphColor = isDark ? "text-white/80" : "text-[#0B3E80]/80";
 
   return (
     <div className="flex flex-col">

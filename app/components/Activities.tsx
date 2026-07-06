@@ -65,12 +65,12 @@ export default function ProgramsSection() {
   };
 
   return (
-    <section className="bg-[#171717] w-full px-6 md:px-12 lg:px-16 py-16 md:py-20 lg:py-24 overflow-hidden">
+    <section className="bg-[#0B3E80] w-full px-6 md:px-12 lg:px-16 py-16 md:py-20 lg:py-24 overflow-hidden">
       <div className="max-w-screen-2xl mx-auto">
         {/* Header */}
         <div className="flex items-end justify-between mb-8 md:mb-10">
           <div className="flex items-center gap-3 md:gap-5">
-            <h2 className="font-extrabold text-3xl sm:text-4xl md:text-5xl lg:text-[64px] leading-none uppercase tracking-tight [text-shadow:_-1px_-1px_0_#fff,_1px_-1px_0_#fff,_-1px_1px_0_#fff,_1px_1px_0_#fff] text-[#171717]">
+            <h2 className="font-extrabold text-3xl sm:text-4xl md:text-5xl lg:text-[64px] leading-none uppercase tracking-tight [text-shadow:_-1px_-1px_0_#fff,_1px_-1px_0_#fff,_-1px_1px_0_#fff,_1px_1px_0_#fff] text-[#0B3E80]">
               INSIDE ATHLETICO
             </h2>
             <Image
@@ -87,7 +87,7 @@ export default function ProgramsSection() {
             <button
               onClick={goPrev}
               aria-label="Previous"
-              className="w-11 h-11 md:w-12 md:h-12 border border-white/30 hover:border-[#3050FD] hover:bg-[#3050FD] text-white flex items-center justify-center transition-all"
+              className="w-11 h-11 md:w-12 md:h-12 border border-white/30 hover:border-[#2B87C8] hover:bg-[#2B87C8] text-white flex items-center justify-center transition-all"
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <polyline points="15 18 9 12 15 6" />
@@ -96,7 +96,7 @@ export default function ProgramsSection() {
             <button
               onClick={goNext}
               aria-label="Next"
-              className="w-11 h-11 md:w-12 md:h-12 border border-white/30 hover:border-[#3050FD] hover:bg-[#3050FD] text-white flex items-center justify-center transition-all"
+              className="w-11 h-11 md:w-12 md:h-12 border border-white/30 hover:border-[#2B87C8] hover:bg-[#2B87C8] text-white flex items-center justify-center transition-all"
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <polyline points="9 18 15 12 9 6" />
@@ -138,7 +138,7 @@ export default function ProgramsSection() {
                     height="24"
                     viewBox="0 0 24 24"
                     fill="none"
-                    stroke="#171717"
+                    stroke="#0B3E80"
                     strokeWidth="2.5"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -168,7 +168,7 @@ export default function ProgramsSection() {
                 onClick={() => goTo(i)}
                 aria-label={`Go to ${program.title}`}
                 className={`h-1.5 transition-all ${
-                  i === index ? "w-8 bg-[#3050FD]" : "w-4 bg-white/30 hover:bg-white/60"
+                  i === index ? "w-8 bg-[#2B87C8]" : "w-4 bg-white/30 hover:bg-white/60"
                 }`}
               />
             ))}
@@ -179,7 +179,7 @@ export default function ProgramsSection() {
             <button
               onClick={goPrev}
               aria-label="Previous"
-              className="w-10 h-10 border border-white/30 text-white flex items-center justify-center transition-all active:bg-[#3050FD]"
+              className="w-10 h-10 border border-white/30 text-white flex items-center justify-center transition-all active:bg-[#2B87C8]"
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <polyline points="15 18 9 12 15 6" />
@@ -188,7 +188,7 @@ export default function ProgramsSection() {
             <button
               onClick={goNext}
               aria-label="Next"
-              className="w-10 h-10 border border-white/30 text-white flex items-center justify-center transition-all active:bg-[#3050FD]"
+              className="w-10 h-10 border border-white/30 text-white flex items-center justify-center transition-all active:bg-[#2B87C8]"
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <polyline points="9 18 15 12 9 6" />

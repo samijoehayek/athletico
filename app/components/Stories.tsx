@@ -87,7 +87,7 @@ export default function TopStoriesSection() {
   const nextGraduate = graduates[(currentIndex + 1) % graduates.length];
 
   return (
-    <section className="bg-white w-full min-h-screen lg:h-[90vh] overflow-hidden">
+    <section className="bg-[#F1EAEA] w-full min-h-screen lg:h-[90vh] overflow-hidden">
       {/* Main Container */}
       <div className="h-full px-6 md:px-10 lg:pl-40 lg:pr-10 py-10 flex flex-col lg:flex-row gap-8">
         {/* LEFT COLUMN - Title and Player Info */}
@@ -160,7 +160,7 @@ export default function TopStoriesSection() {
 function TitleSection() {
   return (
     <div className="mb-4">
-      <h2 className="text-[#3050FD] font-extrabold text-4xl sm:text-5xl md:text-6xl lg:text-[72px] xl:text-[88px] leading-none uppercase">
+      <h2 className="text-[#0B3E80] font-extrabold text-4xl sm:text-5xl md:text-6xl lg:text-[72px] xl:text-[88px] leading-none uppercase">
         ATHLETICO
         <div className="mt-4 lg:mt-10" />
         GRADUATES
@@ -173,7 +173,7 @@ function TitleSection() {
 function PlayerProfile({ graduate }: { graduate: Graduate }) {
   return (
     <div className="flex items-center gap-4">
-      <div className="relative w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-full overflow-hidden flex-shrink-0 ring-2 ring-[#3050FD]/20">
+      <div className="relative w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-full overflow-hidden flex-shrink-0 ring-2 ring-[#0B3E80]/20">
         <Image
           src={graduate.profileImage}
           alt={graduate.name}
@@ -183,10 +183,10 @@ function PlayerProfile({ graduate }: { graduate: Graduate }) {
         />
       </div>
       <div>
-        <p className="text-[#171717] text-lg sm:text-xl md:text-2xl font-bold uppercase leading-tight">
+        <p className="text-[#0B3E80] text-lg sm:text-xl md:text-2xl font-bold uppercase leading-tight">
           {graduate.name}
         </p>
-        <p className="text-[#171717]/60 text-xs sm:text-sm md:text-base font-medium uppercase tracking-wide">
+        <p className="text-[#0B3E80]/60 text-xs sm:text-sm md:text-base font-medium uppercase tracking-wide">
           {graduate.position}
         </p>
       </div>
@@ -198,10 +198,10 @@ function PlayerProfile({ graduate }: { graduate: Graduate }) {
 function PlayerAdvice({ advice }: { advice: string }) {
   return (
     <div className="pt-2 max-w-md">
-      <p className="text-[#171717]/50 text-[10px] md:text-xs font-semibold uppercase tracking-wide mb-2">
+      <p className="text-[#0B3E80]/50 text-[10px] md:text-xs font-semibold uppercase tracking-wide mb-2">
         ADVICE TO YOUNG PLAYERS
       </p>
-      <p className="text-[#171717]/70 text-sm md:text-base italic leading-relaxed">
+      <p className="text-[#0B3E80]/70 text-sm md:text-base italic leading-relaxed">
         &ldquo;{advice}&rdquo;
       </p>
     </div>
@@ -212,7 +212,7 @@ function PlayerAdvice({ advice }: { advice: string }) {
 function NextUpLabel() {
   return (
     <div className="mb-1">
-      <p className="text-[#171717] text-xs md:text-sm font-bold uppercase tracking-wider">
+      <p className="text-[#0B3E80] text-xs md:text-sm font-bold uppercase tracking-wider">
         NEXT UP
       </p>
     </div>

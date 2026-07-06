@@ -28,7 +28,7 @@ export default function Navbar() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden text-white hover:text-[#3050FD] transition-colors"
+            className="md:hidden text-white hover:text-[#2B87C8] transition-colors"
             aria-label="Toggle menu"
             aria-expanded={isOpen}
           >
@@ -55,7 +55,7 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`text-black text-sm lg:text-base uppercase transition-all hover:text-[#3050FD] ${
+                className={`text-black text-sm lg:text-base uppercase transition-all hover:text-[#2B87C8] ${
                   isActive(link.href) ? "font-bold" : "font-normal"
                 }`}
               >
@@ -80,7 +80,7 @@ export default function Navbar() {
             <Link
               key={link.href}
               href={link.href}
-              className={`text-black text-base uppercase transition-colors hover:text-[#3050FD] ${
+              className={`text-black text-base uppercase transition-colors hover:text-[#2B87C8] ${
                 isActive(link.href) ? "font-bold" : "font-normal"
               }`}
               onClick={() => setIsOpen(false)}

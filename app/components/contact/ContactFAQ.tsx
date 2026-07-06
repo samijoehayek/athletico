@@ -84,11 +84,11 @@ export default function ContactFAQ() {
   };
 
   return (
-    <section className="w-full bg-white py-12 md:py-18 lg:py-24 px-6 md:px-10 lg:px-16">
+    <section className="w-full bg-[#F1EAEA] py-12 md:py-18 lg:py-24 px-6 md:px-10 lg:px-16">
       <div className="max-w-7xl mx-auto">
         {/* Section Heading */}
         <div className="mb-10">
-          <h2 className="text-[#171717] font-extrabold uppercase leading-tight text-2xl md:text-3xl lg:text-[32px]">
+          <h2 className="text-[#0B3E80] font-extrabold uppercase leading-tight text-2xl md:text-3xl lg:text-[32px]">
             FREQUENTLY
             <br />
             ASKED QUESTIONS
@@ -107,10 +107,10 @@ export default function ContactFAQ() {
                     onClick={() => toggleFAQ(index)}
                     className="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-gray-50 transition-colors"
                   >
-                    <span className="text-[#171717] text-base font-semibold pr-4">
+                    <span className="text-[#0B3E80] text-base font-semibold pr-4">
                       {faq.question}
                     </span>
-                    <span className="text-[#171717] text-xl flex-shrink-0">
+                    <span className="text-[#0B3E80] text-xl flex-shrink-0">
                       {openIndex === index ? "−" : "+"}
                     </span>
                   </button>
@@ -118,7 +118,7 @@ export default function ContactFAQ() {
                   {/* Answer */}
                   {openIndex === index && (
                     <div className="px-5 pb-4">
-                      <p className="text-[#171717]/70 text-sm leading-relaxed whitespace-pre-line">
+                      <p className="text-[#0B3E80]/70 text-sm leading-relaxed whitespace-pre-line">
                         {faq.answer}
                       </p>
                     </div>
@@ -132,13 +132,13 @@ export default function ContactFAQ() {
           <div className="lg:col-span-3">
             <div className="bg-white border border-[#e0e0e0] p-6 h-full flex flex-col">
               {/* Icon Placeholder */}
-              <div className="w-12 h-12 bg-[#3050FD]/10 rounded flex items-center justify-center mb-4">
+              <div className="w-12 h-12 bg-[#0B3E80]/10 rounded flex items-center justify-center mb-4">
                 <svg
                   width="24"
                   height="24"
                   viewBox="0 0 24 24"
                   fill="none"
-                  stroke="#3050FD"
+                  stroke="#0B3E80"
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -148,19 +148,19 @@ export default function ContactFAQ() {
               </div>
 
               {/* Title */}
-              <h3 className="text-[#171717] text-lg font-bold mb-2">
+              <h3 className="text-[#0B3E80] text-lg font-bold mb-2">
                 Do you have more questions?
               </h3>
 
               {/* Subtitle */}
-              <p className="text-[#171717]/60 text-sm mb-6 flex-grow">
+              <p className="text-[#0B3E80]/60 text-sm mb-6 flex-grow">
                 Meet the right platform to help realize.
               </p>
 
               {/* CTA Button */}
               <a
                 href="mailto:OPERATION@ATHLETICO.COM"
-                className="w-full bg-[#3050FD] hover:bg-[#2040dd] text-white font-semibold text-center py-3 rounded transition-colors"
+                className="w-full bg-[#0B3E80] hover:bg-[#092f5f] text-white font-semibold text-center py-3 rounded transition-colors"
               >
                 Shoot a Direct Mail
               </a>

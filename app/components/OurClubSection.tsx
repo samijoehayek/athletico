@@ -33,7 +33,7 @@ export default function OurClubSection() {
   ];
 
   return (
-    <section className="bg-[#171717] w-full px-6 md:px-12 lg:px-16 py-16 md:py-20 lg:py-24">
+    <section className="bg-[#0B3E80] w-full px-6 md:px-12 lg:px-16 py-16 md:py-20 lg:py-24">
       <div className="max-w-screen-2xl mx-auto">
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 xl:gap-24">
           {/* Left Column - Title and Images */}

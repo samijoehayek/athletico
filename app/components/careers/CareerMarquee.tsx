@@ -33,7 +33,7 @@ export default function CareerMarquee() {
   return (
     <section
       ref={marqueeRef}
-      className="w-full bg-white py-12 sm:py-16 md:py-24 overflow-hidden"
+      className="w-full bg-[#F1EAEA] py-12 sm:py-16 md:py-24 overflow-hidden"
     >
       <div
         ref={textRef}
@@ -45,7 +45,7 @@ export default function CareerMarquee() {
             key={index}
             className="font-extrabold uppercase font-outfit mx-6 sm:mx-8 text-3xl sm:text-4xl md:text-5xl lg:text-[80px] xl:text-[120px]"
             style={{
-              background: "linear-gradient(90deg, #3050FD 0%, #7B08FF 100%)",
+              background: "linear-gradient(90deg, #2B87C8 0%, #0B3E80 100%)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               backgroundClip: "text",

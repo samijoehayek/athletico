@@ -18,9 +18,9 @@ export default function PartnersSection() {
   const duplicatedLogos = [...logos, ...logos];
 
   return (
-    <section className="w-full bg-white flex flex-col items-center justify-center py-12 md:py-16 lg:py-20 overflow-hidden">
+    <section className="w-full bg-[#F1EAEA] flex flex-col items-center justify-center py-12 md:py-16 lg:py-20 overflow-hidden">
       {/* Title */}
-      <h2 className="text-3xl sm:text-4xl lg:text-[50px] font-bold text-[#171717] uppercase mb-8 md:mb-10 font-outfit text-center px-6">
+      <h2 className="text-3xl sm:text-4xl lg:text-[50px] font-bold text-[#0B3E80] uppercase mb-8 md:mb-10 font-outfit text-center px-6">
         OUR PARTNERS
       </h2>
 

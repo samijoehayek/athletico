@@ -101,10 +101,10 @@ export default function LocateUs() {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
-          <p className="text-[#171717]/60 text-sm font-semibold uppercase tracking-wide mb-1">
+          <p className="text-[#0B3E80]/60 text-sm font-semibold uppercase tracking-wide mb-1">
             10 BRANCHES
           </p>
-          <h2 className="text-[#171717] text-3xl font-extrabold uppercase">
+          <h2 className="text-[#0B3E80] text-3xl font-extrabold uppercase">
             LOCATE US
           </h2>
         </div>
@@ -130,22 +130,22 @@ export default function LocateUs() {
                           <p
                             className={`text-base font-semibold mb-1 transition-colors ${
                               isSelected
-                                ? "text-[#3050FD]"
-                                : "text-[#171717] group-hover:text-[#3050FD]"
+                                ? "text-[#0B3E80]"
+                                : "text-[#0B3E80] group-hover:text-[#0B3E80]"
                             }`}
                           >
                             {branch.name}
                           </p>
                           <a
                             href={`tel:${branch.phone.replace(/\s/g, "")}`}
-                            className="text-[#171717]/60 text-sm hover:text-[#3050FD] transition-colors"
+                            className="text-[#0B3E80]/60 text-sm hover:text-[#0B3E80] transition-colors"
                             onClick={(e) => e.stopPropagation()}
                           >
                             {branch.phone}
                           </a>
                         </div>
                         <div
-                          className={`flex-shrink-0 text-[#3050FD] transition-opacity ${
+                          className={`flex-shrink-0 text-[#0B3E80] transition-opacity ${
                             isSelected
                               ? "opacity-100"
                               : "opacity-0 group-hover:opacity-100"
@@ -186,7 +186,7 @@ export default function LocateUs() {
         <div className="mt-10 flex flex-wrap gap-6 md:gap-10">
           <div className="flex items-center gap-2">
             <ClockIcon />
-            <p className="text-[#171717] text-sm">
+            <p className="text-[#0B3E80] text-sm">
               Administrative opening hours{" "}
               <span className="font-bold">4PM to 8PM</span>
             </p>
@@ -195,7 +195,7 @@ export default function LocateUs() {
             <EmailIcon />
             <a
               href="mailto:OPERATION@ATHLETICO.COM"
-              className="text-[#171717] text-sm font-bold hover:text-[#3050FD] transition-colors"
+              className="text-[#0B3E80] text-sm font-bold hover:text-[#0B3E80] transition-colors"
             >
               OPERATION@ATHLETICO.COM
             </a>
@@ -214,7 +214,7 @@ function ClockIcon() {
       height="16"
       viewBox="0 0 24 24"
       fill="none"
-      stroke="#171717"
+      stroke="#0B3E80"
       strokeWidth="2"
     >
       <circle cx="12" cy="12" r="10" />
@@ -230,7 +230,7 @@ function EmailIcon() {
       height="16"
       viewBox="0 0 24 24"
       fill="none"
-      stroke="#171717"
+      stroke="#0B3E80"
       strokeWidth="2"
     >
       <rect width="20" height="16" x="2" y="4" />

@@ -82,11 +82,11 @@ export default function MustSeeMomentsSection() {
   const visibleMoments = getVisibleMoments(currentIndex);
 
   return (
-    <section className="w-full bg-white px-4 sm:px-6 lg:px-12 xl:px-20 2xl:px-28 pt-10 md:pt-14 lg:pt-16 pb-16 md:pb-20">
+    <section className="w-full bg-[#F1EAEA] px-4 sm:px-6 lg:px-12 xl:px-20 2xl:px-28 pt-10 md:pt-14 lg:pt-16 pb-16 md:pb-20">
       <div className="w-full max-w-[1440px] mx-auto flex flex-col">
         {/* Header - Title and Navigation */}
         <div className="flex items-center justify-between gap-4">
-          <h2 className="text-2xl sm:text-3xl md:text-[40px] lg:text-[50px] font-bold text-[#171717] uppercase font-outfit tracking-tight">
+          <h2 className="text-2xl sm:text-3xl md:text-[40px] lg:text-[50px] font-bold text-[#0B3E80] uppercase font-outfit tracking-tight">
             MUST - SEE MOMENTS
           </h2>
 
@@ -94,7 +94,7 @@ export default function MustSeeMomentsSection() {
           <div className="flex gap-3 sm:gap-4">
             <button
               onClick={handlePrevious}
-              className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-full border-2 border-[#171717] flex items-center justify-center hover:bg-[#171717] hover:text-white transition-colors duration-300"
+              className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-full border-2 border-[#0B3E80] flex items-center justify-center hover:bg-[#0B3E80] hover:text-white transition-colors duration-300"
               aria-label="Previous"
             >
               <svg
@@ -112,7 +112,7 @@ export default function MustSeeMomentsSection() {
             </button>
             <button
               onClick={handleNext}
-              className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-full border-2 border-[#171717] flex items-center justify-center hover:bg-[#171717] hover:text-white transition-colors duration-300"
+              className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-full border-2 border-[#0B3E80] flex items-center justify-center hover:bg-[#0B3E80] hover:text-white transition-colors duration-300"
               aria-label="Next"
             >
               <svg
@@ -191,17 +191,17 @@ function MomentCard({ moment }: { moment: Moment }) {
       </div>
 
       {/* Date */}
-      <p className="text-xs sm:text-sm md:text-[16px] font-normal text-[#171717] opacity-60 mb-1 uppercase tracking-wide">
+      <p className="text-xs sm:text-sm md:text-[16px] font-normal text-[#0B3E80] opacity-60 mb-1 uppercase tracking-wide">
         {moment.date}
       </p>
 
       {/* Title */}
-      <h3 className="text-lg sm:text-xl md:text-[22px] lg:text-[24px] font-bold text-[#171717] mb-2 uppercase">
+      <h3 className="text-lg sm:text-xl md:text-[22px] lg:text-[24px] font-bold text-[#0B3E80] mb-2 uppercase">
         {moment.title}
       </h3>
 
       {/* Description with 2–3 line clamp */}
-      <p className="text-[15px] sm:text-[16px] md:text-[18px] text-[#171717] leading-relaxed line-clamp-3">
+      <p className="text-[15px] sm:text-[16px] md:text-[18px] text-[#0B3E80] leading-relaxed line-clamp-3">
         {moment.description}
       </p>
     </article>

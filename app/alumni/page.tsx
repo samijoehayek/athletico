@@ -16,13 +16,13 @@ interface Alumni {
 
 export default function AlumniPage() {
   return (
-    <main className="bg-[#171717] min-h-screen relative overflow-hidden">
+    <main className="bg-[#0B3E80] min-h-screen relative overflow-hidden">
       {/* Purple/Blue Glow - Top Right */}
       <div
         className="absolute top-0 right-0 w-[600px] h-[600px] md:w-[800px] md:h-[800px] lg:w-[1000px] lg:h-[1000px] pointer-events-none"
         style={{
           background:
-            "radial-gradient(circle at center, rgba(168, 97, 249, 0.3) 0%, rgba(48, 80, 253, 0.2) 40%, transparent 70%)",
+            "radial-gradient(circle at center, rgba(43, 135, 200, 0.30) 0%, rgba(11, 62, 128, 0.25) 40%, transparent 70%)",
           filter: "blur(80px)",
           transform: "translate(30%, -30%)",
         }}
@@ -272,7 +272,7 @@ function AlumniSection() {
           <h2
             className="font-extrabold text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[90px] uppercase leading-none"
             style={{
-              background: "linear-gradient(90deg, #3050FD 0%, #A861F9 100%)",
+              background: "linear-gradient(90deg, #2B87C8 0%, #FFE400 100%)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               backgroundClip: "text",
@@ -295,7 +295,7 @@ function AlumniSection() {
                     className={`whitespace-nowrap text-sm font-medium transition-colors duration-300 ${
                       index === activeIndex
                         ? "text-white"
-                        : "text-[#3B3B3B] hover:text-white/50"
+                        : "text-white/40 hover:text-white/50"
                     }`}
                   >
                     {alumni.name}
@@ -303,9 +303,9 @@ function AlumniSection() {
                 ))}
               </div>
               {/* Horizontal Progress Line */}
-              <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#3B3B3B]">
+              <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-white/20">
                 <div
-                  className="h-full bg-[#3050FD] transition-all duration-300"
+                  className="h-full bg-[#2B87C8] transition-all duration-300"
                   style={{
                     width: `${indicatorHeight}%`,
                     marginLeft: `${indicatorTop}%`,
@@ -346,7 +346,7 @@ function AlumniSection() {
                     className={`text-left text-base lg:text-lg font-medium transition-colors duration-300 ${
                       index === activeIndex
                         ? "text-white"
-                        : "text-[#3B3B3B] hover:text-white/50"
+                        : "text-white/40 hover:text-white/50"
                     }`}
                   >
                     {alumni.name}
@@ -357,10 +357,10 @@ function AlumniSection() {
               {/* Vertical Progress Line - Draggable */}
               <div
                 ref={progressBarRef}
-                className="relative w-[2px] bg-[#3B3B3B] ml-4 h-[500px] cursor-grab active:cursor-grabbing"
+                className="relative w-[2px] bg-white/20 ml-4 h-[500px] cursor-grab active:cursor-grabbing"
               >
                 <div
-                  className="absolute left-0 w-full bg-[#3050FD] transition-all duration-150"
+                  className="absolute left-0 w-full bg-[#2B87C8] transition-all duration-150"
                   style={{
                     height: `${indicatorHeight}%`,
                     top: `${indicatorTop}%`,
@@ -459,13 +459,13 @@ function AlumniContent({ alumni }: { alumni: Alumni }) {
 
         {/* Advice to Young Athletes - Highlighted Quote */}
         {advice && (
-          <div className="relative mb-8 border-l-4 border-[#3050FD] bg-white/[0.04] rounded-r-lg pl-6 pr-5 py-5 md:pl-8 md:pr-6 md:py-6">
+          <div className="relative mb-8 border-l-4 border-[#2B87C8] bg-white/[0.04] rounded-r-lg pl-6 pr-5 py-5 md:pl-8 md:pr-6 md:py-6">
             {/* Quote mark */}
             <span
               aria-hidden="true"
               className="absolute top-2 right-4 text-5xl md:text-6xl leading-none font-serif select-none"
               style={{
-                background: "linear-gradient(90deg, #3050FD 0%, #A861F9 100%)",
+                background: "linear-gradient(90deg, #2B87C8 0%, #FFE400 100%)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
@@ -473,7 +473,7 @@ function AlumniContent({ alumni }: { alumni: Alumni }) {
             >
               &rdquo;
             </span>
-            <p className="text-[#3050FD] text-[11px] md:text-xs font-semibold uppercase tracking-widest mb-2">
+            <p className="text-[#2B87C8] text-[11px] md:text-xs font-semibold uppercase tracking-widest mb-2">
               Advice to Young Athletes
             </p>
             <p className="text-white font-semibold italic text-base md:text-lg lg:text-xl leading-relaxed pr-8">

@@ -31,7 +31,7 @@ export default function Footer() {
   const repeatedSlogan = slogan.repeat(10);
 
   return (
-    <footer className="w-full bg-[#3050FD] flex flex-col font-outfit">
+    <footer className="w-full bg-[#0B3E80] flex flex-col font-outfit">
       {/* PART 1: WhatsApp Section */}
       {/* <div className="w-full px-4 sm:px-6 lg:px-16 xl:px-24 py-10 md:py-16 lg:py-20 flex flex-col justify-center">
         <h2 className="text-white text-3xl sm:text-4xl md:text-[40px] lg:text-[50px] font-extrabold leading-tight mb-3">
@@ -107,7 +107,7 @@ export default function Footer() {
         </div>
 
         {/* PART 3: Infinite Scrolling Slogan Banner */}
-        <div className="overflow-hidden bg-[#3050FD] py-4 sm:py-6 md:py-8">
+        <div className="overflow-hidden bg-[#FFE400] py-4 sm:py-6 md:py-8">
           <motion.div
             className="flex whitespace-nowrap"
             animate={{ x: [0, "-400%"] }}
@@ -120,7 +120,7 @@ export default function Footer() {
               },
             }}
           >
-            <span className="text-white font-bold uppercase text-4xl sm:text-5xl md:text-6xl lg:text-[140px] xl:text-[190px] leading-none">
+            <span className="text-[#0B3E80] font-bold uppercase text-4xl sm:text-5xl md:text-6xl lg:text-[140px] xl:text-[190px] leading-none">
               {repeatedSlogan}
             </span>
           </motion.div>
