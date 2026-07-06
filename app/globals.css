@@ -8,6 +8,22 @@
   --font-weight-bold: 700;
   --font-weight-extrabold: 800;
   --font-weight-black: 900;
+
+  /* Athletico brand palette */
+  --color-brand-white: #f1eaea;
+  --color-brand-yellow: #ffe400;
+  --color-brand-blue: #2b87c8;
+  --color-brand-navy: #0b3e80;
+
+  /* Brand display font (QB One Bold) */
+  --font-qb: var(--qb-one-font), var(--font-outfit), sans-serif;
+}
+
+/* Brand display font on headings, brand off-white as the page base */
+h1,
+h2,
+h3 {
+  font-family: var(--qb-one-font), var(--font-outfit), sans-serif;
 }
 
 @keyframes fadeInUp {
