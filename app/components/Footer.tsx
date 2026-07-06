@@ -107,7 +107,7 @@ export default function Footer() {
         </div>
 
         {/* PART 3: Infinite Scrolling Slogan Banner */}
-        <div className="overflow-hidden bg-[#FFE400] py-4 sm:py-6 md:py-8">
+        <div className="overflow-hidden bg-[#0B3E80] py-4 sm:py-6 md:py-8">
           <motion.div
             className="flex whitespace-nowrap"
             animate={{ x: [0, "-400%"] }}
@@ -120,7 +120,7 @@ export default function Footer() {
               },
             }}
           >
-            <span className="text-[#0B3E80] font-bold uppercase text-4xl sm:text-5xl md:text-6xl lg:text-[140px] xl:text-[190px] leading-none">
+            <span className="text-[#F1EAEA] font-bold uppercase text-4xl sm:text-5xl md:text-6xl lg:text-[140px] xl:text-[190px] leading-none">
               {repeatedSlogan}
             </span>
           </motion.div>
