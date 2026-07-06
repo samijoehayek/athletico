@@ -33,7 +33,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${outfit.variable} ${qbOne.variable} ${outfit.className}`}>
+      <body className={`${outfit.variable} ${qbOne.variable} antialiased`}>
         {children}
         <FloatingWhatsAppButton />
       </body>

@@ -19,11 +19,28 @@
   --font-qb: var(--qb-one-font), var(--font-outfit), sans-serif;
 }
 
-/* Brand display font on headings, brand off-white as the page base */
+/* QB One Bold is the brand font — use it everywhere by default,
+   and fall back to the brand off-white as the page base. */
+body {
+  font-family: var(--qb-one-font), var(--font-outfit), sans-serif;
+  background-color: #f1eaea;
+}
+
+/* Titles and display type in the brand font */
 h1,
 h2,
-h3 {
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--qb-one-font), var(--font-outfit), sans-serif;
+}
+
+/* Body copy stays on Outfit for readability (lighter than the bold display
+   font), which also gives the title/subtitle weight contrast. */
+p,
+li {
+  font-family: var(--font-outfit), sans-serif;
 }
 
 @keyframes fadeInUp {
