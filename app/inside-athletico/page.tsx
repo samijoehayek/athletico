@@ -54,42 +54,40 @@ const CLUB_VALUES: ClubValue[] = [
   {
     number: "01",
     title: "Sportsmanship",
-    description: "Respect for the game, our opponents, and ourselves.",
+    description: "We play fair, respect all, and honor the game.",
   },
   {
     number: "02",
     title: "Teamwork",
-    description: "Winning together and growing as one unit.",
+    description: "We rise and fall together, as one.",
   },
   {
     number: "03",
     title: "Discipline",
-    description: "Consistency and commitment in every session.",
+    description:
+      "We train the mind and body, making choices that shape champions.",
   },
   {
     number: "04",
-    title: "Integrity",
-    description: "Doing what is right, on and off the pitch.",
+    title: "Community",
+    description:
+      "We build a lasting sense of belonging in a safe, apolitical environment, free from any political or religious intervention or influence.",
   },
   {
     number: "05",
     title: "Professionalism",
-    description: "World-class standards at every level of play.",
+    description: "We live as champions, on and off the field.",
   },
   {
     number: "06",
-    title: "Community",
-    description: "Building bonds that reach beyond the field.",
+    title: "Education",
+    description:
+      "We place studies first, knowing strong minds build strong players.",
   },
   {
     number: "07",
-    title: "Education",
-    description: "Developing sharp minds alongside athletes.",
-  },
-  {
-    number: "08",
-    title: "Independence",
-    description: "Empowering players to lead their own journey.",
+    title: "Integrity",
+    description: "We live as champions, on and off the field.",
   },
 ];
 
@@ -209,17 +207,13 @@ function OurMissionVisionSection() {
 
             {/* Paragraph */}
             <p className="text-white/80 text-sm md:text-base lg:text-lg leading-relaxed">
-              Athletico&apos;s mission is rooted in the belief that a football
-              club is one of the most powerful environments for shaping young
-              people. Every drill, every match, every conversation between a
-              coach and a player is an opportunity to build not just technique,
-              but character.
+              To set the standard for excellence &ndash; developing top-level
+              athletes with world-class discipline and heart, while
+              revolutionizing football in Lebanon.
             </p>
             <p className="text-white/80 text-sm md:text-base lg:text-lg leading-relaxed mt-5 md:mt-6">
-              Through our partnership with Olympique Lyonnais and our French
-              Technical Director, we bring elite European methodology to every
-              branch across Lebanon, making world-class development accessible
-              to every child who walks through our doors.
+              To build a club where every child can live their passion &ndash;
+              in a safe, inspiring, and high-performance environment.
             </p>
           </div>
         </div>
@@ -254,9 +248,8 @@ function OurVisionSection() {
           <div className="lg:w-[55%] flex flex-col justify-end">
             <blockquote className="border-l-2 border-[#0B3E80] pl-6 md:pl-8">
               <p className="text-[#0B3E80] font-medium italic text-xl sm:text-2xl md:text-3xl lg:text-[34px] leading-snug tracking-tight">
-                &ldquo;To be the defining football academy of the Middle East,
-                a place where Lebanese talent is discovered, developed, and
-                celebrated on the world stage.&rdquo;
+                &ldquo;Inspiring generations by setting the highest standards in
+                sports.&rdquo;
               </p>
             </blockquote>
           </div>
