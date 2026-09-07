@@ -7,10 +7,12 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
 interface Achievement {
-  title: string;
+  /** Squad birth year(s), e.g. "2012" or "2002-2003". */
+  team: string;
   ageCategory: string;
   season: string;
   tournament: string;
+  ranking: string;
   image: string;
 }
 
@@ -94,77 +96,199 @@ function HeroSection() {
 
 // ==================== ACHIEVEMENTS SLIDER SECTION ====================
 function AchievementsSliderSection() {
+  // Trophy cabinet, newest season first. Mirrors the club's official record;
+  // two rows in a season with the same squad mean an A and a B team both placed.
   const achievements: Achievement[] = [
     {
-      title: "ATHLETICO MATEN 2013",
+      team: "2012",
+      ageCategory: "U14",
+      season: "2025/26",
+      tournament: "Official Youth Lebanese League",
+      ranking: "1st Place",
+      image: "/logonew.png",
+    },
+    {
+      team: "2009",
+      ageCategory: "U17",
+      season: "2025/26",
+      tournament: "Official Youth Lebanese League",
+      ranking: "2nd Place",
+      image: "/logonew.png",
+    },
+    {
+      team: "2014",
       ageCategory: "U12",
-      season: "2024-2025",
-      tournament: "PROMISING",
+      season: "2025/26",
+      tournament: "Official Lebanese Grassroots League",
+      ranking: "1st Place",
       image: "/logonew.png",
     },
     {
-      title: "ATHLETICO 2011",
+      team: "2014",
       ageCategory: "U12",
-      season: "22/23",
-      tournament: "PROMISING",
+      season: "2025/26",
+      tournament: "Official Lebanese Grassroots League",
+      ranking: "2nd Place",
       image: "/logonew.png",
     },
     {
-      title: "ATHLETICO 2012",
-      ageCategory: "U11",
-      season: "23/24",
-      tournament: "PROMISING",
-      image: "/logonew.png",
-    },
-    {
-      title: "ATHLETICO 2010",
+      team: "2013",
       ageCategory: "U13",
-      season: "2023/2024",
-      tournament: "LEBANESE LEAGUE U13",
+      season: "2025/26",
+      tournament: "Official Lebanese Grassroots League",
+      ranking: "2nd Place",
       image: "/logonew.png",
     },
     {
-      title: "MOUNT LEBANON CHAMPIONS",
+      team: "2008",
+      ageCategory: "U17",
+      season: "2024/25",
+      tournament: "Official Youth Lebanese League",
+      ranking: "1st Place",
+      image: "/logonew.png",
+    },
+    {
+      team: "2010",
+      ageCategory: "U15",
+      season: "2024/25",
+      tournament: "Official Youth Lebanese League",
+      ranking: "2nd Place",
+      image: "/logonew.png",
+    },
+    {
+      team: "2013",
+      ageCategory: "U12",
+      season: "2024/25",
+      tournament: "Official Lebanese Grassroots League",
+      ranking: "1st Place",
+      image: "/logonew.png",
+    },
+    {
+      team: "2013",
+      ageCategory: "U12",
+      season: "2024/25",
+      tournament: "Official Lebanese Grassroots League",
+      ranking: "2nd Place",
+      image: "/logonew.png",
+    },
+    {
+      team: "2010",
+      ageCategory: "U14",
+      season: "2023/24",
+      tournament: "Official Youth Lebanese League",
+      ranking: "1st Place",
+      image: "/logonew.png",
+    },
+    {
+      team: "2008",
+      ageCategory: "U16",
+      season: "2023/24",
+      tournament: "Official Youth Lebanese League",
+      ranking: "1st Place",
+      image: "/logonew.png",
+    },
+    {
+      team: "2007",
+      ageCategory: "U17",
+      season: "2023/24",
+      tournament: "Official Youth Lebanese League",
+      ranking: "1st Place",
+      image: "/logonew.png",
+    },
+    {
+      team: "2012",
+      ageCategory: "U12",
+      season: "2023/24",
+      tournament: "Official Lebanese Grassroots League",
+      ranking: "1st Place",
+      image: "/logonew.png",
+    },
+    {
+      team: "2008",
+      ageCategory: "U15",
+      season: "2022/23",
+      tournament: "Official Youth Lebanese League",
+      ranking: "2nd Place",
+      image: "/logonew.png",
+    },
+    {
+      team: "2007",
       ageCategory: "U16",
       season: "2022/23",
-      tournament: "ATHLETICO 2007",
+      tournament: "Official Youth Lebanese League",
+      ranking: "2nd Place",
       image: "/logonew.png",
     },
     {
-      title: "LEBANESE LEAGUE CHAMPIONS",
-      ageCategory: "U16",
-      season: "2023/24",
-      tournament: "ATHLETICO 2007",
+      team: "2011",
+      ageCategory: "U12",
+      season: "2022/23",
+      tournament: "Official Lebanese Grassroots League",
+      ranking: "1st Place",
       image: "/logonew.png",
     },
     {
-      title: "MOUNT LEBANON CHAMPIONS",
-      ageCategory: "U16",
-      season: "2023/24",
-      tournament: "ATHLETICO 2007",
+      team: "2010",
+      ageCategory: "U13",
+      season: "2022/23",
+      tournament: "Official Lebanese Grassroots League",
+      ranking: "1st Place",
       image: "/logonew.png",
     },
     {
-      title: "ATHLETICO SENIOR TEAM",
-      ageCategory: "SENIOR",
-      season: "2023/2024",
-      tournament: "LEBANESE LEAGUE DIV.5 CHAMPIONS • PROMOTION TO 3RD DIVISION",
+      team: "2006",
+      ageCategory: "U13",
+      season: "2019/20",
+      tournament: "Official Lebanese Cup",
+      ranking: "1st Place",
+      image: "/logonew.png",
+    },
+    {
+      team: "2008",
+      ageCategory: "U10",
+      season: "2018/19",
+      tournament: "Official Lebanese Cup",
+      ranking: "1st Place",
+      image: "/logonew.png",
+    },
+    {
+      team: "2002-2003",
+      ageCategory: "U17",
+      season: "2018/19",
+      tournament: "Official Youth Lebanese League",
+      ranking: "2nd Place",
+      image: "/logonew.png",
+    },
+    {
+      team: "2009",
+      ageCategory: "U10",
+      season: "2018/19",
+      tournament: "Official Lebanese Grassroots League",
+      ranking: "1st Place",
+      image: "/logonew.png",
+    },
+    {
+      team: "1996-1997",
+      ageCategory: "U15",
+      season: "2010/11",
+      tournament: "Official Youth Lebanese League",
+      ranking: "1st Place",
       image: "/logonew.png",
     },
   ];
 
-  const withYear = achievements.map((a) => ({
-    ...a,
-    year: normalizeSeason(a.season),
-  }));
+  // Newest season first, so the slider opens on the most recent silverware.
+  const withYear = achievements
+    .map((a) => ({ ...a, year: normalizeSeason(a.season) }))
+    .sort((a, b) => b.year.sort - a.year.sort);
 
-  // Unique year labels, sorted chronologically, for the year navigation.
-  const years = Array.from(new Set(withYear.map((a) => a.year.label)))
-    .map((label) => ({
+  // Unique year labels, most recent first, for the year navigation.
+  const years = Array.from(new Set(withYear.map((a) => a.year.label))).map(
+    (label) => ({
       label,
       sort: withYear.find((a) => a.year.label === label)!.year.sort,
-    }))
-    .sort((a, b) => a.sort - b.sort);
+    }),
+  );
 
   const total = withYear.length;
   const [index, setIndex] = useState(0);
@@ -243,7 +367,7 @@ function AchievementsSliderSection() {
             </svg>
           </button>
 
-          <div className="min-h-[440px] md:min-h-[420px] flex items-center justify-center overflow-hidden">
+          <div className="min-h-[520px] md:min-h-[480px] flex items-center justify-center overflow-hidden">
             <AnimatePresence mode="wait" custom={direction}>
               <motion.div
                 key={index}
@@ -257,25 +381,29 @@ function AchievementsSliderSection() {
               >
                 {/* Logo + Title */}
                 <div className="flex flex-col items-center gap-6 flex-shrink-0">
-                  <div className="relative w-[240px] h-[240px] sm:w-[280px] sm:h-[280px] lg:w-[320px] lg:h-[320px] rounded-full overflow-hidden bg-white border-4 border-[#0B3E80] flex items-center justify-center">
+                  <div className="relative w-[240px] h-[240px] sm:w-[280px] sm:h-[280px] lg:w-[320px] lg:h-[320px]">
                     <Image
                       src={active.image}
-                      alt={active.title}
+                      alt={`Athletico ${active.team}`}
                       fill
-                      className="object-contain p-10"
+                      className="object-contain"
                       sizes="320px"
                     />
                   </div>
                   <h3 className="text-white font-extrabold text-xl lg:text-2xl uppercase leading-tight text-center max-w-[320px]">
-                    {active.title}
+                    ATHLETICO {active.team}
                   </h3>
                 </div>
 
                 {/* Stats */}
                 <div className="flex flex-col gap-5 md:gap-6 w-full max-w-[340px]">
-                  <Stat label="AGE CATEGORY" value={active.ageCategory} />
+                  <Stat
+                    label="AGE CATEGORY"
+                    value={`${active.ageCategory} (${active.team})`}
+                  />
                   <Stat label="SEASON" value={active.year.label} />
-                  <Stat label="TOURNAMENT" value={active.tournament} last />
+                  <Stat label="TOURNAMENT" value={active.tournament} />
+                  <Stat label="RANKING" value={active.ranking} highlight last />
                 </div>
               </motion.div>
             </AnimatePresence>
@@ -296,7 +424,7 @@ function AchievementsSliderSection() {
           </button>
 
           {/* Dots */}
-          <div className="flex gap-2">
+          <div className="flex flex-wrap justify-center gap-2 max-w-[520px]">
             {withYear.map((a, i) => (
               <button
                 key={i}
@@ -335,14 +463,20 @@ function Stat({
   label,
   value,
   last = false,
+  highlight = false,
 }: {
   label: string;
   value: string;
   last?: boolean;
+  highlight?: boolean;
 }) {
   return (
     <div className={last ? "" : "border-b border-white/15 pb-5"}>
-      <p className="text-white font-bold text-lg md:text-xl lg:text-2xl uppercase leading-tight">
+      <p
+        className={`font-bold text-lg md:text-xl lg:text-2xl uppercase leading-tight ${
+          highlight ? "text-[#FFE400]" : "text-white"
+        }`}
+      >
         {value}
       </p>
       <p className="text-white/50 text-xs md:text-sm uppercase tracking-wide mt-1">

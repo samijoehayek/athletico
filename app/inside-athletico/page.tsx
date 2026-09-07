@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "framer-motion";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -154,7 +153,9 @@ function ValueCard({ value, index }: { value: ClubValue; index: number }) {
   );
 }
 
-// ==================== OUR MISSION & VISION SECTION ====================
+// ==================== OUR MISSION SECTION ====================
+// Mirrors the Vision section's layout (title left, statement right) so the two
+// read as a matched pair. Deliberately image-free, like Vision and Values.
 function OurMissionVisionSection() {
   return (
     <section
@@ -162,59 +163,32 @@ function OurMissionVisionSection() {
       className="bg-[#0B3E80] w-full px-6 md:px-12 lg:px-16 py-16 md:py-20 lg:py-24"
     >
       <div className="max-w-screen-2xl mx-auto">
-        {/* Section Title */}
-        <h2 className="text-white font-extrabold text-4xl sm:text-5xl md:text-6xl lg:text-[70px] leading-none uppercase mb-12 md:mb-16">
-          OUR
-          <br />
-          MISSION
-        </h2>
-
-        <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 xl:gap-24">
-          {/* Left Column - Two Images */}
-          <div className="w-full lg:w-[55%] flex flex-col">
-            {/* Images Container */}
-            <div className="flex gap-3 md:gap-4 h-[280px] sm:h-[320px] md:h-[380px] lg:h-[420px]">
-              {/* Left Image - Portrait/Vertical (narrower) */}
-              <div className="relative w-[42%] h-full overflow-hidden">
-                <Image
-                  src="/homepage/values.jpg"
-                  alt="Athletico Sports Club Vision"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 45vw, (max-width: 1024px) 30vw, 25vw"
-                />
-              </div>
-
-              {/* Right Image - Landscape/Horizontal (wider) */}
-              <div className="relative w-[58%] h-full overflow-hidden">
-                <Image
-                  src="/homepage/mission.jpg"
-                  alt="Athletico Sports Club Training"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 55vw, (max-width: 1024px) 35vw, 30vw"
-                />
-              </div>
-            </div>
+        <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 xl:gap-24">
+          {/* Left — Title */}
+          <div className="lg:w-[45%]">
+            <p className="text-white/50 text-xs md:text-sm font-semibold uppercase tracking-[0.25em] mb-5 md:mb-7">
+              Athletico Sports Club
+            </p>
+            <h2 className="text-white font-extrabold text-5xl sm:text-6xl md:text-7xl lg:text-[80px] leading-[0.9] uppercase tracking-tight">
+              OUR
+              <br />
+              MISSION
+            </h2>
           </div>
 
-          {/* Right Column - Text Content */}
-          <div className="w-full lg:w-[45%] flex flex-col justify-center">
-            {/* Club Label */}
-            <p className="text-white/50 text-xs md:text-sm font-medium uppercase tracking-widest mb-4 md:mb-6">
-              ATHLETICO SPORTS CLUB
-            </p>
-
-            {/* Paragraph */}
-            <p className="text-white/80 text-sm md:text-base lg:text-lg leading-relaxed">
-              To set the standard for excellence &ndash; developing top-level
-              athletes with world-class discipline and heart, while
-              revolutionizing football in Lebanon.
-            </p>
-            <p className="text-white/80 text-sm md:text-base lg:text-lg leading-relaxed mt-5 md:mt-6">
-              To build a club where every child can live their passion &ndash;
-              in a safe, inspiring, and high-performance environment.
-            </p>
+          {/* Right — Mission Statement */}
+          <div className="lg:w-[55%] flex flex-col justify-end">
+            <blockquote className="border-l-2 border-white/60 pl-6 md:pl-8 space-y-6 md:space-y-8">
+              <p className="text-white font-medium text-xl sm:text-2xl md:text-3xl lg:text-[34px] leading-snug tracking-tight">
+                To set the standard for excellence &ndash; developing top-level
+                athletes with world-class discipline and heart, while
+                revolutionizing football in Lebanon.
+              </p>
+              <p className="text-white font-medium text-xl sm:text-2xl md:text-3xl lg:text-[34px] leading-snug tracking-tight">
+                To build a club where every child can live their passion &ndash;
+                in a safe, inspiring, and high-performance environment.
+              </p>
+            </blockquote>
           </div>
         </div>
       </div>

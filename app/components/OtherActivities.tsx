@@ -22,11 +22,11 @@ export default function OtherActivitiesSection() {
   const activities: Activity[] = [
     {
       name: "TENNIS",
-      image: "/tennis.png",
+      image: "/homepage/tennis.jpg",
     },
     {
       name: "BASKETBALL",
-      image: "/basketball.png",
+      image: "/homepage/basketball.jpg",
     },
     {
       name: "PADEL",
@@ -34,11 +34,11 @@ export default function OtherActivitiesSection() {
     },
     {
       name: "GYM",
-      image: "/gym.png",
+      image: "/homepage/gym.jpg",
     },
     {
       name: "FOOTBALL",
-      image: "/football.png",
+      image: "/homepage/football.jpeg",
     },
   ];
 

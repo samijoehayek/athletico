@@ -33,7 +33,7 @@ export default function Navbar({ mode = "light" }: NavbarProps) {
     { href: "/team", label: "THE CLUB" },
     // { href: "/camps", label: "CAMPS & TRIPS" },
     { href: "/olympique-lyonnais", label: "OL" },
-    { href: "/achievement", label: "ACHIEVEMENT" },
+    { href: "/achievements", label: "ACHIEVEMENTS" },
     { href: "/alumni", label: "ALUMNI" },
     { href: "/contact", label: "JOIN US" },
   ];

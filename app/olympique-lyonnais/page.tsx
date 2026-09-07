@@ -78,27 +78,30 @@ function PartnershipIntroSection() {
             </div>
           </div>
 
-          {/* Right Column - Image and Logo */}
-          <div className="w-full lg:w-[45%] flex flex-col items-center justify-center gap-6">
+          {/* Right Column - Crest over the photo */}
+          <div className="w-full lg:w-[45%] flex flex-col">
+            {/* OL Crest — fills the empty space above the photo */}
+            <div className="flex-1 flex items-center justify-center py-4 lg:py-0">
+              <div className="relative w-[180px] h-[205px] sm:w-[220px] sm:h-[251px] lg:w-[260px] lg:h-[296px]">
+                <Image
+                  src="/ol.png"
+                  alt="Olympique Lyonnais crest"
+                  fill
+                  className="object-contain"
+                  sizes="(max-width: 640px) 180px, (max-width: 1024px) 220px, 260px"
+                  priority
+                />
+              </div>
+            </div>
+
             {/* Partnership Photo */}
-            <div className="relative w-full h-[300px] sm:h-[350px] md:h-[400px] lg:h-[420px] overflow-hidden rounded-lg">
+            <div className="relative w-full h-[300px] sm:h-[350px] md:h-[400px] lg:h-[420px] overflow-hidden rounded-lg mt-6 lg:mt-8">
               <Image
                 src="/Olympique Lyonnais/ol.jpeg"
                 alt="Athletico players at Olympique Lyonnais"
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 45vw"
-              />
-            </div>
-
-            {/* OL Logo */}
-            <div className="relative w-[80px] h-[80px] sm:w-[100px] sm:h-[100px]">
-              <Image
-                src="/ol.png"
-                alt="Olympique Lyonnais Logo"
-                fill
-                className="object-contain"
-                sizes="100px"
               />
             </div>
           </div>

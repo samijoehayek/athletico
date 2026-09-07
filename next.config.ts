@@ -8,6 +8,12 @@ const nextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      // The page moved from the singular route; keep old links working.
+      { source: '/achievement', destination: '/achievements', permanent: true },
+    ];
+  },
 };
 
 export default nextConfig;

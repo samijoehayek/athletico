@@ -9,7 +9,7 @@ import Footer from "../components/Footer";
 interface Alumni {
   name: string;
   bio: string[];
-  instagram: string;
+  instagram?: string;
   image: string;
   message?: string;
 }
@@ -72,10 +72,10 @@ function AlumniSection() {
       message: "NUMBER 1 CLUB IN LEBANON.",
     },
     {
-      name: "Assaf Antoine",
+      name: "Antoine Assaf",
       bio: [
-        "Assaf Antoine joined Athletico in 2014, trained at the Dbayeh branch, and spent 8 years at the club. He played as a midfielder.",
-        "After Athletico, Assaf played with AS Saint-Priest, Olympique Lyonnais, and Stade Lavallois.",
+        "Antoine Assaf joined Athletico in 2014, trained at the Dbayeh branch, and spent 8 years at the club. He played as a midfielder.",
+        "After Athletico, Antoine played with AS Saint-Priest, Olympique Lyonnais, and Stade Lavallois.",
         "His most memorable moment at Athletico is simple and powerful: every trophy he won with the club.",
         "His advice to young Athletico players: Keep working hard and believe in yourself.",
       ],
@@ -92,8 +92,6 @@ function AlumniSection() {
       ],
       instagram: "kasemhayek",
       image: "/alumni/kassem-hayek.jpeg",
-      message:
-        "KASSEM SHARES THAT ATHLETICO SHAPED HIM DEEPLY THROUGH BOTH CHALLENGES AND VICTORIES, AND THAT HE'S PROUD TO CALL THE CLUB HIS HOME.",
     },
     {
       name: "Jacques Matta",
@@ -130,11 +128,8 @@ function AlumniSection() {
     },
     {
       name: "Andrew Sawaya",
-      bio: [
-        "Andrew Sawaya is part of the Athletico alumni family.",
-        "Bio to be added soon.",
-      ],
-      instagram: "andrewsawaya",
+      // Portrait only, by request: no bio copy and no Instagram handle.
+      bio: [],
       image: "/alumni/andrew-sawaya.jpg",
     },
   ];
@@ -406,17 +401,22 @@ function AlumniContent({ alumni }: { alumni: Alumni }) {
     adviceIndex >= 0
       ? alumni.bio.filter((_, i) => i !== adviceIndex)
       : alumni.bio;
-  let advice: string | null =
-    adviceIndex >= 0 ? alumni.bio[adviceIndex] : null;
+  let advice: string | null = adviceIndex >= 0 ? alumni.bio[adviceIndex] : null;
   if (advice) {
     const colon = advice.indexOf(":");
     if (colon !== -1) advice = advice.slice(colon + 1).trim();
   }
 
+  // Some alumni are portrait-only; the text column collapses so the photo can
+  // breathe instead of sitting beside an empty block.
+  const hasText = bioParagraphs.length > 0 || !!advice || !!alumni.message;
+
   return (
     <div className="flex flex-col lg:flex-row gap-4 lg:gap-6">
       {/* Left - Image + Instagram */}
-      <div className="w-full lg:w-[35%] flex-shrink-0">
+      <div
+        className={`w-full flex-shrink-0 ${hasText ? "lg:w-[35%]" : "lg:w-[45%]"}`}
+      >
         {/* Image */}
         <div className="relative w-full aspect-[4/5] max-w-[350px] overflow-hidden mb-4">
           <Image
@@ -429,71 +429,76 @@ function AlumniContent({ alumni }: { alumni: Alumni }) {
         </div>
 
         {/* Instagram Link */}
-        <Link
-          href={`https://instagram.com/${alumni.instagram}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 text-white/70 hover:text-white transition-colors text-sm"
-        >
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            className="flex-shrink-0"
+        {alumni.instagram && (
+          <Link
+            href={`https://instagram.com/${alumni.instagram}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-white/70 hover:text-white transition-colors text-sm"
           >
-            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-          </svg>
-          <span>{alumni.instagram}</span>
-        </Link>
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              className="flex-shrink-0"
+            >
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+            </svg>
+            <span>{alumni.instagram}</span>
+          </Link>
+        )}
       </div>
 
       {/* Right - Bio + Message */}
-      <div className="w-full lg:w-[65%]">
-        {/* Bio Paragraphs */}
-        <div className="space-y-4 text-white/80 text-sm md:text-base leading-relaxed mb-8">
-          {bioParagraphs.map((paragraph, index) => (
-            <p key={index}>{paragraph}</p>
-          ))}
+      {hasText && (
+        <div className="w-full lg:w-[65%]">
+          {/* Bio Paragraphs */}
+          <div className="space-y-4 text-white/80 text-sm md:text-base leading-relaxed mb-8">
+            {bioParagraphs.map((paragraph, index) => (
+              <p key={index}>{paragraph}</p>
+            ))}
+          </div>
+
+          {/* Advice to Young Athletes - Highlighted Quote */}
+          {advice && (
+            <div className="relative mb-8 border-l-4 border-[#2B87C8] bg-white/[0.04] rounded-r-lg pl-6 pr-5 py-5 md:pl-8 md:pr-6 md:py-6">
+              {/* Quote mark */}
+              <span
+                aria-hidden="true"
+                className="absolute top-2 right-4 text-5xl md:text-6xl leading-none font-serif select-none"
+                style={{
+                  background:
+                    "linear-gradient(90deg, #2B87C8 0%, #FFE400 100%)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
+              >
+                &rdquo;
+              </span>
+              <p className="text-[#2B87C8] text-[11px] md:text-xs font-semibold uppercase tracking-widest mb-2">
+                Advice to Young Athletes
+              </p>
+              <p className="text-white font-semibold italic text-base md:text-lg lg:text-xl leading-relaxed pr-8">
+                {advice}
+              </p>
+            </div>
+          )}
+
+          {/* Message to Athletico Family */}
+          {alumni.message && (
+            <div className="pt-6 border-t border-white/10">
+              <p className="text-white/50 text-xs uppercase tracking-widest mb-3">
+                MESSAGE TO THE ATHLETICO FAMILY
+              </p>
+              <p className="text-white font-bold text-sm md:text-base lg:text-lg uppercase leading-relaxed">
+                {alumni.message}
+              </p>
+            </div>
+          )}
         </div>
-
-        {/* Advice to Young Athletes - Highlighted Quote */}
-        {advice && (
-          <div className="relative mb-8 border-l-4 border-[#2B87C8] bg-white/[0.04] rounded-r-lg pl-6 pr-5 py-5 md:pl-8 md:pr-6 md:py-6">
-            {/* Quote mark */}
-            <span
-              aria-hidden="true"
-              className="absolute top-2 right-4 text-5xl md:text-6xl leading-none font-serif select-none"
-              style={{
-                background: "linear-gradient(90deg, #2B87C8 0%, #FFE400 100%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}
-            >
-              &rdquo;
-            </span>
-            <p className="text-[#2B87C8] text-[11px] md:text-xs font-semibold uppercase tracking-widest mb-2">
-              Advice to Young Athletes
-            </p>
-            <p className="text-white font-semibold italic text-base md:text-lg lg:text-xl leading-relaxed pr-8">
-              {advice}
-            </p>
-          </div>
-        )}
-
-        {/* Message to Athletico Family */}
-        {alumni.message && (
-          <div className="pt-6 border-t border-white/10">
-            <p className="text-white/50 text-xs uppercase tracking-widest mb-3">
-              MESSAGE TO THE ATHLETICO FAMILY
-            </p>
-            <p className="text-white font-bold text-sm md:text-base lg:text-lg uppercase leading-relaxed">
-              {alumni.message}
-            </p>
-          </div>
-        )}
-      </div>
+      )}
     </div>
   );
 }
