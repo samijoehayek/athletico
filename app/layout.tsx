@@ -4,6 +4,8 @@ import { Outfit } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 import FloatingWhatsAppButton from "./components/FloatingWhatsAppButton";
+import CartDrawer from "./components/store/CartDrawer";
+import { CartProvider } from "@/lib/store/cart-context";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -22,6 +24,9 @@ const qbOne = localFont({
 });
 
 export const metadata: Metadata = {
+  // Needed so Open Graph / social share images resolve to absolute URLs.
+  // Set NEXT_PUBLIC_SITE_URL in production to the club's real domain.
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://athleticosc.com"),
   title: "Athletico Sports Club",
   description: "Premier sports club and fitness center",
 };
@@ -34,7 +39,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${outfit.variable} ${qbOne.variable} antialiased`}>
-        {children}
+        {/* The bag is reachable from every page, not only inside the store. */}
+        <CartProvider>
+          {children}
+          <CartDrawer />
+        </CartProvider>
         <FloatingWhatsAppButton />
       </body>
     </html>

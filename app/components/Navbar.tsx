@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
+import CartButton from "./store/CartButton";
 
 interface NavbarProps {
   mode?: "light" | "dark";
@@ -111,6 +112,9 @@ export default function Navbar({ mode = "light" }: NavbarProps) {
                 {link.label}
               </Link>
             ))}
+
+            {/* The only filled chip in the bar — makes the store the header's destination. */}
+            <CartButton mode={mode} />
           </div>
         </div>
       </nav>
@@ -165,6 +169,10 @@ export default function Navbar({ mode = "light" }: NavbarProps) {
               {link.label}
             </Link>
           ))}
+
+          <div className="px-4 pt-4">
+            <CartButton mode={mode} block onNavigate={() => setIsOpen(false)} />
+          </div>
         </div>
       </div>
 
