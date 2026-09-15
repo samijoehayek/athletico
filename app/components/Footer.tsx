@@ -176,9 +176,8 @@ export default function Footer() {
               <LinkedInIcon />
             </Link>
 
-            {/* TODO: swap for the club's own TikTok / YouTube URLs once provided. */}
             <Link
-              href="https://tiktok.com"
+              href="https://www.tiktok.com/@athletico.sc"
               target="_blank"
               className="text-white hover:opacity-70 transition-opacity"
               aria-label="TikTok"
@@ -187,7 +186,7 @@ export default function Footer() {
             </Link>
 
             <Link
-              href="https://youtube.com"
+              href="https://youtube.com/@athleticosportsclub6766"
               target="_blank"
               className="text-white hover:opacity-70 transition-opacity"
               aria-label="YouTube"
