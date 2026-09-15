@@ -132,6 +132,27 @@ function AlumniSection() {
       bio: [],
       image: "/alumni/andrew-sawaya.jpg",
     },
+    // Portrait only, by request: no bio copy and no Instagram handle.
+    {
+      name: "Gabriel Bassil",
+      bio: [],
+      image: "/alumni/gabriel-bassil.jpg",
+    },
+    {
+      name: "Omar Khoury",
+      bio: [],
+      image: "/alumni/omar-khoury.jpg",
+    },
+    {
+      name: "Paul Kater",
+      bio: [],
+      image: "/alumni/paul-kater.jpg",
+    },
+    {
+      name: "Roudy Hajj",
+      bio: [],
+      image: "/alumni/roudy-hajj.jpg",
+    },
   ];
 
   const [activeIndex, setActiveIndex] = useState(0);
