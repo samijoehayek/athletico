@@ -30,7 +30,7 @@ export default function OtherActivitiesSection() {
     },
     {
       name: "PADEL",
-      image: "/activities/padel.png",
+      image: "/activities/padel.jpg",
     },
     {
       name: "GYM",

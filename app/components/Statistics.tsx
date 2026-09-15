@@ -25,7 +25,7 @@ export default function StatisticsSection() {
         <h1
           className="block md:hidden text-[64px] sm:text-[84px] font-black uppercase leading-none text-center"
           style={{
-            backgroundImage: "url('/activities/tennis-wordmark.png')",
+            backgroundImage: "url('/activities/tennis-wordmark.jpg')",
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundClip: "text",
@@ -42,7 +42,7 @@ export default function StatisticsSection() {
           className="hidden md:block font-black uppercase leading-none text-center"
           style={{
             fontSize: "clamp(108px, 14.5vw, 225px)",
-            backgroundImage: "url('/activities/tennis-wordmark.png')",
+            backgroundImage: "url('/activities/tennis-wordmark.jpg')",
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundClip: "text",
