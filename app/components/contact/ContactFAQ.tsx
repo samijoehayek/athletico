@@ -3,7 +3,6 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 
 interface FAQItem {
   question: string;
@@ -166,19 +165,6 @@ export default function ContactFAQ() {
               </a>
             </div>
           </div>
-
-          {/* Right Column - Image */}
-          {/* <div className="lg:col-span-3">
-            <div className="relative w-full h-full min-h-[300px] lg:min-h-0 rounded-lg overflow-hidden">
-              <Image
-                src="/contact-faq.jpg"
-                alt="Kids playing football"
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 25vw"
-              />
-            </div>
-          </div> */}
         </div>
       </div>
     </section>

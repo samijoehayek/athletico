@@ -88,14 +88,6 @@ export default function LocateUs() {
     },
   ];
 
-  const getEmbedUrl = (branch: Branch | null): string => {
-    if (!branch) {
-      return "https://www.google.com/maps/embed/v1/view?key=&center=33.88,35.55&zoom=11";
-    }
-    // Use the embed API with lat,lng coordinates for precise, reliable positioning
-    return `https://maps.google.com/maps?q=${branch.lat},${branch.lng}&hl=en&z=16&output=embed`;
-  };
-
   return (
     <section className="w-full py-10 md:py-14 lg:py-18 px-6 md:px-10 lg:px-16">
       <div className="max-w-7xl mx-auto">
