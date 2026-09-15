@@ -88,6 +88,8 @@ export const PRODUCTS: Product[] = [
       priceUSD: 8,
       maxChars: 12,
       backImage: "/store/shirt-back-away.svg",
+      // Yellow garment, so the print is navy rather than the default off-white.
+      printColor: "#0B3E80",
     },
     description:
       "The 25/26 away shirt in Athletico yellow, with a tonal navy trim at the collar and cuff.",
@@ -184,9 +186,19 @@ export const PRODUCTS: Product[] = [
     name: "Club Hoodie",
     category: "training",
     priceUSD: 45,
-    images: ["/store/club-hoodie-1.svg", "/store/club-hoodie-2.svg"],
+    // First product shot in from the club. [0] front, [1] back — the card
+    // cross-fades between them, and the back doubles as the customiser canvas.
+    images: ["/store/club-hoodie-1.jpg", "/store/club-hoodie-2.jpg"],
     variants: sizes("ATH-HD", APPAREL, { M: "low", L: "low" }),
-    description: "Heavyweight brushed-back hoodie with an embroidered crest.",
+    personalisation: {
+      priceUSD: 8,
+      maxChars: 12,
+      backImage: "/store/club-hoodie-2.jpg",
+      // Light garment, so the print is navy rather than the default off-white.
+      printColor: "#0B3E80",
+    },
+    description:
+      "Heavyweight brushed-back hoodie in off-white, with a blue-lined hood, contrast drawcords and the club crest at the chest.",
     details: ["340gsm brushed-back fleece", "Embroidered crest", "Kangaroo pocket", "Unisex fit"],
   },
   {

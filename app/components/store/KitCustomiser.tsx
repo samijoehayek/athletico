@@ -55,6 +55,7 @@ export default function KitCustomiser({
   const nameId = useId();
   const numberId = useId();
   const blocked = isBlocked(value.name);
+  const printColor = personalisation.printColor ?? "#F1EAEA";
 
   return (
     <div className="border border-[#0B3E80]/20 bg-white">
@@ -90,8 +91,9 @@ export default function KitCustomiser({
               aria-hidden
             >
               <span
-                className="uppercase font-bold text-[#F1EAEA] leading-none mix-blend-multiply"
+                className="uppercase font-bold leading-none mix-blend-multiply"
                 style={{
+                  color: printColor,
                   fontSize: "clamp(10px, 3.1vw, 17px)",
                   letterSpacing: "0.22em",
                   marginBottom: "4%",
@@ -101,8 +103,9 @@ export default function KitCustomiser({
                 {value.name}
               </span>
               <span
-                className="font-bold text-[#F1EAEA] leading-[0.82] mix-blend-multiply"
+                className="font-bold leading-[0.82] mix-blend-multiply"
                 style={{
+                  color: printColor,
                   fontSize: "clamp(44px, 14vw, 86px)",
                   textShadow: "0 2px 0 rgba(0,0,0,0.18)",
                 }}

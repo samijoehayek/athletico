@@ -28,6 +28,11 @@ export interface Personalisation {
   maxChars: number;
   /** Straight-on photo of the back of the shirt the name/number render onto. */
   backImage: string;
+  /**
+   * Colour the name and number are printed in. Must contrast with the garment:
+   * off-white on a dark shirt, navy on a light one. Defaults to off-white.
+   */
+  printColor?: string;
 }
 
 export interface Product {
