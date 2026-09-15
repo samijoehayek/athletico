@@ -12,6 +12,7 @@ export default function PartnersSection() {
     "/parterners/partner5.png",
     "/parterners/partner6.png",
     "/parterners/partner7.png",
+    "/parterners/partner8.png",
   ];
 
   // Duplicate logos for seamless infinite scroll
