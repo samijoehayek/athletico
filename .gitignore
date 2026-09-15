@@ -46,3 +46,9 @@ next-env.d.ts
 # business paperwork stays local. Developer docs (*.md, apps-script) are tracked.
 docs/*.pdf
 docs/*.html
+
+# design sources — masters belong in the club's drive, not in a public repo
+*.ai
+*.psd
+*.sketch
+*.fig
