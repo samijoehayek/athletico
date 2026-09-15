@@ -105,7 +105,7 @@ function AchievementsSliderSection() {
       season: "2025/26",
       tournament: "Official Youth Lebanese League",
       ranking: "1st Place",
-      image: "/logonew.png",
+      image: "/achievements/trophy-placeholder.png",
     },
     {
       team: "2009",
@@ -113,7 +113,7 @@ function AchievementsSliderSection() {
       season: "2025/26",
       tournament: "Official Youth Lebanese League",
       ranking: "2nd Place",
-      image: "/logonew.png",
+      image: "/achievements/trophy-placeholder.png",
     },
     {
       team: "2014",
@@ -121,7 +121,7 @@ function AchievementsSliderSection() {
       season: "2025/26",
       tournament: "Official Lebanese Grassroots League",
       ranking: "1st Place",
-      image: "/logonew.png",
+      image: "/achievements/trophy-placeholder.png",
     },
     {
       team: "2014",
@@ -129,7 +129,7 @@ function AchievementsSliderSection() {
       season: "2025/26",
       tournament: "Official Lebanese Grassroots League",
       ranking: "2nd Place",
-      image: "/logonew.png",
+      image: "/achievements/trophy-placeholder.png",
     },
     {
       team: "2013",
@@ -137,7 +137,7 @@ function AchievementsSliderSection() {
       season: "2025/26",
       tournament: "Official Lebanese Grassroots League",
       ranking: "2nd Place",
-      image: "/logonew.png",
+      image: "/achievements/trophy-placeholder.png",
     },
     {
       team: "2008",
@@ -145,7 +145,7 @@ function AchievementsSliderSection() {
       season: "2024/25",
       tournament: "Official Youth Lebanese League",
       ranking: "1st Place",
-      image: "/logonew.png",
+      image: "/achievements/trophy-placeholder.png",
     },
     {
       team: "2010",
@@ -153,7 +153,7 @@ function AchievementsSliderSection() {
       season: "2024/25",
       tournament: "Official Youth Lebanese League",
       ranking: "2nd Place",
-      image: "/logonew.png",
+      image: "/achievements/trophy-placeholder.png",
     },
     {
       team: "2013",
@@ -161,7 +161,7 @@ function AchievementsSliderSection() {
       season: "2024/25",
       tournament: "Official Lebanese Grassroots League",
       ranking: "1st Place",
-      image: "/logonew.png",
+      image: "/achievements/trophy-placeholder.png",
     },
     {
       team: "2013",
@@ -169,7 +169,7 @@ function AchievementsSliderSection() {
       season: "2024/25",
       tournament: "Official Lebanese Grassroots League",
       ranking: "2nd Place",
-      image: "/logonew.png",
+      image: "/achievements/trophy-placeholder.png",
     },
     {
       team: "2010",
@@ -177,7 +177,7 @@ function AchievementsSliderSection() {
       season: "2023/24",
       tournament: "Official Youth Lebanese League",
       ranking: "1st Place",
-      image: "/logonew.png",
+      image: "/achievements/trophy-placeholder.png",
     },
     {
       team: "2008",
@@ -185,7 +185,7 @@ function AchievementsSliderSection() {
       season: "2023/24",
       tournament: "Official Youth Lebanese League",
       ranking: "1st Place",
-      image: "/logonew.png",
+      image: "/achievements/trophy-placeholder.png",
     },
     {
       team: "2007",
@@ -193,7 +193,7 @@ function AchievementsSliderSection() {
       season: "2023/24",
       tournament: "Official Youth Lebanese League",
       ranking: "1st Place",
-      image: "/logonew.png",
+      image: "/achievements/trophy-placeholder.png",
     },
     {
       team: "2012",
@@ -201,7 +201,7 @@ function AchievementsSliderSection() {
       season: "2023/24",
       tournament: "Official Lebanese Grassroots League",
       ranking: "1st Place",
-      image: "/logonew.png",
+      image: "/achievements/trophy-placeholder.png",
     },
     {
       team: "2008",
@@ -209,7 +209,7 @@ function AchievementsSliderSection() {
       season: "2022/23",
       tournament: "Official Youth Lebanese League",
       ranking: "2nd Place",
-      image: "/logonew.png",
+      image: "/achievements/trophy-placeholder.png",
     },
     {
       team: "2007",
@@ -217,7 +217,7 @@ function AchievementsSliderSection() {
       season: "2022/23",
       tournament: "Official Youth Lebanese League",
       ranking: "2nd Place",
-      image: "/logonew.png",
+      image: "/achievements/trophy-placeholder.png",
     },
     {
       team: "2011",
@@ -225,7 +225,7 @@ function AchievementsSliderSection() {
       season: "2022/23",
       tournament: "Official Lebanese Grassroots League",
       ranking: "1st Place",
-      image: "/logonew.png",
+      image: "/achievements/trophy-placeholder.png",
     },
     {
       team: "2010",
@@ -233,7 +233,7 @@ function AchievementsSliderSection() {
       season: "2022/23",
       tournament: "Official Lebanese Grassroots League",
       ranking: "1st Place",
-      image: "/logonew.png",
+      image: "/achievements/trophy-placeholder.png",
     },
     {
       team: "2006",
@@ -241,7 +241,7 @@ function AchievementsSliderSection() {
       season: "2019/20",
       tournament: "Official Lebanese Cup",
       ranking: "1st Place",
-      image: "/logonew.png",
+      image: "/achievements/trophy-placeholder.png",
     },
     {
       team: "2008",
@@ -249,7 +249,7 @@ function AchievementsSliderSection() {
       season: "2018/19",
       tournament: "Official Lebanese Cup",
       ranking: "1st Place",
-      image: "/logonew.png",
+      image: "/achievements/trophy-placeholder.png",
     },
     {
       team: "2002-2003",
@@ -257,7 +257,7 @@ function AchievementsSliderSection() {
       season: "2018/19",
       tournament: "Official Youth Lebanese League",
       ranking: "2nd Place",
-      image: "/logonew.png",
+      image: "/achievements/trophy-placeholder.png",
     },
     {
       team: "2009",
@@ -265,7 +265,7 @@ function AchievementsSliderSection() {
       season: "2018/19",
       tournament: "Official Lebanese Grassroots League",
       ranking: "1st Place",
-      image: "/logonew.png",
+      image: "/achievements/trophy-placeholder.png",
     },
     {
       team: "1996-1997",
@@ -273,7 +273,7 @@ function AchievementsSliderSection() {
       season: "2010/11",
       tournament: "Official Youth Lebanese League",
       ranking: "1st Place",
-      image: "/logonew.png",
+      image: "/achievements/trophy-placeholder.png",
     },
   ];
 

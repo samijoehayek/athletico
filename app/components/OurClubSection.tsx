@@ -50,7 +50,7 @@ export default function OurClubSection() {
               {/* Left Image - Portrait/Vertical (narrower) */}
               <div className="relative w-[42%] h-full overflow-hidden">
                 <Image
-                  src="/homepage/created-with-a-idea.JPG"
+                  src="/homepage/created-with-an-idea.jpg"
                   alt="Athletico Sports Club"
                   fill
                   className="object-cover"
@@ -61,7 +61,7 @@ export default function OurClubSection() {
               {/* Right Image - Landscape/Horizontal (wider) */}
               <div className="relative w-[58%] h-full overflow-hidden">
                 <Image
-                  src="/homepage/created-with-a-idea.JPG"
+                  src="/homepage/created-with-an-idea.jpg"
                   alt="Athletico Sports Club Training"
                   fill
                   className="object-cover object-right"

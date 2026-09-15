@@ -74,7 +74,7 @@ export default function ProgramsSection() {
               INSIDE ATHLETICO
             </h2>
             <Image
-              src="/arrow.svg"
+              src="/brand/arrow.svg"
               alt="Arrow"
               width={56}
               height={56}

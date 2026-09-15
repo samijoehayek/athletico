@@ -65,7 +65,7 @@ export default function Navbar({ mode = "light" }: NavbarProps) {
           {/* Logo - Left */}
           <Link href="/" className="flex-shrink-0">
             <Image
-              src="/logo.png"
+              src="/brand/logo.png"
               alt="Athletico Logo"
               width={60}
               height={60}
@@ -129,7 +129,7 @@ export default function Navbar({ mode = "light" }: NavbarProps) {
         <div className="flex items-center justify-between px-6 py-6 border-b border-gray-200/20">
           <Link href="/" onClick={() => setIsOpen(false)}>
             <Image
-              src="/logo.png"
+              src="/brand/logo.png"
               alt="Athletico Logo"
               width={48}
               height={48}
