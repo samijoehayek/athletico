@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1250" width="1000" height="1250" role="img" aria-label="Water Bottle">
+<rect width="1000" height="1250" fill="#e3e9f2"/>
+<path d="M0 1030 L1000 930 L1000 1250 L0 1250 Z" fill="#0B3E80" opacity=".07"/>
+<path d="M432 300 L568 300 L568 372 L602 430 L602 946 L398 946 L398 430 L432 372 Z" fill="#0B3E80"/><circle cx="500" cy="430" r="34" fill="#F1EAEA" opacity=".92"/>
+<text x="60" y="1178" font-family="Outfit, Helvetica, Arial, sans-serif" font-size="21" font-weight="600" fill="#0B3E80" opacity=".45" letter-spacing="3">WATER BOTTLE</text>
+<text x="60" y="1208" font-family="Outfit, Helvetica, Arial, sans-serif" font-size="17" fill="#0B3E80" opacity=".3" letter-spacing="4">IN PLAY · PLACEHOLDER</text>
+</svg>
