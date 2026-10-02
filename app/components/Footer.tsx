@@ -29,13 +29,6 @@ export default function Footer() {
               href="/contact"
               className="text-white text-base sm:text-lg md:text-[20px] uppercase hover:opacity-70 transition-opacity"
             >
-              Career
-            </Link>
-
-            <Link
-              href="/contact"
-              className="text-white text-base sm:text-lg md:text-[20px] uppercase hover:opacity-70 transition-opacity"
-            >
               Join us
             </Link>
           </div>

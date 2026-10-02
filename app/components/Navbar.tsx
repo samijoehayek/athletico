@@ -36,8 +36,14 @@ export default function Navbar({ mode = "light" }: NavbarProps) {
     { href: "/olympique-lyonnais", label: "OL" },
     { href: "/achievements", label: "ACHIEVEMENTS" },
     { href: "/alumni", label: "ALUMNI" },
-    { href: "/contact", label: "JOIN US" },
   ];
+
+  // JOIN US is the one filled chip in the bar — the header's main call to action.
+  const joinHref = "/contact";
+  const joinChip =
+    mode === "dark"
+      ? "bg-[#0B3E80] text-white hover:bg-[#2B87C8]"
+      : "bg-[#FFE400] text-[#0B3E80] hover:bg-white";
 
   const handleLinkClick = (href: string) => {
     setIsOpen(false);
@@ -67,9 +73,9 @@ export default function Navbar({ mode = "light" }: NavbarProps) {
             <Image
               src="/brand/logo.png"
               alt="Athletico Logo"
-              width={60}
-              height={60}
-              className="w-12 h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 object-contain"
+              width={80}
+              height={80}
+              className="w-14 h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 object-contain"
               priority
             />
           </Link>
@@ -113,8 +119,19 @@ export default function Navbar({ mode = "light" }: NavbarProps) {
               </Link>
             ))}
 
-            {/* The only filled chip in the bar — makes the store the header's destination. */}
-            <CartButton mode={mode} />
+            <CartButton
+              mode={mode}
+              className={`${textColor} text-sm lg:text-base uppercase transition-all ${hoverColor} ${
+                pathname?.startsWith("/store") ? "font-bold" : "font-normal"
+              }`}
+            />
+
+            <Link
+              href={joinHref}
+              className={`inline-flex items-center px-4 py-2 text-sm font-bold uppercase tracking-wider transition-colors ${joinChip}`}
+            >
+              JOIN US
+            </Link>
           </div>
         </div>
       </nav>
@@ -170,8 +187,22 @@ export default function Navbar({ mode = "light" }: NavbarProps) {
             </Link>
           ))}
 
+          <CartButton
+            mode={mode}
+            onNavigate={() => setIsOpen(false)}
+            className={`${textColor} text-base uppercase transition-colors ${hoverColor} px-4 py-3 rounded-lg hover:bg-gray-500/10 ${
+              pathname?.startsWith("/store") ? "font-bold bg-gray-500/10" : "font-normal"
+            }`}
+          />
+
           <div className="px-4 pt-4">
-            <CartButton mode={mode} block onNavigate={() => setIsOpen(false)} />
+            <Link
+              href={joinHref}
+              onClick={() => setIsOpen(false)}
+              className={`w-full inline-flex items-center justify-center px-4 py-3 text-base font-bold uppercase tracking-wider transition-colors ${joinChip}`}
+            >
+              JOIN US
+            </Link>
           </div>
         </div>
       </div>
