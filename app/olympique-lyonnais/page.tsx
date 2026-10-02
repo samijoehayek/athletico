@@ -111,6 +111,26 @@ function PartnershipIntroSection() {
   );
 }
 
+// ==================== 2029 RENEWAL ====================
+// Facts from OL's own announcement, linked from the card.
+const RENEWAL_URL =
+  "https://www.ol.fr/fr/actualites/l-olympique-lyonnais-et-l-athletico-sports-club-reprennent-leur-partenariat-historique";
+
+const RENEWAL_CARD = {
+  title: "RENEWED",
+  titleLine2: "UNTIL 2029",
+  label: "OLYMPIQUE LYONNAIS × ATHLETICO",
+  heading: "OUR HISTORIC PARTNERSHIP",
+  headingLine2: "CONTINUES",
+  paragraphs: [
+    "In 2011, Olympique Lyonnais signed its very first international partnership with Athletico. The two clubs have now renewed it for three more years, until June 2029.",
+    "The new agreement brings OL experts to Beirut to share the Lyon methodology and training culture, keeps the OL Academy and Athletico technical staffs in regular exchange, and welcomes young Lebanese players and their coaches to Lyon for training and cultural immersions.",
+  ],
+  image: "/ol/ol-academy-lockup.png",
+  imageContain: true,
+  link: { href: RENEWAL_URL, label: "Read the announcement on ol.fr" },
+};
+
 // ==================== STACKING CARDS SECTION ====================
 function StackingCardsSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -188,20 +208,9 @@ function StackingCardsSection() {
             />
           </div>
 
-          {/* Card 2 - Light */}
+          {/* Card 2 - Light: 2029 renewal */}
           <div className="bg-[#F1EAEA] w-full p-6 md:p-10">
-            <CardContent
-              title="RECOGNITION"
-              titleLine2="AND CREDIBILITY"
-              label="ATHLETICO SPORTS CLUB"
-              heading="SHAPING THE FUTURE"
-              headingLine2="OF YOUTH FOOTBALL"
-              paragraphs={[
-                "Athletico's long-term development work has also been highlighted by local media, including coverage noting national recognition and the academy's progress in building a professional youth structure.",
-              ]}
-              image="/ol/recognition-credibility.jpeg"
-              isDark={false}
-            />
+            <CardContent {...RENEWAL_CARD} isDark={false} />
           </div>
         </div>
       </section>
@@ -241,23 +250,12 @@ function StackingCardsSection() {
             />
           </div>
 
-          {/* Card 2 - Light (Slides over Card 1) */}
+          {/* Card 2 - Light: 2029 renewal (slides over Card 1) */}
           <div
             ref={card2Ref}
             className="bg-[#F1EAEA] w-[95%] mx-auto p-10 lg:p-12 absolute inset-x-0 top-0 bottom-0 my-auto h-fit"
           >
-            <CardContent
-              title="RECOGNITION"
-              titleLine2="AND CREDIBILITY"
-              label="ATHLETICO SPORTS CLUB"
-              heading="SHAPING THE FUTURE"
-              headingLine2="OF YOUTH FOOTBALL"
-              paragraphs={[
-                "Athletico's long-term development work has also been highlighted by local media, including coverage noting national recognition and the academy's progress in building a professional youth structure.",
-              ]}
-              image="/ol/recognition-credibility.jpeg"
-              isDark={false}
-            />
+            <CardContent {...RENEWAL_CARD} isDark={false} />
           </div>
         </div>
       </div>
@@ -276,6 +274,7 @@ function CardContent({
   image,
   imageContain,
   isDark,
+  link,
 }: {
   title: string;
   titleLine2?: string;
@@ -286,6 +285,7 @@ function CardContent({
   image: string;
   imageContain?: boolean;
   isDark: boolean;
+  link?: { href: string; label: string };
 }) {
   const textColor = isDark ? "text-white" : "text-[#0B3E80]";
   const mutedTextColor = isDark ? "text-white/50" : "text-[#0B3E80]/50";
@@ -351,6 +351,22 @@ function CardContent({
               <p key={index}>{paragraph}</p>
             ))}
           </div>
+
+          {link && (
+            <a
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`mt-8 inline-flex items-center gap-3 w-fit border px-6 py-3 font-bold uppercase text-sm tracking-wider transition-colors hover:bg-[#2B87C8] hover:border-[#2B87C8] hover:text-white ${
+                isDark ? "border-white/40 text-white" : "border-[#0B3E80] text-[#0B3E80]"
+              }`}
+            >
+              {link.label}
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                <path d="M7 17 17 7M8 7h9v9" />
+              </svg>
+            </a>
+          )}
         </div>
       </div>
     </div>
