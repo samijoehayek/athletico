@@ -2,12 +2,12 @@
 
 // app/components/store/ProductDetail.tsx
 // Two columns on desktop: the gallery stays pinned while the right column
-// scrolls through description, sizing and delivery.
+// scrolls through sizing, details and collection.
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { useCart } from "@/lib/store/cart-context";
-import { formatUSD } from "@/lib/store/pricing";
+import { COLLECTION_ETA, formatUSD } from "@/lib/store/pricing";
 import type { Product } from "@/lib/store/types";
 import KitCustomiser, { isBlocked, type PersonalisationValue } from "./KitCustomiser";
 import ProductGallery from "./ProductGallery";
@@ -80,9 +80,6 @@ export default function ProductDetail({ product }: { product: Product }) {
               {product.name}
             </h1>
             <p className="text-[#0B3E80] font-bold text-2xl md:text-3xl mt-4">{formatUSD(unitPrice)}</p>
-            <p className="text-[#0B3E80]/70 text-sm md:text-base leading-relaxed mt-5 max-w-lg">
-              {product.description}
-            </p>
 
             {product.colourways && product.colourways.length > 1 && (
               <div className="mt-8">
@@ -196,17 +193,8 @@ export default function ProductDetail({ product }: { product: Product }) {
                   ))}
                 </ul>
               </Accordion>
-              <Accordion title="Delivery">
-                <p>
-                  Beirut and metro area, 1–2 working days. Rest of Lebanon, 2–3 working days.
-                  Collection from a club branch is free and ready the next day.
-                </p>
-              </Accordion>
-              <Accordion title="Returns">
-                <p>
-                  Exchanges on unworn items with tags within 14 days. Personalised items are made to
-                  order and cannot be returned or exchanged.
-                </p>
+              <Accordion title="Collection">
+                <p>Free collection from your club branch. {COLLECTION_ETA}.</p>
               </Accordion>
             </div>
           </div>

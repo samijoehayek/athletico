@@ -25,12 +25,9 @@ export default function KitDropBand({ product }: { product: Product }) {
           <p className="text-[#FFE400] text-xs md:text-sm font-medium uppercase tracking-[0.28em] mb-4">
             The 25/26 drop
           </p>
-          <h2 className="text-white font-extrabold text-3xl sm:text-4xl md:text-5xl lg:text-[56px] uppercase leading-[0.95] mb-5">
+          <h2 className="text-white font-extrabold text-3xl sm:text-4xl md:text-5xl lg:text-[56px] uppercase leading-[0.95] mb-8">
             {product.name}
           </h2>
-          <p className="text-white/70 text-sm md:text-base leading-relaxed max-w-md mb-8">
-            {product.description}
-          </p>
           <Link
             href={`/store/${product.slug}`}
             className="inline-flex items-center gap-3 w-fit bg-white text-[#0B3E80] hover:bg-[#2B87C8] hover:text-white font-bold uppercase text-sm tracking-wider px-8 py-4 transition-colors"

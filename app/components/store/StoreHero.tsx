@@ -44,8 +44,8 @@ export default function StoreHero() {
               Store
             </h1>
             <p className="text-[#0B3E80]/70 text-sm md:text-base max-w-xl mt-4">
-              The official club range — match kit, training wear and equipment. Delivered across
-              Lebanon, or collect from your branch.
+              The official club range — match kit, training wear and equipment. Order online and
+              collect from your branch.
             </p>
           </div>
         </div>

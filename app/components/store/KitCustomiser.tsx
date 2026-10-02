@@ -161,7 +161,7 @@ export default function KitCustomiser({
             )}
 
             <p className="text-[#0B3E80]/45 text-xs leading-relaxed">
-              Personalised items are made to order and cannot be returned or exchanged.
+              Personalised items are made to order.
             </p>
           </div>
         </div>

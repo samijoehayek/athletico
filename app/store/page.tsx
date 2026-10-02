@@ -8,7 +8,7 @@ import { getFeatured } from "@/lib/store/catalog";
 export const metadata: Metadata = {
   title: "Store — Athletico Sports Club",
   description:
-    "The official Athletico Sports Club range. Match kit, training wear and equipment, delivered across Lebanon or collected from your branch.",
+    "The official Athletico Sports Club range. Match kit, training wear and equipment, ordered online and collected from your branch.",
   openGraph: {
     title: "Athletico Store",
     description: "The official Athletico Sports Club range.",
