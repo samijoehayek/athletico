@@ -28,12 +28,13 @@ export default function FoundersSection() {
       {/* Single Full-Width Card */}
       <div className="bg-white shadow-xl overflow-hidden">
         {/* Image */}
-        <div className="relative w-full h-[400px] md:h-[520px] lg:h-[620px]">
+        {/* Phones show the whole 3:2 photo so no founder is cropped out. */}
+        <div className="relative w-full aspect-[3/2] md:aspect-auto md:h-[520px] lg:h-[620px]">
           <Image
             src="/team/founders.jpeg"
             alt="Athletico Founders: Nadim Ghattas, Robert Paoli, René Matta"
             fill
-            className="object-cover object-[center_35%]"
+            className="object-cover md:object-[center_35%]"
             sizes="100vw"
             priority
           />

@@ -7,22 +7,22 @@ export default function TeamHero() {
       <h1
         className="text-white font-extrabold uppercase leading-none tracking-wide"
         style={{
-          fontSize: "clamp(60px, 10vw, 120px)",
+          fontSize: "clamp(40px, 10vw, 120px)",
           letterSpacing: "0.05em",
         }}
       >
         ATHLETICO
       </h1>
 
-      {/* TEAM */}
+      {/* FOUNDERS */}
       <h2
         className="text-white font-extrabold uppercase leading-none tracking-wide mt-2"
         style={{
-          fontSize: "clamp(40px, 7vw, 80px)",
+          fontSize: "clamp(28px, 7vw, 80px)",
           letterSpacing: "0.05em",
         }}
       >
-        TEAM
+        FOUNDERS
       </h2>
     </section>
   );
