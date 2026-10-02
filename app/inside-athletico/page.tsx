@@ -86,7 +86,12 @@ const CLUB_VALUES: ClubValue[] = [
   {
     number: "07",
     title: "Integrity",
-    description: "We live as champions, on and off the field.",
+    description: "We do what is right, even when no one is watching.",
+  },
+  {
+    number: "08",
+    title: "Independence",
+    description: "We are not affiliated with any political or religious party.",
   },
 ];
 
