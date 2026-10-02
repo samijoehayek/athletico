@@ -2,24 +2,34 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { whatsappLink } from "@/lib/site";
 
 interface Activity {
   name: string;
   image: string;
+  /** Tailwind object-position class, when the subject isn't centred. */
+  position?: string;
 }
 
 export default function OtherActivitiesSection() {
-  const whatsappNumber = "96170202030";
-  const whatsappMessage = "Hello! I would like to get more information.";
-
-  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
-    whatsappMessage,
-  )}`;
+  const whatsappUrl = whatsappLink();
   // Adjustable diagonal angle - increase this number to make the diagonal steeper
   // Lower values = more horizontal, Higher values = more vertical
   const diagonalAngle = 22; // Percentage - adjusts the slope of the diagonal
 
-  const activities: Activity[] = [
+  // Two large cards on top, four below.
+  const topActivities: Activity[] = [
+    {
+      name: "FOOTBALL",
+      image: "/homepage/football.jpeg",
+    },
+    {
+      name: "PADEL",
+      image: "/activities/padel.jpg",
+    },
+  ];
+
+  const bottomActivities: Activity[] = [
     {
       name: "TENNIS",
       image: "/homepage/tennis.jpg",
@@ -29,21 +39,15 @@ export default function OtherActivitiesSection() {
       image: "/homepage/basketball.jpg",
     },
     {
-      name: "PADEL",
-      image: "/activities/padel.jpg",
-    },
-    {
       name: "GYM",
       image: "/homepage/gym.jpg",
     },
     {
-      name: "FOOTBALL",
-      image: "/homepage/football.jpeg",
+      name: "SPA",
+      image: "/activities/spa.jpg",
+      position: "object-[center_62%]",
     },
   ];
-
-  const topActivity = activities[0];
-  const bottomActivities = activities.slice(1);
 
   return (
     <section className="w-full min-h-[70vh] lg:min-h-screen relative overflow-hidden -mt-1 py-30">
@@ -97,27 +101,30 @@ export default function OtherActivitiesSection() {
 
         {/* Grid Container */}
         <div className="flex flex-col">
-          {/* Top Row - Single Large Activity (Padel) */}
-          <ActivityCard
-            activity={topActivity}
-            className="w-full h-[300px] sm:h-[300px] md:h-[350px] lg:h-[400px]"
-            isLarge
-            whatsappUrl={whatsappUrl}
-          />
+          {/* Top Row - Two Large Activities */}
+          <div className="grid grid-cols-1 sm:grid-cols-2">
+            {topActivities.map((activity) => (
+              <ActivityCard
+                key={activity.name}
+                activity={activity}
+                className="h-[240px] sm:h-[300px] md:h-[350px] lg:h-[400px]"
+                isLarge
+                whatsappUrl={whatsappUrl}
+              />
+            ))}
+          </div>
 
-          {/* Bottom Row - 4 Equal Columns (if there are more activities) */}
-          {bottomActivities.length > 0 && (
-            <div className="grid grid-cols-2 md:grid-cols-4">
-              {bottomActivities.map((activity, index) => (
-                <ActivityCard
-                  key={index}
-                  activity={activity}
-                  className="h-[200px] sm:h-[250px] md:h-[350px] lg:h-[400px]"
-                  whatsappUrl={whatsappUrl}
-                />
-              ))}
-            </div>
-          )}
+          {/* Bottom Row - 4 Equal Columns */}
+          <div className="grid grid-cols-2 md:grid-cols-4">
+            {bottomActivities.map((activity) => (
+              <ActivityCard
+                key={activity.name}
+                activity={activity}
+                className="h-[200px] sm:h-[250px] md:h-[350px] lg:h-[400px]"
+                whatsappUrl={whatsappUrl}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -153,8 +160,8 @@ function ActivityCard({
           src={activity.image}
           alt={activity.name}
           fill
-          className="object-cover"
-          sizes={isLarge ? "100vw" : "(max-width: 768px) 50vw, 25vw"}
+          className={`object-cover ${activity.position ?? ""}`}
+          sizes={isLarge ? "(max-width: 640px) 100vw, 50vw" : "(max-width: 768px) 50vw, 25vw"}
         />
       </motion.div>
 

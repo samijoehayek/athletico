@@ -18,18 +18,8 @@ export default function OurClubSection() {
   }, []);
 
   const mottoLines = [
-    { text: "OUR MOTTO", isBold: false, isSubtitle: false },
-    { text: "LIVE YOUR PASSION", isBold: true, isSubtitle: false },
-    {
-      text: "BECAUSE PROGRESS COMES WHEN FOOTBALL STAYS",
-      isBold: false,
-      isSubtitle: true,
-    },
-    {
-      text: "JOYFUL, CONSISTENT, AND PURPOSEFUL.",
-      isBold: false,
-      isSubtitle: true,
-    },
+    { text: "OUR MOTTO", isBold: false },
+    { text: "LIVE YOUR PASSION", isBold: true },
   ];
 
   return (
@@ -45,29 +35,15 @@ export default function OurClubSection() {
               WITH A SIMPLE IDEA
             </h2>
 
-            {/* Images Container */}
-            <div className="flex gap-3 md:gap-4 h-[280px] sm:h-[320px] md:h-[380px] lg:h-[420px]">
-              {/* Left Image - Portrait/Vertical (narrower) */}
-              <div className="relative w-[42%] h-full overflow-hidden">
-                <Image
-                  src="/homepage/created-with-an-idea.jpg"
-                  alt="Athletico Sports Club"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 45vw, (max-width: 1024px) 30vw, 25vw"
-                />
-              </div>
-
-              {/* Right Image - Landscape/Horizontal (wider) */}
-              <div className="relative w-[58%] h-full overflow-hidden">
-                <Image
-                  src="/homepage/created-with-an-idea.jpg"
-                  alt="Athletico Sports Club Training"
-                  fill
-                  className="object-cover object-right"
-                  sizes="(max-width: 768px) 55vw, (max-width: 1024px) 35vw, 30vw"
-                />
-              </div>
+            {/* Image */}
+            <div className="relative w-full h-[280px] sm:h-[320px] md:h-[380px] lg:h-[420px] overflow-hidden">
+              <Image
+                src="/homepage/created-with-an-idea.jpg"
+                alt="Athletico Sports Club players"
+                fill
+                className="object-cover object-[center_30%]"
+                sizes="(max-width: 1024px) 100vw, 55vw"
+              />
             </div>
           </div>
 
@@ -87,7 +63,7 @@ export default function OurClubSection() {
             </p>
 
             {/* Animated Motto Section */}
-            <div className="min-h-[140px] md:min-h-[160px]">
+            <div className="min-h-[64px] md:min-h-[80px]">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={animationKey}
@@ -103,9 +79,7 @@ export default function OurClubSection() {
                       className={`uppercase leading-tight ${
                         line.isBold
                           ? "text-white font-bold text-xl sm:text-2xl md:text-3xl lg:text-[32px]"
-                          : line.isSubtitle
-                            ? "text-white/50 font-normal text-xs sm:text-sm md:text-base tracking-wide"
-                            : "text-white/70 font-medium text-sm md:text-base tracking-wider"
+                          : "text-white/70 font-medium text-sm md:text-base tracking-wider"
                       }`}
                     >
                       {line.text}

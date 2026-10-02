@@ -23,9 +23,9 @@ export default function StatisticsSection() {
       <div className="mb-10 md:mb-16 lg:mb-20 w-full">
         {/* Mobile Title */}
         <h1
-          className="block md:hidden text-[64px] sm:text-[84px] font-black uppercase leading-none text-center"
+          className="block md:hidden text-[16vw] sm:text-[84px] font-black uppercase leading-none text-center"
           style={{
-            backgroundImage: "url('/activities/tennis-wordmark.jpg')",
+            backgroundImage: "url('/activities/football-wordmark.jpg')",
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundClip: "text",
@@ -42,7 +42,7 @@ export default function StatisticsSection() {
           className="hidden md:block font-black uppercase leading-none text-center"
           style={{
             fontSize: "clamp(108px, 14.5vw, 225px)",
-            backgroundImage: "url('/activities/tennis-wordmark.jpg')",
+            backgroundImage: "url('/activities/football-wordmark.jpg')",
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundClip: "text",

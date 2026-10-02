@@ -3,14 +3,14 @@ import Image from "next/image";
 
 export default function Hero() {
   return (
-    <section className="relative h-[70vh] w-full overflow-hidden bg-[#0B3E80]">
+    <section className="relative h-[62vh] min-h-[460px] md:h-[70vh] w-full overflow-hidden bg-[#0B3E80]">
       {/* Background Image */}
       <Image
         src="/homepage/main.jpg"
         alt="Athletico Sports Club Background"
         fill
         sizes="100vw"
-        className="object-cover"
+        className="object-cover object-[58%_center] md:object-center"
         priority
         quality={90}
       />
@@ -27,10 +27,10 @@ export default function Hero() {
         <div className="flex-1 flex flex-col justify-between px-8 md:px-12 lg:px-16 pt-24 md:pt-16 pb-8 md:pb-12">
           {/* Title Section - Left Aligned */}
           <div className="max-w-screen-2xl w-full">
-            <h1 className="text-white font-extrabold text-6xl md:text-8xl lg:text-[120px] xl:text-[140px] leading-none">
+            <h1 className="text-white font-extrabold text-[12.5vw] sm:text-7xl md:text-8xl lg:text-[120px] xl:text-[140px] leading-none">
               ATHLETICO
             </h1>
-            <h2 className="text-white font-normal text-4xl md:text-6xl lg:text-[80px] xl:text-[90px] leading-none mt-2">
+            <h2 className="text-white font-normal text-[8vw] sm:text-5xl md:text-6xl lg:text-[80px] xl:text-[90px] leading-none mt-2">
               SPORTS CLUB
             </h2>
           </div>
