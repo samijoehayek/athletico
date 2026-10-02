@@ -3,90 +3,13 @@
 "use client";
 
 import { useState } from "react";
-
-interface Branch {
-  name: string;
-  phone: string;
-  mapUrl: string;
-  lat: number;
-  lng: number;
-}
+import Image from "next/image";
+import { BRANCHES, type Branch } from "@/lib/branches";
+import BranchMap from "./BranchMap";
 
 export default function LocateUs() {
-  const [selectedBranch, setSelectedBranch] = useState<Branch | null>(null);
-
-  const branches: Branch[] = [
-    {
-      name: "Saint Joseph - Cornet Chahwan",
-      phone: "+961 79 100 023",
-      mapUrl: "https://maps.app.goo.gl/nY3A78bPXVdG6goR7",
-      lat: 33.9166823,
-      lng: 35.6336115,
-    },
-    {
-      name: "Freres - Sami El Soleh",
-      phone: "+961 79 100 025",
-      mapUrl: "https://maps.app.goo.gl/HNs3XKgWSRuZysHm9",
-      lat: 33.8713467,
-      lng: 35.5176699,
-    },
-    {
-      name: "Hooligans - Horsh Tabet",
-      phone: "+961 79 100 024",
-      mapUrl: "https://maps.app.goo.gl/TWckchEYKzvzYGGh8",
-      lat: 33.875421,
-      lng: 35.536366,
-    },
-    {
-      name: "Athletico Sports City - Dbaye",
-      phone: "+961 78 824 357",
-      mapUrl: "https://maps.app.goo.gl/tRMG1gvVwQov67bu8",
-      lat: 33.9460312,
-      lng: 35.6006699,
-    },
-    {
-      name: "Mansourieh",
-      phone: "+961 79 100 026",
-      mapUrl: "https://maps.app.goo.gl/Ukhuv7swQHE2JHJf6",
-      lat: 33.8524864,
-      lng: 35.5699343,
-    },
-    {
-      name: "Vclub - Jal el Dib",
-      phone: "+961 76 499 049",
-      mapUrl: "https://maps.app.goo.gl/6VKeRjoc45HKcfya9",
-      lat: 33.9105636,
-      lng: 35.5836163,
-    },
-    {
-      name: "Jnah",
-      phone: "+961 70 343 483",
-      mapUrl: "https://maps.app.goo.gl/Uhr4Qznqtzuv27Bi8",
-      lat: 33.8711738,
-      lng: 35.4856033,
-    },
-    {
-      name: "Sin El Fil",
-      phone: "+961 70 202030",
-      mapUrl: "https://maps.app.goo.gl/LUcjuVqpf9RnxCKM7",
-      lat: 33.8776104,
-      lng: 35.5310628,
-    },
-    {
-      name: "Champville - Dik el Mahdi",
-      phone: "+961 71 402 444",
-      mapUrl: "https://maps.app.goo.gl/rVJZNREX43geHS3VA",
-      lat: 33.9334759,
-      lng: 35.6198336,
-    },
-    {
-      name: "Country Lodge - Beit Mery",
-      phone: "+961 76 779 027",
-      mapUrl: "https://maps.app.goo.gl/JiRUoKjUAHExPdS76",
-      lat: 33.8552964,
-      lng: 35.6051484,
-    },
-  ];
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const selectedBranch = BRANCHES.find((b) => b.id === selectedId) ?? null;
 
   return (
     <section className="w-full py-10 md:py-14 lg:py-18 px-6 md:px-10 lg:px-16">
@@ -94,7 +17,7 @@ export default function LocateUs() {
         {/* Header */}
         <div className="mb-8">
           <p className="text-[#0B3E80]/60 text-sm font-semibold uppercase tracking-wide mb-1">
-            10 BRANCHES
+            {BRANCHES.length} BRANCHES
           </p>
           <h2 className="text-[#0B3E80] text-3xl font-extrabold uppercase">
             LOCATE US
@@ -107,25 +30,20 @@ export default function LocateUs() {
           <div className="lg:col-span-4 h-full">
             <div className="bg-white border border-[#E0E0E0] p-6 h-full flex flex-col">
               <div className="flex flex-col divide-y divide-[#E0E0E0]">
-                {branches.map((branch, index) => {
-                  const isSelected = selectedBranch?.name === branch.name;
+                {BRANCHES.map((branch) => {
+                  const isSelected = branch.id === selectedId;
                   return (
                     <button
-                      key={index}
-                      onClick={() => setSelectedBranch(branch)}
+                      key={branch.id}
+                      onClick={() => setSelectedId(branch.id)}
+                      aria-pressed={isSelected}
                       className={`py-4 text-left hover:bg-gray-50 transition-colors px-2 -mx-2 rounded group ${
                         isSelected ? "bg-gray-50" : ""
                       }`}
                     >
                       <div className="flex items-start justify-between gap-2">
                         <div className="flex-1">
-                          <p
-                            className={`text-base font-semibold mb-1 transition-colors ${
-                              isSelected
-                                ? "text-[#0B3E80]"
-                                : "text-[#0B3E80] group-hover:text-[#0B3E80]"
-                            }`}
-                          >
+                          <p className="text-base font-semibold mb-1 text-[#0B3E80]">
                             {branch.name}
                           </p>
                           <a
@@ -137,10 +55,10 @@ export default function LocateUs() {
                           </a>
                         </div>
                         <div
-                          className={`flex-shrink-0 text-[#0B3E80] transition-opacity ${
+                          className={`flex-shrink-0 transition-opacity ${
                             isSelected
-                              ? "opacity-100"
-                              : "opacity-0 group-hover:opacity-100"
+                              ? "opacity-100 text-[#2B87C8]"
+                              : "opacity-0 group-hover:opacity-100 text-[#0B3E80]"
                           }`}
                         >
                           <MapPinIcon />
@@ -153,23 +71,22 @@ export default function LocateUs() {
             </div>
           </div>
 
-          {/* RIGHT COLUMN - Map */}
+          {/* RIGHT COLUMN - Map with every branch pinned */}
           <div className="lg:col-span-8">
-            <div className="w-full h-full bg-gray-200 overflow-hidden rounded-lg min-h-[500px]">
-              <iframe
-                key={selectedBranch ? selectedBranch.name : "default"}
-                src={
-                  selectedBranch
-                    ? `https://maps.google.com/maps?q=${selectedBranch.lat},${selectedBranch.lng}&hl=en&z=16&output=embed`
-                    : "https://maps.google.com/maps?q=33.88,35.55&hl=en&z=11&output=embed"
-                }
-                className="w-full h-full"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="Athletico Locations"
+            <div className="relative w-full h-full bg-gray-200 overflow-hidden rounded-lg min-h-[500px] isolate">
+              <BranchMap
+                branches={BRANCHES}
+                selectedId={selectedId}
+                onSelect={setSelectedId}
               />
+
+              {selectedBranch && (
+                <BranchCard
+                  key={selectedBranch.id}
+                  branch={selectedBranch}
+                  onClose={() => setSelectedId(null)}
+                />
+              )}
             </div>
           </div>
         </div>
@@ -195,6 +112,69 @@ export default function LocateUs() {
         </div>
       </div>
     </section>
+  );
+}
+
+// ==================== SELECTED BRANCH CARD ====================
+// Floats over the map. Shows the branch photo, or a branded placeholder until
+// the club sends one (drop it in /public/branches and set `image`).
+function BranchCard({ branch, onClose }: { branch: Branch; onClose: () => void }) {
+  return (
+    <div className="absolute z-[1000] left-3 right-3 bottom-3 sm:left-4 sm:right-auto sm:bottom-4 sm:w-[300px] bg-white shadow-xl">
+      <div className="relative w-full aspect-[16/9] bg-[#0B3E80] overflow-hidden">
+        {branch.image ? (
+          <Image
+            src={branch.image}
+            alt={branch.name}
+            fill
+            className="object-cover"
+            sizes="300px"
+          />
+        ) : (
+          <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-gradient-to-br from-[#0B3E80] to-[#2B87C8]">
+            <Image
+              src="/brand/logo.png"
+              alt=""
+              width={44}
+              height={44}
+              className="w-11 h-11 object-contain opacity-90"
+            />
+            <p className="text-white/70 text-[11px] font-semibold uppercase tracking-widest">
+              Photo coming soon
+            </p>
+          </div>
+        )}
+        <button
+          onClick={onClose}
+          aria-label="Close branch details"
+          className="absolute top-2 right-2 w-8 h-8 bg-white/90 hover:bg-white text-[#0B3E80] flex items-center justify-center transition-colors"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+            <path d="M18 6 6 18M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      <div className="p-4">
+        <p className="text-[#0B3E80] font-bold leading-tight">{branch.name}</p>
+        <a
+          href={`tel:${branch.phone.replace(/\s/g, "")}`}
+          className="block text-[#0B3E80]/60 text-sm mt-1 hover:text-[#0B3E80] transition-colors"
+        >
+          {branch.phone}
+        </a>
+        <a
+          href={branch.mapUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-3 inline-flex items-center gap-2 text-[#0B3E80] text-xs font-bold uppercase tracking-wider hover:text-[#2B87C8] transition-colors"
+        >
+          Get directions
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+            <path d="M7 17 17 7M8 7h9v9" />
+          </svg>
+        </a>
+      </div>
+    </div>
   );
 }
 

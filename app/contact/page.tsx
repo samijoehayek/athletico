@@ -3,6 +3,7 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import ContactHero from "@/app/components/contact/ContactHero";
+import ContactOptions from "@/app/components/contact/ContactOptions";
 import LocateUs from "@/app/components/contact/LocateUs";
 import ContactFAQ from "@/app/components/contact/ContactFAQ";
 
@@ -14,6 +15,9 @@ export default function ContactPage() {
 
       {/* Hero Contact Section */}
       <ContactHero />
+
+      {/* Players / Marketing & sponsors / Careers */}
+      <ContactOptions />
 
       {/* Locate Us Section */}
       <div id="branches">

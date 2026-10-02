@@ -3,11 +3,18 @@
 "use client";
 
 import { useState } from "react";
+import { BRANCHES } from "@/lib/branches";
+import { TRAINING_SCHEDULE_URL } from "@/lib/site";
 
 interface FAQItem {
   question: string;
   answer: string;
+  link?: { href: string; label: string };
 }
+
+const branchPhones = BRANCHES.map(
+  (b) => `• ${b.name}: ${b.phone.replace(/^\+961\s*/, "").replace(/\s/g, "")}`,
+).join("\n");
 
 export default function ContactFAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -21,17 +28,18 @@ export default function ContactFAQ() {
     {
       question: "How can I register my child?",
       answer:
-        "Registration is handled directly with our branch admins. Call or WhatsApp the branch closest to you:\n\n• Dbayeh: 78824357\n• Cornet Chahwan: 79100023\n• Jal el Dib: 76499049\n• Sami el Soloh: 79100025\n• Mansourieh: 79100026\n• Beit Mery: 76779027\n• Horsh Tabet: 79100024\n• Jnah: 70343483\n• Champville, Dik el Mehdi: 71402444\n• Antoura: 03337875\n• Zouk Mikhael: 03337875\n• HQ (Admin/Marketing): 70202030 / 76927288",
+        `Registration is handled directly with our branch admins. Call or WhatsApp the branch closest to you:\n\n${branchPhones}\n• HQ (Admin/Marketing): 70202030 / 76927288`,
     },
     {
       question: "What are the training days and times?",
       answer:
-        "Training days and times vary by branch. Refer to our weekly schedule on Instagram (check carousel posts or story highlights for your branch).",
+        "Training days and times vary by branch. Refer to our weekly schedule on Instagram for your branch.",
+      link: { href: TRAINING_SCHEDULE_URL, label: "View training schedule" },
     },
     {
       question: "Where are the training venues located?",
       answer:
-        "We currently operate in 12 branches across Lebanon: Dbayeh, Cornet Chahwan, Jal el Dib, Sami el Soloh, Mansourieh, Beit Mery, Horsh Tabet, Jnah, Champville (Dik el Mehdi), Antoura, and Zouk Mikhael.",
+        `We currently operate in ${BRANCHES.length} branches across Lebanon: ${BRANCHES.map((b) => b.name).join(", ")}.`,
     },
     {
       question: "How long does each session last?",
@@ -94,76 +102,47 @@ export default function ContactFAQ() {
           </h2>
         </div>
 
-        {/* Three Column Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
-          {/* Left Column - FAQ Accordion */}
-          <div className="lg:col-span-6">
-            <div className="space-y-2">
-              {faqs.map((faq, index) => (
-                <div key={index} className="bg-white border border-[#e0e0e0]">
-                  {/* Question Header */}
-                  <button
-                    onClick={() => toggleFAQ(index)}
-                    className="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-gray-50 transition-colors"
-                  >
-                    <span className="text-[#0B3E80] text-base font-semibold pr-4">
-                      {faq.question}
-                    </span>
-                    <span className="text-[#0B3E80] text-xl flex-shrink-0">
-                      {openIndex === index ? "−" : "+"}
-                    </span>
-                  </button>
-
-                  {/* Answer */}
-                  {openIndex === index && (
-                    <div className="px-5 pb-4">
-                      <p className="text-[#0B3E80]/70 text-sm leading-relaxed whitespace-pre-line">
-                        {faq.answer}
-                      </p>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Middle Column - Info Card */}
-          <div className="lg:col-span-3">
-            <div className="bg-white border border-[#e0e0e0] p-6 h-full flex flex-col">
-              {/* Icon Placeholder */}
-              <div className="w-12 h-12 bg-[#0B3E80]/10 rounded flex items-center justify-center mb-4">
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="#0B3E80"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
+        {/* FAQ Accordion */}
+        <div className="max-w-4xl">
+          <div className="space-y-2">
+            {faqs.map((faq, index) => (
+              <div key={index} className="bg-white border border-[#e0e0e0]">
+                {/* Question Header */}
+                <button
+                  onClick={() => toggleFAQ(index)}
+                  className="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-gray-50 transition-colors"
                 >
-                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-                </svg>
+                  <span className="text-[#0B3E80] text-base font-semibold pr-4">
+                    {faq.question}
+                  </span>
+                  <span className="text-[#0B3E80] text-xl flex-shrink-0">
+                    {openIndex === index ? "−" : "+"}
+                  </span>
+                </button>
+
+                {/* Answer */}
+                {openIndex === index && (
+                  <div className="px-5 pb-4">
+                    <p className="text-[#0B3E80]/70 text-sm leading-relaxed whitespace-pre-line">
+                      {faq.answer}
+                    </p>
+                    {faq.link && (
+                      <a
+                        href={faq.link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-3 inline-flex items-center gap-2 text-[#0B3E80] text-xs font-bold uppercase tracking-wider hover:text-[#2B87C8] transition-colors"
+                      >
+                        {faq.link.label}
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                          <path d="M7 17 17 7M8 7h9v9" />
+                        </svg>
+                      </a>
+                    )}
+                  </div>
+                )}
               </div>
-
-              {/* Title */}
-              <h3 className="text-[#0B3E80] text-lg font-bold mb-2">
-                Do you have more questions?
-              </h3>
-
-              {/* Subtitle */}
-              <p className="text-[#0B3E80]/60 text-sm mb-6 flex-grow">
-                Meet the right platform to help realize.
-              </p>
-
-              {/* CTA Button */}
-              <a
-                href="mailto:OPERATION@ATHLETICO.COM"
-                className="w-full bg-[#0B3E80] hover:bg-[#092f5f] text-white font-semibold text-center py-3 rounded transition-colors"
-              >
-                Shoot a Direct Mail
-              </a>
-            </div>
+            ))}
           </div>
         </div>
       </div>
