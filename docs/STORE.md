@@ -14,8 +14,8 @@ panel, no commerce platform. One serverless function, one Google Sheet.
 | `/store` | Static | Landing, catalogue grid, category filtering, kit-drop band |
 | `/store/[slug]` | Static, one page per product | Product detail, Kit Customiser |
 | `/store/checkout` | Static shell, client form | Single-screen checkout |
-| `/store/order/[ref]` | Client | Confirmation, payment instructions, WhatsApp hand-off |
-| `/store/info` | Static | Shipping, payment, returns, sizing |
+| `/store/order/[ref]` | Client | Confirmation, payment summary, collection branch |
+| `/store/info` | Static | Collection, payment, sizing |
 | `/api/orders` | Serverless | Validation, server-side re-pricing, order dispatch |
 
 ### Key files
@@ -24,11 +24,12 @@ panel, no commerce platform. One serverless function, one Google Sheet.
 lib/store/
   types.ts          shared shapes (browser + server)
   catalog.ts        THE PRODUCT LIST — edit prices/stock here
-  pricing.ts        single source of truth for money, zones, payment methods
+  pricing.ts        single source of truth for money, collection ETA, payment method
   validate.ts       shared form validation
   cart-store.ts     cart state, backed by localStorage
   cart-context.tsx  React wrapper over the store
-  config.ts         club-specific values (Whish/BOB/WhatsApp)
+  config.ts         club-specific values (BOB account and QR)
+lib/branches.ts     the 10 branches — collection picker, contact map and FAQ
 app/components/store/   all UI
 app/api/orders/route.ts the only server-side code
 docs/apps-script/Code.gs the Google Apps Script for the order book
@@ -82,14 +83,15 @@ it blocks **launch**.
 
 ### 3.2 Payment details — blocks taking money
 
-- [ ] **Whish**: account name, number, and a screenshot/export of the *Whish Me*
-      QR code. Replace `public/store/whish-qr.svg`.
-- [ ] **BOB Finance**: account number, beneficiary name, and QR if they have one.
-      Replace `public/store/bob-qr.svg`.
-- [ ] Set `NEXT_PUBLIC_WHISH_NUMBER`, `NEXT_PUBLIC_WHISH_NAME`,
-      `NEXT_PUBLIC_BOB_ACCOUNT`, `NEXT_PUBLIC_BOB_NAME`.
+BOB Finance is the only payment method (no cash on delivery, no Whish): the
+customer scans the club's QR code in the BOB app and pays before ordering, so
+personalised kit is paid for before it is printed.
 
-> Until both QR files and the env vars are in place, the checkout displays an
+- [ ] **BOB Finance**: account number, beneficiary name, and the QR code.
+      Replace `public/store/bob-qr.svg`.
+- [ ] Set `NEXT_PUBLIC_BOB_ACCOUNT`, `NEXT_PUBLIC_BOB_NAME`.
+
+> Until the QR file and the env vars are in place, the checkout displays an
 > obvious yellow "setup pending" warning so placeholder details can't ship by
 > accident.
 
@@ -100,15 +102,11 @@ it blocks **launch**.
 - [ ] Deploy `docs/apps-script/Code.gs` (instructions in the file header) and set
       `ORDERS_WEBHOOK_URL` + `ORDERS_SHARED_SECRET`.
 
-### 3.4 Delivery & policy
+### 3.4 Collection
 
-- [ ] Courier chosen, and the **Zone A / Zone B fees** (currently $3 / $5 in
-      `lib/store/pricing.ts`).
-- [ ] Whether cash on delivery carries a surcharge.
-- [ ] Any free-delivery threshold the club wants.
-- [ ] **Which branches accept collection**, and their opening hours.
-- [ ] Returns policy sign-off — our draft is in `/store/info` and on every
-      product page.
+Every order is collected, free, from one of the 10 branches in
+`lib/branches.ts`, and is ready within 10–15 days (`COLLECTION_ETA` in
+`lib/store/pricing.ts`). There is no delivery and no returns policy on the site.
 
 ### 3.5 Housekeeping
 
@@ -141,8 +139,7 @@ Changing a price or stock state is a one-line edit and a deploy.
 
 The browser sends **product IDs and quantities only** — never prices. Every
 total is recomputed server-side in `/api/orders` from `catalog.ts`. This is
-verified: posting a forged `$1` price for a `$45` jersey still charges $48
-($45 + $3 delivery).
+verified: posting a forged `$1` price for a `$45` jersey still charges $45.
 
 Also enforced server-side:
 
@@ -161,8 +158,8 @@ abuse ever becomes real.
 
 **If Google is unreachable**, the order still returns a valid reference, the
 full payload is written to the server log prefixed `UNRECORDED ORDER` for
-replay, and the confirmation screen pushes the WhatsApp hand-off — so the order
-still reaches the club.
+replay. There is no WhatsApp fallback any more, so the order book (and its
+emails) must be deployed and monitored.
 
 ---
 
@@ -186,6 +183,6 @@ still reaches the club.
 
 ## 7. Not included (per the proposal)
 
-Whish/BOB API payment confirmation (needs a merchant account), card payments,
+BOB API payment confirmation (needs a merchant account), card payments,
 customer accounts, automatic stock decrement, a CMS, discount codes, courier API
 integration, Arabic/RTL, analytics dashboards.

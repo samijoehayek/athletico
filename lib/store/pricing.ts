@@ -8,22 +8,13 @@
 import { getProduct } from "./catalog";
 import type {
   CartLineInput,
-  DeliveryZoneId,
   PaymentMethodId,
   PricedCart,
   PricedLine,
 } from "./types";
 
-export const DELIVERY_ZONES: {
-  id: DeliveryZoneId;
-  label: string;
-  feeUSD: number;
-  eta: string;
-}[] = [
-  { id: "beirut", label: "Beirut & metro area", feeUSD: 3, eta: "1–2 working days" },
-  { id: "lebanon", label: "Rest of Lebanon", feeUSD: 5, eta: "2–3 working days" },
-  { id: "collect", label: "Collect from a branch", feeUSD: 0, eta: "Ready next day" },
-];
+/** Every order is collected from a branch; there is no delivery. */
+export const COLLECTION_ETA = "Ready for collection within 10–15 days";
 
 export const PAYMENT_METHODS: {
   id: PaymentMethodId;
@@ -33,30 +24,13 @@ export const PAYMENT_METHODS: {
   referenceLabel?: string;
 }[] = [
   {
-    id: "cod",
-    label: "Cash on delivery",
-    blurb: "Pay the courier when your order arrives. Nothing to do now.",
-    requiresReference: false,
-  },
-  {
-    id: "whish",
-    label: "Whish",
-    blurb: "Send the exact total from your Whish app, then enter the transaction reference below.",
-    requiresReference: true,
-    referenceLabel: "Whish transaction reference",
-  },
-  {
     id: "bob",
     label: "BOB Finance",
-    blurb: "Pay at any BoB Finance branch or from the BoB wallet, then enter the reference below.",
+    blurb: "Scan the QR code with the BOB Finance app and pay the exact total, then enter the transaction reference below.",
     requiresReference: true,
     referenceLabel: "BOB transaction reference",
   },
 ];
-
-export function getZone(id: DeliveryZoneId) {
-  return DELIVERY_ZONES.find((z) => z.id === id) ?? DELIVERY_ZONES[0];
-}
 
 export function getPaymentMethod(id: PaymentMethodId) {
   return PAYMENT_METHODS.find((m) => m.id === id) ?? PAYMENT_METHODS[0];

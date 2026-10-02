@@ -77,18 +77,15 @@ export interface PricedCart {
   errors: string[];
 }
 
-export type PaymentMethodId = "cod" | "whish" | "bob";
-export type DeliveryZoneId = "beirut" | "lebanon" | "collect";
+/** BOB Finance only — paid up front so a personalised kit can't be refused at the door. */
+export type PaymentMethodId = "bob";
 
 export interface CustomerDetails {
   name: string;
   phone: string;
   email: string;
-  zone: DeliveryZoneId;
-  address: string;
-  building: string;
-  landmark: string;
-  notes: string;
+  /** Id of the branch the order is collected from — see lib/branches.ts. */
+  branch: string;
 }
 
 export interface OrderPayload {

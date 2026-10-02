@@ -1,8 +1,12 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { whatsappLink } from "@/lib/site";
 
 export default function FloatingWhatsAppButton() {
+  // Out of the way at checkout, where it would sit on the order total.
+  if (usePathname() === "/store/checkout") return null;
+
   return (
     <a
       href={whatsappLink()}

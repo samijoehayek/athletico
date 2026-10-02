@@ -2,6 +2,7 @@
 // Shared between the checkout form and the order route, so the browser and the
 // server agree on what a valid order looks like.
 
+import { getBranch } from "../branches";
 import { PAYMENT_METHODS } from "./pricing";
 import type { CustomerDetails, PaymentMethodId } from "./types";
 
@@ -38,9 +39,9 @@ export function validateOrder(
     errors.email = "That email address doesn't look right.";
   }
 
-  // Collection orders are picked up at a branch, so no address is needed.
-  if (customer.zone !== "collect" && !customer.address?.trim()) {
-    errors.address = "Please enter a delivery address.";
+  // Every order is collected, so the branch replaces a delivery address.
+  if (!getBranch(customer.branch)) {
+    errors.branch = "Please choose the branch you'll collect from.";
   }
 
   const method = PAYMENT_METHODS.find((m) => m.id === payment.method);

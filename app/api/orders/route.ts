@@ -14,7 +14,8 @@
 // There is no database and no state between requests.
 
 import { NextResponse } from "next/server";
-import { getZone, priceCart, round2 } from "@/lib/store/pricing";
+import { getBranch } from "@/lib/branches";
+import { COLLECTION_ETA, priceCart } from "@/lib/store/pricing";
 import { hasErrors, validateOrder } from "@/lib/store/validate";
 import type { CustomerDetails, OrderPayload } from "@/lib/store/types";
 
@@ -95,14 +96,10 @@ export async function POST(request: Request) {
     name: clean(payload.customer?.name, 120),
     phone: clean(payload.customer?.phone, 40),
     email: clean(payload.customer?.email, 160),
-    zone: payload.customer?.zone ?? "beirut",
-    address: clean(payload.customer?.address, 300),
-    building: clean(payload.customer?.building, 160),
-    landmark: clean(payload.customer?.landmark, 160),
-    notes: clean(payload.customer?.notes, 600),
+    branch: clean(payload.customer?.branch, 40),
   };
   const payment = {
-    method: payload.payment?.method ?? "cod",
+    method: "bob" as const,
     reference: clean(payload.payment?.reference, 80),
   };
 
@@ -123,29 +120,29 @@ export async function POST(request: Request) {
     );
   }
 
-  const zone = getZone(customer.zone);
-  const deliveryUSD = zone.feeUSD;
-  const totalUSD = round2(priced.subtotalUSD + deliveryUSD);
+  // Validation has already rejected unknown branches.
+  const branch = getBranch(customer.branch)!;
+  // Collection is free: the total is the subtotal.
+  const totalUSD = priced.subtotalUSD;
   const reference = orderReference();
 
   const order = {
     reference,
     placedAt: new Date().toISOString(),
     customer,
-    zoneLabel: zone.label,
-    zoneEta: zone.eta,
+    branchName: branch.name,
+    collectionEta: COLLECTION_ETA,
     payment,
     lines: priced.lines,
     subtotalUSD: priced.subtotalUSD,
-    deliveryUSD,
     totalUSD,
-    status: payment.method === "cod" ? "NEW — COD" : "AWAITING PAYMENT",
+    status: "AWAITING PAYMENT",
     unavailable: priced.errors,
   };
 
-  // Forward to the order book. A failure here must not lose the order: we still
-  // return success with the reference, and the confirmation screen pushes the
-  // WhatsApp hand-off so it reaches the club regardless.
+  // Forward to the order book, which records it and sends the confirmation
+  // emails. A failure here must not lose the order: we still return success
+  // with the reference, and the full payload is logged below for replay.
   let recorded = false;
   const webhook = process.env.ORDERS_WEBHOOK_URL;
   if (webhook) {

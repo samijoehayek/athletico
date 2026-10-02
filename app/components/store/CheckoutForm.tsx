@@ -8,38 +8,36 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useMemo, useState } from "react";
+import { useState } from "react";
+import { BRANCHES } from "@/lib/branches";
 import { useCart } from "@/lib/store/cart-context";
-import { DELIVERY_ZONES, formatUSD, getZone, lineKey } from "@/lib/store/pricing";
+import { COLLECTION_ETA, formatUSD, lineKey } from "@/lib/store/pricing";
 import { hasErrors, validateOrder, type FieldErrors } from "@/lib/store/validate";
-import type { CustomerDetails, DeliveryZoneId, PaymentMethodId } from "@/lib/store/types";
+import type { CustomerDetails, PaymentMethodId } from "@/lib/store/types";
 import PaymentPanel from "./PaymentPanel";
 
 const EMPTY: CustomerDetails = {
   name: "",
   phone: "",
   email: "",
-  zone: "beirut",
-  address: "",
-  building: "",
-  landmark: "",
-  notes: "",
+  branch: "",
 };
+
+const METHOD: PaymentMethodId = "bob";
 
 export default function CheckoutForm() {
   const router = useRouter();
   const { items, priced, hydrated, clear } = useCart();
 
   const [customer, setCustomer] = useState<CustomerDetails>(EMPTY);
-  const [method, setMethod] = useState<PaymentMethodId>("cod");
   const [reference, setReference] = useState("");
   const [honeypot, setHoneypot] = useState("");
   const [errors, setErrors] = useState<FieldErrors>({});
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
 
-  const zone = getZone(customer.zone);
-  const total = useMemo(() => priced.subtotalUSD + zone.feeUSD, [priced.subtotalUSD, zone.feeUSD]);
+  // Collection is free, so the total is the subtotal.
+  const total = priced.subtotalUSD;
 
   function set<K extends keyof CustomerDetails>(key: K, value: CustomerDetails[K]) {
     setCustomer((c) => ({ ...c, [key]: value }));
@@ -50,7 +48,7 @@ export default function CheckoutForm() {
     e.preventDefault();
     if (submitting) return;
 
-    const found = validateOrder(customer, { method, reference });
+    const found = validateOrder(customer, { method: METHOD, reference });
     setErrors(found);
     if (hasErrors(found)) {
       document.querySelector<HTMLElement>("[aria-invalid='true']")?.focus();
@@ -67,7 +65,7 @@ export default function CheckoutForm() {
         body: JSON.stringify({
           items,
           customer,
-          payment: { method, reference },
+          payment: { method: METHOD, reference },
           company: honeypot,
         }),
       });
@@ -159,86 +157,48 @@ export default function CheckoutForm() {
 
           <fieldset>
             <legend className="text-[#0B3E80] font-bold uppercase text-sm tracking-wider mb-4">
-              Delivery
+              Collection
             </legend>
 
-            <div className="space-y-2 mb-5">
-              {DELIVERY_ZONES.map((z) => (
-                <label
-                  key={z.id}
-                  className={`flex items-center gap-3 border px-4 py-3.5 cursor-pointer transition-all ${
-                    z.id === customer.zone
-                      ? "border-[#0B3E80] bg-white"
-                      : "border-[#0B3E80]/25 hover:border-[#0B3E80]/60 bg-white/40"
-                  }`}
+            <Field
+              label="Collect from"
+              required
+              error={errors.branch}
+              hint={`${COLLECTION_ETA}. We'll call you when it's ready.`}
+            >
+              <span className="relative block">
+                <select
+                  value={customer.branch}
+                  onChange={(e) => set("branch", e.target.value)}
+                  aria-invalid={Boolean(errors.branch)}
+                  className={`${inputClass(errors.branch)} appearance-none pr-10 cursor-pointer`}
                 >
-                  <input
-                    type="radio"
-                    name="zone"
-                    value={z.id}
-                    checked={z.id === customer.zone}
-                    onChange={() => set("zone", z.id as DeliveryZoneId)}
-                    className="w-4 h-4 accent-[#0B3E80]"
-                  />
-                  <span className="flex-1">
-                    <span className="block text-[#0B3E80] font-bold uppercase text-sm">{z.label}</span>
-                    <span className="block text-[#0B3E80]/55 text-xs mt-0.5">{z.eta}</span>
-                  </span>
-                  <span className="text-[#0B3E80] font-bold text-sm">
-                    {z.feeUSD === 0 ? "Free" : formatUSD(z.feeUSD)}
-                  </span>
-                </label>
-              ))}
-            </div>
-
-            {customer.zone !== "collect" && (
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <Field label="Address" required error={errors.address} className="sm:col-span-2">
-                  <input
-                    type="text"
-                    autoComplete="street-address"
-                    placeholder="Street, area"
-                    value={customer.address}
-                    onChange={(e) => set("address", e.target.value)}
-                    aria-invalid={Boolean(errors.address)}
-                    className={inputClass(errors.address)}
-                  />
-                </Field>
-                <Field label="Building & floor">
-                  <input
-                    type="text"
-                    value={customer.building}
-                    onChange={(e) => set("building", e.target.value)}
-                    className={inputClass()}
-                  />
-                </Field>
-                <Field label="Nearest landmark" hint="More useful than the street name here.">
-                  <input
-                    type="text"
-                    value={customer.landmark}
-                    onChange={(e) => set("landmark", e.target.value)}
-                    className={inputClass()}
-                  />
-                </Field>
-              </div>
-            )}
-
-            <Field label="Order notes" className="mt-4">
-              <textarea
-                rows={3}
-                value={customer.notes}
-                onChange={(e) => set("notes", e.target.value)}
-                className={`${inputClass()} resize-y`}
-              />
+                  <option value="" disabled>
+                    Choose a branch
+                  </option>
+                  {BRANCHES.map((b) => (
+                    <option key={b.id} value={b.id}>
+                      {b.name}
+                    </option>
+                  ))}
+                </select>
+                <svg
+                  width="12"
+                  height="8"
+                  viewBox="0 0 12 8"
+                  fill="none"
+                  stroke="#0B3E80"
+                  strokeWidth="2"
+                  aria-hidden
+                  className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2"
+                >
+                  <path d="M1 1l5 5 5-5" />
+                </svg>
+              </span>
             </Field>
           </fieldset>
 
           <PaymentPanel
-            method={method}
-            onMethodChange={(m) => {
-              setMethod(m);
-              setErrors((e) => ({ ...e, reference: undefined }));
-            }}
             reference={reference}
             onReferenceChange={(r) => {
               setReference(r);
@@ -298,7 +258,7 @@ export default function CheckoutForm() {
 
           <div className="px-5 py-4 border-t border-[#0B3E80]/15 space-y-2 text-sm">
             <Row label="Subtotal" value={formatUSD(priced.subtotalUSD)} />
-            <Row label="Delivery" value={zone.feeUSD === 0 ? "Free" : formatUSD(zone.feeUSD)} />
+            <Row label="Collection" value="Free" />
             <div className="flex items-center justify-between pt-3 mt-1 border-t border-[#0B3E80]/15">
               <span className="text-[#0B3E80] font-bold uppercase tracking-wider">Total</span>
               <span className="text-[#0B3E80] font-bold text-2xl">{formatUSD(total)}</span>
@@ -323,7 +283,7 @@ export default function CheckoutForm() {
               {submitting ? "Placing order…" : "Place order"}
             </button>
             <p className="text-[#0B3E80]/45 text-xs mt-3 leading-relaxed text-center">
-              You&apos;ll get a confirmation email and we&apos;ll call to confirm before dispatch.
+              You&apos;ll get a confirmation email. {COLLECTION_ETA}.
             </p>
           </div>
         </aside>

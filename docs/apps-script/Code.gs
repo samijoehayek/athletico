@@ -40,13 +40,13 @@ var CONFIG = {
 var HEADERS = [
   "Reference", "Received", "Status", "Payment", "Payment ref",
   "Customer", "Phone", "Email",
-  "Zone", "Address", "Building/Floor", "Landmark", "Notes",
+  "Collect from",
   "Items", "Personalisation", "Units",
-  "Subtotal", "Delivery", "Total",
+  "Total",
 ];
 
 var STATUSES = [
-  "NEW — COD", "AWAITING PAYMENT", "PAID", "PACKED", "SHIPPED", "DELIVERED", "CANCELLED",
+  "AWAITING PAYMENT", "PAID", "PACKED", "READY FOR COLLECTION", "COLLECTED", "CANCELLED",
 ];
 
 /** Run once from the editor to build and format the order book. */
@@ -72,8 +72,8 @@ function setupSheet() {
     { text: "AWAITING PAYMENT", bg: "#FFF3CD" },
     { text: "PAID", bg: "#D4EDDA" },
     { text: "PACKED", bg: "#CCE5FF" },
-    { text: "SHIPPED", bg: "#D1ECF1" },
-    { text: "DELIVERED", bg: "#E2E3E5" },
+    { text: "READY FOR COLLECTION", bg: "#D1ECF1" },
+    { text: "COLLECTED", bg: "#E2E3E5" },
     { text: "CANCELLED", bg: "#F8D7DA" },
   ].map(function (r) {
     return SpreadsheetApp.newConditionalFormatRule()
@@ -81,7 +81,7 @@ function setupSheet() {
   });
   sheet.setConditionalFormatRules(rules);
 
-  [140, 150, 150, 120, 120, 160, 120, 200, 150, 240, 140, 160, 200, 320, 180, 70, 90, 90, 90]
+  [140, 150, 170, 120, 120, 160, 120, 200, 220, 320, 180, 70, 90]
     .forEach(function (w, i) { sheet.setColumnWidth(i + 1, w); });
 
   sheet.getRange(2, 1, sheet.getMaxRows() - 1, HEADERS.length).setVerticalAlignment("top");
@@ -141,9 +141,9 @@ function appendOrder(order) {
     paymentLabel(order.payment.method),
     order.payment.reference || "",
     c.name, c.phone, c.email,
-    order.zoneLabel, c.address, c.building, c.landmark, c.notes,
+    order.branchName,
     items, personal || "—", units,
-    order.subtotalUSD, order.deliveryUSD, order.totalUSD,
+    order.totalUSD,
   ]);
 
   // Keep the newest order visible without scrolling.
@@ -174,26 +174,18 @@ function notifyClub(order) {
     + '<div style="font-size:26px;font-weight:bold">' + esc(order.reference) + "</div></div>"
     + '<table style="width:100%;border-collapse:collapse;margin-top:16px">' + rows + "</table>"
     + '<table style="width:100%;margin-top:12px;font-size:14px">'
-    + row("Subtotal", "$" + order.subtotalUSD.toFixed(2))
-    + row("Delivery — " + esc(order.zoneLabel), "$" + order.deliveryUSD.toFixed(2))
     + '<tr><td style="padding:8px 0;font-weight:bold;border-top:2px solid #0B3E80">TOTAL</td>'
     + '<td style="padding:8px 0;text-align:right;font-weight:bold;font-size:18px;border-top:2px solid #0B3E80">$'
     + order.totalUSD.toFixed(2) + "</td></tr></table>"
     + '<div style="margin-top:20px;padding:16px;background:#f4f8fc">'
     + "<div><strong>" + esc(c.name) + "</strong></div>"
     + "<div>" + esc(c.phone) + " · " + esc(c.email) + "</div>"
-    + '<div style="margin-top:8px">' + esc(order.zoneLabel) + "</div>"
-    + (c.address ? "<div>" + esc(c.address) + "</div>" : "")
-    + (c.building ? "<div>" + esc(c.building) + "</div>" : "")
-    + (c.landmark ? '<div style="color:#666">Landmark: ' + esc(c.landmark) + "</div>" : "")
-    + (c.notes ? '<div style="margin-top:8px;font-style:italic">“' + esc(c.notes) + "”</div>" : "")
+    + '<div style="margin-top:8px">Collect from: <strong>' + esc(order.branchName) + "</strong></div>"
     + "</div>"
-    + '<div style="margin-top:16px;padding:12px;border-left:4px solid '
-    + (order.payment.method === "cod" ? "#2e8b57" : "#d98324") + ';background:#fafafa">'
+    + '<div style="margin-top:16px;padding:12px;border-left:4px solid #d98324;background:#fafafa">'
     + "<strong>" + paymentLabel(order.payment.method) + "</strong>"
     + (order.payment.reference ? "<br>Reference: <strong>" + esc(order.payment.reference) + "</strong>" : "")
-    + (order.payment.method !== "cod"
-        ? '<br><span style="color:#d98324">Check this transfer before packing.</span>' : "")
+    + '<br><span style="color:#d98324">Check this payment before preparing the order.</span>'
     + "</div></div>";
 
   MailApp.sendEmail({
@@ -214,22 +206,19 @@ function notifyCustomer(order) {
       + "</li>";
   }).join("");
 
-  var awaiting = order.payment.method !== "cod";
   var html =
     '<div style="font-family:Helvetica,Arial,sans-serif;max-width:600px;color:#12203a">'
     + '<div style="background:#0B3E80;color:#fff;padding:24px">'
     + '<div style="font-size:11px;letter-spacing:2px;opacity:.7">ORDER RECEIVED</div>'
     + '<div style="font-size:24px;font-weight:bold">' + esc(order.reference) + "</div></div>"
     + '<div style="padding:24px 0"><p>Thanks ' + esc(order.customer.name.split(" ")[0])
-    + " — we've got your order and we'll call to confirm before it goes out.</p>"
+    + " — we've got your order and we'll call you when it's ready for collection.</p>"
     + "<ul>" + items + "</ul>"
     + "<p><strong>Total: $" + order.totalUSD.toFixed(2) + "</strong><br>"
-    + esc(order.zoneLabel) + " · " + esc(order.zoneEta) + "</p>"
-    + (awaiting
-        ? '<p style="padding:12px;background:#FFF3CD;border-left:4px solid #FFE400">'
-          + "We're checking your " + paymentLabel(order.payment.method)
-          + " transfer. Your order is packed as soon as it clears.</p>"
-        : "<p>You'll pay the courier when your order arrives.</p>")
+    + "Collect from " + esc(order.branchName) + " · " + esc(order.collectionEta) + "</p>"
+    + '<p style="padding:12px;background:#FFF3CD;border-left:4px solid #FFE400">'
+    + "We're checking your " + paymentLabel(order.payment.method)
+    + " payment. Your order is prepared as soon as it clears.</p>"
     + "<p style=\"color:#666;font-size:13px\">Questions? Reply to this email and quote "
     + esc(order.reference) + ".</p></div></div>";
 
@@ -242,12 +231,8 @@ function notifyCustomer(order) {
 }
 
 // ─── helpers ───────────────────────────────────────────────────────────────
-function paymentLabel(m) {
-  return m === "whish" ? "Whish" : m === "bob" ? "BOB Finance" : "Cash on delivery";
-}
-function row(label, value) {
-  return '<tr><td style="padding:4px 0;color:#666">' + label
-    + '</td><td style="padding:4px 0;text-align:right">' + value + "</td></tr>";
+function paymentLabel() {
+  return "BOB Finance";
 }
 function esc(s) {
   return String(s == null ? "" : s)

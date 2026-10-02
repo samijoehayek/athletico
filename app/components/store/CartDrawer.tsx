@@ -11,7 +11,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { useCart } from "@/lib/store/cart-context";
-import { formatUSD, lineKey } from "@/lib/store/pricing";
+import { COLLECTION_ETA, formatUSD, lineKey } from "@/lib/store/pricing";
 
 export default function CartDrawer() {
   const { isOpen, closeCart, priced, setQty, remove, count } = useCart();
@@ -175,7 +175,7 @@ export default function CartDrawer() {
                     <span className="text-white/70 text-sm uppercase tracking-wider">Subtotal</span>
                     <span className="text-white font-bold text-xl">{formatUSD(priced.subtotalUSD)}</span>
                   </div>
-                  <p className="text-white/40 text-xs mb-4">Delivery calculated at checkout.</p>
+                  <p className="text-white/40 text-xs mb-4">Free collection from your branch. {COLLECTION_ETA}.</p>
                   <Link
                     href="/store/checkout"
                     onClick={closeCart}

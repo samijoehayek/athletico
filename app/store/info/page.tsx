@@ -5,13 +5,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
-import { DELIVERY_ZONES, formatUSD } from "@/lib/store/pricing";
-import { whatsappOrderLink } from "@/lib/store/config";
+import { BRANCHES } from "@/lib/branches";
+import { COLLECTION_ETA } from "@/lib/store/pricing";
+import { whatsappLink } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Shipping, Returns & Sizing — Athletico Store",
+  title: "Collection, Payment & Sizing — Athletico Store",
   description:
-    "Delivery zones and fees, returns and exchanges, and the size guide for the Athletico Sports Club store.",
+    "Branch collection, BOB Finance payment and the size guide for the Athletico Sports Club store.",
 };
 
 export default function StoreInfoPage() {
@@ -30,73 +31,35 @@ export default function StoreInfoPage() {
           </nav>
 
           <h1 className="text-[#0B3E80] font-extrabold uppercase text-4xl sm:text-5xl md:text-6xl leading-[0.9] mb-10">
-            Shipping,
+            Collection,
             <br />
-            Returns &amp; Sizing
+            Payment &amp; Sizing
           </h1>
 
-          <Block title="Delivery">
+          <Block title="Collection">
             <p className="mb-5">
-              We deliver across Lebanon. Your zone is chosen at checkout and sets the delivery fee.
+              Every order is collected from a club branch — choose yours at checkout. Collection is
+              free. {COLLECTION_ETA}, and we&apos;ll call you when your order is ready.
             </p>
-            <table className="w-full text-sm mb-4">
-              <thead>
-                <tr className="bg-[#0B3E80] text-white">
-                  <th className="text-left px-3 py-2.5 text-xs font-bold uppercase tracking-wider">Zone</th>
-                  <th className="text-left px-3 py-2.5 text-xs font-bold uppercase tracking-wider">Time</th>
-                  <th className="text-right px-3 py-2.5 text-xs font-bold uppercase tracking-wider">Fee</th>
-                </tr>
-              </thead>
-              <tbody>
-                {DELIVERY_ZONES.map((z, i) => (
-                  <tr key={z.id} className={i % 2 ? "bg-white/60" : ""}>
-                    <td className="px-3 py-2.5 font-medium text-[#0B3E80]">{z.label}</td>
-                    <td className="px-3 py-2.5 text-[#0B3E80]/70">{z.eta}</td>
-                    <td className="px-3 py-2.5 text-right text-[#0B3E80] font-medium">
-                      {z.feeUSD === 0 ? "Free" : formatUSD(z.feeUSD)}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            <p className="text-[#0B3E80]/55 text-sm">
-              Collection is free from any participating club branch and is usually ready the next
-              day. We&apos;ll call you when your order is ready.
-            </p>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 list-disc pl-4 marker:text-[#2B87C8]">
+              {BRANCHES.map((b) => (
+                <li key={b.id} className="text-[#0B3E80]">
+                  {b.name}
+                </li>
+              ))}
+            </ul>
           </Block>
 
           <Block title="Payment">
-            <p className="mb-3">Three ways to pay:</p>
-            <ul className="space-y-2 list-disc pl-4 marker:text-[#2B87C8] mb-4">
-              <li>
-                <strong className="text-[#0B3E80]">Cash on delivery</strong> — pay the courier when
-                your order arrives.
-              </li>
-              <li>
-                <strong className="text-[#0B3E80]">Whish</strong> — send the total from your Whish
-                app and enter the transaction reference at checkout.
-              </li>
-              <li>
-                <strong className="text-[#0B3E80]">BOB Finance</strong> — pay at any BoB Finance
-                branch or from the BoB wallet, then enter the reference.
-              </li>
-            </ul>
+            <p className="mb-3">
+              <strong className="text-[#0B3E80]">BOB Finance</strong> — scan the QR code at
+              checkout with the BOB Finance app, pay the exact total, then enter the transaction
+              reference.
+            </p>
             <p className="text-[#0B3E80]/55 text-sm">
-              Transfers are checked by hand before an order is packed, so please send the exact
+              Payments are checked by hand before an order is prepared, so please send the exact
               amount shown at checkout and keep your reference.
             </p>
-          </Block>
-
-          <Block title="Returns & exchanges">
-            <ul className="space-y-2 list-disc pl-4 marker:text-[#2B87C8]">
-              <li>Exchanges on unworn items with tags attached within 14 days of delivery.</li>
-              <li>
-                <strong className="text-[#0B3E80]">Personalised items cannot be returned or
-                exchanged</strong>, as they are printed to order.
-              </li>
-              <li>Faulty items are replaced or refunded in full — contact us with your reference.</li>
-              <li>Return delivery is arranged by the club; we&apos;ll talk you through it.</li>
-            </ul>
           </Block>
 
           <Block title="Sizing">
@@ -115,7 +78,7 @@ export default function StoreInfoPage() {
               The fastest way to reach us is WhatsApp. Have your order reference to hand.
             </p>
             <a
-              href={whatsappOrderLink("Hello Athletico — I have a question about the store.")}
+              href={whatsappLink("Hello Athletico — I have a question about the store.")}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-3 bg-[#0B3E80] hover:bg-[#2B87C8] text-white font-bold uppercase text-sm tracking-wider px-8 py-4 transition-colors"
