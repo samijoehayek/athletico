@@ -361,7 +361,7 @@ function AchievementCard({ achievement }: { achievement: Achievement }) {
 
   return (
     <div
-      className={`flex flex-col justify-between gap-5 p-5 md:p-6 border transition-colors ${
+      className={`flex flex-col gap-5 p-5 md:p-6 border transition-colors ${
         title
           ? "border-[#FFE400]/40 bg-white/[0.06] hover:border-[#FFE400]"
           : "border-white/15 hover:border-white/40"
@@ -378,12 +378,14 @@ function AchievementCard({ achievement }: { achievement: Achievement }) {
         <TrophyIcon className={title ? "text-[#FFE400]" : "text-white/40"} />
       </div>
 
+      {/* Title sits right under the fixed-height ranking row, so titles line
+          up across a row however long the tournament name runs. */}
       <div>
-        <h3 className="text-white font-extrabold text-xl md:text-2xl uppercase leading-tight">
-          ATHLETICO {achievement.team}
+        <h3 className="text-white font-extrabold text-2xl md:text-3xl uppercase leading-tight">
+          {achievement.ageCategory} ({achievement.team})
         </h3>
-        <p className="text-white/60 text-sm uppercase tracking-wide mt-1">
-          {achievement.ageCategory} · {achievement.tournament}
+        <p className="text-white/60 text-sm uppercase tracking-wide mt-1.5">
+          {achievement.tournament}
         </p>
       </div>
     </div>
