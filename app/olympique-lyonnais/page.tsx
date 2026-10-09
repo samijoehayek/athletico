@@ -76,6 +76,17 @@ function PartnershipIntroSection() {
                 new football cultures.
               </p>
             </div>
+
+            {/* OL International Football Academy lockup, same as the homepage */}
+            <div className="relative w-[300px] sm:w-[400px] lg:w-[480px] xl:w-[560px] aspect-[1200/292] mt-12 md:mt-16">
+              <Image
+                src="/ol/ol-academy-lockup.png"
+                alt="Olympique Lyonnais International Football Academy — Athletico Sport Club"
+                fill
+                className="object-contain object-left"
+                sizes="(max-width: 640px) 300px, (max-width: 1024px) 400px, (max-width: 1280px) 480px, 560px"
+              />
+            </div>
           </div>
 
           {/* Right Column - Crest over the photo */}
