@@ -14,11 +14,11 @@ interface Partner {
 const PARTNERS: Partner[] = [
   { name: "Matta et Associés", src: "/partners/partner1.png", width: 600, height: 350 },
   { name: "Gerimax", src: "/partners/partner2.png", width: 600, height: 492 },
-  { name: "Go Greece", src: "/partners/partner3.png", width: 600, height: 162 },
+  { name: "Go Greece", src: "/partners/partner3.png", width: 551, height: 148 },
   { name: "BOB Finance", src: "/partners/partner4.png", width: 600, height: 261 },
   { name: "Sparx", src: "/partners/partner5.png", width: 600, height: 71 },
   { name: "Technoblue", src: "/partners/partner6.png", width: 574, height: 520 },
-  { name: "Toters", src: "/partners/partner7.png", width: 600, height: 220 },
+  { name: "Toters", src: "/partners/partner7.png", width: 600, height: 191 },
 ];
 
 // Logos come in every shape, from a thin wordmark to a square badge. Fitting
