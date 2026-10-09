@@ -397,42 +397,48 @@ function AlumniSection() {
                 </div>
               ))}
             </div>
+
+            <AndManyMore className="mt-6" />
           </div>
         ) : (
           /* Desktop Layout */
           <div className="flex gap-4 lg:gap-6">
             {/* Left Sidebar - Names (30%) */}
-            <div className="w-[30%] flex" ref={namesContainerRef}>
-              {/* Names List */}
-              <div className="flex flex-col justify-between h-[500px] flex-1">
-                {alumniData.map((alumni, index) => (
-                  <button
-                    key={index}
-                    onClick={() => scrollToAlumni(index)}
-                    className={`text-left text-base lg:text-lg font-medium transition-colors duration-300 ${
-                      index === activeIndex
-                        ? "text-white"
-                        : "text-white/40 hover:text-white/50"
-                    }`}
-                  >
-                    {alumni.name}
-                  </button>
-                ))}
+            <div className="w-[30%]" ref={namesContainerRef}>
+              <div className="flex">
+                {/* Names List */}
+                <div className="flex flex-col justify-between h-[500px] flex-1">
+                  {alumniData.map((alumni, index) => (
+                    <button
+                      key={index}
+                      onClick={() => scrollToAlumni(index)}
+                      className={`text-left text-base lg:text-lg font-medium transition-colors duration-300 ${
+                        index === activeIndex
+                          ? "text-white"
+                          : "text-white/40 hover:text-white/50"
+                      }`}
+                    >
+                      {alumni.name}
+                    </button>
+                  ))}
+                </div>
+
+                {/* Vertical Progress Line - Draggable */}
+                <div
+                  ref={progressBarRef}
+                  className="relative w-[2px] bg-white/20 ml-4 h-[500px] cursor-grab active:cursor-grabbing"
+                >
+                  <div
+                    className="absolute left-0 w-full bg-[#2B87C8] transition-all duration-150"
+                    style={{
+                      height: `${indicatorHeight}%`,
+                      top: `${indicatorTop}%`,
+                    }}
+                  />
+                </div>
               </div>
 
-              {/* Vertical Progress Line - Draggable */}
-              <div
-                ref={progressBarRef}
-                className="relative w-[2px] bg-white/20 ml-4 h-[500px] cursor-grab active:cursor-grabbing"
-              >
-                <div
-                  className="absolute left-0 w-full bg-[#2B87C8] transition-all duration-150"
-                  style={{
-                    height: `${indicatorHeight}%`,
-                    top: `${indicatorTop}%`,
-                  }}
-                />
-              </div>
+              <AndManyMore className="mt-6" />
             </div>
 
             {/* Right Content (70%) */}
@@ -460,6 +466,19 @@ function AlumniSection() {
         )}
       </div>
     </section>
+  );
+}
+
+// The list is a selection, not the full roll of former players.
+function AndManyMore({ className = "" }: { className?: string }) {
+  return (
+    // Inline font so it matches the names: the global p rule would set Outfit.
+    <p
+      className={`text-[#FFE400] text-sm font-medium ${className}`}
+      style={{ fontFamily: "var(--font-qb)" }}
+    >
+      And many more
+    </p>
   );
 }
 
