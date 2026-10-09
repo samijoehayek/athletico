@@ -9,16 +9,20 @@ interface Partner {
   /** Intrinsic pixel size of the PNG, used to balance the logos optically. */
   width: number;
   height: number;
+  /** Optical correction on top of the equal-area sizing: solid, heavy marks
+   *  read bigger than thin line work at the same area. */
+  scale?: number;
 }
 
 const PARTNERS: Partner[] = [
-  { name: "Matta et Associés", src: "/partners/partner1.png", width: 600, height: 350 },
-  { name: "Gerimax", src: "/partners/partner2.png", width: 600, height: 492 },
-  { name: "Go Greece", src: "/partners/partner3.png", width: 551, height: 148 },
-  { name: "BOB Finance", src: "/partners/partner4.png", width: 600, height: 261 },
+  { name: "Matta et Associés", src: "/partners/partner1.png", width: 600, height: 350, scale: 1.12 },
+  { name: "Gerimax", src: "/partners/partner2.png", width: 600, height: 492, scale: 0.92 },
+  { name: "Go Greece", src: "/partners/partner3.png", width: 551, height: 148, scale: 1.18 },
+  { name: "BOB Finance", src: "/partners/partner4.png", width: 600, height: 261, scale: 0.82 },
   { name: "Sparx", src: "/partners/partner5.png", width: 600, height: 71 },
-  { name: "Technoblue", src: "/partners/partner6.png", width: 574, height: 520 },
+  { name: "Technoblue", src: "/partners/partner6.png", width: 574, height: 520, scale: 1.08 },
   { name: "Toters", src: "/partners/partner7.png", width: 600, height: 191 },
+  { name: "Promomedia", src: "/partners/partner8.png", width: 600, height: 323, scale: 0.95 },
 ];
 
 // Logos come in every shape, from a thin wordmark to a square badge. Fitting
@@ -29,10 +33,11 @@ const LOGO_AREA = 9000;
 const MAX_WIDTH = 240;
 const MAX_HEIGHT = 84;
 
-function logoSize({ width, height }: Partner) {
+function logoSize({ width, height, scale = 1 }: Partner) {
   const ratio = width / height;
   let h = Math.min(Math.sqrt(LOGO_AREA / ratio), MAX_HEIGHT);
   if (h * ratio > MAX_WIDTH) h = MAX_WIDTH / ratio;
+  h *= scale;
   return { w: Math.round(h * ratio), h: Math.round(h) };
 }
 
