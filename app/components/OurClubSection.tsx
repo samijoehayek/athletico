@@ -41,7 +41,7 @@ export default function OurClubSection() {
                 src="/homepage/created-with-an-idea.jpg"
                 alt="Athletico Sports Club players"
                 fill
-                className="object-cover object-[center_30%]"
+                className="object-cover object-[center_6%]"
                 sizes="(max-width: 1024px) 100vw, 55vw"
               />
             </div>
