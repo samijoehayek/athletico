@@ -258,8 +258,12 @@ function HeroSection() {
         {/* Title */}
         <div className="flex-1 px-6 md:px-12 lg:px-16">
           <div className="max-w-screen-2xl mx-auto h-full flex flex-col justify-center pb-12 md:pb-16">
-            <p className="text-[#0B3E80] font-bold text-lg sm:text-xl md:text-2xl uppercase tracking-wide mb-1">
-              ATHLETICO
+            {/* Inline font: the global p rule would otherwise put this in Outfit. */}
+            <p
+              className="text-[#0B3E80] font-bold text-lg sm:text-xl md:text-2xl uppercase tracking-wide mb-1"
+              style={{ fontFamily: "var(--font-qb)" }}
+            >
+              ATHLETICO S.C
             </p>
             <h1 className="text-[#0B3E80] font-extrabold text-[9vw] sm:text-6xl md:text-[100px] lg:text-[140px] xl:text-[180px] uppercase leading-none tracking-tight">
               ACHIEVEMENTS
