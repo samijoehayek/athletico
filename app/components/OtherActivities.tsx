@@ -2,13 +2,15 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { whatsappLink } from "@/lib/site";
+import { whatsappLink, PADEL_SPA_WHATSAPP_NUMBER } from "@/lib/site";
 
 interface Activity {
   name: string;
   image: string;
   /** Tailwind object-position class, when the subject isn't centred. */
   position?: string;
+  /** Booking number when it isn't the HQ one. */
+  whatsappNumber?: string;
 }
 
 export default function OtherActivitiesSection() {
@@ -26,6 +28,7 @@ export default function OtherActivitiesSection() {
     {
       name: "PADEL",
       image: "/activities/padel.jpg",
+      whatsappNumber: PADEL_SPA_WHATSAPP_NUMBER,
     },
   ];
 
@@ -46,6 +49,7 @@ export default function OtherActivitiesSection() {
       name: "SPA",
       image: "/activities/spa.jpg",
       position: "object-[center_62%]",
+      whatsappNumber: PADEL_SPA_WHATSAPP_NUMBER,
     },
   ];
 
@@ -109,7 +113,6 @@ export default function OtherActivitiesSection() {
                 activity={activity}
                 className="h-[240px] sm:h-[300px] md:h-[350px] lg:h-[400px]"
                 isLarge
-                whatsappUrl={whatsappUrl}
               />
             ))}
           </div>
@@ -121,7 +124,6 @@ export default function OtherActivitiesSection() {
                 key={activity.name}
                 activity={activity}
                 className="h-[200px] sm:h-[250px] md:h-[350px] lg:h-[400px]"
-                whatsappUrl={whatsappUrl}
               />
             ))}
           </div>
@@ -136,16 +138,14 @@ function ActivityCard({
   activity,
   className = "",
   isLarge = false,
-  whatsappUrl,
 }: {
   activity: Activity;
   className?: string;
   isLarge?: boolean;
-  whatsappUrl: string;
 }) {
   return (
     <a
-      href={whatsappUrl}
+      href={whatsappLink(undefined, activity.whatsappNumber)}
       target="_blank"
       rel="noopener noreferrer"
       className={`relative overflow-hidden group cursor-pointer block ${className}`}

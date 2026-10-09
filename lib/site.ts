@@ -5,10 +5,16 @@
 /** HQ WhatsApp, digits only with country code. */
 export const WHATSAPP_NUMBER = "96170202030";
 
+/** Padel and SPA bookings at Athletico Sports City, digits only with country code. */
+export const PADEL_SPA_WHATSAPP_NUMBER = "96176186647";
+
 export const DEFAULT_WHATSAPP_MESSAGE = "Hello! I would like to get more information.";
 
-export function whatsappLink(message: string = DEFAULT_WHATSAPP_MESSAGE): string {
-  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+export function whatsappLink(
+  message: string = DEFAULT_WHATSAPP_MESSAGE,
+  number: string = WHATSAPP_NUMBER,
+): string {
+  return `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
 }
 
 /** Instagram post with the weekly training schedules for every branch. */
