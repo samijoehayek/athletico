@@ -179,6 +179,8 @@ function AlumniSection() {
   const [isDragging, setIsDragging] = useState(false);
   const progressBarRef = useRef<HTMLDivElement>(null);
   const namesContainerRef = useRef<HTMLDivElement>(null);
+  const namesStripRef = useRef<HTMLDivElement>(null);
+  const nameButtonRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
   // Check if mobile
   useEffect(() => {
@@ -252,7 +254,9 @@ function AlumniSection() {
     };
   }, [isMobile, isDragging]);
 
-  // Handle scroll to update active index
+  // Handle scroll to update active index. Mobile and desktop render different
+  // scroll containers, so this re-attaches when the layout switches (the first
+  // render is always the desktop one).
   useEffect(() => {
     const container = scrollContainerRef.current;
     if (!container) return;
@@ -271,12 +275,35 @@ function AlumniSection() {
         }
       });
 
+      // The last profile is too short to reach the top third, so the end of
+      // the list counts as reaching it.
+      if (
+        container.scrollTop + containerHeight >=
+        container.scrollHeight - 2
+      ) {
+        newActiveIndex = contentRefs.current.length - 1;
+      }
+
       setActiveIndex(newActiveIndex);
     };
 
     container.addEventListener("scroll", handleScroll);
     return () => container.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isMobile]);
+
+  // Mobile: keep the highlighted name in view. The strip only scrolls
+  // sideways, so it is moved directly instead of with scrollIntoView, which
+  // would also jump the page.
+  useEffect(() => {
+    if (!isMobile) return;
+    const strip = namesStripRef.current;
+    const button = nameButtonRefs.current[activeIndex];
+    if (!strip || !button) return;
+    strip.scrollTo({
+      left: button.offsetLeft - (strip.clientWidth - button.offsetWidth) / 2,
+      behavior: "smooth",
+    });
+  }, [activeIndex, isMobile]);
 
   // Click handler to scroll to alumni
   const scrollToAlumni = (index: number) => {
@@ -320,10 +347,16 @@ function AlumniSection() {
           <div className="flex flex-col">
             {/* Horizontal Names Scroll */}
             <div className="relative mb-6">
-              <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
+              <div
+                ref={namesStripRef}
+                className="relative flex gap-4 overflow-x-auto pb-4 scrollbar-hide"
+              >
                 {alumniData.map((alumni, index) => (
                   <button
                     key={index}
+                    ref={(el) => {
+                      nameButtonRefs.current[index] = el;
+                    }}
                     onClick={() => scrollToAlumni(index)}
                     className={`whitespace-nowrap text-sm font-medium transition-colors duration-300 ${
                       index === activeIndex
