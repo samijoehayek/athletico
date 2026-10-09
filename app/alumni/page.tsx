@@ -128,21 +128,38 @@ function AlumniSection() {
     },
     {
       name: "Andrew Sawaya",
-      // Portrait only, by request: no bio copy and no Instagram handle.
-      bio: [],
+      bio: [
+        "Andrew Sawaya joined Athletico in 2012, starting at the Saint Joseph branch before moving to Dbayeh. He spent 4 to 5 years at the club, playing mainly as a left winger.",
+        "After Athletico, Andrew played for Nejmeh, Ahed, and Safa.",
+        "His most memorable Athletico moments include competing in the U16 league and travelling on all of the club's trips.",
+        "His advice to young Athletico players: Keep working hard and enjoy the game.",
+      ],
+      instagram: "andrew_sawaya",
       image: "/alumni/andrew-sawaya.jpg",
     },
-    // Portrait only, by request: no bio copy and no Instagram handle.
     {
       name: "Gabriel Bassil",
-      bio: [],
+      bio: [
+        "Gabriel Bassil joined Athletico at the age of 5 at the Dbayeh branch and spent 13 years with the club. He played as a defensive midfielder (CDM).",
+        "After Athletico, Gabriel continued his journey with Sagesse.",
+        "His most memorable Athletico moment was the U16 championship.",
+        "His advice to young Athletico players: Pressure is a privilege. It means things are expected of you.",
+      ],
+      instagram: "gabbassil",
       image: "/alumni/gabriel-bassil.jpg",
     },
     {
       name: "Omar Khoury",
-      bio: [],
+      bio: [
+        "Omar Khoury joined Athletico at the age of 5 at the Dbayeh branch and spent 13 years with the club. He played as a left back / left winger (LB/LW).",
+        "After Athletico, Omar continued with Hekmeh.",
+        "His most memorable Athletico moments include winning the Lebanese League in 2023 and earning promotion to Division 3.",
+        "His advice to young Athletico players: Keep believing. Hard work and sacrifice will pay off.",
+      ],
+      instagram: "omar.khoury",
       image: "/alumni/omar-khoury.jpg",
     },
+    // Portrait only for now: no bio copy and no Instagram handle yet.
     {
       name: "Paul Kater",
       bio: [],
