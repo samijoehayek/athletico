@@ -1,6 +1,8 @@
 "use client";
 
-// Mirrors FoundersSection's metrics: same title size/tracking, same divider,
+import Image from "next/image";
+
+// Mirrors FoundersSection's metrics: logo in the title slot, same divider,
 // same single full-width white card sitting on the navy page.
 export default function FoundationSection() {
   const paragraphs = [
@@ -13,15 +15,16 @@ export default function FoundationSection() {
 
   return (
     <section className="mt-20 md:mt-24">
-      {/* Section Title */}
-      <h3
-        className="text-white font-semibold uppercase tracking-widest"
-        style={{
-          fontSize: "30px",
-          letterSpacing: "0.1em",
-        }}
-      >
-        ATHLETICO FOUNDATION
+      {/* Section Title — the Foundation logo stands in for the text title */}
+      <h3>
+        <Image
+          src="/team/athletico-foundation.png"
+          alt="Athletico Foundation"
+          width={1000}
+          height={260}
+          className="w-[260px] sm:w-[320px] md:w-[380px] h-auto"
+          sizes="(max-width: 640px) 260px, (max-width: 768px) 320px, 380px"
+        />
       </h3>
 
       {/* Divider Line */}
