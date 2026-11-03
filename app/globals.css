@@ -53,3 +53,29 @@ li {
     transform: translateY(0);
   }
 }
+
+/* Printing. Used to generate the Terms & Conditions PDF (scripts/build-terms-pdf.sh)
+   and by anyone printing a page from the browser. Margin boxes put page numbers
+   in the footer on browsers that support them (Chrome 131+); others ignore them. */
+@media print {
+  @page {
+    size: A4;
+    margin: 18mm 16mm 20mm;
+
+    @bottom-center {
+      content: "Page " counter(page) " of " counter(pages);
+      font-size: 9pt;
+      color: #6b7a90;
+    }
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+  }
+
+  /* Next.js dev-tools badge, present only when printing from `next dev`. */
+  nextjs-portal {
+    display: none !important;
+  }
+}

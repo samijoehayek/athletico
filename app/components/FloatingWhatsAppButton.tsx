@@ -25,6 +25,7 @@ export default function FloatingWhatsAppButton() {
         transition-all duration-300 ease-out
         hover:scale-110
         active:scale-95
+        print:hidden
       "
     >
       {/* WhatsApp SVG Icon */}
