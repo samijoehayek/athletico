@@ -57,7 +57,9 @@ var CONFIG = {
 };
 
 function secret_() {
-  return PropertiesService.getScriptProperties().getProperty("SHARED_SECRET") || "";
+  // Trimmed: a space or line break picked up while pasting into Script
+  // properties would otherwise make every request "unauthorised".
+  return String(PropertiesService.getScriptProperties().getProperty("SHARED_SECRET") || "").trim();
 }
 function notifyList_() {
   var raw = PropertiesService.getScriptProperties().getProperty("NOTIFY_EMAILS") || "";
