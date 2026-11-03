@@ -215,7 +215,7 @@ function doPost(e) {
 }
 
 function doGet() {
-  return json_({ ok: true, service: "athletico-order-book", version: 3 });
+  return json_({ ok: true, service: "athletico-order-book", version: 4 });
 }
 
 // ─── Actions ───────────────────────────────────────────────────────────────
@@ -372,7 +372,7 @@ function diagnose_() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   return {
     ok: true,
-    version: 3,
+    version: 4,
     spreadsheet: { name: ss.getName(), url: ss.getUrl(), timezone: ss.getSpreadsheetTimeZone(), locale: ss.getSpreadsheetLocale() },
     tabs: ss.getSheets().map(function (sh) {
       return {
@@ -461,7 +461,7 @@ function notifyClub_(order) {
   MailApp.sendEmail({
     to: to.join(","),
     replyTo: order.customer.email,
-    subject: "New order " + order.reference + " — $" + order.totalUSD.toFixed(2) + " (pending payment)",
+    subject: testTag_(order) + "New order " + order.reference + " — $" + order.totalUSD.toFixed(2) + " (pending payment)",
     htmlBody: html,
     name: "Athletico Store",
   });
@@ -500,7 +500,7 @@ function notifyCustomer_(order) {
 
   MailApp.sendEmail({
     to: order.customer.email,
-    subject: CONFIG.CLUB_NAME + " — order " + order.reference + " received",
+    subject: testTag_(order) + CONFIG.CLUB_NAME + " — order " + order.reference + " received",
     htmlBody: html,
     name: "Athletico Store",
   });
@@ -557,12 +557,17 @@ function findOrderRow_(orders, reference) {
     .createTextFinder(String(reference)).matchEntireCell(true).findNext();
   return hit ? hit.getRow() : 0;
 }
+/** "BOB Wallet", "Card", … from the website's label, flagged when simulated. */
 function methodLabel_(payment) {
-  switch (payment && payment.method) {
-    case "card": return "Card";
-    case "bob": return "BOB Finance";
-    default: return payment && payment.method ? String(payment.method) : "";
-  }
+  if (!payment) return "";
+  var known = { "card": "Card", "bob-wallet": "BOB Wallet", "bob": "BOB Finance" };
+  var label = payment.label || known[payment.method] || String(payment.method || "");
+  return payment.simulated && label.indexOf("simulated") === -1 ? label + " (simulated)" : label;
+}
+
+/** Subject prefix for orders paid through the website's test simulator. */
+function testTag_(order) {
+  return order.payment && order.payment.simulated ? "[TEST] " : "";
 }
 function esc_(s) {
   return String(s == null ? "" : s)
