@@ -113,10 +113,33 @@ personalised kit is paid for before it is printed.
 
 ### 3.3 Order book — blocks receiving orders
 
-- [ ] A **Google account** to own the order sheet (the club's, not ours).
-- [ ] The **staff email addresses** that should be notified of each order.
-- [ ] Deploy `docs/apps-script/Code.gs` (instructions in the file header) and set
-      `ORDERS_WEBHOOK_URL` + `ORDERS_SHARED_SECRET`.
+The order book is a Google Sheet with an Apps Script web app
+(`docs/apps-script/Code.gs`, setup steps in its header), called only by the
+site's server through `lib/store/order-book.ts`. It is the shop's only store
+of orders.
+
+- **Items** tab: one row per item, in the columns of the club's paper order
+  sheet (DATE, ORDER, NAME, PHONE, DESCR, SIZE, QTY, COLOR, NAME TO PRINT,
+  NUMBER, BRANCH) plus PRICE, PAYMENT and a coloured STATUS dropdown. NAME is
+  the player's name from checkout, or the buyer's when left empty.
+- **Orders** tab: one row per order with the payment state (written by the
+  site only), totals, gateway references, T&C version and the full order as
+  JSON in a hidden column.
+- Item STATUS: `PENDING PAYMENT` → `PAID` (set by the site once a payment is
+  verified; until the payment integrations land, staff set it by hand after
+  checking the BOB reference) → `ORDERED` → `READY FOR COLLECTION` →
+  `COLLECTED`, plus `PAYMENT FAILED`, `CANCELLED`, `REFUNDED`.
+- Actions `createOrder`, `markPaid`, `markFailed`, `getOrder` are idempotent
+  and run under a script lock: a repeated payment notification never
+  duplicates a row or an email.
+- On a new order it emails the staff in `NOTIFY_EMAILS` and sends the customer
+  the acknowledgement of receipt (clause 5.2 of the Terms).
+
+Still needed:
+
+- [x] A Google account to own the sheet: the club's marketing account.
+- [ ] The **staff email addresses** for new orders (`NOTIFY_EMAILS`).
+- [ ] Deploy it and set `ORDERS_WEBHOOK_URL` + `ORDERS_SHARED_SECRET` on Vercel.
 
 ### 3.4 Collection
 
