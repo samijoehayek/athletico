@@ -14,10 +14,14 @@ panel, no commerce platform. One serverless function, one Google Sheet.
 | `/store` | Static | Landing, catalogue grid, category filtering, kit-drop band |
 | `/store/[slug]` | Static, one page per product | Product detail, Kit Customiser |
 | `/store/checkout` | Static shell, client form | Single-screen checkout |
-| `/store/order/[ref]` | Client | Confirmation, payment summary, collection branch |
+| `/store/order/[ref]?t=` | Client, polls the API | The order page: pending / paid / failed (with "try again"), read from the order sheet |
+| `/store/pay/simulate` | Dynamic, non-production only | Payment simulator standing in for the bank page and the BOB app |
 | `/store/info` | Static | Collection, payment, sizing |
 | `/terms` | Static | Terms and Conditions of Sale, with PDF download |
-| `/api/orders` | Serverless | Validation, server-side re-pricing, order dispatch |
+| `/api/orders` | Serverless | Validation, server-side re-pricing, saves the order, starts the payment |
+| `/api/orders/[ref]` | Serverless | Order status for the order page (token required) |
+| `/api/orders/[ref]/retry` | Serverless | Restart a failed payment for the same order |
+| `/api/payments/simulate` | Serverless, non-production only | The simulator's approve / decline |
 
 ### Key files
 
@@ -25,14 +29,19 @@ panel, no commerce platform. One serverless function, one Google Sheet.
 lib/store/
   types.ts          shared shapes (browser + server)
   catalog.ts        THE PRODUCT LIST — edit prices/stock here
-  pricing.ts        single source of truth for money, collection ETA, payment method
+  pricing.ts        single source of truth for money and the collection ETA
   validate.ts       shared form validation
   cart-store.ts     cart state, backed by localStorage
   cart-context.tsx  React wrapper over the store
-  config.ts         club-specific values (BOB account and QR)
+  order-book.ts     server client for the order sheet (Apps Script)
+lib/payments/
+  methods.ts        payment methods offered at checkout (BOB Wallet, card)
+  providers.ts      which methods are on, and how each payment starts
+  orders.ts         loads an order back from the sheet for the order page
+  token.ts          signed links to order pages
 lib/branches.ts     the 10 branches — collection picker, contact map and FAQ
 app/components/store/   all UI
-app/api/orders/route.ts the only server-side code
+app/api/            orders, order status / retry, payment simulator
 docs/apps-script/Code.gs the Google Apps Script for the order book
 ```
 
@@ -97,19 +106,34 @@ Still open with the club:
       on the back) is still in the code for when it is; it needs a price, sizes,
       a front photo and a flat straight-on photo of the back.
 
-### 3.2 Payment details — blocks taking money
+### 3.2 Payments — blocks taking money
 
-BOB Finance is the only payment method (no cash on delivery, no Whish): the
-customer scans the club's QR code in the BOB app and pays before ordering, so
-personalised kit is paid for before it is printed.
+Two methods, each offered at checkout only once its credentials are set
+(`lib/payments/providers.ts`):
 
-- [ ] **BOB Finance**: account number, beneficiary name, and the QR code.
-      Replace `public/store/bob-qr.svg`.
-- [ ] Set `NEXT_PUBLIC_BOB_ACCOUNT`, `NEXT_PUBLIC_BOB_NAME`.
+- **BOB Wallet**: the customer enters their BOB Finance mobile number and
+  approves a payment request in the BOB app (BOB merchant checkout API).
+- **Card**: Visa / Mastercard on Bank of Beirut's Mastercard Gateway hosted
+  payment page; card details never touch this site.
 
-> Until the QR file and the env vars are in place, the checkout displays an
-> obvious yellow "setup pending" warning so placeholder details can't ship by
-> accident.
+The flow is the same for both:
+1. `/api/orders` re-prices the cart, validates, and writes the order to the
+   order sheet as PENDING PAYMENT. If the sheet can't be reached the customer
+   gets an error and no payment starts.
+2. The payment starts: a redirect to the payment page, or a BOB push.
+3. The customer lands on `/store/order/ATH-…?t=…`, which polls the order's
+   status. The link carries an HMAC token, so a reference alone reveals nothing.
+4. When the gateway confirms, the order sheet's `markPaid` flips the order and
+   its items to PAID, once; a failure flips them to PAYMENT FAILED and the page
+   offers "try again" (same order, new payment attempt).
+
+Until real credentials exist, `PAYMENTS_SIMULATOR=1` stands in for both
+methods on local and preview deployments (never on production): its page has
+Approve / Decline buttons that drive the real order sheet, and simulated
+orders are marked "(simulated)" and "[TEST]" in the sheet and emails.
+
+- [ ] Card: MPGS merchant ID and integration password (step 5).
+- [ ] BOB Wallet: API key, merchant path, whitelisted server IP (step 6).
 
 ### 3.3 Order book — blocks receiving orders
 
@@ -236,15 +260,14 @@ emails) must be deployed and monitored.
    invisible until JavaScript hydrated. It now uses the `fadeInUp` keyframes
    already defined in `globals.css`, which run on paint regardless of JS.
    Framer Motion still drives the cart drawer, size-guide drawer and lightbox.
-3. **`next.config.ts` gained `dangerouslyAllowSVG`** so `next/image` can serve
-   SVGs. Safe here because every SVG is our own file in `/public`. The
-   placeholder product SVGs are gone; the setting stays until the BOB QR
-   (`public/store/bob-qr.svg`) is replaced by the payment integration.
+3. **`next.config.ts` has `dangerouslyAllowSVG`** so `next/image` can serve
+   SVGs. Safe here because every SVG is our own file in `/public`. The store
+   no longer uses any; it stays for site graphics such as `/brand/arrow.svg`.
 
 ---
 
 ## 8. Not included (per the proposal)
 
-BOB API payment confirmation (needs a merchant account), card payments,
-customer accounts, automatic stock decrement, a CMS, discount codes, courier API
+BOB Wallet and card payments were outside the original proposal and are now
+being added (section 3.2). Still not included: customer accounts, automatic stock decrement, a CMS, discount codes, courier API
 integration, Arabic/RTL, analytics dashboards.
