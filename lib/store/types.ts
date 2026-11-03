@@ -118,6 +118,12 @@ export interface OrderPayload {
   items: CartLineInput[];
   customer: CustomerDetails;
   payment: { method: PaymentMethodId; reference: string };
+  /**
+   * The customer ticked "I agree to the Terms and Conditions of Sale" (clause
+   * 1.2 of the Terms requires it). The server records which version was in
+   * force; it never trusts a version id sent by the browser.
+   */
+  termsAccepted: boolean;
   /** Honeypot — must be empty. Bots fill it, humans never see it. */
   company?: string;
 }

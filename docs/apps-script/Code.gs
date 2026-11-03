@@ -42,7 +42,7 @@ var HEADERS = [
   "Customer", "Phone", "Email",
   "Collect from",
   "Items", "Personalisation", "Units",
-  "Total",
+  "Total", "T&C version",
 ];
 
 var STATUSES = [
@@ -81,7 +81,7 @@ function setupSheet() {
   });
   sheet.setConditionalFormatRules(rules);
 
-  [140, 150, 170, 120, 120, 160, 120, 200, 220, 320, 180, 70, 90]
+  [140, 150, 170, 120, 120, 160, 120, 200, 220, 320, 180, 70, 90, 110]
     .forEach(function (w, i) { sheet.setColumnWidth(i + 1, w); });
 
   sheet.getRange(2, 1, sheet.getMaxRows() - 1, HEADERS.length).setVerticalAlignment("top");
@@ -144,6 +144,8 @@ function appendOrder(order) {
     order.branchName,
     items, personal || "—", units,
     order.totalUSD,
+    // Version of the Terms and Conditions of Sale the customer accepted (clause 1.2).
+    order.termsVersion || "",
   ]);
 
   // Keep the newest order visible without scrolling.

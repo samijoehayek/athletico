@@ -15,8 +15,9 @@
 
 import { NextResponse } from "next/server";
 import { getBranch } from "@/lib/branches";
+import { TERMS_VERSION } from "@/lib/legal/terms";
 import { COLLECTION_ETA, priceCart } from "@/lib/store/pricing";
-import { hasErrors, validateOrder } from "@/lib/store/validate";
+import { TERMS_NOT_ACCEPTED, hasErrors, validateOrder } from "@/lib/store/validate";
 import type { CustomerDetails, OrderPayload } from "@/lib/store/types";
 
 export const runtime = "nodejs";
@@ -104,6 +105,8 @@ export async function POST(request: Request) {
   };
 
   const fieldErrors = validateOrder(customer, payment);
+  // Clause 1.2 of the Terms: no order without ticking the acceptance box.
+  if (payload.termsAccepted !== true) fieldErrors.terms = TERMS_NOT_ACCEPTED;
   if (hasErrors(fieldErrors)) {
     return NextResponse.json(
       { ok: false, error: "Please check the highlighted fields.", fieldErrors },
@@ -133,6 +136,9 @@ export async function POST(request: Request) {
     branchName: branch.name,
     collectionEta: COLLECTION_ETA,
     payment,
+    // The version in force when the order was placed (clause 1.2: "We keep an
+    // electronic record of your acceptance and of the version accepted").
+    termsVersion: TERMS_VERSION.id,
     lines: priced.lines,
     subtotalUSD: priced.subtotalUSD,
     totalUSD,

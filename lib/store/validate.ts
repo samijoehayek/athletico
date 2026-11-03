@@ -6,7 +6,10 @@ import { getBranch } from "../branches";
 import { PAYMENT_METHODS } from "./pricing";
 import type { CustomerDetails, PaymentMethodId } from "./types";
 
-export type FieldErrors = Partial<Record<keyof CustomerDetails | "reference", string>>;
+export type FieldErrors = Partial<Record<keyof CustomerDetails | "reference" | "terms", string>>;
+
+export const TERMS_NOT_ACCEPTED =
+  "Please confirm you have read and accept the Terms and Conditions of Sale.";
 
 /** Lebanese numbers are 7–8 digits after the country code; we accept either form. */
 export function isValidLebanesePhone(raw: string): boolean {

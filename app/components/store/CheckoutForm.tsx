@@ -10,9 +10,15 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { BRANCHES } from "@/lib/branches";
+import { TERMS_PATH } from "@/lib/legal/terms";
 import { useCart } from "@/lib/store/cart-context";
 import { COLLECTION_ETA, formatUSD, lineKey } from "@/lib/store/pricing";
-import { hasErrors, validateOrder, type FieldErrors } from "@/lib/store/validate";
+import {
+  TERMS_NOT_ACCEPTED,
+  hasErrors,
+  validateOrder,
+  type FieldErrors,
+} from "@/lib/store/validate";
 import type { CustomerDetails, PaymentMethodId } from "@/lib/store/types";
 import PaymentPanel from "./PaymentPanel";
 
@@ -32,6 +38,7 @@ export default function CheckoutForm() {
   const [customer, setCustomer] = useState<CustomerDetails>(EMPTY);
   const [reference, setReference] = useState("");
   const [honeypot, setHoneypot] = useState("");
+  const [termsAccepted, setTermsAccepted] = useState(false);
   const [errors, setErrors] = useState<FieldErrors>({});
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -49,6 +56,7 @@ export default function CheckoutForm() {
     if (submitting) return;
 
     const found = validateOrder(customer, { method: METHOD, reference });
+    if (!termsAccepted) found.terms = TERMS_NOT_ACCEPTED;
     setErrors(found);
     if (hasErrors(found)) {
       document.querySelector<HTMLElement>("[aria-invalid='true']")?.focus();
@@ -66,12 +74,15 @@ export default function CheckoutForm() {
           items,
           customer,
           payment: { method: METHOD, reference },
+          termsAccepted,
           company: honeypot,
         }),
       });
 
       const data = await res.json();
       if (!res.ok || !data.ok) {
+        // Highlight whatever the server rejected (it re-validates every field).
+        if (data.fieldErrors) setErrors(data.fieldErrors);
         setSubmitError(data.error ?? "We couldn't place your order. Please try again.");
         setSubmitting(false);
         return;
@@ -266,6 +277,39 @@ export default function CheckoutForm() {
           </div>
 
           <div className="px-5 pb-5">
+            {/* Clause 1.2 of the Terms: acceptance is a ticked box, not implied.
+                The link opens in a new tab so the bag and the form stay put. */}
+            <label className="flex items-start gap-3 mb-4 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={termsAccepted}
+                onChange={(e) => {
+                  setTermsAccepted(e.target.checked);
+                  if (errors.terms) setErrors((er) => ({ ...er, terms: undefined }));
+                }}
+                aria-invalid={Boolean(errors.terms)}
+                aria-describedby={errors.terms ? "terms-error" : undefined}
+                className="mt-0.5 w-4 h-4 shrink-0 accent-[#0B3E80] cursor-pointer"
+              />
+              {/* Outfit, like the site's other body copy (spans default to the display font). */}
+              <span className="font-[family-name:var(--font-outfit)] text-[#0B3E80]/75 text-sm leading-relaxed">
+                I have read and accept the{" "}
+                <a
+                  href={TERMS_PATH}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#2B87C8] underline underline-offset-2 hover:text-[#0B3E80]"
+                >
+                  Terms and Conditions of Sale
+                </a>
+                .
+              </span>
+            </label>
+            {errors.terms && (
+              <p id="terms-error" className="text-[#c0392b] text-xs -mt-2 mb-4" role="alert">
+                {errors.terms}
+              </p>
+            )}
             {submitError && (
               <p className="text-[#c0392b] text-xs mb-3 leading-relaxed" role="alert">
                 {submitError}
