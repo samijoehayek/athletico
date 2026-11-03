@@ -16,6 +16,7 @@
 import { NextResponse } from "next/server";
 import { getBranch } from "@/lib/branches";
 import { TERMS_VERSION } from "@/lib/legal/terms";
+import { callOrderBook } from "@/lib/store/order-book";
 import { COLLECTION_ETA, priceCart } from "@/lib/store/pricing";
 import { TERMS_NOT_ACCEPTED, hasErrors, validateOrder } from "@/lib/store/validate";
 import type { CustomerDetails, OrderPayload } from "@/lib/store/types";
@@ -98,6 +99,7 @@ export async function POST(request: Request) {
     phone: clean(payload.customer?.phone, 40),
     email: clean(payload.customer?.email, 160),
     branch: clean(payload.customer?.branch, 40),
+    playerName: clean(payload.customer?.playerName, 120) || undefined,
   };
   const payment = {
     method: "bob" as const,
@@ -142,32 +144,18 @@ export async function POST(request: Request) {
     lines: priced.lines,
     subtotalUSD: priced.subtotalUSD,
     totalUSD,
-    status: "AWAITING PAYMENT",
+    // Every order starts unpaid; only a verified payment moves it to PAID.
+    status: "PENDING PAYMENT",
     unavailable: priced.errors,
   };
 
-  // Forward to the order book, which records it and sends the confirmation
-  // emails. A failure here must not lose the order: we still return success
-  // with the reference, and the full payload is logged below for replay.
-  let recorded = false;
-  const webhook = process.env.ORDERS_WEBHOOK_URL;
-  if (webhook) {
-    try {
-      const res = await fetch(webhook, {
-        method: "POST",
-        // text/plain avoids a CORS preflight on Apps Script and is what it reads.
-        headers: { "Content-Type": "text/plain;charset=utf-8" },
-        body: JSON.stringify({ secret: process.env.ORDERS_SHARED_SECRET ?? "", order }),
-        signal: AbortSignal.timeout(10_000),
-      });
-      recorded = res.ok;
-      if (!res.ok) console.error("[orders] order book rejected", reference, res.status);
-    } catch (err) {
-      console.error("[orders] order book unreachable", reference, err);
-    }
-  } else {
-    console.warn("[orders] ORDERS_WEBHOOK_URL not set — order not recorded:", reference);
-  }
+  // Forward to the order book (docs/apps-script/Code.gs), which writes the
+  // Items and Orders tabs and sends the acknowledgement emails. A failure here
+  // must not lose the order: we still return success with the reference, and
+  // the full payload is logged below for replay.
+  const result = await callOrderBook({ action: "createOrder", order });
+  const recorded = result.ok;
+  if (!recorded) console.error("[orders] order book did not record", reference, result.error);
 
   // Always log the full payload so a failed delivery can be replayed by hand.
   if (!recorded) console.error("[orders] UNRECORDED ORDER", JSON.stringify(order));
