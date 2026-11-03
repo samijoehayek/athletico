@@ -16,6 +16,7 @@ panel, no commerce platform. One serverless function, one Google Sheet.
 | `/store/checkout` | Static shell, client form | Single-screen checkout |
 | `/store/order/[ref]` | Client | Confirmation, payment summary, collection branch |
 | `/store/info` | Static | Collection, payment, sizing |
+| `/terms` | Static | Terms and Conditions of Sale, with PDF download |
 | `/api/orders` | Serverless | Validation, server-side re-pricing, order dispatch |
 
 ### Key files
@@ -131,7 +132,25 @@ Every order is collected, free, from one of the 10 branches in
 
 ---
 
-## 4. Editing the catalogue
+## 4. Terms and Conditions of Sale
+
+The club's T&C live in `lib/legal/`: `terms.ts` holds the version in force
+(`TERMS_VERSION`) and `terms-of-sale-2026-11.ts` the text, converted verbatim
+from the club's Google Doc. They feed three things that must never disagree:
+
+- `/terms`: the web page (contents with jump links, numbered clauses,
+  e-mails and phone numbers tappable), plus a "Cookies & storage" note that is
+  not part of the Terms;
+- the PDF behind its "Download PDF" button, `public/legal/…pdf`, which is the
+  same page printed by `scripts/build-terms-pdf.sh` (A4, page numbers);
+- the checkout: a required "I have read and accept…" checkbox. The server
+  refuses an order without it and stamps the order with `termsVersion`, which
+  the order sheet records (clause 1.2 of the Terms).
+
+To publish a new version, follow the steps at the top of `lib/legal/terms.ts`.
+Keep old PDFs: orders point at the version they were accepted under.
+
+## 5. Editing the catalogue
 
 `lib/store/catalog.ts` is the whole catalogue. It is a typed file, so a
 malformed product fails the build rather than reaching production, and every
@@ -154,7 +173,7 @@ the navy band inside the grid, headed by its first section's name.
 
 ---
 
-## 5. Security notes
+## 6. Security notes
 
 The browser sends **product IDs and quantities only** — never prices. Every
 total is recomputed server-side in `/api/orders` from `catalog.ts`. This is
@@ -182,7 +201,7 @@ emails) must be deployed and monitored.
 
 ---
 
-## 6. Deliberate deviations from the proposal
+## 7. Deliberate deviations from the proposal
 
 1. **The pinned gallery uses CSS `sticky`, not GSAP ScrollTrigger.** Identical
    visual result, survives resize and orientation change with no cleanup, and
@@ -201,7 +220,7 @@ emails) must be deployed and monitored.
 
 ---
 
-## 7. Not included (per the proposal)
+## 8. Not included (per the proposal)
 
 BOB API payment confirmation (needs a merchant account), card payments,
 customer accounts, automatic stock decrement, a CMS, discount codes, courier API
