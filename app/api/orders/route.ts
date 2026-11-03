@@ -82,9 +82,13 @@ export async function POST(request: Request) {
   }
 
   // Honeypot: a bot fills every field it finds, a human never sees this one.
-  // Answer 200 so the bot believes it succeeded and doesn't retry.
-  if (clean(payload.company)) {
-    return NextResponse.json({ ok: true, reference: orderReference(), order: null });
+  // Answer 200 so the bot believes it succeeded and doesn't retry. Logged with
+  // its reference, so a real customer caught by it (as happened when browser
+  // autofill filled the old "company" trap) can be traced from the reference.
+  if (clean(payload.hp)) {
+    const decoy = orderReference();
+    console.warn("[orders] honeypot tripped, order discarded", decoy, ip);
+    return NextResponse.json({ ok: true, reference: decoy, order: null });
   }
 
   if (!Array.isArray(payload.items) || payload.items.length === 0) {

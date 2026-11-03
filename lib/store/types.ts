@@ -131,5 +131,5 @@ export interface OrderPayload {
    */
   termsAccepted: boolean;
   /** Honeypot — must be empty. Bots fill it, humans never see it. */
-  company?: string;
+  hp?: string;
 }

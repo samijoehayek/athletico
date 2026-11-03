@@ -75,7 +75,7 @@ export default function CheckoutForm() {
           customer,
           payment: { method: METHOD, reference },
           termsAccepted,
-          company: honeypot,
+          hp: honeypot,
         }),
       });
 
@@ -236,15 +236,21 @@ export default function CheckoutForm() {
             error={errors.reference}
           />
 
-          {/* Honeypot — off-screen, never announced, never filled by a human. */}
+          {/* Honeypot: off-screen, never announced, never filled by a human.
+              Its name and label must mean nothing to browser autofill. It used
+              to be "Company", and Chrome filled it from customers' saved
+              addresses, so real orders were discarded as spam. */}
           <div aria-hidden className="absolute left-[-9999px] w-px h-px overflow-hidden">
-            <label htmlFor="company">Company</label>
+            <label htmlFor="ath-hp">Leave this field empty</label>
             <input
-              id="company"
-              name="company"
+              id="ath-hp"
+              name="ath-hp"
               type="text"
               tabIndex={-1}
               autoComplete="off"
+              data-lpignore="true"
+              data-1p-ignore
+              data-form-type="other"
               value={honeypot}
               onChange={(e) => setHoneypot(e.target.value)}
             />
