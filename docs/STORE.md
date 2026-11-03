@@ -65,21 +65,36 @@ shows placeholder payment details with a visible "setup pending" notice.
 Everything below is currently a placeholder. Nothing here blocks development —
 it blocks **launch**.
 
-### 3.1 Product content — blocks a real catalogue
+### 3.1 Product content
 
-- [ ] **Final product list**: names, descriptions, prices in USD, and the size
-      run stocked for each item. The 16 products currently in `catalog.ts` are
-      an indicative range, not the club's real one.
-- [ ] **Photography**: 2–5 images per product. At minimum one product-only shot
-      and one worn/in-play shot — the card cross-fade uses images `[0]` and `[1]`.
-      Shoot on a consistent ground, 4:5 portrait, min 1400px on the short edge.
-- [ ] **One flat, straight-on photo of the BACK of each personalisable shirt.**
-      The Kit Customiser renders the name and number onto this image, so it
-      needs to be square-on, evenly lit, and shot flat. This is the single
-      highest-value asset in the build.
-- [ ] **Size guide**: the club's own measurement table. Placeholder numbers are
-      in `app/components/store/SizeGuideDrawer.tsx`.
-- [ ] **Which products allow personalisation**, and the surcharge (currently $8).
+The catalogue now holds the club's real range: 23 products built from the 29
+lines of `merch price list.xlsx` (colours of the same item are one product with
+swatches), with the club's photos in `public/store/products/`. The photos are
+normalised by script: white background, trimmed, centred in a 1280×1600 (4:5)
+frame, JPEG q82.
+
+Still open with the club:
+
+- [ ] **Sizes**: the price list has none. Clothing uses kids' heights
+      120/130/140/150/160 (as written on the club's order sheet) plus adult
+      S–XXL; socks and sock sleeves are KIDS/ADULT; the cheer parent T-shirt is
+      adult only; bags, bottle, towel, scarf, fanion and cap are ONE SIZE.
+- [ ] **Missing colour photos**: thermal pant and top in blue and black, white
+      sock sleeves. Until they arrive these options borrow the photo they have,
+      and the product page says "Photo shows the white version"
+      (`Colourway.photoOf`).
+- [ ] **Higher-resolution photos**: fan fanion (178×236 px original), fan scarf,
+      techshirt, cotton short.
+- [ ] **Cheer parent T-shirt**: photos 2 and 3 show the same "Athletico S.C.
+      Since 2006" print, so it is sold as two designs, not three. Confirm.
+- [ ] **Size guide**: the club's measurement table. Until then the list in
+      `app/components/store/SizeGuideDrawer.tsx` is empty and the "Size guide"
+      link is hidden (`HAS_SIZE_GUIDE`).
+- [ ] **Long-sleeve polos** (white, black): photographed but not priced, so not
+      listed.
+- [ ] **Match uniform**: not sold at launch. The Kit Customiser (name and number
+      on the back) is still in the code for when it is; it needs a price, sizes,
+      a front photo and a flat straight-on photo of the back.
 
 ### 3.2 Payment details — blocks taking money
 
@@ -125,13 +140,17 @@ price change is recorded in git.
 Stock is set by hand per size:
 
 ```ts
-variants: sizes("ATH-HJ", APPAREL, { XS: "low", XXL: "out" }),
+variants: sizes("ATH-TRK", CLOTHING, { "140": "low", XXL: "out" }),
 ```
 
 `"in"` (default) · `"low"` shows a *Last few* badge · `"out"` renders the size
 struck through and is rejected by the server if someone forces it.
 
 Changing a price or stock state is a one-line edit and a deploy.
+
+A product can appear under more than one section of the price list
+(`categories: ["cheer", "gadgets"]` for the cap), and `featured: true` puts it in
+the navy band inside the grid, headed by its first section's name.
 
 ---
 
@@ -176,8 +195,9 @@ emails) must be deployed and monitored.
    already defined in `globals.css`, which run on paint regardless of JS.
    Framer Motion still drives the cart drawer, size-guide drawer and lightbox.
 3. **`next.config.ts` gained `dangerouslyAllowSVG`** so `next/image` can serve
-   the placeholder SVG product imagery. Safe here because every SVG is our own
-   file in `/public`; it can be removed once real photography lands.
+   SVGs. Safe here because every SVG is our own file in `/public`. The
+   placeholder product SVGs are gone; the setting stays until the BOB QR
+   (`public/store/bob-qr.svg`) is replaced by the payment integration.
 
 ---
 
