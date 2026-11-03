@@ -212,7 +212,7 @@ function doPost(e) {
 }
 
 function doGet() {
-  return json_({ ok: true, service: "athletico-order-book", version: 2 });
+  return json_({ ok: true, service: "athletico-order-book", version: 3 });
 }
 
 // ─── Actions ───────────────────────────────────────────────────────────────
@@ -337,7 +337,28 @@ function getOrder_(reference) {
     ok: true,
     payment: orders.getRange(row, col_(ORDER_HEADERS, "PAYMENT")).getValue(),
     order: JSON.parse(orders.getRange(row, col_(ORDER_HEADERS, "ORDER JSON")).getValue()),
+    // Per-item status from the Items tab, so the order page can show what's
+    // ready, and so a missing item row is visible from outside the Sheet.
+    items: itemRowsFor_(reference),
   };
+}
+
+function itemRowsFor_(reference) {
+  var items = sheet_(CONFIG.ITEMS_SHEET);
+  var last = items.getLastRow();
+  if (last < 2) return [];
+  var values = items.getRange(2, 1, last - 1, ITEM_HEADERS.length).getValues();
+  var out = [];
+  for (var i = 0; i < values.length; i++) {
+    if (values[i][col_(ITEM_HEADERS, "ORDER") - 1] !== reference) continue;
+    out.push({
+      row: i + 2,
+      descr: values[i][col_(ITEM_HEADERS, "DESCR") - 1],
+      size: values[i][col_(ITEM_HEADERS, "SIZE") - 1],
+      status: values[i][col_(ITEM_HEADERS, "STATUS") - 1],
+    });
+  }
+  return out;
 }
 
 function setItemStatuses_(reference, status, fromStatuses, payment) {
