@@ -31,6 +31,13 @@ export default function Footer() {
             >
               Join us
             </Link>
+
+            <Link
+              href="/terms"
+              className="text-white text-base sm:text-lg md:text-[20px] uppercase hover:opacity-70 transition-opacity"
+            >
+              Terms &amp; Conditions
+            </Link>
           </div>
 
         </div>
