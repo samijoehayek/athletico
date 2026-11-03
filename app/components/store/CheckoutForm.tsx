@@ -19,8 +19,9 @@ import {
   validateOrder,
   type FieldErrors,
 } from "@/lib/store/validate";
-import type { CustomerDetails, PaymentMethodId } from "@/lib/store/types";
-import PaymentPanel from "./PaymentPanel";
+import type { PaymentMethodId, PaymentNextStep } from "@/lib/payments/methods";
+import type { CustomerDetails } from "@/lib/store/types";
+import PaymentMethodPicker from "./PaymentMethodPicker";
 
 const EMPTY: CustomerDetails = {
   name: "",
@@ -29,14 +30,26 @@ const EMPTY: CustomerDetails = {
   branch: "",
 };
 
-const METHOD: PaymentMethodId = "bob";
-
-export default function CheckoutForm() {
+/**
+ * `methods` is what the server offers right now (decided from the payment
+ * credentials configured), `simulated` that they run on the test simulator.
+ */
+export default function CheckoutForm({
+  methods,
+  simulated,
+}: {
+  methods: PaymentMethodId[];
+  simulated: boolean;
+}) {
   const router = useRouter();
   const { items, priced, hydrated, clear } = useCart();
 
   const [customer, setCustomer] = useState<CustomerDetails>(EMPTY);
-  const [reference, setReference] = useState("");
+  // With a single method on offer there's nothing to choose.
+  const [method, setMethod] = useState<PaymentMethodId | undefined>(
+    methods.length === 1 ? methods[0] : undefined,
+  );
+  const [mobile, setMobile] = useState("");
   const [honeypot, setHoneypot] = useState("");
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [errors, setErrors] = useState<FieldErrors>({});
@@ -51,11 +64,18 @@ export default function CheckoutForm() {
     if (errors[key]) setErrors((e) => ({ ...e, [key]: undefined }));
   }
 
+  function chooseMethod(m: PaymentMethodId) {
+    setMethod(m);
+    // Most people pay from the phone they gave as contact; offer it, editable.
+    if (m === "bob-wallet" && !mobile) setMobile(customer.phone);
+    if (errors.method) setErrors((er) => ({ ...er, method: undefined }));
+  }
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (submitting) return;
 
-    const found = validateOrder(customer, { method: METHOD, reference });
+    const found = validateOrder(customer, { method, mobile }, methods);
     if (!termsAccepted) found.terms = TERMS_NOT_ACCEPTED;
     setErrors(found);
     if (hasErrors(found)) {
@@ -73,7 +93,7 @@ export default function CheckoutForm() {
         body: JSON.stringify({
           items,
           customer,
-          payment: { method: METHOD, reference },
+          payment: { method, mobile: method === "bob-wallet" ? mobile : undefined },
           termsAccepted,
           hp: honeypot,
         }),
@@ -88,14 +108,14 @@ export default function CheckoutForm() {
         return;
       }
 
-      // Hand the confirmation page everything it needs without a round trip.
-      try {
-        window.sessionStorage.setItem(`athletico-order-${data.reference}`, JSON.stringify(data.order));
-      } catch {
-        // Non-fatal: the confirmation page falls back to a minimal view.
-      }
+      // The order now exists in the club's order sheet, so the bag has done its
+      // job. Payment happens next: on the bank's page (redirect) or in the BOB
+      // app while the order page waits (await). Either way the order page,
+      // which reads the sheet, is where the customer ends up.
       clear();
-      router.push(`/store/order/${data.reference}`);
+      const next = data.next as PaymentNextStep;
+      if (next.kind === "redirect") window.location.assign(next.url);
+      else router.push(next.url);
     } catch {
       setSubmitError("We couldn't reach the server. Please check your connection and try again.");
       setSubmitting(false);
@@ -226,14 +246,17 @@ export default function CheckoutForm() {
             </Field>
           </fieldset>
 
-          <PaymentPanel
-            reference={reference}
-            onReferenceChange={(r) => {
-              setReference(r);
-              if (errors.reference) setErrors((e) => ({ ...e, reference: undefined }));
+          <PaymentMethodPicker
+            methods={methods}
+            value={method}
+            onChange={chooseMethod}
+            mobile={mobile}
+            onMobileChange={(v) => {
+              setMobile(v);
+              if (errors.mobile) setErrors((er) => ({ ...er, mobile: undefined }));
             }}
-            total={total}
-            error={errors.reference}
+            errors={{ method: errors.method, mobile: errors.mobile }}
+            simulated={simulated}
           />
 
           {/* Honeypot: off-screen, never announced, never filled by a human.
@@ -340,17 +363,26 @@ export default function CheckoutForm() {
             )}
             <button
               type="submit"
-              disabled={submitting}
+              disabled={submitting || methods.length === 0}
               className={`w-full py-4 font-bold uppercase text-sm tracking-[0.14em] transition-colors ${
                 submitting
                   ? "bg-[#0B3E80]/40 text-white cursor-wait"
-                  : "bg-[#0B3E80] text-white hover:bg-[#2B87C8]"
+                  : methods.length === 0
+                    ? "bg-[#0B3E80]/20 text-[#0B3E80]/50 cursor-not-allowed"
+                    : "bg-[#0B3E80] text-white hover:bg-[#2B87C8]"
               }`}
             >
-              {submitting ? "Placing order…" : "Place order"}
+              {submitting ? "Placing order…" : method === "card" ? "Continue to payment" : "Place order & pay"}
             </button>
+            {/* Says what happens next for the chosen method, so the bank page or the
+                BOB notification is expected rather than a surprise. */}
             <p className="text-[#0B3E80]/45 text-xs mt-3 leading-relaxed text-center">
-              You&apos;ll get a confirmation email. {COLLECTION_ETA}.
+              {method === "card"
+                ? "You'll pay on Bank of Beirut's secure page, then come back here."
+                : method === "bob-wallet"
+                  ? "You'll approve the payment in your BOB Finance app."
+                  : "Choose a payment method above."}{" "}
+              {COLLECTION_ETA}.
             </p>
           </div>
         </aside>

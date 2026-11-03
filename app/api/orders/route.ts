@@ -1,6 +1,6 @@
 // app/api/orders/route.ts
 //
-// The only server-side code in the store. It exists for four reasons, in order
+// Creates an order and starts its payment. It exists for four reasons, in order
 // of importance:
 //
 //   1. Price integrity. The browser sends product IDs and quantities — never
@@ -11,11 +11,17 @@
 //   3. Reliability. A server-to-server call to Google has no CORS class of bug.
 //   4. Abuse control. Honeypot, rate limiting and payload validation live here.
 //
-// There is no database and no state between requests.
+// There is no database: the order sheet (via lib/store/order-book.ts) is the
+// store of record. The order is written there BEFORE the payment starts, so a
+// payment can never exist for an order the club doesn't have; if the sheet
+// can't be reached, the customer gets an error and nothing is charged.
 
 import { NextResponse } from "next/server";
 import { getBranch } from "@/lib/branches";
 import { TERMS_VERSION } from "@/lib/legal/terms";
+import { isPaymentMethodId, PAYMENT_METHODS } from "@/lib/payments/methods";
+import { availableMethods, isSimulated, orderPageUrl, startPayment } from "@/lib/payments/providers";
+import { orderToken } from "@/lib/payments/token";
 import { callOrderBook } from "@/lib/store/order-book";
 import { COLLECTION_ETA, priceCart } from "@/lib/store/pricing";
 import { TERMS_NOT_ACCEPTED, hasErrors, validateOrder } from "@/lib/store/validate";
@@ -88,7 +94,11 @@ export async function POST(request: Request) {
   if (clean(payload.hp)) {
     const decoy = orderReference();
     console.warn("[orders] honeypot tripped, order discarded", decoy, ip);
-    return NextResponse.json({ ok: true, reference: decoy, order: null });
+    return NextResponse.json({
+      ok: true,
+      reference: decoy,
+      next: { kind: "await", url: `/store/order/${decoy}` },
+    });
   }
 
   if (!Array.isArray(payload.items) || payload.items.length === 0) {
@@ -105,12 +115,10 @@ export async function POST(request: Request) {
     branch: clean(payload.customer?.branch, 40),
     playerName: clean(payload.customer?.playerName, 120) || undefined,
   };
-  const payment = {
-    method: "bob" as const,
-    reference: clean(payload.payment?.reference, 80),
-  };
+  const method = isPaymentMethodId(payload.payment?.method) ? payload.payment.method : undefined;
+  const mobile = method === "bob-wallet" ? clean(payload.payment?.mobile, 40) : undefined;
 
-  const fieldErrors = validateOrder(customer, payment);
+  const fieldErrors = validateOrder(customer, { method, mobile }, availableMethods());
   // Clause 1.2 of the Terms: no order without ticking the acceptance box.
   if (payload.termsAccepted !== true) fieldErrors.terms = TERMS_NOT_ACCEPTED;
   if (hasErrors(fieldErrors)) {
@@ -134,6 +142,8 @@ export async function POST(request: Request) {
   // Collection is free: the total is the subtotal.
   const totalUSD = priced.subtotalUSD;
   const reference = orderReference();
+  // Validation has already rejected a missing or unavailable method.
+  const paymentMethod = method!;
 
   const order = {
     reference,
@@ -141,7 +151,14 @@ export async function POST(request: Request) {
     customer,
     branchName: branch.name,
     collectionEta: COLLECTION_ETA,
-    payment,
+    payment: {
+      method: paymentMethod,
+      label: PAYMENT_METHODS[paymentMethod].sheetLabel,
+      mobile,
+      // Marks orders paid through the test simulator, so they can never be
+      // mistaken for real money in the sheet.
+      simulated: isSimulated(paymentMethod) || undefined,
+    },
     // The version in force when the order was placed (clause 1.2: "We keep an
     // electronic record of your acceptance and of the version accepted").
     termsVersion: TERMS_VERSION.id,
@@ -153,18 +170,44 @@ export async function POST(request: Request) {
     unavailable: priced.errors,
   };
 
-  // Forward to the order book (docs/apps-script/Code.gs), which writes the
-  // Items and Orders tabs and sends the acknowledgement emails. A failure here
-  // must not lose the order: we still return success with the reference, and
-  // the full payload is logged below for replay.
-  const result = await callOrderBook({ action: "createOrder", order });
-  const recorded = result.ok;
-  if (!recorded) console.error("[orders] order book did not record", reference, result.error);
+  // Record the order BEFORE any payment starts. If the order sheet can't be
+  // reached, stop here: taking a payment for an order the club can't see is
+  // worse than asking the customer to try again. The payload is logged in full
+  // either way, so nothing is lost.
+  const recorded = await callOrderBook({ action: "createOrder", order });
+  if (!recorded.ok) {
+    console.error("[orders] order book did not record", reference, recorded.error);
+    console.error("[orders] UNRECORDED ORDER", JSON.stringify(order));
+    return NextResponse.json(
+      {
+        ok: false,
+        error:
+          "We couldn't save your order just now, and nothing has been charged. Please try again in a minute.",
+      },
+      { status: 503 },
+    );
+  }
 
-  // Always log the full payload so a failed delivery can be replayed by hand.
-  if (!recorded) console.error("[orders] UNRECORDED ORDER", JSON.stringify(order));
+  const started = await startPayment({
+    reference,
+    totalUSD,
+    customer: { name: customer.name, email: customer.email },
+    payment: { method: paymentMethod, mobile },
+  });
+  if (!started.ok) {
+    // The order exists (PENDING PAYMENT) but the payment couldn't start. Send
+    // the customer to its page, which offers "try again".
+    console.error("[orders] payment did not start", reference, started.error);
+    await callOrderBook({ action: "markFailed", reference, reason: started.error });
+    return NextResponse.json({
+      ok: true,
+      reference,
+      token: orderToken(reference),
+      next: { kind: "await", url: orderPageUrl(reference) },
+    });
+  }
 
-  return NextResponse.json({ ok: true, reference, recorded, order });
+  return NextResponse.json({ ok: true, reference, token: orderToken(reference), next: started.next });
 }
 
 export async function GET() {

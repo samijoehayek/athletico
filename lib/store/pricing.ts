@@ -6,35 +6,10 @@
 // and quantities, and the server works out what that actually costs.
 
 import { getProduct } from "./catalog";
-import type {
-  CartLineInput,
-  PaymentMethodId,
-  PricedCart,
-  PricedLine,
-} from "./types";
+import type { CartLineInput, PricedCart, PricedLine } from "./types";
 
 /** Every order is collected from a branch; there is no delivery. */
 export const COLLECTION_ETA = "Ready for collection within 10–15 days";
-
-export const PAYMENT_METHODS: {
-  id: PaymentMethodId;
-  label: string;
-  blurb: string;
-  requiresReference: boolean;
-  referenceLabel?: string;
-}[] = [
-  {
-    id: "bob",
-    label: "BOB Finance",
-    blurb: "Scan the QR code with the BOB Finance app and pay the exact total, then enter the transaction reference below.",
-    requiresReference: true,
-    referenceLabel: "BOB transaction reference",
-  },
-];
-
-export function getPaymentMethod(id: PaymentMethodId) {
-  return PAYMENT_METHODS.find((m) => m.id === id) ?? PAYMENT_METHODS[0];
-}
 
 export const MAX_QTY_PER_LINE = 10;
 

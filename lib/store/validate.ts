@@ -3,10 +3,12 @@
 // server agree on what a valid order looks like.
 
 import { getBranch } from "../branches";
-import { PAYMENT_METHODS } from "./pricing";
-import type { CustomerDetails, PaymentMethodId } from "./types";
+import type { PaymentMethodId } from "../payments/methods";
+import type { CustomerDetails } from "./types";
 
-export type FieldErrors = Partial<Record<keyof CustomerDetails | "reference" | "terms", string>>;
+export type FieldErrors = Partial<
+  Record<keyof CustomerDetails | "method" | "mobile" | "terms", string>
+>;
 
 export const TERMS_NOT_ACCEPTED =
   "Please confirm you have read and accept the Terms and Conditions of Sale.";
@@ -22,9 +24,14 @@ export function isValidEmail(raw: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(raw.trim());
 }
 
+/**
+ * `available` is the list of methods the server offers right now; a method
+ * outside it (switched off, or a crafted request) is rejected.
+ */
 export function validateOrder(
   customer: CustomerDetails,
-  payment: { method: PaymentMethodId; reference: string },
+  payment: { method: PaymentMethodId | undefined; mobile?: string },
+  available: PaymentMethodId[],
 ): FieldErrors {
   const errors: FieldErrors = {};
 
@@ -51,9 +58,15 @@ export function validateOrder(
     errors.branch = "Please choose the branch you'll collect from.";
   }
 
-  const method = PAYMENT_METHODS.find((m) => m.id === payment.method);
-  if (method?.requiresReference && !payment.reference?.trim()) {
-    errors.reference = "Please enter the transaction reference from your app.";
+  if (!payment.method || !available.includes(payment.method)) {
+    errors.method = "Please choose how you'd like to pay.";
+  } else if (payment.method === "bob-wallet") {
+    // The payment request is pushed to the BOB Finance app registered on this number.
+    if (!payment.mobile?.trim()) {
+      errors.mobile = "Please enter the mobile number of your BOB Finance account.";
+    } else if (!isValidLebanesePhone(payment.mobile)) {
+      errors.mobile = "Please enter a valid Lebanese mobile number, e.g. 70 202 030.";
+    }
   }
 
   return errors;

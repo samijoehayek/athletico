@@ -2,6 +2,8 @@
 // Shared shapes for the Athletico store. These types are imported by both the
 // browser and the order route handler, so anything here must stay isomorphic.
 
+import type { PaymentMethodId } from "../payments/methods";
+
 /** The sections of the club's price list (merch price list.xlsx). */
 export type Category =
   | "thermals"
@@ -103,9 +105,6 @@ export interface PricedCart {
   errors: string[];
 }
 
-/** BOB Finance only — paid up front so a personalised kit can't be refused at the door. */
-export type PaymentMethodId = "bob";
-
 export interface CustomerDetails {
   name: string;
   phone: string;
@@ -123,7 +122,11 @@ export interface CustomerDetails {
 export interface OrderPayload {
   items: CartLineInput[];
   customer: CustomerDetails;
-  payment: { method: PaymentMethodId; reference: string };
+  /**
+   * How the customer will pay. `mobile` is the BOB Wallet number the payment
+   * request is pushed to (BOB only; it may differ from the contact phone).
+   */
+  payment: { method: PaymentMethodId; mobile?: string };
   /**
    * The customer ticked "I agree to the Terms and Conditions of Sale" (clause
    * 1.2 of the Terms requires it). The server records which version was in

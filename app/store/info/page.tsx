@@ -12,7 +12,7 @@ import { whatsappLink } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Collection, Payment & Sizing — Athletico Store",
   description:
-    "Branch collection, BOB Finance payment and the size guide for the Athletico Sports Club store.",
+    "Branch collection, payment by BOB Wallet or card, and sizing for the Athletico Sports Club store.",
 };
 
 export default function StoreInfoPage() {
@@ -52,13 +52,15 @@ export default function StoreInfoPage() {
 
           <Block title="Payment">
             <p className="mb-3">
-              <strong className="text-[#0B3E80]">BOB Finance</strong> — scan the QR code at
-              checkout with the BOB Finance app, pay the exact total, then enter the transaction
-              reference.
+              <strong className="text-[#0B3E80]">BOB Wallet</strong> — enter the mobile number of
+              your BOB Finance account at checkout, then approve the payment request in the BOB app.
+            </p>
+            <p className="mb-3">
+              <strong className="text-[#0B3E80]">Card</strong> — Visa or Mastercard, paid on Bank of
+              Beirut&apos;s secure payment page. Your card details are never entered on this website.
             </p>
             <p className="text-[#0B3E80]/55 text-sm">
-              Payments are checked by hand before an order is prepared, so please send the exact
-              amount shown at checkout and keep your reference.
+              Your order is prepared once the payment is confirmed. Prices are in US dollars.
             </p>
           </Block>
 
