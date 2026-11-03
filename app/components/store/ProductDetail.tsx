@@ -6,16 +6,17 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import { defaultColourwayId } from "@/lib/store/catalog";
 import { useCart } from "@/lib/store/cart-context";
 import { COLLECTION_ETA, formatUSD } from "@/lib/store/pricing";
 import type { Product } from "@/lib/store/types";
 import KitCustomiser, { isBlocked, type PersonalisationValue } from "./KitCustomiser";
 import ProductGallery from "./ProductGallery";
-import SizeGuideDrawer from "./SizeGuideDrawer";
+import SizeGuideDrawer, { HAS_SIZE_GUIDE } from "./SizeGuideDrawer";
 
 export default function ProductDetail({ product }: { product: Product }) {
   const { add } = useCart();
-  const [colourwayId, setColourwayId] = useState(product.colourways?.[0]?.id);
+  const [colourwayId, setColourwayId] = useState(defaultColourwayId(product));
   const [size, setSize] = useState<string | null>(null);
   const [guideOpen, setGuideOpen] = useState(false);
   const [attemptedAdd, setAttemptedAdd] = useState(false);
@@ -27,6 +28,7 @@ export default function ProductDetail({ product }: { product: Product }) {
 
   const colourway = product.colourways?.find((c) => c.id === colourwayId);
   const images = colourway?.images ?? product.images;
+  const optionLabel = product.optionLabel ?? "Colour";
   const selectedVariant = product.variants.find((v) => v.size === size);
   const soldOut = product.variants.every((v) => v.stock === "out");
 
@@ -84,42 +86,76 @@ export default function ProductDetail({ product }: { product: Product }) {
             {product.colourways && product.colourways.length > 1 && (
               <div className="mt-8">
                 <p className="text-[#0B3E80]/60 text-xs uppercase tracking-wider mb-3">
-                  Colour — <span className="text-[#0B3E80]">{colourway?.name}</span>
+                  {optionLabel} — <span className="text-[#0B3E80]">{colourway?.name}</span>
                 </p>
-                <div className="flex gap-3">
-                  {product.colourways.map((c) => (
-                    <button
-                      key={c.id}
-                      type="button"
-                      onClick={() => setColourwayId(c.id)}
-                      aria-label={c.name}
-                      aria-pressed={c.id === colourwayId}
-                      className={`w-9 h-9 border transition-all ${
-                        c.id === colourwayId
-                          ? "border-[#0B3E80] ring-1 ring-[#0B3E80] ring-offset-2 ring-offset-[#F1EAEA]"
-                          : "border-[#0B3E80]/25 hover:border-[#0B3E80]"
-                      }`}
-                      style={{
-                        background: c.hexSecondary
-                          ? `linear-gradient(135deg, ${c.hex} 50%, ${c.hexSecondary} 50%)`
-                          : c.hex,
-                      }}
-                    />
-                  ))}
-                </div>
+                {optionLabel === "Design" ? (
+                  // Designs differ by print, not colour, so they're named buttons
+                  // styled like the size buttons below rather than swatches.
+                  <div className="flex flex-wrap gap-2">
+                    {product.colourways.map((c) => {
+                      const active = c.id === colourwayId;
+                      return (
+                        <button
+                          key={c.id}
+                          type="button"
+                          onClick={() => setColourwayId(c.id)}
+                          aria-pressed={active}
+                          className={`px-4 h-12 text-xs font-bold uppercase tracking-wider border transition-all ${
+                            active
+                              ? "bg-[#0B3E80] text-white border-[#0B3E80]"
+                              : "border-[#0B3E80]/30 text-[#0B3E80] hover:border-[#0B3E80] hover:bg-[#0B3E80]/5"
+                          }`}
+                        >
+                          {c.name}
+                        </button>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  <div className="flex gap-3">
+                    {product.colourways.map((c) => (
+                      <button
+                        key={c.id}
+                        type="button"
+                        onClick={() => setColourwayId(c.id)}
+                        aria-label={c.name}
+                        aria-pressed={c.id === colourwayId}
+                        className={`w-9 h-9 border transition-all ${
+                          c.id === colourwayId
+                            ? "border-[#0B3E80] ring-1 ring-[#0B3E80] ring-offset-2 ring-offset-[#F1EAEA]"
+                            : "border-[#0B3E80]/25 hover:border-[#0B3E80]"
+                        }`}
+                        style={{
+                          background: c.hexSecondary
+                            ? `linear-gradient(135deg, ${c.hex} 50%, ${c.hexSecondary} 50%)`
+                            : c.hex,
+                        }}
+                      />
+                    ))}
+                  </div>
+                )}
+                {/* This colour has no photo of its own yet; say which one is shown. */}
+                {colourway?.photoOf && (
+                  <p className="text-[#0B3E80]/60 text-xs mt-3">
+                    Photo shows the {colourway.photoOf.toLowerCase()} version.
+                  </p>
+                )}
               </div>
             )}
 
             <div className="mt-8">
               <div className="flex items-baseline justify-between mb-3">
                 <p className="text-[#0B3E80]/60 text-xs uppercase tracking-wider">Size</p>
-                <button
-                  type="button"
-                  onClick={() => setGuideOpen(true)}
-                  className="text-[#2B87C8] text-xs uppercase tracking-wider underline underline-offset-4 hover:text-[#0B3E80] transition-colors"
-                >
-                  Size guide
-                </button>
+                {/* Hidden until the club sends its measurement table. */}
+                {HAS_SIZE_GUIDE && (
+                  <button
+                    type="button"
+                    onClick={() => setGuideOpen(true)}
+                    className="text-[#2B87C8] text-xs uppercase tracking-wider underline underline-offset-4 hover:text-[#0B3E80] transition-colors"
+                  >
+                    Size guide
+                  </button>
+                )}
               </div>
               <div className="flex flex-wrap gap-2">
                 {product.variants.map((v) => {
@@ -186,13 +222,16 @@ export default function ProductDetail({ product }: { product: Product }) {
             )}
 
             <div className="mt-10 border-t border-[#0B3E80]/15">
-              <Accordion title="Details & care" defaultOpen>
-                <ul className="space-y-1.5 list-disc pl-4 marker:text-[#2B87C8]">
-                  {product.details.map((d) => (
-                    <li key={d}>{d}</li>
-                  ))}
-                </ul>
-              </Accordion>
+              {/* Only when the club supplies material / fit details for the item. */}
+              {product.details && product.details.length > 0 && (
+                <Accordion title="Details & care" defaultOpen>
+                  <ul className="space-y-1.5 list-disc pl-4 marker:text-[#2B87C8]">
+                    {product.details.map((d) => (
+                      <li key={d}>{d}</li>
+                    ))}
+                  </ul>
+                </Accordion>
+              )}
               <Accordion title="Collection">
                 <p>Free collection from your club branch. {COLLECTION_ETA}.</p>
               </Accordion>
@@ -201,7 +240,7 @@ export default function ProductDetail({ product }: { product: Product }) {
         </div>
       </div>
 
-      <SizeGuideDrawer open={guideOpen} onClose={() => setGuideOpen(false)} />
+      {HAS_SIZE_GUIDE && <SizeGuideDrawer open={guideOpen} onClose={() => setGuideOpen(false)} />}
     </section>
   );
 }

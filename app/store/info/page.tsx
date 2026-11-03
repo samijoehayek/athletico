@@ -64,9 +64,8 @@ export default function StoreInfoPage() {
 
           <Block title="Sizing">
             <p className="mb-3">
-              Apparel runs XS to XXL. Our match shirts are cut close — if you are between sizes, size
-              up. A full measurement table is on every product page under{" "}
-              <em>Size guide</em>.
+              Clothing comes in kids&apos; sizes by height (120 to 160 cm) and adult sizes S to XXL.
+              Socks and sock sleeves come in kids and adult.
             </p>
             <p className="text-[#0B3E80]/55 text-sm">
               Not sure? Message us before you order and we&apos;ll help you pick.

@@ -2,10 +2,11 @@
 
 // app/components/store/StoreCatalogue.tsx
 //
-// Category filtering is client-side with a Framer Motion layout transition —
-// no page reload for a sixteen-product range. The kit-drop band is injected
-// after the first row when nothing is filtered, so it breaks the grid rather
-// than sitting above or below it.
+// Category filtering is client-side — no page reload for a range this size.
+// A product can sit in more than one section of the club's price list, so the
+// filter matches any of its categories. The featured band is injected after
+// the first row when nothing is filtered, so it breaks the grid rather than
+// sitting above or below it.
 
 import { useMemo, useState } from "react";
 import { CATEGORIES, PRODUCTS } from "@/lib/store/catalog";
@@ -19,7 +20,7 @@ export default function StoreCatalogue({ featured }: { featured: Product | null 
   const [active, setActive] = useState<Category | "all">("all");
 
   const products = useMemo(
-    () => (active === "all" ? PRODUCTS : PRODUCTS.filter((p) => p.category === active)),
+    () => (active === "all" ? PRODUCTS : PRODUCTS.filter((p) => p.categories.includes(active))),
     [active],
   );
 

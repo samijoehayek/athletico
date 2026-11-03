@@ -2,7 +2,15 @@
 // Shared shapes for the Athletico store. These types are imported by both the
 // browser and the order route handler, so anything here must stay isomorphic.
 
-export type Category = "kit" | "training" | "equipment" | "accessories";
+/** The sections of the club's price list (merch price list.xlsx). */
+export type Category =
+  | "thermals"
+  | "bags"
+  | "cheer"
+  | "winter"
+  | "training"
+  | "gadgets"
+  | "casuals";
 
 /** Stock is maintained by hand in the catalogue — see docs/STORE.md. */
 export type StockState = "in" | "low" | "out";
@@ -21,6 +29,12 @@ export interface Colourway {
   hex: string;
   hexSecondary?: string;
   images: string[];
+  /**
+   * Set when this option has no photo of its own yet and borrows another
+   * option's images — e.g. "white" on the blue thermal. The product page says
+   * which version the photo shows, so nobody orders from a misleading picture.
+   */
+  photoOf?: string;
 }
 
 export interface Personalisation {
@@ -38,16 +52,28 @@ export interface Personalisation {
 export interface Product {
   slug: string;
   name: string;
-  category: Category;
+  /**
+   * Usually one. A few items sit in two sections of the club's price list
+   * (the cap, the bottle, the polo), and they show under both filters.
+   */
+  categories: Category[];
   priceUSD: number;
   /** [0] is the card's resting image, [1] the one it cross-fades to on hover. */
   images: string[];
   colourways?: Colourway[];
+  /**
+   * What the `colourways` represent. "Colour" (the default) renders swatches;
+   * "Design" renders labelled buttons, for options that differ by print rather
+   * than by colour (the cheer T-shirt's three back designs).
+   */
+  optionLabel?: "Colour" | "Design";
   variants: Variant[];
   personalisation?: Personalisation;
-  description: string;
-  details: string[];
-  /** Promotes the product into the kit-drop band on the landing page. */
+  /** Search and share description. Not shown on the page (client request, Oct 2026). */
+  description?: string;
+  /** Material / fit bullets, only when the club supplies them. */
+  details?: string[];
+  /** Promotes the product into the featured band on the store landing page. */
   featured?: boolean;
 }
 

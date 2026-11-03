@@ -10,7 +10,9 @@
 import { lineKey, MAX_QTY_PER_LINE } from "./pricing";
 import type { CartLineInput } from "./types";
 
-const STORAGE_KEY = "athletico-cart-v1";
+// v2: the placeholder catalogue was replaced by the club's real range, so bags
+// saved against the old product slugs are dropped instead of erroring at checkout.
+const STORAGE_KEY = "athletico-cart-v2";
 
 /** Stable empty reference — getServerSnapshot must not allocate per call. */
 const SERVER_SNAPSHOT: CartLineInput[] = [];

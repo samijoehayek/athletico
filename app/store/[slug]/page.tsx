@@ -8,6 +8,18 @@ import Footer from "../../components/Footer";
 import ProductDetail from "../../components/store/ProductDetail";
 import RelatedProducts from "../../components/store/RelatedProducts";
 import { PRODUCTS, getProduct, getRelated } from "@/lib/store/catalog";
+import type { Product } from "@/lib/store/types";
+
+/**
+ * Search / share description. The club hasn't written product copy (and asked
+ * for none on the page), so this falls back to a plain factual line.
+ */
+function describe(product: Product): string {
+  return (
+    product.description ??
+    `${product.name}, official Athletico Sports Club merchandise. Order online and collect from your branch.`
+  );
+}
 
 export function generateStaticParams() {
   return PRODUCTS.map((p) => ({ slug: p.slug }));
@@ -22,12 +34,14 @@ export async function generateMetadata({
   const product = getProduct(slug);
   if (!product) return { title: "Not found — Athletico Store" };
 
+  const description = describe(product);
+
   return {
     title: `${product.name} — Athletico Store`,
-    description: product.description,
+    description,
     openGraph: {
       title: product.name,
-      description: product.description,
+      description,
       images: [{ url: product.images[0] }],
       type: "website",
     },
@@ -46,7 +60,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
     "@context": "https://schema.org",
     "@type": "Product",
     name: product.name,
-    description: product.description,
+    description: describe(product),
     image: product.images,
     brand: { "@type": "Brand", name: "Athletico Sports Club" },
     offers: {

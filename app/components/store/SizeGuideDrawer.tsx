@@ -7,15 +7,13 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect } from "react";
 
-// PLACEHOLDER measurements — replace with the club's own table.
-const APPAREL_ROWS = [
-  { size: "XS", chest: "86–91", waist: "71–76", length: "68" },
-  { size: "S", chest: "91–97", waist: "76–81", length: "70" },
-  { size: "M", chest: "97–102", waist: "81–87", length: "72" },
-  { size: "L", chest: "102–107", waist: "87–92", length: "74" },
-  { size: "XL", chest: "107–112", waist: "92–97", length: "76" },
-  { size: "XXL", chest: "112–118", waist: "97–103", length: "78" },
-];
+// The club's measurement table goes here. Until it arrives the list stays empty,
+// and the product page hides the "Size guide" link rather than show invented
+// numbers (the placeholder XS–XXL table was removed in Nov 2026).
+const APPAREL_ROWS: { size: string; chest: string; waist: string; length: string }[] = [];
+
+/** False until the club's real measurements are filled in above. */
+export const HAS_SIZE_GUIDE = APPAREL_ROWS.length > 0;
 
 export default function SizeGuideDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
   useEffect(() => {

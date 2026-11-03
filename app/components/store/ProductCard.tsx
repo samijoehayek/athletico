@@ -12,16 +12,22 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { defaultColourwayId } from "@/lib/store/catalog";
 import { useCart } from "@/lib/store/cart-context";
 import { formatUSD } from "@/lib/store/pricing";
 import type { Product } from "@/lib/store/types";
 
 export default function ProductCard({ product, priority = false }: { product: Product; priority?: boolean }) {
   const { add } = useCart();
-  const [colourwayId, setColourwayId] = useState(product.colourways?.[0]?.id);
+  const [colourwayId, setColourwayId] = useState(defaultColourwayId(product));
 
   const colourway = product.colourways?.find((c) => c.id === colourwayId);
   const images = colourway?.images ?? product.images;
+  // Design options (the cheer T-shirt's prints) are all the same colour, so
+  // swatches would be identical squares. The card names the count instead and
+  // the product page shows the designs as labelled buttons.
+  const isDesign = product.optionLabel === "Design";
+  const optionCount = product.colourways?.length ?? 0;
   const soldOut = product.variants.every((v) => v.stock === "out");
   const lowStock = !soldOut && product.variants.some((v) => v.stock === "low");
 
@@ -75,14 +81,18 @@ export default function ProductCard({ product, priority = false }: { product: Pr
               {product.name}
             </Link>
           </h3>
-          {colourway && <p className="text-[#0B3E80]/50 text-xs mt-1">{colourway.name}</p>}
+          {colourway && (
+            <p className="text-[#0B3E80]/50 text-xs mt-1">
+              {isDesign ? `${optionCount} designs` : colourway.name}
+            </p>
+          )}
         </div>
         <p className="text-[#0B3E80] text-sm md:text-base font-bold shrink-0">
           {formatUSD(product.priceUSD)}
         </p>
       </div>
 
-      {product.colourways && product.colourways.length > 1 && (
+      {!isDesign && product.colourways && product.colourways.length > 1 && (
         <div className="flex gap-2 pt-3">
           {product.colourways.map((c) => (
             <button
