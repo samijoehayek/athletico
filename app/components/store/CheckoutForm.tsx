@@ -142,6 +142,23 @@ export default function CheckoutForm() {
                   className={inputClass(errors.name)}
                 />
               </Field>
+              {/* Optional. Fills the NAME column of the club's order sheet, which
+                  tracks orders by player (parents usually buy for a child). */}
+              <Field
+                label="Player's name"
+                error={errors.playerName}
+                hint="If you're ordering for a player, e.g. your child. Leave empty if it's for you."
+                className="sm:col-span-2"
+              >
+                <input
+                  type="text"
+                  autoComplete="off"
+                  value={customer.playerName ?? ""}
+                  onChange={(e) => set("playerName", e.target.value)}
+                  aria-invalid={Boolean(errors.playerName)}
+                  className={inputClass(errors.playerName)}
+                />
+              </Field>
               <Field label="Phone" required error={errors.phone} hint="We'll call to confirm your order.">
                 <input
                   type="tel"

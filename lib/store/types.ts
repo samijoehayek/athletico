@@ -112,6 +112,12 @@ export interface CustomerDetails {
   email: string;
   /** Id of the branch the order is collected from — see lib/branches.ts. */
   branch: string;
+  /**
+   * Optional: the player the order is for, when a parent buys for a child.
+   * It fills the NAME column of the order sheet, as on the club's paper sheet;
+   * when empty, the buyer's name is used.
+   */
+  playerName?: string;
 }
 
 export interface OrderPayload {

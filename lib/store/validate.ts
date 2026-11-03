@@ -42,6 +42,10 @@ export function validateOrder(
     errors.email = "That email address doesn't look right.";
   }
 
+  if (customer.playerName && customer.playerName.trim().length > 120) {
+    errors.playerName = "Please shorten the player's name.";
+  }
+
   // Every order is collected, so the branch replaces a delivery address.
   if (!getBranch(customer.branch)) {
     errors.branch = "Please choose the branch you'll collect from.";
