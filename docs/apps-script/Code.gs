@@ -144,13 +144,13 @@ function setupSheet() {
   var stray = ss.getSheetByName("Sheet1");
   if (stray && stray.getLastRow() === 0 && ss.getSheets().length > 2) ss.deleteSheet(stray);
 
-  var missing = [];
-  if (!secret_()) missing.push("SHARED_SECRET");
-  SpreadsheetApp.getUi().alert(
-    "Order book ready." +
-      (missing.length ? "\n\nStill to do: add " + missing.join(", ") + " in Project Settings → Script properties." : "") +
-      "\n\nNext: Deploy → New deployment → Web app."
-  );
+  // A toast, not an alert: an alert keeps the run "executing" in the editor
+  // until someone clicks OK in the Sheet, which looks like a hang.
+  var message = secret_()
+    ? "Order book ready. Next: Deploy → New deployment → Web app."
+    : "Order book ready. Still to do: add SHARED_SECRET in Project Settings → Script properties.";
+  ss.toast(message, "Athletico Store", 15);
+  console.log(message);
 }
 
 function prepareTab_(ss, name, headers, widths) {
@@ -476,7 +476,8 @@ function sendTestOrder() {
     totalUSD: 55,
     unavailable: [],
   });
-  SpreadsheetApp.getUi().alert("Test order " + ref + " added.");
+  SpreadsheetApp.getActiveSpreadsheet().toast("Test order " + ref + " added.", "Athletico Store", 10);
+  console.log("Test order " + ref + " added.");
 }
 
 // ─── Helpers ───────────────────────────────────────────────────────────────
