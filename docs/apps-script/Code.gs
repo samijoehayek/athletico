@@ -18,7 +18,9 @@
  *   markPaid     {reference, payment}         → PAID; returns firstTime=true only
  *                                               the first time (so emails go once)
  *   markFailed   {reference, reason}          → PAYMENT FAILED, if still pending
- *   getOrder     {reference}                  → the order and its payment status
+ *   getOrder     {reference}                  → the order, its payment status and its item rows
+ *   diagnose     {}                           → which spreadsheet this script writes to,
+ *                                               its tabs and row counts (for support)
  * Every write runs under a script lock and is idempotent, because payment
  * callbacks, webhooks and the customer's browser can all report the same event.
  *
@@ -201,6 +203,7 @@ function doPost(e) {
       case "markPaid": return json_(markPaid_(body.reference, body.payment || {}));
       case "markFailed": return json_(markFailed_(body.reference, body.reason));
       case "getOrder": return json_(getOrder_(body.reference));
+      case "diagnose": return json_(diagnose_());
       default: return json_({ ok: false, error: "unknown action" });
     }
   } catch (err) {
@@ -359,6 +362,36 @@ function itemRowsFor_(reference) {
     });
   }
   return out;
+}
+
+/**
+ * Answers "where are the orders going?": the spreadsheet this script is bound
+ * to, and each tab's row count. Behind the shared secret like every action.
+ */
+function diagnose_() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  return {
+    ok: true,
+    version: 3,
+    spreadsheet: { name: ss.getName(), url: ss.getUrl(), timezone: ss.getSpreadsheetTimeZone(), locale: ss.getSpreadsheetLocale() },
+    tabs: ss.getSheets().map(function (sh) {
+      return {
+        name: sh.getName(),
+        lastRow: sh.getLastRow(),
+        hidden: sh.isSheetHidden(),
+        filtered: Boolean(sh.getFilter() && sh.getFilter().getRange() && hasCriteria_(sh)),
+      };
+    }),
+    notify: notifyList_().length,
+  };
+}
+
+function hasCriteria_(sheet) {
+  var f = sheet.getFilter();
+  for (var c = 1; c <= f.getRange().getNumColumns(); c++) {
+    if (f.getColumnFilterCriteria(c)) return true;
+  }
+  return false;
 }
 
 function setItemStatuses_(reference, status, fromStatuses, payment) {
