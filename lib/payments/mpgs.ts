@@ -31,11 +31,16 @@ export function mpgsIsTest(): boolean {
 
 /**
  * Credentials are present and safe to use here. A test merchant is refused on
- * production: test cards would otherwise mark real orders PAID with no money.
+ * production, because test cards mark orders PAID with no money, unless
+ * PAYMENTS_TEST_ON_PRODUCTION=1 says the live site is deliberately in its testing
+ * phase. Checkout then shows a "Test mode" notice and orders are tagged as tests.
+ * The switch only ever applies to a test merchant: with production credentials
+ * it does nothing, so leaving it set can't affect real payments.
  */
 export function mpgsConfigured(): boolean {
   if (!config()) return false;
-  return !(mpgsIsTest() && process.env.VERCEL_ENV === "production");
+  if (!mpgsIsTest() || process.env.VERCEL_ENV !== "production") return true;
+  return process.env.PAYMENTS_TEST_ON_PRODUCTION === "1";
 }
 
 /** The gateway's Checkout script, which sends the browser to the payment page. */

@@ -150,7 +150,9 @@ Testing cards: with `MPGS_MERCHANT_ID=TESTATHLETICO`, use Mastercard
 `5123450000000008`, CVV `100`. The expiry decides the outcome: `01/39` approved,
 `05/39` declined. The 3-D Secure screen is an emulator with a result dropdown.
 Orders on a test merchant are tagged as tests in the sheet and emails, and a
-`TEST…` merchant is refused on production.
+`TEST…` merchant is refused on production unless `PAYMENTS_TEST_ON_PRODUCTION=1`
+is set there, for testing on the live site before launch. Checkout then shows a
+"Test mode" notice. The switch does nothing with production credentials.
 
 Until BOB's credentials exist, `PAYMENTS_SIMULATOR=1` stands in for BOB Wallet on
 local and preview deployments (never on production): its page has Approve /
