@@ -161,7 +161,7 @@ function ReadyView({
     <>
       {order.simulated && (
         <p className="mb-6 inline-block bg-[#FFE400] text-[#0B3E80] text-[10px] font-bold uppercase tracking-[0.18em] px-2.5 py-1">
-          Test order · simulated payment
+          Test order · no real payment
         </p>
       )}
 

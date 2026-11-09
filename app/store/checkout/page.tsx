@@ -8,7 +8,7 @@ import type { Metadata } from "next";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import CheckoutForm from "../../components/store/CheckoutForm";
-import { availableMethods, isSimulated } from "@/lib/payments/providers";
+import { availableMethods, isTestPayment } from "@/lib/payments/providers";
 
 export const metadata: Metadata = {
   title: "Checkout — Athletico Store",
@@ -22,7 +22,7 @@ export default function CheckoutPage() {
   return (
     <main className="bg-[#F1EAEA] min-h-screen">
       <Navbar mode="dark" />
-      <CheckoutForm methods={methods} simulated={methods.some(isSimulated)} />
+      <CheckoutForm methods={methods} testMode={methods.some(isTestPayment)} />
       <Footer />
     </main>
   );

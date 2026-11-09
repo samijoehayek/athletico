@@ -32,14 +32,14 @@ const EMPTY: CustomerDetails = {
 
 /**
  * `methods` is what the server offers right now (decided from the payment
- * credentials configured), `simulated` that they run on the test simulator.
+ * credentials configured), `testMode` that no real money can move.
  */
 export default function CheckoutForm({
   methods,
-  simulated,
+  testMode,
 }: {
   methods: PaymentMethodId[];
-  simulated: boolean;
+  testMode: boolean;
 }) {
   const router = useRouter();
   const { items, priced, hydrated, clear } = useCart();
@@ -256,7 +256,7 @@ export default function CheckoutForm({
               if (errors.mobile) setErrors((er) => ({ ...er, mobile: undefined }));
             }}
             errors={{ method: errors.method, mobile: errors.mobile }}
-            simulated={simulated}
+            testMode={testMode}
           />
 
           {/* Honeypot: off-screen, never announced, never filled by a human.

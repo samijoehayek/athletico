@@ -17,7 +17,7 @@ export default function PaymentMethodPicker({
   mobile,
   onMobileChange,
   errors,
-  simulated,
+  testMode,
 }: {
   methods: PaymentMethodId[];
   value: PaymentMethodId | undefined;
@@ -25,15 +25,15 @@ export default function PaymentMethodPicker({
   mobile: string;
   onMobileChange: (v: string) => void;
   errors: { method?: string; mobile?: string };
-  simulated: boolean;
+  testMode: boolean;
 }) {
   return (
     <fieldset>
       <legend className="text-[#0B3E80] font-bold uppercase text-sm tracking-wider mb-4">Payment</legend>
 
-      {simulated && (
+      {testMode && (
         <p className="mb-4 border-l-4 border-[#FFE400] bg-[#FFE400]/15 px-4 py-3 text-[#0B3E80] text-xs leading-relaxed">
-          <strong>Test mode:</strong> payments go to a simulator, not to BOB or the bank. No money is taken.
+          <strong>Test mode:</strong> payments go to a simulator or the bank&apos;s test gateway. No money is taken.
         </p>
       )}
 

@@ -20,7 +20,7 @@ import { NextResponse } from "next/server";
 import { getBranch } from "@/lib/branches";
 import { TERMS_VERSION } from "@/lib/legal/terms";
 import { isPaymentMethodId, PAYMENT_METHODS } from "@/lib/payments/methods";
-import { availableMethods, isSimulated, orderPageUrl, startPayment } from "@/lib/payments/providers";
+import { availableMethods, isTestPayment, orderPageUrl, startPayment } from "@/lib/payments/providers";
 import { orderToken } from "@/lib/payments/token";
 import { callOrderBook } from "@/lib/store/order-book";
 import { COLLECTION_ETA, priceCart } from "@/lib/store/pricing";
@@ -155,9 +155,9 @@ export async function POST(request: Request) {
       method: paymentMethod,
       label: PAYMENT_METHODS[paymentMethod].sheetLabel,
       mobile,
-      // Marks orders paid through the test simulator, so they can never be
-      // mistaken for real money in the sheet.
-      simulated: isSimulated(paymentMethod) || undefined,
+      // Marks orders paid through the simulator or the gateway's test profile,
+      // so they can never be mistaken for real money in the sheet.
+      simulated: isTestPayment(paymentMethod) || undefined,
     },
     // The version in force when the order was placed (clause 1.2: "We keep an
     // electronic record of your acceptance and of the version accepted").

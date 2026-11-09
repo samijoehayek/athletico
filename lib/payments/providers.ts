@@ -13,7 +13,9 @@
 // the real order sheet. It is on only when PAYMENTS_SIMULATOR=1 AND the
 // deployment is not production; a production deployment can never offer it.
 
+import { cardProvider } from "./card";
 import { PAYMENT_METHODS, type PaymentMethodId, type PaymentNextStep } from "./methods";
+import { mpgsIsTest } from "./mpgs";
 import { orderPageUrl, orderToken } from "./token";
 
 /** The parts of a stored order a provider needs. */
@@ -46,8 +48,10 @@ const simulator: PaymentProvider = {
   },
 };
 
-// Real providers are registered here as they're built (steps 5 and 6).
-const PROVIDERS: Partial<Record<PaymentMethodId, PaymentProvider>> = {};
+// Real providers are registered here as they're built (BOB Wallet: step 6).
+const PROVIDERS: Partial<Record<PaymentMethodId, PaymentProvider>> = {
+  card: cardProvider,
+};
 
 function providerFor(method: PaymentMethodId): PaymentProvider | null {
   const real = PROVIDERS[method];
@@ -60,9 +64,13 @@ export function availableMethods(): PaymentMethodId[] {
   return (Object.keys(PAYMENT_METHODS) as PaymentMethodId[]).filter((m) => providerFor(m) !== null);
 }
 
-/** True when the chosen method would be handled by the simulator. */
-export function isSimulated(method: PaymentMethodId): boolean {
-  return providerFor(method) === simulator;
+/**
+ * True when no real money can move for this method: the simulator, or the
+ * gateway's test profile. Such orders are tagged as tests in the sheet and emails.
+ */
+export function isTestPayment(method: PaymentMethodId): boolean {
+  const provider = providerFor(method);
+  return provider === simulator || (provider === cardProvider && mpgsIsTest());
 }
 
 export async function startPayment(order: PayableOrder): Promise<StartResult> {
