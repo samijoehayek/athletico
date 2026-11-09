@@ -15,12 +15,15 @@ panel, no commerce platform. One serverless function, one Google Sheet.
 | `/store/[slug]` | Static, one page per product | Product detail, Kit Customiser |
 | `/store/checkout` | Static shell, client form | Single-screen checkout |
 | `/store/order/[ref]?t=` | Client, polls the API | The order page: pending / paid / failed (with "try again"), read from the order sheet |
-| `/store/pay/simulate` | Dynamic, non-production only | Payment simulator standing in for the bank page and the BOB app |
+| `/store/pay/card` | Dynamic | Brief stop that hands the customer to the bank's payment page |
+| `/store/pay/simulate` | Dynamic, non-production only | Payment simulator standing in for the BOB app until step 6 |
 | `/store/info` | Static | Collection, payment, sizing |
 | `/terms` | Static | Terms and Conditions of Sale, with PDF download |
 | `/api/orders` | Serverless | Validation, server-side re-pricing, saves the order, starts the payment |
 | `/api/orders/[ref]` | Serverless | Order status for the order page (token required) |
 | `/api/orders/[ref]/retry` | Serverless | Restart a failed payment for the same order |
+| `/api/payments/card/return` | Serverless | Customer back from the bank's page (paid, declined or cancelled); checks the gateway, then redirects to the order page |
+| `/api/payments/card/webhook` | Serverless | The gateway's notification, for customers who paid and closed the tab |
 | `/api/payments/simulate` | Serverless, non-production only | The simulator's approve / decline |
 
 ### Key files
@@ -37,6 +40,8 @@ lib/store/
 lib/payments/
   methods.ts        payment methods offered at checkout (BOB Wallet, card)
   providers.ts      which methods are on, and how each payment starts
+  mpgs.ts           Mastercard Gateway client, and THE rule for "this card payment is paid"
+  card.ts           starts a card attempt; settles the sheet from what the gateway reports
   orders.ts         loads an order back from the sheet for the order page
   token.ts          signed links to order pages
 lib/branches.ts     the 10 branches — collection picker, contact map and FAQ
@@ -127,12 +132,35 @@ The flow is the same for both:
    its items to PAID, once; a failure flips them to PAYMENT FAILED and the page
    offers "try again" (same order, new payment attempt).
 
-Until real credentials exist, `PAYMENTS_SIMULATOR=1` stands in for both
-methods on local and preview deployments (never on production): its page has
-Approve / Decline buttons that drive the real order sheet, and simulated
-orders are marked "(simulated)" and "[TEST]" in the sheet and emails.
+**How a card payment is confirmed.** The site never believes the browser or a
+notification. The customer's return, a cancel and the webhook only name the
+payment attempt; `reconcileCardAttempt` then asks the gateway, and the order is
+PAID only if the gateway says `result=SUCCESS`, `status=CAPTURED`, the full order
+total was captured, and the currency is USD (`classifyGatewayOrder`). This also
+replaces the plan's `successIndicator` comparison, which would have needed
+storing a value per attempt and could never be enough on its own.
 
-- [ ] Card: MPGS merchant ID and integration password (step 5).
+Each attempt has its own gateway order id (`ATH-261109-K4P2-3F9A0C`), because the
+gateway refuses to reuse one after a failure. A second charge on a paid order
+(an old payment page left open, say) is flagged "SECOND PAYMENT, REFUND IT" in
+the sheet's NOTES column. A captured amount that doesn't match the order leaves
+it unpaid and logs `AMOUNT MISMATCH`. Refunds are done in the merchant portal.
+
+Testing cards: with `MPGS_MERCHANT_ID=TESTATHLETICO`, use Mastercard
+`5123450000000008`, CVV `100`. The expiry decides the outcome: `01/39` approved,
+`05/39` declined. The 3-D Secure screen is an emulator with a result dropdown.
+Orders on a test merchant are tagged as tests in the sheet and emails, and a
+`TEST…` merchant is refused on production.
+
+Until BOB's credentials exist, `PAYMENTS_SIMULATOR=1` stands in for BOB Wallet on
+local and preview deployments (never on production): its page has Approve /
+Decline buttons that drive the real order sheet, and simulated orders are marked
+"(simulated)" and "[TEST]" in the sheet and emails.
+
+- [x] Card, test: merchant ID and integration password (step 5).
+- [ ] Card, webhook: register the endpoint in the merchant portal and set
+      `MPGS_WEBHOOK_SECRET` (see `.env.local.example`).
+- [ ] Card, live: production merchant ID, password and host from Bank of Beirut.
 - [ ] BOB Wallet: API key, merchant path, whitelisted server IP (step 6).
 
 ### 3.3 Order book — blocks receiving orders
