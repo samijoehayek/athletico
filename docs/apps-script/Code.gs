@@ -215,7 +215,7 @@ function doPost(e) {
 }
 
 function doGet() {
-  return json_({ ok: true, service: "athletico-order-book", version: 4 });
+  return json_({ ok: true, service: "athletico-order-book", version: 5 });
 }
 
 // ─── Actions ───────────────────────────────────────────────────────────────
@@ -301,7 +301,21 @@ function markPaid_(reference, payment) {
   var payCol = col_(ORDER_HEADERS, "PAYMENT");
   var current = orders.getRange(row, payCol).getValue();
   var order = JSON.parse(orders.getRange(row, col_(ORDER_HEADERS, "ORDER JSON")).getValue());
-  if (current === "PAID") return { ok: true, firstTime: false, order: order };
+  if (current === "PAID") {
+    // The same payment reported again is normal. A different gateway id means a
+    // second charge (say, an old payment page left open): flag it for a refund.
+    var stored = String(orders.getRange(row, col_(ORDER_HEADERS, "GATEWAY ID")).getValue());
+    var second = Boolean(payment.gatewayId && stored && String(payment.gatewayId) !== stored);
+    if (second) {
+      var flag = "SECOND PAYMENT, REFUND IT: " + payment.gatewayId + " " + (payment.reference || "");
+      var noteCell = orders.getRange(row, col_(ORDER_HEADERS, "NOTES"));
+      var existing = String(noteCell.getValue());
+      if (existing.indexOf(payment.gatewayId) === -1) {
+        noteCell.setValue([existing, flag].filter(String).join("; "));
+      }
+    }
+    return { ok: true, firstTime: false, secondPayment: second, order: order };
+  }
 
   var paidAt = payment.paidAt ? new Date(payment.paidAt) : new Date();
   orders.getRange(row, payCol).setValue("PAID");
@@ -372,7 +386,7 @@ function diagnose_() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   return {
     ok: true,
-    version: 4,
+    version: 5,
     spreadsheet: { name: ss.getName(), url: ss.getUrl(), timezone: ss.getSpreadsheetTimeZone(), locale: ss.getSpreadsheetLocale() },
     tabs: ss.getSheets().map(function (sh) {
       return {
